@@ -12,7 +12,7 @@ if (!is_main_cubert) {
 }
 
 if (lose_state) {
-	lose_timer -= delta_time / 1000000
+	lose_timer -= 1
 	if (lose_timer <= 0) {
 		lose_state = false
 		x = 64
