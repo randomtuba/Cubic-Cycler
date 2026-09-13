@@ -1,7 +1,7 @@
 if (player_copy == 0) {
 	x_speed += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 0.75
 
-	x_speed *= 0.9
+	x_speed *= x_drag
 	y_speed *= 0.99
 
 	if (place_meeting(x, y+2, collision_map)) {
