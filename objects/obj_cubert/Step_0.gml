@@ -1,4 +1,5 @@
-//follow in main_cubert's footsteps
+#region Follow Main Cubert (Side Cuberts Only)
+
 if (!is_main_cubert) {
 	if (instance_exists(main_cubert) && main_cubert != self) { 
 		x = main_cubert.x + main_cubert_offset[0];
@@ -10,6 +11,10 @@ if (!is_main_cubert) {
 	
 	return;
 }
+
+#endregion Follow Main Cubert (Side Cuberts Only)
+
+#region Loss State
 
 if (lose_state) {
 	lose_timer -= 1
@@ -23,20 +28,37 @@ if (lose_state) {
 	return;
 }
 
-//movement & collision & control
+#endregion Loss State
+
+#region Movement
+
+#region Horizontal Movement
+
 var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
 x_speed += _lr * 0.75
 
 x_speed *= x_drag
 y_speed *= 0.99
 
+#endregion Horizontal Movement
+
+#region Coyote Time
+
 var _grounded = place_meeting(x, y+2, collision_map) || faux_place_meeting(0, 2, collision_map);
 var _grounded2 = place_meeting(x, y-2, collision_map) || faux_place_meeting(0, -2, collision_map);
 
 if (_grounded) {
+	coyote_time = global.coyote_time
+} else if (coyote_time > 0) {
+	coyote_time--
+}
+
+#endregion Coyote Time
+
+#region Ground Collision and Diving
+
+if (_grounded) {
 	y_speed = 0
-	var _jump = keyboard_check(vk_up) || keyboard_check(ord("W"))
-	if (_jump) { y_speed = -10; jump_k = 1; }
 } else if (_grounded2) {
 	y_speed = 1
 } else {
@@ -44,9 +66,39 @@ if (_grounded) {
 	if (_down) { y_speed += 0.8 } else { y_speed += 0.4 }
 }
 
+#endregion Ground Collision and Diving
+
+#region Jumping
+
+// Buffer
+var _jump = keyboard_check(vk_up) || keyboard_check(ord("W"))
+if (_jump) {
+	jump_buffer = global.input_buffer_time
+} else if (jump_buffer > 0) {
+	jump_buffer--
+}
+
+// Jump
+if (coyote_time > 0) {
+	if (jump_buffer > 0) { 
+		y_speed = -10
+		jump_k = 1
+		
+		coyote_time = 0
+		jump_buffer = 0
+	}
+}
+
+#endregion Jumping
+
 //move_and_collide(x_speed, y_speed, collision_map)
 move_and_collide_with_faux(x_speed, y_speed, collision_map)
+
+#endregion Movement
 	
+#region Room Wrapping
+
+// Horizontal
 if (x > room_width) {
 	x = 0
 	if (place_meeting(x, y, collision_map)) x = room_width
@@ -55,6 +107,7 @@ if (x > room_width) {
 	if (place_meeting(x, y, collision_map)) x = 0
 }
 
+// Vertical
 if (y > room_height) {
 	y = 0
 	if (place_meeting(x, y, collision_map)) y = room_height
@@ -62,6 +115,8 @@ if (y > room_height) {
 	y = room_height
 	if (place_meeting(x, y, collision_map)) y = 0
 }
+
+#endregion Room Wrapping
 
 global.default_x = x
 global.default_y = y
