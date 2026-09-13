@@ -5,6 +5,9 @@ collision_map = layer_tilemap_get_id("Tiles_1")
 lose_state = false
 lose_timer = 0
 
+coyote_time = 0
+jump_buffer = 0
+
 //cool effects
 jump_k = 0;
 
