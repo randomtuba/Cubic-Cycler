@@ -68,5 +68,5 @@ global.default_y = y
 
 if (x_speed != 0) { image_xscale = sign(x_speed) * 0.5 }
 
-var _crouch = (!keyboard_check(vk_down) || place_meeting(x, y+2, collision_map))
+var _crouch = !(keyboard_check(vk_down) || keyboard_check(ord("S"))) || place_meeting(x, y+2, collision_map)
 image_index = !_crouch;
