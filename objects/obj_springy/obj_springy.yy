@@ -9,8 +9,8 @@
   "name":"obj_springy",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cubic Cycler",
-    "path":"Cubic Cycler.yyp",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
