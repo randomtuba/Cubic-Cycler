@@ -8,7 +8,6 @@ lose_timer = 0
 //cool effects
 jump_k = 0;
 
-
 //create visual warp cuberts
 main_cubert = self;
 is_main_cubert = true;

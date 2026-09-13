@@ -11,14 +11,13 @@ if (!is_main_cubert) {
 	return;
 }
 
-if (player_copy == 0) {
-	if (lose_state) {
-		lose_timer -= delta_time / 1000000
-		if (lose_timer <= 0) {
-			lose_state = false
-			x = 64
-			y = 480
-    }
+if (lose_state) {
+	lose_timer -= delta_time / 1000000
+	if (lose_timer <= 0) {
+		lose_state = false
+		x = 64
+		y = 480
+	}
   } else {
 	//movement & collision & control
   var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
