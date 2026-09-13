@@ -1,44 +1,53 @@
 if (player_copy == 0) {
+	if (lose_state) {
+		lose_timer -= delta_time / 1000000
+		if (lose_timer <= 0) {
+			lose_state = false
+			x = 64
+			y = 480
+    }
+  } else {
 	x_speed += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 0.75
 
 	x_speed *= x_drag
 	y_speed *= 0.99
 
-	if (place_meeting(x, y+2, collision_map)) {
-		y_speed = 0
-		if (keyboard_check(vk_up)) {
-			y_speed = -10
-		}
-	} else if (place_meeting(x, y-2, collision_map)) {
-		y_speed = 1
-	} else {
-		if (keyboard_check(vk_down)) {
-			y_speed += 0.8
+	  if (place_meeting(x, y+2, collision_map)) {
+      y_speed = 0
+      if (keyboard_check(vk_up)) {
+        y_speed = -10
+      }
+		} else if (place_meeting(x, y-2, collision_map)) {
+			y_speed = 1
 		} else {
-			y_speed += 0.4
+			if (keyboard_check(vk_down)) {
+				y_speed += 0.8
+			} else {
+				y_speed += 0.4
+			}
 		}
-	}
 
-	move_and_collide(x_speed, y_speed, collision_map)
+		move_and_collide(x_speed, y_speed, collision_map)
 	
-	if (x > 1024) {
-		x = 0
-		if (place_meeting(x, y, collision_map)) x = 1024
-	} else if (x < 1) {
-		x = 1024
-		if (place_meeting(x, y, collision_map)) x = 0
+		if (x > 1024) {
+			x = 0
+			if (place_meeting(x, y, collision_map)) x = 1024
+		} else if (x < 1) {
+			x = 1024
+			if (place_meeting(x, y, collision_map)) x = 0
+		}
+	
+		if (y > 640) {
+			y = 0
+			if (place_meeting(x, y, collision_map)) y = 640
+		} else if (y < 1) {
+			y = 640
+			if (place_meeting(x, y, collision_map)) y = 0
+		}
+	
+		global.default_x = x
+		global.default_y = y
 	}
-	
-	if (y > 640) {
-		y = 0
-		if (place_meeting(x, y, collision_map)) y = 640
-	} else if (y < 1) {
-		y = 640
-		if (place_meeting(x, y, collision_map)) y = 0
-	}
-	
-	global.default_x = x
-	global.default_y = y
 } else {
 	switch (player_copy) {
 		case 1:
@@ -80,8 +89,12 @@ with (obj_cubert) {
 	if (x_speed != 0) image_xscale = sign(x_speed) * 0.5
 }
 
-if (!keyboard_check(vk_down) || place_meeting(x, y+2, collision_map)) {
-	image_index = 0
+if (lose_state) {
+	image_index = 2
 } else {
-	image_index = 1
+	if (!keyboard_check(vk_down) || place_meeting(x, y+2, collision_map)) {
+		image_index = 0
+	} else {
+		image_index = 1
+	}
 }
