@@ -13,22 +13,23 @@ if (!is_main_cubert) {
 
 
 //movement & collision & control
-var _lr = (keyboard_check(vk_right) - keyboard_check(vk_left))
+var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
 x_speed += _lr * 0.75
 
 x_speed *= 0.9
 y_speed *= 0.99
 
 var _grounded = place_meeting(x, y+2, collision_map) || faux_place_meeting(0, 2, collision_map);
+var _grounded2 = place_meeting(x, y-2, collision_map) || faux_place_meeting(0, -2, collision_map);
 
 if (_grounded) {
 	y_speed = 0
-	var _jump = keyboard_check(vk_up)
+	var _jump = keyboard_check(vk_up) || keyboard_check(ord("W"))
 	if (_jump) { y_speed = -10; jump_k = 1; }
-} else if (place_meeting(x, y-2, collision_map)) {
+} else if (_grounded2) {
 	y_speed = 1
 } else {
-	var _down = keyboard_check(vk_down)
+	var _down = keyboard_check(vk_down) || keyboard_check(ord("S"))
 	if (_down) { y_speed += 0.8 } else { y_speed += 0.4 }
 }
 
