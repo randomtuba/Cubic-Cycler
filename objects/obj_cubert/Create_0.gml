@@ -18,12 +18,6 @@ main_cubert_offset = [0, 0];
 non_main_cuberts = [];
 alarm[0] = 1;
 
-function room_index_bounded(_i = global.level_x, _j = global.default_y) {
-	return (_j >= 0) && (_j < array_length(global.level_map)) &&
-		(_i >= 0) && (_i < array_length(global.level_map[0])) &&
-		global.level_map[_j][_i] != -1
-}
-
 function faux_place_meeting(_xoff, _yoff, _collision_map) {
 	var _touch = false;
 	for (var i=0; i<array_length(non_main_cuberts); i++) {
