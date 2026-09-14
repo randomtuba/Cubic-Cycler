@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-global.default_x = 0
-global.default_y = 0
-=======
 #macro sec game_get_speed(gamespeed_fps)
 
 // stores the position of the player
@@ -20,4 +16,3 @@ global.level_map = [
 ["","Room1","room_springtest"],
 ["","room_lower",""],
 ]
->>>>>>> Stashed changes
