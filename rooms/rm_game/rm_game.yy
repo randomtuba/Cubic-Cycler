@@ -1,17 +1,17 @@
 {
   "$GMRoom":"v1",
-  "%Name":"Room1",
+  "%Name":"rm_game",
   "creationCodeFile":"",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_ED92EAD","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_22BF30F3","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_3369ACB2","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_DE905E4","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_3E42C06C","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_15B3F7A1","path":"rooms/Room1/Room1.yy",},
+    {"name":"inst_ED92EAD","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_22BF30F3","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_3369ACB2","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_DE905E4","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_3E42C06C","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_15B3F7A1","path":"rooms/rm_game/rm_game.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -29,7 +29,7 @@
         ],"TileDataFormat":1,},"tilesetId":{"name":"tileset_block","path":"tilesets/tileset_block/tileset_block.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4289900419,"depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
-  "name":"Room1",
+  "name":"rm_game",
   "parent":{
     "name":"Cubic Cycler",
     "path":"Cubic Cycler.yyp",
