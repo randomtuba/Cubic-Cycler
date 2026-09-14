@@ -1,12 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_global",
+  "%Name":"obj_overlay",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_global",
+  "name":"obj_overlay",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -30,7 +29,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_overlay",
+    "path":"sprites/spr_overlay/spr_overlay.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
