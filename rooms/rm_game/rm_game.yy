@@ -12,6 +12,8 @@
     {"name":"inst_DE905E4","path":"rooms/rm_game/rm_game.yy",},
     {"name":"inst_3E42C06C","path":"rooms/rm_game/rm_game.yy",},
     {"name":"inst_15B3F7A1","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_37FB9F7A","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_140B97C2","path":"rooms/rm_game/rm_game.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -22,6 +24,8 @@
         {"$GMRInstance":"v4","%Name":"inst_DE905E4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_DE905E4","objectId":{"name":"obj_spikes","path":"objects/obj_spikes/obj_spikes.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":288.0,"y":128.0,},
         {"$GMRInstance":"v4","%Name":"inst_3E42C06C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3E42C06C","objectId":{"name":"obj_overlay","path":"objects/obj_overlay/obj_overlay.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":16.0,"scaleY":10.0,"x":0.0,"y":0.0,},
         {"$GMRInstance":"v4","%Name":"inst_15B3F7A1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_15B3F7A1","objectId":{"name":"obj_generator","path":"objects/obj_generator/obj_generator.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":928.0,"y":160.0,},
+        {"$GMRInstance":"v4","%Name":"inst_37FB9F7A","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_37FB9F7A","objectId":{"name":"obj_checkpoint","path":"objects/obj_checkpoint/obj_checkpoint.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":800.0,"y":480.0,},
+        {"$GMRInstance":"v4","%Name":"inst_140B97C2","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_140B97C2","objectId":{"name":"obj_checkpoint","path":"objects/obj_checkpoint/obj_checkpoint.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":224.0,"y":288.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Tiles_1","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":10,"SerialiseWidth":16,"TileCompressedData":[
           -34,-2147483648,-4,1,-36,-2147483648,-4,1,-4,-2147483648,-4,1,-15,-2147483648,-4,0,-7,-2147483648,-4,

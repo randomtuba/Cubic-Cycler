@@ -1,17 +1,20 @@
-//main vars
+// main vars
 x_speed = 0
 y_speed = 0
 collision_map = layer_tilemap_get_id("Tiles_1")
+
+// lose state
 lose_state = false
 lose_timer = 0
 
+// quality of life vars
 coyote_time = 0
 jump_buffer = 0
 
-//cool effects
+// cool effects
 jump_k = 0;
 
-//create visual warp cuberts
+// create visual warp cuberts
 main_cubert = self;
 is_main_cubert = true;
 main_cubert_offset = [0, 0];

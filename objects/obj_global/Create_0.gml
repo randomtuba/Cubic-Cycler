@@ -16,3 +16,7 @@ global.level_map = [
 [-1, rm_game, rm_spring_test],
 [-1, -1, -1],
 ]
+
+// stores checkpoint data
+global.checkpoint_id = 0
+global.checkpoint_room = "rm_game"

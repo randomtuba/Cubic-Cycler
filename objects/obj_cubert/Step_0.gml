@@ -25,8 +25,15 @@ if (lose_state) {
 	lose_timer -= 1
 	if (lose_timer <= 0) {
 		lose_state = false
-		x = 64
-		y = 480
+		if (global.checkpoint_id == 0) {
+			room_goto(rm_game)
+			x = 64
+			y = 480
+		} else {
+			room_goto(global.checkpoint_room)
+			x = global.checkpoint_id.x
+			y = global.checkpoint_id.y
+		}
 	}
 	image_index = 2
 	
