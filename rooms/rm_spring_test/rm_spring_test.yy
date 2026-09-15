@@ -1,15 +1,15 @@
 {
   "$GMRoom":"v1",
-  "%Name":"room_springtest",
+  "%Name":"rm_spring_test",
   "creationCodeFile":"",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_79EAFD90","path":"rooms/room_springtest/room_springtest.yy",},
-    {"name":"inst_705DF121","path":"rooms/room_springtest/room_springtest.yy",},
-    {"name":"inst_1A2E17C5","path":"rooms/room_springtest/room_springtest.yy",},
-    {"name":"inst_253B2C03","path":"rooms/room_springtest/room_springtest.yy",},
+    {"name":"inst_79EAFD90","path":"rooms/rm_spring_test/rm_spring_test.yy",},
+    {"name":"inst_705DF121","path":"rooms/rm_spring_test/rm_spring_test.yy",},
+    {"name":"inst_1A2E17C5","path":"rooms/rm_spring_test/rm_spring_test.yy",},
+    {"name":"inst_253B2C03","path":"rooms/rm_spring_test/rm_spring_test.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -21,12 +21,12 @@
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Tiles_1","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":10,"SerialiseWidth":16,"TileCompressedData":[
           -33,-2147483648,-5,0,1,-2147483648,-3,0,-21,-2147483648,1,0,-3,-2147483648,-5,1,-2,-2147483648,-4,0,
-          -4,-2147483648,-7,0,-12,-2147483648,-4,0,-2,-2147483648,1,1,-4,-2147483648,-4,0,-5,-2147483648,-2,0,
-          -3,1,-2,-2147483648,-32,1,
+          -4,-2147483648,-7,0,-12,-2147483648,-4,0,-2,-2147483648,1,1,-4,-2147483648,1,1,-3,0,-5,-2147483648,-2,
+          0,-3,1,-2,-2147483648,-32,1,
         ],"TileDataFormat":1,},"tilesetId":{"name":"tileset_block","path":"tilesets/tileset_block/tileset_block.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4289900419,"depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
-  "name":"room_springtest",
+  "name":"rm_spring_test",
   "parent":{
     "name":"Cubic Cycler",
     "path":"Cubic Cycler.yyp",
