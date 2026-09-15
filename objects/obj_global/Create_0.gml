@@ -19,5 +19,7 @@ global.level_map = [
 global.generators_destroyed = []
 
 // stores checkpoint data
-global.checkpoint_id = 0
+global.checkpoint_id = -1
+global.checkpoint_x = room_width/2
+global.checkpoint_y = room_height/2
 global.checkpoint_room = "rm_game"
