@@ -16,6 +16,7 @@ global.level_map = [
 [-1, rm_game, rm_spring_test],
 [-1, -1, -1],
 ]
+global.generators_destroyed = []
 
 // stores checkpoint data
 global.checkpoint_id = 0
