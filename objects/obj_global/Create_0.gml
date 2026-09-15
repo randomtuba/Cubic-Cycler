@@ -12,7 +12,7 @@ global.input_buffer_time = 5
 global.level_x = 1
 global.level_y = 1
 global.level_map = [
-["","room_upper",""],
-["","Room1","room_springtest"],
-["","room_lower",""],
+	[-1, -1, -1],
+	[-1, rm_game, rm_springtest],
+	[-1, -1, -1],
 ]
