@@ -23,3 +23,5 @@ global.checkpoint_id = -1
 global.checkpoint_x = room_width/2
 global.checkpoint_y = room_height/2
 global.checkpoint_room = "rm_game"
+global.checkpoint_level_x = 1
+global.checkpoint_level_y = 1
