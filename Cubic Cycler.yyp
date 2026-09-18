@@ -22,6 +22,7 @@
   },
   "name":"Cubic Cycler",
   "resources":[
+    {"id":{"name":"obj_block_fragile","path":"objects/obj_block_fragile/obj_block_fragile.yy",},},
     {"id":{"name":"obj_checkpoint","path":"objects/obj_checkpoint/obj_checkpoint.yy",},},
     {"id":{"name":"obj_cubert","path":"objects/obj_cubert/obj_cubert.yy",},},
     {"id":{"name":"obj_generator","path":"objects/obj_generator/obj_generator.yy",},},
@@ -36,6 +37,7 @@
     {"id":{"name":"rm_spring_boost","path":"rooms/rm_spring_boost/rm_spring_boost.yy",},},
     {"id":{"name":"rm_spring_hard","path":"rooms/rm_spring_hard/rm_spring_hard.yy",},},
     {"id":{"name":"rm_spring_test","path":"rooms/rm_spring_test/rm_spring_test.yy",},},
+    {"id":{"name":"spr_block_fragile","path":"sprites/spr_block_fragile/spr_block_fragile.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},
     {"id":{"name":"spr_checkpoint","path":"sprites/spr_checkpoint/spr_checkpoint.yy",},},
     {"id":{"name":"spr_cubert","path":"sprites/spr_cubert/spr_cubert.yy",},},
