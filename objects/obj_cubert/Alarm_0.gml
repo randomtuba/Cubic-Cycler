@@ -6,7 +6,7 @@ if (is_main_cubert) {
 			var non_main_cubert = instance_create_depth(x, y, depth, obj_cubert);
 			non_main_cubert.main_cubert = self;
 			non_main_cubert.is_main_cubert = false;
-			non_main_cubert.main_cubert_offset = [i*room_width, j*room_height];
+			non_main_cubert.main_cubert_off_i = [i, j];
 			array_push(non_main_cuberts, non_main_cubert);
 		}
 	}

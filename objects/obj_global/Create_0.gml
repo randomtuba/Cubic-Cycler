@@ -16,7 +16,15 @@ global.level_map = [
 [-1, rm_game, rm_spring_test],
 [-1, rm_awkward, -1],
 ]
-global.generators_destroyed = []
+global.generators_destroyed_map = []
+
+//fill it with falses at the start of the game
+for (var i=0; i<array_length(global.level_map); i++) {
+	array_push(global.generators_destroyed_map, []);
+	for (var j=0; j<array_length(global.level_map[0]); j++) {
+		array_push(global.generators_destroyed_map[i], false);
+	}
+}
 
 // stores checkpoint data
 global.checkpoint_id = -1

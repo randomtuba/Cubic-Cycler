@@ -1,3 +1,1 @@
-if (array_contains(global.generators_destroyed, id)) {
-	instance_destroy()
-}
+if (global.generators_destroyed_map[global.level_x][global.level_y]) { instance_destroy() }

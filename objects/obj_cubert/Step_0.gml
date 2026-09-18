@@ -2,16 +2,12 @@
 
 if (!is_main_cubert) {
 	if (instance_exists(main_cubert) && main_cubert != self) { 
-		x = main_cubert.x + main_cubert_offset[0];
-		y = main_cubert.y + main_cubert_offset[1];
+		x = main_cubert.x + main_cubert_off_i[0]*room_width;
+		y = main_cubert.y + main_cubert_off_i[1]*room_height;
 		image_index = main_cubert.image_index;
 		image_xscale = main_cubert.image_xscale;
 		image_yscale = main_cubert.image_yscale;
-		if (instance_exists(obj_generator)) {
-			visible = true
-		} else {
-			visible = false
-		}
+		visible = (instance_exists(obj_generator));
 	}
 	
 	return;
@@ -122,7 +118,7 @@ if (x > room_width) {
         global.level_x++
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
-		} else { global.level_x-- }
+		} else { global.level_x--; x = xprevious; }
     }
 } else if (x < 1) {
     x = room_width
@@ -131,7 +127,7 @@ if (x > room_width) {
         global.level_x--
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
-		} else { global.level_x++ }
+		} else { global.level_x++; x = xprevious; }
     }
 }
 
@@ -143,7 +139,7 @@ if (y > room_height) {
         global.level_y++
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
-		} else { global.level_y-- }
+		} else { global.level_y--; y = yprevious; }
     }
 } else if (y < 1) {
     y = room_height
@@ -152,7 +148,7 @@ if (y > room_height) {
         global.level_y--
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
-		} else { global.level_y++ }
+		} else { global.level_y++; y = yprevious;;}
     }
 }
 
