@@ -36,11 +36,11 @@ function faux_place_meeting(_xoff, _yoff, _collision_map) {
 		if (place_meeting(q.x+_xoff, q.y+_yoff, collision_map)) { _touch = true; break; }
 		var _i = q.main_cubert_off_i[0];
 		var _j = q.main_cubert_off_i[1];
-		if (global.generators_destroyed_map[global.level_x][global.level_y] && !room_index_bounded(global.level_x-_i, global.level_y-_j)) {
+		if (global.generators_destroyed_map[global.level_x][global.level_y] == true && !room_index_bounded(global.level_x-_i, global.level_y-_j)) {
 			var _x = q.x+_xoff - abs(sprite_width/2)*_i;
 			var _y = q.y+_yoff - abs(sprite_height/2)*_j;
 			//draw_circle(_x, _y, 5, false); //was for debugging 
-			if (0 <= _x && _x <= room_width && 0 <= _y && _y <= room_height) { _touch = true; }
+			if (2 <= _x && _x <= room_width-2 && 2 <= _y && _y <= room_height-2) { _touch = true; }
 		}
 	}
 	//if room invalid left && my right faux cubert
