@@ -32,6 +32,7 @@
     {"id":{"name":"obj_springy","path":"objects/obj_springy/obj_springy.yy",},},
     {"id":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
+    {"id":{"name":"rm_spring_boost","path":"rooms/rm_spring_boost/rm_spring_boost.yy",},},
     {"id":{"name":"rm_spring_test","path":"rooms/rm_spring_test/rm_spring_test.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},
     {"id":{"name":"spr_checkpoint","path":"sprites/spr_checkpoint/spr_checkpoint.yy",},},
@@ -49,6 +50,7 @@
     {"roomId":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"roomId":{"name":"rm_spring_test","path":"rooms/rm_spring_test/rm_spring_test.yy",},},
     {"roomId":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
+    {"roomId":{"name":"rm_spring_boost","path":"rooms/rm_spring_boost/rm_spring_boost.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
