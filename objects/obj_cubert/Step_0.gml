@@ -68,8 +68,8 @@ y_speed *= 0.99
 
 #region Coyote Time
 
-var _grounded = place_meeting(x, y+2, collision_map) || faux_place_meeting(0, 2, collision_map);
-var _grounded2 = place_meeting(x, y-2, collision_map) || faux_place_meeting(0, -2, collision_map);
+var _grounded = place_meeting(x, y+2, collisions) || faux_place_meeting(0, 2, collisions);
+var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);
 
 if (_grounded) {
 	coyote_time = global.coyote_time
@@ -113,8 +113,8 @@ if (coyote_time > 0) {
 
 #endregion Jumping
 
-//move_and_collide(x_speed, y_speed, collision_map)
-move_and_collide_with_faux(x_speed, y_speed, collision_map)
+//move_and_collide(x_speed, y_speed, collisions)
+move_and_collide_with_faux(x_speed, y_speed, collisions)
 
 #endregion Movement
 	
@@ -123,7 +123,7 @@ move_and_collide_with_faux(x_speed, y_speed, collision_map)
 // Horizontal
 if (x > room_width) {
     x = 0
-    if (place_meeting(x, y, collision_map)) x = room_width
+    if (place_meeting(x, y, collisions)) x = room_width
     if (!instance_exists(obj_generator)) {
         global.level_x++
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -132,7 +132,7 @@ if (x > room_width) {
     }
 } else if (x < 0) {
     x = room_width
-    if (place_meeting(x, y, collision_map)) x = 0
+    if (place_meeting(x, y, collisions)) x = 0
     if (!instance_exists(obj_generator)) {
         global.level_x--
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -144,7 +144,7 @@ if (x > room_width) {
 // Vertical
 if (y > room_height) {
     y = 0
-    if (place_meeting(x, y, collision_map)) y = room_height
+    if (place_meeting(x, y, collisions)) y = room_height
     if (!instance_exists(obj_generator)) {
         global.level_y++
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -153,7 +153,7 @@ if (y > room_height) {
     }
 } else if (y < 0) {
     y = room_height
-    if (place_meeting(x, y, collision_map)) y = 0
+    if (place_meeting(x, y, collisions)) y = 0
     if (!instance_exists(obj_generator)) {
         global.level_y--
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -169,5 +169,5 @@ global.default_y = y
 
 if (x_speed != 0) { image_xscale = sign(x_speed) * 0.5 }
 
-//var _crouch = !(keyboard_check(vk_down) || keyboard_check(ord("S"))) || place_meeting(x, y+2, collision_map)
+//var _crouch = !(keyboard_check(vk_down) || keyboard_check(ord("S"))) || place_meeting(x, y+2, collisions)
 //image_index = !_crouch;

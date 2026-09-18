@@ -1,1 +1,1 @@
-collision_map = layer_tilemap_get_id("Tiles_1")
+update_collisions();

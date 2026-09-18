@@ -2,7 +2,8 @@
 x_speed = 0
 y_speed = 0
 rotation = 0;
-collision_map = layer_tilemap_get_id("Tiles_1")
+//collision_map = layer_tilemap_get_id("Tiles_1")
+collisions = []; update_collisions();
 
 // lose state
 lose_state = false
@@ -22,6 +23,9 @@ main_cubert_off_i = [0, 0];
 non_main_cuberts = [];
 alarm[0] = 1;
 
+function update_collisions() {
+	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile];
+}
 
 function room_index_bounded(_i = global.level_x, _j = global.default_y) {
 	return (_j >= 0) && (_j < array_length(global.level_map)) &&
@@ -30,11 +34,11 @@ function room_index_bounded(_i = global.level_x, _j = global.default_y) {
 }
 
 
-function faux_place_meeting(_xoff, _yoff, _collision_map) {
+function faux_place_meeting(_xoff, _yoff, _collisions) {
 	var _touch = false;
 	for (var i=0; i<array_length(non_main_cuberts); i++) {
 		var q = non_main_cuberts[i];
-		if (place_meeting(q.x+_xoff, q.y+_yoff, collision_map)) { _touch = true; break; }
+		if (place_meeting(q.x+_xoff, q.y+_yoff, _collisions)) { _touch = true; break; }
 		var _i = q.main_cubert_off_i[0];
 		var _j = q.main_cubert_off_i[1];
 		if (global.generators_destroyed_map[global.level_x][global.level_y] == true && !room_index_bounded(global.level_x-_i, global.level_y-_j)) {
@@ -48,20 +52,28 @@ function faux_place_meeting(_xoff, _yoff, _collision_map) {
 	return _touch;
 }
 
-function move_and_collide_with_faux(x_speed, y_speed, collision_map, _iter = 32, reset_speeds_if_cant = true) {
-	var _can_both = !place_meeting(x+x_speed, y+y_speed, collision_map) && !faux_place_meeting(x_speed, y_speed, collision_map)
-	var _can_ud = !place_meeting(x, y+y_speed, collision_map) && !faux_place_meeting(0, y_speed, collision_map)
-	var _can_lr = !place_meeting(x+x_speed, y, collision_map) && !faux_place_meeting(x_speed, 0, collision_map)
+function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, reset_speeds_if_cant = true) {
+	var _can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
+	var _can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
+	var _can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
+	
+	if (array_contains(_collisions, obj_block_fragile)) {
+		var _fragile_list = ds_list_create();
+		var _fragile_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_block_fragile, false, true, _fragile_list, false);
+		for (var i=0; i<_fragile_count; i++) { _fragile_list[|i].break_timer-=1; }
+	}
+	
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
 		if (!_can_lr) { x_speed *= (_iter-1)/_iter; }
 		if (!_can_ud || (_can_lr && _can_ud && !_can_both)) { y_speed *= (_iter-1)/_iter; }
-		_can_both = !place_meeting(x+x_speed, y+y_speed, collision_map) && !faux_place_meeting(x_speed, y_speed, collision_map)
-		_can_ud = !place_meeting(x, y+y_speed, collision_map) && !faux_place_meeting(0, y_speed, collision_map)
-		_can_lr = !place_meeting(x+x_speed, y, collision_map) && !faux_place_meeting(x_speed, 0, collision_map)
+		_can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
+		_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
+		_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 		_iter--;
 	}
 	x += _can_lr * x_speed;
 	y += _can_ud * y_speed;
+	
 	if (reset_speeds_if_cant) {
 		if (!_can_lr) { self.x_speed = 0 }
 		if (!_can_ud) { if (self.y_speed > 1 && abs(self.jump_k) < 0.2) { self.jump_k = self.y_speed; } self.y_speed = 0}
