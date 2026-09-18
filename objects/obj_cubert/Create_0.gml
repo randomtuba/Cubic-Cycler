@@ -1,6 +1,7 @@
 // main vars
 x_speed = 0
 y_speed = 0
+rotation = 0;
 collision_map = layer_tilemap_get_id("Tiles_1")
 
 // lose state
@@ -63,6 +64,6 @@ function move_and_collide_with_faux(x_speed, y_speed, collision_map, _iter = 32,
 	y += _can_ud * y_speed;
 	if (reset_speeds_if_cant) {
 		if (!_can_lr) { self.x_speed = 0 }
-		if (!_can_ud) { self.y_speed = 0 }
+		if (!_can_ud) { if (self.y_speed > 1 && abs(self.jump_k) < 0.2) { self.jump_k = self.y_speed; } self.y_speed = 0}
 	}
 }
