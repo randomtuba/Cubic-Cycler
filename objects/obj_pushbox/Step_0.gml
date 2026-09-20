@@ -33,3 +33,5 @@ if (instance_exists(obj_generator)) {
 	    if (place_meeting(x, y, collisions)) y = 0
 	}
 }
+
+if (instance_exists(rider) && rider.y_speed >= 0) { rider.y = bbox_top + 1 - rider.sprite_height/2; }
