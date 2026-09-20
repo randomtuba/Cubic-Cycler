@@ -24,7 +24,7 @@ non_main_cuberts = [];
 alarm[0] = 1;
 
 function update_collisions() {
-	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile];
+	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox];
 }
 
 function room_index_bounded(_i = global.level_x, _j = global.default_y) {
@@ -61,6 +61,12 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		var _fragile_list = ds_list_create();
 		var _fragile_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_block_fragile, false, true, _fragile_list, false);
 		for (var i=0; i<_fragile_count; i++) { _fragile_list[|i].break_timer-=1; }
+	}
+	
+	if (array_contains(_collisions, obj_pushbox)) {
+		var _pushbox_list = ds_list_create();
+		var _pushbox_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_pushbox, false, true, _pushbox_list, false);
+		for (var i=0; i<_pushbox_count; i++) { _pushbox_list[|i].x_speed += x_speed }
 	}
 	
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
