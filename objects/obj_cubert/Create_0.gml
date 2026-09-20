@@ -71,19 +71,28 @@ function faux_place_meeting(_xoff, _yoff, _collisions) {
 }
 
 
-function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, reset_speeds_if_cant = true) {
+function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, reset_speeds_if_cant = true, apply_bounce = true) {
 	//check any of the 9 cuberts can move
 	var _can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
 	var _can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
 	var _can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
-	if (y_speed > 0 && !_can_ud && self.jump_k <= 0) { self.jump_k = self.jump_j_max+y_speed; self.bounciness = y_speed; }
+	if (y_speed > 0 && apply_bounce && !_can_ud && self.jump_k <= 0) { self.jump_k = self.jump_j_max+abs(y_speed); self.bounciness = abs(y_speed); }
 	
 	//todo: make the 9 able to increment break timer
 	if (array_contains(_collisions, obj_block_fragile)) {
 		var _fragile_list = ds_list_create();
 		var _fragile_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_block_fragile, false, true, _fragile_list, false);
 		for (var i=0; i<_fragile_count; i++) { _fragile_list[|i].break_timer-=1; }
+		
+		for (var i=0; i<array_length(non_main_cuberts); i++) {
+			var q = non_main_cuberts[i];
+			var _faux_fragile_list = ds_list_create();
+			var _faux_fragile_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, obj_block_fragile, false, true, _faux_fragile_list, false);
+			for (var j=0; j<_faux_fragile_count; j++) { if (instance_exists(_faux_fragile_list[|j])) { _faux_fragile_list[|j].break_timer-=1; } }
+			ds_list_destroy(_faux_fragile_list);
+			
+		}
 		
 		
 		ds_list_destroy(_fragile_list);
