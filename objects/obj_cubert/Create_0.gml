@@ -15,6 +15,8 @@ jump_buffer = 0
 
 // cool effects
 jump_k = 0;
+jump_j_max = sec;
+bounciness = 1;
 
 // create visual warp cuberts
 main_cubert = self;
@@ -75,6 +77,8 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	var _can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
 	var _can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
+	if (y_speed > 0 && !_can_ud && self.jump_k <= 0) { self.jump_k = self.jump_j_max+y_speed; self.bounciness = y_speed; }
+	
 	//todo: make the 9 able to increment break timer
 	if (array_contains(_collisions, obj_block_fragile)) {
 		var _fragile_list = ds_list_create();
@@ -129,6 +133,6 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	//clear velocity when hitting something
 	if (reset_speeds_if_cant) {
 		if (!_can_lr) { self.x_speed = 0 }
-		if (!_can_ud) { if (self.y_speed > 1 && abs(self.jump_k) < 0.2) { self.jump_k = self.y_speed; } self.y_speed = 0}
+		if (!_can_ud) { self.y_speed = 0 }
 	}
 }

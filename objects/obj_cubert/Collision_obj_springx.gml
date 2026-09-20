@@ -1,9 +1,5 @@
 // Apply spring velocity
-if (x > other.x) {
-	x_speed = 15
-} else {
-	x_speed = -15
-}
+if (x > other.x) { x_speed = 15 } else { x_speed = -15 }
 
 // Reduce drag temporarily
 x_drag = 0.95

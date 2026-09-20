@@ -1,0 +1,1 @@
+y_speed = clamp(-18, -y_speed, -15)
