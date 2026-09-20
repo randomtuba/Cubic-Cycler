@@ -29,22 +29,6 @@ if (lose_state) {
 	return;
 }
 
-function restart() {
-	if (global.checkpoint_id == -1) {
-		room_goto(rm_game)
-		global.level_x = 1
-		global.level_y = 1
-		x = 64
-		y = 480
-	} else {
-		room_goto(global.checkpoint_room)
-		global.level_x = global.checkpoint_level_x
-		global.level_y = global.checkpoint_level_y
-		x = global.checkpoint_x
-		y = global.checkpoint_y
-	}
-}
-
 if (keyboard_check(ord("R"))) restart()
 
 #endregion Loss State
