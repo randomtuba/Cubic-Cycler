@@ -47,6 +47,7 @@
     {"id":{"name":"spr_cubert","path":"sprites/spr_cubert/spr_cubert.yy",},},
     {"id":{"name":"spr_door","path":"sprites/spr_door/spr_door.yy",},},
     {"id":{"name":"spr_generator","path":"sprites/spr_generator/spr_generator.yy",},},
+    {"id":{"name":"spr_overlay_2","path":"sprites/spr_overlay_2/spr_overlay_2.yy",},},
     {"id":{"name":"spr_overlay","path":"sprites/spr_overlay/spr_overlay.yy",},},
     {"id":{"name":"spr_pushbox","path":"sprites/spr_pushbox/spr_pushbox.yy",},},
     {"id":{"name":"spr_spikes","path":"sprites/spr_spikes/spr_spikes.yy",},},

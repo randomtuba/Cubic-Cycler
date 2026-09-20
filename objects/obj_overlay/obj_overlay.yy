@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_overlay",
-    "path":"sprites/spr_overlay/spr_overlay.yy",
+    "name":"spr_overlay_2",
+    "path":"sprites/spr_overlay_2/spr_overlay_2.yy",
   },
   "spriteMaskId":null,
   "visible":true,
