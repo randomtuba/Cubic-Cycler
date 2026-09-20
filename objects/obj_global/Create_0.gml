@@ -2,6 +2,9 @@
 
 depth += 100;
 
+// fullscreen option
+fullscreen = false
+
 // stores the position of the player
 global.default_x = 0
 global.default_y = 0
