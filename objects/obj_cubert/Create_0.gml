@@ -82,7 +82,10 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	if (array_contains(_collisions, obj_pushbox)) {
 		var _pushbox_list = ds_list_create();
 		var _pushbox_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_pushbox, false, true, _pushbox_list, false);
-		for (var i=0; i<_pushbox_count; i++) { _pushbox_list[|i].x_speed += x_speed }
+		for (var i=0; i<_pushbox_count; i++) {
+			if (abs(y - _pushbox_list[|i].y) > 24) continue
+			_pushbox_list[|i].x_speed += x_speed / 2
+		}
 	}
 	
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
