@@ -2,6 +2,7 @@
 x_speed = 0
 y_speed = 0
 rotation = 0;
+x_scale = 0.5;
 //collision_map = layer_tilemap_get_id("Tiles_1")
 collisions = []; update_collisions();
 
