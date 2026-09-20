@@ -7,7 +7,7 @@ if (!is_main_cubert) {
 		image_index = main_cubert.image_index;
 		image_xscale = main_cubert.image_xscale;
 		image_yscale = main_cubert.image_yscale;
-		visible = (instance_exists(obj_generator));
+		visible = false;//(instance_exists(obj_generator));
 	}
 	
 	return;

@@ -6,5 +6,5 @@ collisions = []; update_collisions();
 rider = noone;
 
 function update_collisions() {
-	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_cubert, obj_pushbox];
+	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox];
 }

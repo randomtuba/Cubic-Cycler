@@ -1,5 +1,7 @@
 #macro sec game_get_speed(gamespeed_fps)
 
+depth += 100;
+
 // stores the position of the player
 global.default_x = 0
 global.default_y = 0

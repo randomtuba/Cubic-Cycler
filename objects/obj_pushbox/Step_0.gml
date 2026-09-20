@@ -12,7 +12,7 @@ if (_grounded) {
 x_speed *= 0.9
 y_speed *= 0.97
 
-move_and_collide(x_speed, y_speed, collisions)
+move_and_collide(x_speed, y_speed, collisions);
 
 if (instance_exists(obj_generator)) {
 	// Horizontal
@@ -34,4 +34,9 @@ if (instance_exists(obj_generator)) {
 	}
 }
 
-if (instance_exists(rider) && rider.y_speed >= 0) { rider.y = bbox_top + 1 - rider.sprite_height/2; }
+if (instance_exists(rider) && rider.y_speed >= 0) {
+	rider.move_and_collide_with_faux(0, 50, rider.collisions);
+	//rider.y -= y_speed;
+	//rider.y_speed = y_speed+2;
+	//rider.y = bbox_top + 1 - rider.sprite_height/2;
+}
