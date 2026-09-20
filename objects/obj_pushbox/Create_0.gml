@@ -5,5 +5,5 @@ rotation = 0;
 collisions = []; update_collisions();
 
 function update_collisions() {
-	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile];
+	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_cubert];
 }
