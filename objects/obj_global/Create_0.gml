@@ -2,6 +2,9 @@
 
 depth += 100;
 
+// fullscreen option
+fullscreen = false
+
 // stores the position of the player
 global.default_x = 0
 global.default_y = 0
@@ -16,7 +19,7 @@ global.level_y = 1
 global.level_map = [
 [-1, -1, -1, -1],
 [rm_spring_boost, rm_game, rm_spring_test, -1],
-[-1, rm_awkward, rm_spring_hard, -1],
+[rm_climb, rm_awkward, rm_spring_hard, -1],
 ]
 global.generators_destroyed_map = []
 

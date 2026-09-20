@@ -36,6 +36,7 @@
     {"id":{"name":"obj_springx","path":"objects/obj_springx/obj_springx.yy",},},
     {"id":{"name":"obj_springy","path":"objects/obj_springy/obj_springy.yy",},},
     {"id":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
+    {"id":{"name":"rm_climb","path":"rooms/rm_climb/rm_climb.yy",},},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"id":{"name":"rm_spring_boost","path":"rooms/rm_spring_boost/rm_spring_boost.yy",},},
     {"id":{"name":"rm_spring_hard","path":"rooms/rm_spring_hard/rm_spring_hard.yy",},},
@@ -64,6 +65,7 @@
     {"roomId":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
     {"roomId":{"name":"rm_spring_hard","path":"rooms/rm_spring_hard/rm_spring_hard.yy",},},
     {"roomId":{"name":"rm_spring_boost","path":"rooms/rm_spring_boost/rm_spring_boost.yy",},},
+    {"roomId":{"name":"rm_climb","path":"rooms/rm_climb/rm_climb.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
