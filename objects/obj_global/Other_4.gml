@@ -1,6 +1,6 @@
 var c=0;
 
-layer_destroy(layer_get_id("Background"));
+if (layer_exists("Background")) { layer_destroy(layer_get_id("Background")); }
 
 view_visible[0] = true;
 view_enabled = true;

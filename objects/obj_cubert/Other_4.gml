@@ -2,13 +2,13 @@ update_collisions();
 
 if (collision_rectangle(x-31, y-31, x+31, y+31, collisions, true, true) != noone) {
 	//bounce back if there's collision in the way
-	room_goto(current_room_data[0]);
-	x = current_room_data[1];
-	y = current_room_data[2];
-	x_speed = -5*current_room_data[3];
-	y_speed = -5*current_room_data[4];
-	global.level_x = current_room_data[5];
-	global.level_y = current_room_data[6];
+	//room_goto(current_room_data[0]);
+	//x = current_room_data[1];
+	//y = current_room_data[2];
+	//x_speed = -5*current_room_data[3];
+	//y_speed = -5*current_room_data[4];
+	//global.level_x = current_room_data[5];
+	//global.level_y = current_room_data[6];
 	
 	//alt: drill through
 	//for (var i=-32; i<33; i++) {
