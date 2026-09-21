@@ -14,13 +14,16 @@ global.coyote_time = 5
 global.input_buffer_time = 5
 
 // stores the map layout and current room
-global.level_x = 1
+global.level_x = 2
 global.level_y = 1
 global.level_map = [
 [-1, -1, -1, -1],
-[rm_spring_boost, rm_game, rm_spring_test, -1],
-[rm_climb, rm_awkward, rm_spring_hard, -1],
+[rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
+[rm_climb, -1, -1, rm_spring_hard],
+[-1, -1, -1, -1],
 ]
+// rm_awkward
+
 global.generators_destroyed_map = []
 
 //fill it with falses at the start of the game
@@ -35,6 +38,6 @@ for (var i=0; i<array_length(global.level_map); i++) {
 global.checkpoint_id = -1
 global.checkpoint_x = room_width/2
 global.checkpoint_y = room_height/2
-global.checkpoint_room = rm_game
-global.checkpoint_level_x = 1
+global.checkpoint_room = rm_template
+global.checkpoint_level_x = 2
 global.checkpoint_level_y = 1

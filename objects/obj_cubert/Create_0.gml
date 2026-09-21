@@ -28,8 +28,8 @@ alarm[0] = 1;
 
 function restart() {
 	if (global.checkpoint_id == -1) {
-		room_goto(rm_game)
-		global.level_x = 1
+		room_goto(rm_start)
+		global.level_x = 2
 		global.level_y = 1
 		x = 64
 		y = 480
@@ -106,7 +106,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 24) { _box.x_speed = x_speed / 2 }
+			if (abs(y - _box.y) < 33) { _box.x_speed = x_speed / 2 }
 			if (abs(x - _box.x) < 30 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 		}
 		
