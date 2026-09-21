@@ -14,6 +14,8 @@ y_speed *= 0.97
 
 move_and_collide(x_speed, y_speed, collisions);
 
+if (place_meeting(x, y, obj_cubert)) { x = xprevious; y = yprevious; y_speed = 0; }
+
 if (instance_exists(obj_generator)) {
 	// Horizontal
 	if (x > room_width) {
