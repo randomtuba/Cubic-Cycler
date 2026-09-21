@@ -4,3 +4,6 @@ with (obj_door) {
 		image_index = 3
 	}
 }
+with (obj_pushbox) {
+	update_collisions()
+}

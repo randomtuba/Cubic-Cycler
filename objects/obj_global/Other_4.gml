@@ -20,4 +20,3 @@ for (var i=-1; i<2; i++) {
 		view_yport[c] = 0;
 	}
 }
-window_set_size(room_width, room_height);
