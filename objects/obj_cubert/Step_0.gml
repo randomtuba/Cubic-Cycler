@@ -45,7 +45,8 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 
 #region Movement
 
-
+var _x_this_frame = 0
+var _y_this_frame = 0
 
 #region Horizontal Movement
 
@@ -53,6 +54,19 @@ x_speed += _lr * 0.75
 
 x_speed *= x_drag
 y_speed *= 0.99
+
+#region Conveyors
+
+if (touching_right_conveyor && !touching_left_conveyor) {
+	_x_this_frame += 5
+} else if (touching_left_conveyor && !touching_right_conveyor) {
+	_x_this_frame -= 5
+}
+
+touching_right_conveyor = false
+touching_left_conveyor = false
+
+#endregion Conveyors
 
 #endregion Horizontal Movement
 
@@ -104,7 +118,11 @@ if (coyote_time > 0) {
 #endregion Jumping
 
 //move_and_collide(x_speed, y_speed, collisions)
-move_and_collide_with_faux(x_speed, y_speed, collisions)
+
+_x_this_frame += x_speed
+_y_this_frame += y_speed
+
+move_and_collide_with_faux(_x_this_frame, _y_this_frame, collisions)
 
 #endregion Movement
 	
@@ -162,6 +180,7 @@ global.default_y = y
 
 if (x_speed != 0) { image_xscale = sign(x_speed) * 0.5; }
 x_scale = lerp(x_scale, image_xscale, 0.9)
+
 
 //var _crouch = !(keyboard_check(vk_down) || keyboard_check(ord("S"))) || place_meeting(x, y+2, collisions)
 //image_index = !_crouch;

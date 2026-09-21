@@ -14,6 +14,11 @@ lose_timer = 0
 coyote_time = 0
 jump_buffer = 0
 
+// Conveyors and Tractor Beams
+touching_right_conveyor = false
+touching_left_conveyor = false
+
+
 // cool effects
 jump_k = 0;
 jump_j_max = sec;
@@ -49,7 +54,7 @@ function restart() {
 }
 
 function update_collisions() {
-	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox];
+	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox, obj_conveyor];
 	with obj_switch_block {
 		if is_on {
 			array_push(other.collisions, self)
@@ -140,6 +145,54 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 			}
 			
 			ds_list_destroy(_faux_pushbox_list);
+			
+		}
+	}
+	
+	// Conveyors
+	if (array_contains(_collisions, obj_conveyor)) {
+		// Create list of touching conveyors
+		var _conveyor_list = ds_list_create();
+		var _conveyor_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_conveyor, false, true, _conveyor_list, false);
+		
+		// Check through touching conveyors
+		for (var i=0; i<_conveyor_count; i++) {
+			var _conveyor = _conveyor_list[|i];
+			if (abs((y + 32) - _conveyor.y) < 10) { 
+				// Set tracker variables to avoid being pushed faster 
+				// when touching multiple parts of long conveyors
+				if (_conveyor.points_right) {
+					touching_right_conveyor = true
+				} else {
+					touching_left_conveyor = true
+				}
+			}
+		}
+		// Destroy list as it's no longer in use
+		ds_list_destroy(_conveyor_list);
+		
+		// Repeat above with non-main cuberts
+		for (var i=0; i<array_length(non_main_cuberts); i++) {
+			var q = non_main_cuberts[i];
+			// Create list of touching conveyors
+			var _faux_conveyor_list = ds_list_create();
+			var _faux_conveyor_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, obj_conveyor, false, true, _faux_conveyor_list, false);
+			
+			// Check through touching conveyors
+			for (var j=0; j<_faux_conveyor_count; j++) {
+				var _conveyor = _faux_conveyor_list[|j];
+				if (abs((q.y + 32) - _conveyor.y) < 10) { 
+					// Set tracker variables to avoid being pushed faster 
+					// when touching multiple parts of long conveyors
+					if (_conveyor.points_right) {
+						touching_right_conveyor = true
+					} else {
+						touching_left_conveyor = true
+					}
+				}
+			}
+			// Destroy list as it's no longer in use
+			ds_list_destroy(_faux_conveyor_list);
 			
 		}
 	}
