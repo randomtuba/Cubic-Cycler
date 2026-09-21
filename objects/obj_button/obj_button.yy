@@ -4,6 +4,7 @@
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_pushbox","path":"objects/obj_pushbox/obj_pushbox.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_button",
@@ -33,8 +34,6 @@
   "spriteId":{
     "name":"spr_button",
     "path":"sprites/spr_button/spr_button.yy",
-    "name":"spr_button_cubert",
-    "path":"sprites/spr_button_cubert/spr_button_cubert.yy",
   },
   "spriteMaskId":null,
   "visible":true,
