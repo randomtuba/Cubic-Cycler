@@ -49,9 +49,14 @@ function restart() {
 }
 
 function update_collisions() {
-	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox, obj_door];
+	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox];
 	with obj_switch_block {
 		if is_on {
+			array_push(other.collisions, self)
+		}
+	}
+	with obj_door {
+		if !is_open {
 			array_push(other.collisions, self)
 		}
 	}
