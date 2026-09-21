@@ -13,6 +13,10 @@ global.default_y = 0
 global.coyote_time = 5
 global.input_buffer_time = 5
 
+// Conveyors and Tractor Beams
+global.conveyor_speed = 5
+global.tractor_strength = 0.5
+
 // stores the map layout and current room
 global.level_x = 2
 global.level_y = 1

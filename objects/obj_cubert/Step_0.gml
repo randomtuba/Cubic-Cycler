@@ -58,15 +58,36 @@ y_speed *= 0.99
 #region Conveyors
 
 if (touching_right_conveyor && !touching_left_conveyor) {
-	_x_this_frame += 5
+	_x_this_frame += global.conveyor_speed
 } else if (touching_left_conveyor && !touching_right_conveyor) {
-	_x_this_frame -= 5
+	_x_this_frame -= global.conveyor_speed
 }
 
 touching_right_conveyor = false
 touching_left_conveyor = false
 
 #endregion Conveyors
+
+#region Tractor Beams
+
+if (touching_up_tractor && !touching_down_tractor) {
+	y_speed -= global.tractor_strength
+} else if (touching_down_tractor && !touching_up_tractor) {
+	y_speed += global.tractor_strength
+}
+
+if (touching_right_tractor && !touching_left_tractor) {
+	x_speed += global.tractor_strength
+} else if (touching_left_tractor && !touching_right_tractor) {
+	x_speed -= global.tractor_strength
+}
+
+touching_up_tractor = false
+touching_down_tractor = false
+touching_right_tractor = false
+touching_left_tractor = false
+
+#endregion Tractor Beams
 
 #endregion Horizontal Movement
 

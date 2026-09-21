@@ -17,6 +17,10 @@ jump_buffer = 0
 // Conveyors and Tractor Beams
 touching_right_conveyor = false
 touching_left_conveyor = false
+touching_up_tractor = false
+touching_down_tractor = false
+touching_right_tractor = false
+touching_left_tractor = false
 
 
 // cool effects
