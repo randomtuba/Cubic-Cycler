@@ -110,6 +110,9 @@ move_and_collide_with_faux(x_speed, y_speed, collisions)
 	
 #region Room Wrapping
 
+
+update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
+
 // Horizontal
 if (x > room_width) {
     x = 0

@@ -25,6 +25,12 @@ is_main_cubert = true;
 main_cubert_off_i = [0, 0];
 non_main_cuberts = [];
 alarm[0] = 1;
+current_room_data = []; update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
+
+function update_current_room_data(_room, _x, _y, _x_speed, _y_speed, _level_x, _level_y) {
+	current_room_data = [_room, _x, _y, _x_speed, _y_speed, _level_x, _level_y];
+	return current_room_data;
+}
 
 function restart() {
 	if (global.checkpoint_id == -1) {
