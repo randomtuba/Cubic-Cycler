@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_door",
+  "%Name":"obj_switch_block",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_door",
+  "name":"obj_switch_block",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -27,14 +27,14 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"v2","%Name":"receiving_id","filters":[],"listItems":[],"multiselect":false,"name":"receiving_id","rangeEnabled":true,"rangeMax":2.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
-    {"$GMObjectProperty":"v2","%Name":"is_open","filters":[],"listItems":[],"multiselect":false,"name":"is_open","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v2","%Name":"is_on","filters":[],"listItems":[],"multiselect":false,"name":"is_on","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_door",
-    "path":"sprites/spr_door/spr_door.yy",
+    "name":"spr_switch_block",
+    "path":"sprites/spr_switch_block/spr_switch_block.yy",
   },
   "spriteMaskId":null,
   "visible":true,
