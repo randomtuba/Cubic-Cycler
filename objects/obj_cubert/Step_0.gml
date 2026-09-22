@@ -17,7 +17,7 @@ if (!is_main_cubert) {
 
 #region Loss State
 
-
+sprite_index = keyboard_check(ord("1")) ? spr_cubert_1 : spr_cubert;
 image_index = 2*lose_state
 if (lose_state) {
 	lose_timer -= 1
