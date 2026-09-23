@@ -1,5 +1,6 @@
-var _grounded = place_meeting(x, y+2, collisions)
-var _grounded2 = place_meeting(x, y-2, collisions)
+var _grounded = place_meeting(x, y + 2, collisions) || place_meeting(x, y + 2, obj_conveyor);
+
+var _grounded2 = place_meeting(x, y - 2, collisions) || place_meeting(x, y - 2, obj_conveyor);
 
 if (_grounded) {
 	y_speed = 0
@@ -11,6 +12,13 @@ if (_grounded) {
 
 x_speed *= 0.9
 y_speed *= 0.97
+
+//conveyer should move block - zach
+var _conveyor = instance_place(x, y + 2, obj_conveyor);
+
+if (_conveyor != noone) {
+    x_speed += _conveyor.points_right ? 0.5 : -0.5;
+}
 
 move_and_collide(x_speed, y_speed, collisions);
 
