@@ -22,7 +22,7 @@ global.tractor_strength = 0.5
 global.level_x = 2
 global.level_y = 1
 global.level_map = [
-[-1, -1, -1, -1],
+[-1, -1, -1, rm_spikes],
 [rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
 [rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
 [-1, rm_fragile_blocks, -1, -1],

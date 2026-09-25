@@ -48,6 +48,7 @@
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"id":{"name":"rm_pushbox_fall","path":"rooms/rm_pushbox_fall/rm_pushbox_fall.yy",},},
     {"id":{"name":"rm_pushbox_intro","path":"rooms/rm_pushbox_intro/rm_pushbox_intro.yy",},},
+    {"id":{"name":"rm_spikes","path":"rooms/rm_spikes/rm_spikes.yy",},},
     {"id":{"name":"rm_spring_boost","path":"rooms/rm_spring_boost/rm_spring_boost.yy",},},
     {"id":{"name":"rm_spring_box","path":"rooms/rm_spring_box/rm_spring_box.yy",},},
     {"id":{"name":"rm_spring_hard","path":"rooms/rm_spring_hard/rm_spring_hard.yy",},},
@@ -95,6 +96,7 @@
     {"roomId":{"name":"rm_pushbox_intro","path":"rooms/rm_pushbox_intro/rm_pushbox_intro.yy",},},
     {"roomId":{"name":"rm_spring_box","path":"rooms/rm_spring_box/rm_spring_box.yy",},},
     {"roomId":{"name":"rm_fragile_blocks","path":"rooms/rm_fragile_blocks/rm_fragile_blocks.yy",},},
+    {"roomId":{"name":"rm_spikes","path":"rooms/rm_spikes/rm_spikes.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
