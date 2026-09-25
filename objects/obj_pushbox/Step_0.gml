@@ -2,8 +2,10 @@ var _grounded = place_meeting(x, y + 2, collisions) || place_meeting(x, y + 2, o
 
 var _grounded2 = place_meeting(x, y - 2, collisions) || place_meeting(x, y - 2, obj_conveyor);
 
-if (_grounded) {
+if (_grounded and touchspring == 0) {
 	y_speed = 0
+} else if (_grounded and touchspring == 1){
+	touchspring = 0
 } else if (_grounded2) {
 	y_speed = 1
 } else {
@@ -22,8 +24,9 @@ if (_conveyor != noone) {
 
 move_and_collide(x_speed, y_speed, collisions);
 
-if (place_meeting(x, y, obj_cubert)) { x = xprevious; y = yprevious; y_speed = 0; }
-
+if (place_meeting(x, y, obj_cubert)) { 
+	if (obj_cubert.y < y) {x = xprevious; y = yprevious; y_speed = 0;}
+}
 if (instance_exists(obj_generator)) {
 	// Horizontal
 	if (x > room_width) {
@@ -44,8 +47,8 @@ if (instance_exists(obj_generator)) {
 	}
 }
 
-if (instance_exists(rider) && rider.y_speed >= 0) {
-	rider.move_and_collide_with_faux(0, 50, rider.collisions, 32, true, false);
+if (instance_exists(rider) && rider.y_speed >= 0 && abs(rider.x - x) < 58) {
+	rider.move_and_collide_with_faux(0, 50, rider.collisions, 32, false, false);
 	//rider.y -= y_speed;
 	//rider.y_speed = y_speed+2;
 	//rider.y = bbox_top + 1 - rider.sprite_height/2;
