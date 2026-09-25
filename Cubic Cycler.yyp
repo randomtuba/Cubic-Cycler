@@ -42,7 +42,6 @@
     {"id":{"name":"obj_springy","path":"objects/obj_springy/obj_springy.yy",},},
     {"id":{"name":"obj_switch_block","path":"objects/obj_switch_block/obj_switch_block.yy",},},
     {"id":{"name":"obj_tractor_beam","path":"objects/obj_tractor_beam/obj_tractor_beam.yy",},},
-    {"id":{"name":"rm_map","path":"objects/rm_map/rm_map.yy",},},
     {"id":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
     {"id":{"name":"rm_climb","path":"rooms/rm_climb/rm_climb.yy",},},
     {"id":{"name":"rm_doubledown","path":"rooms/rm_doubledown/rm_doubledown.yy",},},
