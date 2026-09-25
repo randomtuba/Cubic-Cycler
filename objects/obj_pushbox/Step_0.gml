@@ -24,8 +24,9 @@ if (_conveyor != noone) {
 
 move_and_collide(x_speed, y_speed, collisions);
 
-if (place_meeting(x, y, obj_cubert)) { x = xprevious; y = yprevious; y_speed = 0; }
-
+if (place_meeting(x, y, obj_cubert)) { 
+	if (obj_cubert.y < y) {x = xprevious; y = yprevious; y_speed = 0;}
+}
 if (instance_exists(obj_generator)) {
 	// Horizontal
 	if (x > room_width) {

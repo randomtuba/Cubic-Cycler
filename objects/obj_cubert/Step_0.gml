@@ -106,8 +106,10 @@ if (_grounded) {
 
 #region Ground Collision and Diving
 
-if (_grounded) {
+if (_grounded && springyspring == 0) {
 	y_speed = 0
+} else if (_grounded && springyspring == 1) {
+	springyspring = 0
 } else if (_grounded2) {
 	y_speed = 1
 } else {
