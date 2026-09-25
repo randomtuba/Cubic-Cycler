@@ -2,8 +2,10 @@ var _grounded = place_meeting(x, y + 2, collisions) || place_meeting(x, y + 2, o
 
 var _grounded2 = place_meeting(x, y - 2, collisions) || place_meeting(x, y - 2, obj_conveyor);
 
-if (_grounded) {
+if (_grounded and touchspring == 0) {
 	y_speed = 0
+} else if (_grounded and touchspring == 1){
+	touchspring = 0
 } else if (_grounded2) {
 	y_speed = 1
 } else {
