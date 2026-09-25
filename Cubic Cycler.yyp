@@ -33,6 +33,7 @@
     {"id":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},},
     {"id":{"name":"obj_generator","path":"objects/obj_generator/obj_generator.yy",},},
     {"id":{"name":"obj_global","path":"objects/obj_global/obj_global.yy",},},
+    {"id":{"name":"obj_map","path":"objects/obj_map/obj_map.yy",},},
     {"id":{"name":"obj_overlay","path":"objects/obj_overlay/obj_overlay.yy",},},
     {"id":{"name":"obj_pushbox","path":"objects/obj_pushbox/obj_pushbox.yy",},},
     {"id":{"name":"obj_spikeball","path":"objects/obj_spikeball/obj_spikeball.yy",},},
