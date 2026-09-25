@@ -151,7 +151,6 @@ move_and_collide_with_faux(_x_this_frame, _y_this_frame, collisions)
 	
 #region Room Wrapping
 
-
 update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
 
 // Horizontal
