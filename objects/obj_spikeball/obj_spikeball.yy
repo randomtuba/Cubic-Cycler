@@ -1,11 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_conveyor",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_spikeball",
+  "eventList":[],
   "managed":true,
-  "name":"obj_conveyor",
+  "name":"obj_spikeball",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -25,15 +23,13 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[
-    {"$GMObjectProperty":"v2","%Name":"points_right","filters":[],"listItems":[],"multiselect":false,"name":"points_right","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
-  ],
+  "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_conveyor_1",
-    "path":"sprites/spr_conveyor_1/spr_conveyor_1.yy",
+    "name":"spr_spikeball",
+    "path":"sprites/spr_spikeball/spr_spikeball.yy",
   },
   "spriteMaskId":null,
   "visible":true,
