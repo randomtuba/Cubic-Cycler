@@ -1,1 +1,2 @@
-y_speed = clamp(-18, -y_speed, -15)
+springyspring = 1
+y_speed = -15
