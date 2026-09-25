@@ -1,7 +1,3 @@
-// once touched by cubert, the fragile block begins breaking on its own
-if (is_breaking) break_timer -= 1
-
-// high image index means it gets more cracked
 if (break_timer > sec * 0.75) {
 	image_index = 0
 } else if (break_timer > sec * 0.5) {
@@ -11,5 +7,7 @@ if (break_timer > sec * 0.75) {
 } else if (break_timer > 0) {
 	image_index = 3
 } else {
+	//should they respawn without restarting the room?
+	//if (alarm[0] <= 0) { alarm[0] = 3*sec; }
 	instance_destroy()
 }

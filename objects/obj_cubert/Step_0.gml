@@ -106,10 +106,8 @@ if (_grounded) {
 
 #region Ground Collision and Diving
 
-if (_grounded && springyspring == 0) {
+if (_grounded) {
 	y_speed = 0
-} else if (_grounded && springyspring == 1) {
-	springyspring = 0
 } else if (_grounded2) {
 	y_speed = 1
 } else {
@@ -150,6 +148,7 @@ move_and_collide_with_faux(_x_this_frame, _y_this_frame, collisions)
 #endregion Movement
 	
 #region Room Wrapping
+
 
 update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
 
