@@ -13,7 +13,6 @@ lose_timer = 0
 // quality of life vars
 coyote_time = 0
 jump_buffer = 0
-springyspring = 0
 
 // Conveyors and Tractor Beams
 touching_right_conveyor = false
@@ -105,12 +104,17 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	var _can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
 	if (y_speed > 0 && apply_bounce && !_can_ud && self.jump_k <= 0) { self.jump_k = self.jump_j_max+abs(y_speed); self.bounciness = abs(y_speed); }
-
+	
 	//todo: make the 9 able to increment break timer
 	if (array_contains(_collisions, obj_block_fragile)) {
 		var _fragile_list = ds_list_create();
 		var _fragile_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_block_fragile, false, true, _fragile_list, false);
-		for (var i=0; i<_fragile_count; i++) { _fragile_list[|i].break_timer-=1; }
+		for (var i=0; i<_fragile_count; i++) {
+			if ((keyboard_check(vk_down) || keyboard_check(ord("S"))) && !(place_meeting(x, y+2, collisions) || faux_place_meeting(0, 2, collisions))) {
+				_fragile_list[|i].break_timer = 0
+			}
+			_fragile_list[|i].is_breaking = true;
+		}
 		
 		for (var i=0; i<array_length(non_main_cuberts); i++) {
 			var q = non_main_cuberts[i];
@@ -132,7 +136,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
+			if (abs(y - _box.y) < 33) { _box.x_speed = x_speed / 2 }
 			if (abs(x - _box.x) < 30 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 		}
 		
@@ -145,7 +149,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 			
 			for (var j=0; j<_faux_pushbox_count; j++) {
 				var _box = _faux_pushbox_list[|j];
-				if (abs(q.y - _box.y) < 24 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
+				if (abs(q.y - _box.y) < 24) { _box.x_speed = x_speed / 2 }
 				if (abs(q.x - _box.x) < 30 && q.y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 			}
 			
