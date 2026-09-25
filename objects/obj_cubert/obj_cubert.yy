@@ -43,8 +43,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_cubert",
-    "path":"sprites/spr_cubert/spr_cubert.yy",
+    "name":"spr_cubert_1",
+    "path":"sprites/spr_cubert_1/spr_cubert_1.yy",
   },
   "spriteMaskId":null,
   "visible":true,

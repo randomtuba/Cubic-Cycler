@@ -25,7 +25,7 @@ global.level_map = [
 [-1, -1, -1, -1],
 [rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
 [rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
-[-1, -1, -1, -1],
+[-1, rm_fragile_blocks, -1, -1],
 ]
 // rm_awkward
 

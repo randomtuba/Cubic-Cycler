@@ -43,6 +43,7 @@
     {"id":{"name":"obj_tractor_beam","path":"objects/obj_tractor_beam/obj_tractor_beam.yy",},},
     {"id":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
     {"id":{"name":"rm_climb","path":"rooms/rm_climb/rm_climb.yy",},},
+    {"id":{"name":"rm_fragile_blocks","path":"rooms/rm_fragile_blocks/rm_fragile_blocks.yy",},},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"id":{"name":"rm_pushbox_fall","path":"rooms/rm_pushbox_fall/rm_pushbox_fall.yy",},},
     {"id":{"name":"rm_pushbox_intro","path":"rooms/rm_pushbox_intro/rm_pushbox_intro.yy",},},
@@ -79,6 +80,7 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"rm_start","path":"rooms/rm_start/rm_start.yy",},},
+    {"roomId":{"name":"rm_pushbox_fall","path":"rooms/rm_pushbox_fall/rm_pushbox_fall.yy",},},
     {"roomId":{"name":"rm_template","path":"rooms/rm_template/rm_template.yy",},},
     {"roomId":{"name":"rm_spring_test","path":"rooms/rm_spring_test/rm_spring_test.yy",},},
     {"roomId":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
@@ -88,8 +90,8 @@
     {"roomId":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"roomId":{"name":"rm_spring_intro","path":"rooms/rm_spring_intro/rm_spring_intro.yy",},},
     {"roomId":{"name":"rm_pushbox_intro","path":"rooms/rm_pushbox_intro/rm_pushbox_intro.yy",},},
-    {"roomId":{"name":"rm_pushbox_fall","path":"rooms/rm_pushbox_fall/rm_pushbox_fall.yy",},},
     {"roomId":{"name":"rm_spring_box","path":"rooms/rm_spring_box/rm_spring_box.yy",},},
+    {"roomId":{"name":"rm_fragile_blocks","path":"rooms/rm_fragile_blocks/rm_fragile_blocks.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
