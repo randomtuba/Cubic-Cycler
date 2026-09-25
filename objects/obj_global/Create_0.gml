@@ -1,4 +1,5 @@
 #macro sec game_get_speed(gamespeed_fps)
+randomize()
 
 depth += 100;
 
