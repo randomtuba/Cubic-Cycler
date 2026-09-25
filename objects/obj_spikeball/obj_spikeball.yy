@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite_spikeball",
-    "path":"sprites/Sprite_spikeball/Sprite_spikeball.yy",
+    "name":"spr_spikeball",
+    "path":"sprites/spr_spikeball/spr_spikeball.yy",
   },
   "spriteMaskId":null,
   "visible":true,
