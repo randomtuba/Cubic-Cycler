@@ -56,6 +56,8 @@ function restart() {
 		x = global.checkpoint_x
 		y = global.checkpoint_y
 	}
+	x_speed = 0
+	y_speed = 0
 }
 
 function update_collisions() {
