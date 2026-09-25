@@ -47,8 +47,8 @@ if (instance_exists(obj_generator)) {
 	}
 }
 
-if (instance_exists(rider) && rider.y_speed >= 0) {
-	rider.move_and_collide_with_faux(0, 50, rider.collisions, 32, true, false);
+if (instance_exists(rider) && rider.y_speed >= 0 && abs(rider.x - x) < 58) {
+	rider.move_and_collide_with_faux(0, 50, rider.collisions, 32, false, false);
 	//rider.y -= y_speed;
 	//rider.y_speed = y_speed+2;
 	//rider.y = bbox_top + 1 - rider.sprite_height/2;

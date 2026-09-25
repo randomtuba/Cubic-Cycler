@@ -137,8 +137,8 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33) { _box.x_speed = x_speed / 2 }
-			if (abs(x - _box.x) < 30 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
+			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
+			if (abs(x - _box.x) < 58 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 		}
 		
 		ds_list_destroy(_pushbox_list);
@@ -150,8 +150,8 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 			
 			for (var j=0; j<_faux_pushbox_count; j++) {
 				var _box = _faux_pushbox_list[|j];
-				if (abs(q.y - _box.y) < 24) { _box.x_speed = x_speed / 2 }
-				if (abs(q.x - _box.x) < 30 && q.y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
+				if (abs(q.y - _box.y) < 24 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
+				if (abs(q.x - _box.x) < 58 && q.y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 			}
 			
 			ds_list_destroy(_faux_pushbox_list);
