@@ -41,6 +41,7 @@
     {"id":{"name":"obj_spikeball","path":"objects/obj_spikeball/obj_spikeball.yy",},},
     {"id":{"name":"obj_spikes","path":"objects/obj_spikes/obj_spikes.yy",},},
     {"id":{"name":"obj_spring_down","path":"objects/obj_spring_down/obj_spring_down.yy",},},
+    {"id":{"name":"obj_spring","path":"objects/obj_spring/obj_spring.yy",},},
     {"id":{"name":"obj_springx","path":"objects/obj_springx/obj_springx.yy",},},
     {"id":{"name":"obj_springy","path":"objects/obj_springy/obj_springy.yy",},},
     {"id":{"name":"obj_switch_block","path":"objects/obj_switch_block/obj_switch_block.yy",},},
