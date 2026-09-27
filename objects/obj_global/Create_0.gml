@@ -32,12 +32,11 @@ global.tractor_strength = 0.5
 global.level_x = 2
 global.level_y = 1
 global.level_map = [
-[-1, -1, -1, rm_spikes],
+[-1, -1, -1, rm_many_buttons],
 [rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
 [rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
 [-1, rm_fragile_blocks, rm_doubledown, rm_awkward],
 ]
-// rm_awkward
 
 global.generators_destroyed_map = []
 
@@ -48,6 +47,8 @@ for (var i=0; i<array_length(global.level_map); i++) {
 		array_push(global.generators_destroyed_map[i], false);
 	}
 }
+
+global.kleinbottles_collected = []
 
 // stores checkpoint data
 global.checkpoint_id = -1
