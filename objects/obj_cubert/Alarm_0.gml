@@ -8,6 +8,8 @@ if (is_main_cubert) {
 			non_main_cubert.is_main_cubert = false;
 			non_main_cubert.main_cubert_off_i = [i, j];
 			array_push(non_main_cuberts, non_main_cubert);
+			array_push(all_cuberts, non_main_cubert);
 		}
 	}
+	array_push(all_cuberts, self);
 }

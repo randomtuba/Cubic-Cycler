@@ -7,5 +7,5 @@ if (pressed && !stays_pressed && !place_meeting(x, y, obj_cubert)) {
 	
 	update_connected()
 	
-	update_other_collisions()
+	with (obj_global) send_collision_updates()
 }

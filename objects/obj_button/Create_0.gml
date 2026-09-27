@@ -17,14 +17,3 @@ function update_connected() {
 		}
 	}
 }
-
-function update_other_collisions() {
-	// Update pushbox collision map
-	with (obj_pushbox) {
-		update_collisions()
-	}
-	// Update cubert collision map
-	with (obj_cubert) {
-		update_collisions()
-	}
-}

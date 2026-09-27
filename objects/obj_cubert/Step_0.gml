@@ -45,9 +45,6 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 
 #region Movement
 
-var _x_this_frame = 0
-var _y_this_frame = 0
-
 #region Horizontal Movement
 
 x_speed += _lr * 0.75
@@ -58,9 +55,9 @@ y_speed *= 0.99
 #region Conveyors
 
 if (touching_right_conveyor && !touching_left_conveyor) {
-	_x_this_frame += global.conveyor_speed
+	x_this_frame += global.conveyor_speed
 } else if (touching_left_conveyor && !touching_right_conveyor) {
-	_x_this_frame -= global.conveyor_speed
+	x_this_frame -= global.conveyor_speed
 }
 
 touching_right_conveyor = false
@@ -142,10 +139,13 @@ if (coyote_time > 0) {
 
 //move_and_collide(x_speed, y_speed, collisions)
 
-_x_this_frame += x_speed
-_y_this_frame += y_speed
+x_this_frame += x_speed
+y_this_frame += y_speed
 
-move_and_collide_with_faux(_x_this_frame, _y_this_frame, collisions)
+move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
+
+x_this_frame = 0
+y_this_frame = 0
 
 #endregion Movement
 	

@@ -6,5 +6,5 @@ if (!pressed) {
 	
 	update_connected()
 	
-	update_other_collisions()
+	with (obj_global) send_collision_updates()
 }
