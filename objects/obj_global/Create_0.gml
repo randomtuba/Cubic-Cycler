@@ -37,7 +37,6 @@ global.level_map = [
 [rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
 [-1, rm_fragile_blocks, rm_doubledown, rm_awkward],
 ]
-// rm_awkward
 
 global.generators_destroyed_map = []
 
@@ -48,6 +47,8 @@ for (var i=0; i<array_length(global.level_map); i++) {
 		array_push(global.generators_destroyed_map[i], false);
 	}
 }
+
+global.kleinbottles_collected = []
 
 // stores checkpoint data
 global.checkpoint_id = -1
