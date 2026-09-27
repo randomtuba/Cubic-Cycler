@@ -41,6 +41,42 @@ function move_by_direction() {
 		current_object.x += get_x_speed()
 		current_object.y += get_y_speed()
 	}
+	
+	try_room_wrap()
+}
+
+function try_room_wrap() {
+	if (instance_exists(obj_generator)) {
+		// Horizontal
+		if (x > room_width) {
+		    x = 0
+		    if (place_meeting(x, y, collisions)) {
+				x = room_width
+				turn_around()
+			}
+		} else if (x < 0) {
+		    x = room_width
+		    if (place_meeting(x, y, collisions)) {
+				x = 0
+				turn_around()
+			}
+		}
+
+		// Vertical
+		if (y > room_height) {
+		    y = 0
+		    if (place_meeting(x, y, collisions)) {
+				y = room_height
+				turn_around()
+			}
+		} else if (y < 0) {
+		    y = room_height
+		    if (place_meeting(x, y, collisions)) {
+				y = 0
+				turn_around()
+			}
+		}
+	}
 }
 
 function turn_around() {
