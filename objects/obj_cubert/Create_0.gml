@@ -170,10 +170,27 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	
 	// Moving Platforms
 	var _touching_platforms = get_contacting(_collisions, obj_moving_platform)
-	for (var i = 0; i < array_length(_touching_platforms); i++) {
-		var _platform = array_get(_touching_platforms, i)
+	for (var i = 0; i < array_length(_touching_platforms[0]); i++) {
+		var _platform = array_get(_touching_platforms[0], i)
+		var _direction = array_get(_touching_platforms[1], i)
+		
 		x_speed += _platform.get_x_speed()
-		y_speed += _platform.get_y_speed()
+		if (_direction == Direction.Up || _direction == Direction.Down) {
+			y_speed += _platform.get_y_speed()
+		}
+		
+		if (_platform.get_x_speed() > 0 && x_speed < _platform.get_x_speed() && _direction == Direction.Left) {
+			x_speed = _platform.get_x_speed()
+		}
+		if (_platform.get_x_speed() < 0 && x_speed > _platform.get_x_speed() && _direction == Direction.Right) {
+			x_speed = _platform.get_x_speed()
+		}
+		if (_platform.get_y_speed() > 0 && y_speed < _platform.get_y_speed() && _direction == Direction.Up) {
+			y_speed = _platform.get_x_speed()
+		}
+		if (_platform.get_y_speed() < 0 && y_speed > _platform.get_y_speed() && _direction == Direction.Down) {
+			y_speed = _platform.get_x_speed()
+		}
 	}
 	
 	// Update can_move variables after the speed changes
@@ -230,7 +247,7 @@ function get_standing_on(collision_list, check_object) {
 }
 
 function get_contacting(collision_list, check_object) {
-	var return_list = []
+	var return_list = [[], []]
 	if (array_contains(collision_list, check_object)) {
 	
 		// Check collisions
@@ -244,7 +261,20 @@ function get_contacting(collision_list, check_object) {
 			for (var j = 0; j < _contact_count; j++) {
 				var _contact = _contact_list[|j];
 				// Add object to the return list
-				array_push(return_list, _contact)
+				array_push(return_list[0], _contact)
+				
+				// Add collision direction (from reference point of cubert)
+				if (abs((q.y + abs(q.sprite_height / 2)) - _contact.y) < 4) {
+					array_push(return_list[1], Direction.Down)
+				} else if (abs((q.y - abs(q.sprite_height / 2)) - (_contact.y + _contact.sprite_height)) < 4) {
+					array_push(return_list[1], Direction.Up)
+				} else if (abs((q.x + abs(q.sprite_width / 2)) - _contact.x) < 4) {
+					array_push(return_list[1], Direction.Right)
+				} else if (abs((q.x - abs(q.sprite_width / 2)) - (_contact.x + _contact.sprite_width)) < 4) {
+					array_push(return_list[1], Direction.Left)
+				} else {
+					array_push(return_list[1], Direction.None)
+				}
 			}
 			// Destroy list as it's no longer in use
 			ds_list_destroy(_contact_list);

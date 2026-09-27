@@ -5,6 +5,5 @@ switch type {
 		
 	case MovingPlatformType.Bounce:
 		move_by_direction()
-		turn_if_colliding()
 	break
 }
