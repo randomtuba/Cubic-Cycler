@@ -1,6 +1,8 @@
 // main vars
 x_speed = 0
 y_speed = 0
+x_this_frame = 0
+y_this_frame = 0
 rotation = 0;
 x_scale = 0.5;
 //collision_map = layer_tilemap_get_id("Tiles_1")
@@ -35,6 +37,7 @@ main_cubert = self;
 is_main_cubert = true;
 main_cubert_off_i = [0, 0];
 non_main_cuberts = [];
+all_cuberts = []
 alarm[0] = 1;
 current_room_data = []; update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
 
@@ -62,16 +65,8 @@ function restart() {
 }
 
 function update_collisions() {
-	collisions = [layer_tilemap_get_id("Tiles_1"), obj_block_fragile, obj_pushbox, obj_conveyor];
-	with obj_switch_block {
-		if is_on {
-			array_push(other.collisions, self)
-		}
-	}
-	with obj_door {
-		if !is_open {
-			array_push(other.collisions, self)
-		}
+	with (obj_global) {
+		other.collisions = get_active_collisions()
 	}
 }
 
@@ -163,52 +158,30 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	}
 	
 	// Conveyors
-	if (array_contains(_collisions, obj_conveyor)) {
-		// Create list of touching conveyors
-		var _conveyor_list = ds_list_create();
-		var _conveyor_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_conveyor, false, true, _conveyor_list, false);
-		
-		// Check through touching conveyors
-		for (var i=0; i<_conveyor_count; i++) {
-			var _conveyor = _conveyor_list[|i];
-			if (abs((y + 32) - _conveyor.y) < 10) { 
-				// Set tracker variables to avoid being pushed faster 
-				// when touching multiple parts of long conveyors
-				if (_conveyor.points_right) {
-					touching_right_conveyor = true
-				} else {
-					touching_left_conveyor = true
-				}
-			}
-		}
-		// Destroy list as it's no longer in use
-		ds_list_destroy(_conveyor_list);
-		
-		// Repeat above with non-main cuberts
-		for (var i=0; i<array_length(non_main_cuberts); i++) {
-			var q = non_main_cuberts[i];
-			// Create list of touching conveyors
-			var _faux_conveyor_list = ds_list_create();
-			var _faux_conveyor_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, obj_conveyor, false, true, _faux_conveyor_list, false);
-			
-			// Check through touching conveyors
-			for (var j=0; j<_faux_conveyor_count; j++) {
-				var _conveyor = _faux_conveyor_list[|j];
-				if (abs((q.y + 32) - _conveyor.y) < 10) { 
-					// Set tracker variables to avoid being pushed faster 
-					// when touching multiple parts of long conveyors
-					if (_conveyor.points_right) {
-						touching_right_conveyor = true
-					} else {
-						touching_left_conveyor = true
-					}
-				}
-			}
-			// Destroy list as it's no longer in use
-			ds_list_destroy(_faux_conveyor_list);
-			
+	var _touching_conveyors = get_standing_on(_collisions, obj_conveyor)
+	for (var i = 0; i < array_length(_touching_conveyors); i++) {
+		var _conveyor = array_get(_touching_conveyors, i)
+		if (_conveyor.points_right) {
+			touching_right_conveyor = true
+		} else {
+			touching_left_conveyor = true
 		}
 	}
+	
+	// Moving Platforms
+	var _touching_platforms = get_contacting(_collisions, obj_moving_platform)
+	for (var i = 0; i < array_length(_touching_platforms); i++) {
+		var _platform = array_get(_touching_platforms, i)
+		x_speed += _platform.get_x_speed()
+		y_speed += _platform.get_y_speed()
+	}
+	
+	// Update can_move variables after the speed changes
+	_can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
+	_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
+	_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
+	
+	
 	
 	//slowly decrease percent of x_speed and y_speed until it's possible to fit
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
@@ -227,4 +200,56 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		if (!_can_lr) { self.x_speed = 0 }
 		if (!_can_ud) { self.y_speed = 0 }
 	}
+}
+
+function get_standing_on(collision_list, check_object) {
+	var return_list = []
+	if (array_contains(collision_list, check_object)) {
+	
+		// Check collisions
+		for (var i=0; i<array_length(all_cuberts); i++) {
+			var q = all_cuberts[i];
+			// Create list of touching objects
+			var _contact_list = ds_list_create();
+			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
+			
+			// Check through touching objects for strictly standing on top
+			for (var j = 0; j < _contact_count; j++) {
+				var _contact = _contact_list[|j];
+				if (abs((q.y + 32) - _contact.y) < 10) {
+					// Add object to the return list
+					array_push(return_list, _contact)
+				}
+			}
+			// Destroy list as it's no longer in use
+			ds_list_destroy(_contact_list);
+			
+		}
+	}
+	return return_list
+}
+
+function get_contacting(collision_list, check_object) {
+	var return_list = []
+	if (array_contains(collision_list, check_object)) {
+	
+		// Check collisions
+		for (var i=0; i<array_length(all_cuberts); i++) {
+			var q = all_cuberts[i];
+			// Create list of touching objects
+			var _contact_list = ds_list_create();
+			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
+			
+			// Run through touching objects
+			for (var j = 0; j < _contact_count; j++) {
+				var _contact = _contact_list[|j];
+				// Add object to the return list
+				array_push(return_list, _contact)
+			}
+			// Destroy list as it's no longer in use
+			ds_list_destroy(_contact_list);
+			
+		}
+	}
+	return return_list
 }

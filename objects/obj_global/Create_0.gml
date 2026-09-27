@@ -1,7 +1,17 @@
+#region Macros
+
 #macro sec game_get_speed(gamespeed_fps)
+
+#macro COLLISION_UPDATE_LISTENERS [obj_cubert, obj_pushbox, obj_moving_platform]
+#macro FREELY_MOVABLE_OBJECTS [obj_cubert, obj_pushbox]
+
+#endregion Macros
+
 randomize()
 
 depth += 100;
+
+#region Variables
 
 // fullscreen option
 fullscreen = false
@@ -46,3 +56,63 @@ global.checkpoint_y = room_height/2
 global.checkpoint_room = rm_template
 global.checkpoint_level_x = 2
 global.checkpoint_level_y = 1
+
+#endregion Variables
+
+#region Enums
+
+enum Direction {
+	Up,
+	Down,
+	Left,
+	Right
+}
+
+enum MovingPlatformType {
+	Bounce,
+	Stationary
+}
+
+#endregion Enums
+
+#region Functions
+
+function send_collision_updates() {
+	for (i = 0; i < array_length(COLLISION_UPDATE_LISTENERS); i++) {
+		with (COLLISION_UPDATE_LISTENERS[i]) {
+			update_collisions()
+		}
+	}
+}
+
+function get_active_collisions(include_cubert = false) {
+	// Always active
+	var collisions = [
+		layer_tilemap_get_id("Tiles_1"),
+		obj_block_fragile,
+		obj_pushbox,
+		obj_conveyor,
+		obj_moving_platform
+	];
+	// Conditionally active
+	with obj_switch_block {
+		if is_on {
+			array_push(collisions, self)
+		}
+	}
+	with obj_door {
+		if !is_open {
+			array_push(collisions, self)
+		}
+	}
+	// Optionally include cubert
+	if (include_cubert) {
+		with obj_cubert {
+			array_push(collisions, self)
+		}
+	}
+	
+	return collisions
+}
+
+#endregion Functions

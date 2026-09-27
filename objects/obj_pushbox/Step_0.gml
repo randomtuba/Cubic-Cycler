@@ -1,6 +1,6 @@
-var _grounded = place_meeting(x, y + 2, collisions) || place_meeting(x, y + 2, obj_conveyor);
+var _grounded = place_meeting(x, y + 2, collisions)
 
-var _grounded2 = place_meeting(x, y - 2, collisions) || place_meeting(x, y - 2, obj_conveyor);
+var _grounded2 = place_meeting(x, y - 2, collisions)
 
 if (_grounded and touchspring == 0) {
 	y_speed = 0
