@@ -175,9 +175,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		var _direction = array_get(_touching_platforms[1], i)
 		
 		x_speed += _platform.get_x_speed()
-		if (_direction == Direction.Up || _direction == Direction.Down) {
-			y_speed += _platform.get_y_speed()
-		}
+		y_speed += _platform.get_y_speed()
 		
 		if (_platform.get_x_speed() > 0 && x_speed < _platform.get_x_speed() && _direction == Direction.Left) {
 			x_speed = _platform.get_x_speed()
@@ -186,10 +184,10 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 			x_speed = _platform.get_x_speed()
 		}
 		if (_platform.get_y_speed() > 0 && y_speed < _platform.get_y_speed() && _direction == Direction.Up) {
-			y_speed = _platform.get_x_speed()
+			y_speed = _platform.get_y_speed()
 		}
 		if (_platform.get_y_speed() < 0 && y_speed > _platform.get_y_speed() && _direction == Direction.Down) {
-			y_speed = _platform.get_x_speed()
+			y_speed = _platform.get_y_speed()
 		}
 	}
 	
@@ -264,14 +262,14 @@ function get_contacting(collision_list, check_object) {
 				array_push(return_list[0], _contact)
 				
 				// Add collision direction (from reference point of cubert)
-				if (abs((q.y + abs(q.sprite_height / 2)) - _contact.y) < 4) {
-					array_push(return_list[1], Direction.Down)
-				} else if (abs((q.y - abs(q.sprite_height / 2)) - (_contact.y + _contact.sprite_height)) < 4) {
-					array_push(return_list[1], Direction.Up)
-				} else if (abs((q.x + abs(q.sprite_width / 2)) - _contact.x) < 4) {
+				if (abs((q.x + abs(q.sprite_width / 2)) - _contact.x) < 4) {
 					array_push(return_list[1], Direction.Right)
 				} else if (abs((q.x - abs(q.sprite_width / 2)) - (_contact.x + _contact.sprite_width)) < 4) {
 					array_push(return_list[1], Direction.Left)
+				} else if (abs((q.y + abs(q.sprite_height / 2)) - _contact.y) < 4) {
+					array_push(return_list[1], Direction.Down)
+				} else if (abs((q.y - abs(q.sprite_height / 2)) - (_contact.y + _contact.sprite_height)) < 4) {
+					array_push(return_list[1], Direction.Up)
 				} else {
 					array_push(return_list[1], Direction.None)
 				}
