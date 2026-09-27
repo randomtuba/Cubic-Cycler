@@ -14,6 +14,7 @@ lose_timer = 0
 coyote_time = 0
 jump_buffer = 0
 springyspring = 0
+springxspring = 0
 
 // Conveyors and Tractor Beams
 touching_right_conveyor = false

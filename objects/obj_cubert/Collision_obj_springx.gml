@@ -1,5 +1,6 @@
 // Apply spring velocity
 //if (abs(y-other.y) < 24) { }
+springxspring = 1
 x_speed = sign(x-other.x)*15;
 
 // Reduce drag temporarily
