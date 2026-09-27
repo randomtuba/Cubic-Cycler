@@ -161,6 +161,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	var _touching_conveyors = get_standing_on(_collisions, obj_conveyor)
 	for (var i = 0; i < array_length(_touching_conveyors); i++) {
 		var _conveyor = array_get(_touching_conveyors, i)
+		// Set tracker variables (prevents getting too much speed)
 		if (_conveyor.points_right) {
 			touching_right_conveyor = true
 		} else {
@@ -168,15 +169,58 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		}
 	}
 	
+	// Springs
+	var _touching_springs = get_contacting([obj_spring], obj_spring)[0]
+	//instance_place_list(x, y, obj_spring, _touching_springs, false)
+	
+	// Tracks what directions have been hit
+	var _touched_spring_directions = [false, false, false, false]
+	// Loop through the springs cubert is touching
+	for (var i = 0; i < array_length(_touching_springs); i++) {
+		var current_spring = _touching_springs[i]
+		// Add this spring's direction to the tracker
+		_touched_spring_directions[current_spring.facing_direction] = true
+		// Animate spring
+		current_spring.image_speed = 1
+	}
+	#region Apply spring velocity
+	if (_touched_spring_directions[Direction.Up]) {
+		springyspring = 1
+		self.y_speed = -15
+	}
+	if (_touched_spring_directions[Direction.Down]) {
+		y_speed = 15
+	}
+	if (_touched_spring_directions[Direction.Left]) {
+		springxspring = 1
+		self.x_speed = -15;
+
+		// Reduce drag temporarily
+		x_drag = 0.95
+		alarm[1] = sec/3
+	}
+	if (_touched_spring_directions[Direction.Right]) {
+		springxspring = 1
+		self.x_speed = 15;
+
+		// Reduce drag temporarily
+		x_drag = 0.95
+		alarm[1] = sec/3
+	}
+	#endregion Apply spring velocity
+	
+	
 	// Moving Platforms
 	var _touching_platforms = get_contacting(_collisions, obj_moving_platform)
 	for (var i = 0; i < array_length(_touching_platforms[0]); i++) {
 		var _platform = array_get(_touching_platforms[0], i)
 		var _direction = array_get(_touching_platforms[1], i)
 		
+		// Get dragged with platforms
 		x_speed += _platform.get_x_speed()
 		y_speed += _platform.get_y_speed()
 		
+		// If attempting to move into a platform, get stopped and pushed by the platform
 		if (_platform.get_x_speed() > 0 && x_speed < _platform.get_x_speed() && _direction == Direction.Left) {
 			x_speed = _platform.get_x_speed()
 		}
