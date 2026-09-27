@@ -24,6 +24,12 @@ if (_conveyor != noone) {
 
 move_and_collide(x_speed, y_speed, collisions);
 
+//x_this_frame += x_speed
+//y_this_frame += y_speed
+//move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
+//x_this_frame = 0
+//y_this_frame = 0
+
 if (place_meeting(x, y, obj_cubert)) { 
 	if (obj_cubert.y < y) {x = xprevious; y = yprevious; y_speed = 0;}
 }
@@ -53,3 +59,21 @@ if (instance_exists(rider) && rider.y_speed >= 0 && abs(rider.x - x) < 58) {
 	//rider.y_speed = y_speed+2;
 	//rider.y = bbox_top + 1 - rider.sprite_height/2;
 }
+#region Tractor Beams
+
+if (touching_up_tractor && !touching_down_tractor) {
+	y_speed -= global.tractor_strength
+} else if (touching_down_tractor && !touching_up_tractor) {
+	y_speed += global.tractor_strength
+}
+
+if (touching_right_tractor && !touching_left_tractor) {
+	x_speed += global.tractor_strength
+} else if (touching_left_tractor && !touching_right_tractor) {
+	x_speed -= global.tractor_strength
+}
+
+touching_up_tractor = false
+touching_down_tractor = false
+touching_right_tractor = false
+touching_left_tractor = false
