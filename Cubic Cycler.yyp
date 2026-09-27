@@ -51,6 +51,7 @@
     {"id":{"name":"rm_fragile_blocks","path":"rooms/rm_fragile_blocks/rm_fragile_blocks.yy",},},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"id":{"name":"rm_many_buttons","path":"rooms/rm_many_buttons/rm_many_buttons.yy",},},
+    {"id":{"name":"rm_pushbox_and_fragile","path":"rooms/rm_pushbox_and_fragile/rm_pushbox_and_fragile.yy",},},
     {"id":{"name":"rm_pushbox_fall","path":"rooms/rm_pushbox_fall/rm_pushbox_fall.yy",},},
     {"id":{"name":"rm_pushbox_intro","path":"rooms/rm_pushbox_intro/rm_pushbox_intro.yy",},},
     {"id":{"name":"rm_spikes","path":"rooms/rm_spikes/rm_spikes.yy",},},
@@ -106,6 +107,7 @@
     {"roomId":{"name":"rm_many_buttons","path":"rooms/rm_many_buttons/rm_many_buttons.yy",},},
     {"roomId":{"name":"rm_doubledown","path":"rooms/rm_doubledown/rm_doubledown.yy",},},
     {"roomId":{"name":"rm_spikes","path":"rooms/rm_spikes/rm_spikes.yy",},},
+    {"roomId":{"name":"rm_pushbox_and_fragile","path":"rooms/rm_pushbox_and_fragile/rm_pushbox_and_fragile.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
