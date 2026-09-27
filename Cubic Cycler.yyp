@@ -47,6 +47,7 @@
     {"id":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
     {"id":{"name":"rm_climb","path":"rooms/rm_climb/rm_climb.yy",},},
     {"id":{"name":"rm_doubledown","path":"rooms/rm_doubledown/rm_doubledown.yy",},},
+    {"id":{"name":"rm_fall","path":"rooms/rm_fall/rm_fall.yy",},},
     {"id":{"name":"rm_fragile_blocks","path":"rooms/rm_fragile_blocks/rm_fragile_blocks.yy",},},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
     {"id":{"name":"rm_pushbox_fall","path":"rooms/rm_pushbox_fall/rm_pushbox_fall.yy",},},
@@ -102,6 +103,7 @@
     {"roomId":{"name":"rm_fragile_blocks","path":"rooms/rm_fragile_blocks/rm_fragile_blocks.yy",},},
     {"roomId":{"name":"rm_spikes","path":"rooms/rm_spikes/rm_spikes.yy",},},
     {"roomId":{"name":"rm_doubledown","path":"rooms/rm_doubledown/rm_doubledown.yy",},},
+    {"roomId":{"name":"rm_fall","path":"rooms/rm_fall/rm_fall.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
