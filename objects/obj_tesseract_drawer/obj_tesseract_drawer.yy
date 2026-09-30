@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_tessaract_drawer",
+  "%Name":"obj_tesseract_drawer",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_tessaract_drawer",
+  "name":"obj_tesseract_drawer",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_tesseract",
+    "path":"sprites/spr_tesseract/spr_tesseract.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
