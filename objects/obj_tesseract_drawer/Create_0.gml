@@ -80,5 +80,5 @@ function draw_tesseract() {
 		draw_line_width(t1[i][0], t1[i][1], t2[i][0], t2[i][1], 3);
 	}
 	
-	draw_set_color(_c);
+	//draw_set_color(_c);
 }
