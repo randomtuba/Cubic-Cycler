@@ -14,6 +14,7 @@
     {"name":"inst_671CB082","path":"rooms/rm_start/rm_start.yy",},
     {"name":"inst_53BD8880","path":"rooms/rm_start/rm_start.yy",},
     {"name":"inst_5B3055D5","path":"rooms/rm_start/rm_start.yy",},
+    {"name":"inst_2A3664CB","path":"rooms/rm_start/rm_start.yy",},
   ],
   "isDnd":false,
   "layers":[
