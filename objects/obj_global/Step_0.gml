@@ -14,9 +14,7 @@ if (keyboard_check_pressed(vk_f11) || (global.debug && keyboard_check_pressed(vk
 }
 
 // Disable generators quickly (DEBUG TOOL)
-if (keyboard_check(vk_backspace)){
-	with (obj_generator) {
-		global.generators_destroyed_map[global.level_x][global.level_y] = true;
-		instance_destroy()
-	}
+if (global.debug && keyboard_check(vk_backspace)){
+	global.generators_destroyed_map[global.level_x][global.level_y] = true;
+	with (obj_generator) { instance_destroy() }
 }
