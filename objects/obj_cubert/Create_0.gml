@@ -241,7 +241,12 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
 	_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
-	
+	//clear velocity when hitting something
+	if (reset_speeds_if_cant) {
+		//show_debug_message(_can_lr)
+		if (!_can_lr) { self.x_speed = 0;  }
+		if (!_can_ud) { self.y_speed = 0 }
+	}
 	
 	//slowly decrease percent of x_speed and y_speed until it's possible to fit
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
@@ -253,13 +258,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		_iter--;
 	}
 	x += _can_lr * x_speed;
-	y += _can_ud * y_speed;
-	
-	//clear velocity when hitting something
-	if (reset_speeds_if_cant) {
-		if (!_can_lr) { self.x_speed = 0 }
-		if (!_can_ud) { self.y_speed = 0 }
-	}
+	y += _can_ud * y_speed;	
 }
 
 function get_standing_on(collision_list, check_object) {
