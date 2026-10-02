@@ -135,8 +135,9 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
-			if (abs(x - _box.x) < 64 && y < _box.y) { _box.rider = self; _box.alarm[0] = 3; }
+			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }//cubert push box
+			if (abs(x - _box.x) < 64 && y < _box.y) { _box.rider = self; _box.alarm[0] = 3; }//cubert above box
+			if (abs(x - _box.x) < 64 && y > _box.y) { _box.y_speed = min(_box.y_speed, y_speed); }//cubert under box
 		}
 		
 		ds_list_destroy(_pushbox_list);
@@ -240,7 +241,12 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
 	_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
-	
+	//clear velocity when hitting something
+	if (reset_speeds_if_cant) {
+		//show_debug_message(_can_lr)
+		if (!_can_lr) { self.x_speed = 0;  }
+		if (!_can_ud) { self.y_speed = 0 }
+	}
 	
 	//slowly decrease percent of x_speed and y_speed until it's possible to fit
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
@@ -252,13 +258,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		_iter--;
 	}
 	x += _can_lr * x_speed;
-	y += _can_ud * y_speed;
-	
-	//clear velocity when hitting something
-	if (reset_speeds_if_cant) {
-		if (!_can_lr) { self.x_speed = 0 }
-		if (!_can_ud) { self.y_speed = 0 }
-	}
+	y += _can_ud * y_speed;	
 }
 
 function get_standing_on(collision_list, check_object) {
