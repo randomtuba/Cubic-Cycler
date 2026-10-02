@@ -2,6 +2,9 @@ if(keyboard_check(vk_tab)){
 	//draw_set_alpha(0.7)
 	show_debug_message("DRAW EVENT: " + room_get_name(room));
 	var _y = 100;
+	var _mx = device_mouse_x_to_gui(0);
+	var _my = device_mouse_y_to_gui(0);
+	
 	for(var i = 0; i<4; i++){
 		var _x = 300;
 		for(var j = 0; j<4; j++){
@@ -16,7 +19,7 @@ if(keyboard_check(vk_tab)){
 			draw_set_color(global.generators_destroyed_map[j][i] ? c_lime : c_red)
 			draw_rectangle(_x+w,_y+w, _x + 100-w,_y +100-w,false);
 		}
-		if(mouse_x > _x && mouse_x < _x+100 && mouse_y > _y && mouse_y < _y+100){
+		if(_mx > _x && _mx < _x+100 && _my > _y && _my < _y+100){
 			draw_set_color(c_black);
 			show_debug_message("Is hovering");
 			draw_rectangle(_x,_y, _x + 100,_y +100,false);
@@ -24,7 +27,7 @@ if(keyboard_check(vk_tab)){
 			draw_set_color(global.generators_destroyed_map[j][i] ? c_lime : c_red)
 			draw_rectangle(_x+w,_y+w, _x + 100-w,_y +100-w,false);
 			
-			if(mouse_check_button_pressed(mb_left) && global.generators_destroyed_map[j][i]){
+			if(mouse_check_button_pressed(mb_left) /*&& global.generators_destroyed_map[j][i] uncomment for non dev gameplay*/){
 				global.level_x = j;
 				global.level_y = i;
 				room_goto(global.level_map[global.level_y][global.level_x]);
@@ -67,8 +70,8 @@ if(keyboard_check(vk_tab)){
 							level_spawn_y = 384;
 							break;
 						case rm_spring_hard:
-							level_spawn_x = 640;
-							level_spawn_y = 384;
+							level_spawn_x = 128;
+							level_spawn_y = 480;
 							break;
 						case rm_fall:
 							level_spawn_x = 480;
