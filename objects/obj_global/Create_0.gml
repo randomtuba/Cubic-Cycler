@@ -13,8 +13,7 @@ depth += 100;
 
 #region Variables
 
-// fullscreen option
-fullscreen = false
+global.debug = 0;
 
 // stores the position of the player
 global.default_x = 0
