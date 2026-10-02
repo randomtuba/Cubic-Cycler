@@ -1,3 +1,11 @@
+enum Direction {
+	Up,
+	Down,
+	Left,
+	Right,
+	None
+}
+
 // Sprite Rotation
 switch (facing_direction) {
 	case (Direction.Up):

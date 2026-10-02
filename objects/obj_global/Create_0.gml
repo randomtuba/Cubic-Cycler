@@ -61,14 +61,6 @@ global.checkpoint_level_y = 1
 
 #region Enums
 
-enum Direction {
-	Up,
-	Down,
-	Left,
-	Right,
-	None
-}
-
 enum MovingPlatformType {
 	Bounce,
 	Stationary
