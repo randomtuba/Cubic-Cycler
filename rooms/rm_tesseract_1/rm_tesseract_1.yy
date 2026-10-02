@@ -24,8 +24,8 @@
   ],
   "name":"rm_tesseract_1",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"Act1",
+    "path":"folders/Rooms/Act1.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
