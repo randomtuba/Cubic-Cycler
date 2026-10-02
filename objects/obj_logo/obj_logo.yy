@@ -6,8 +6,8 @@
   "name":"obj_logo",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Control_UI",
+    "path":"folders/Objects/Control_UI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

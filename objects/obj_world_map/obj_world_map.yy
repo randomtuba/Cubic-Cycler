@@ -1,16 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_map",
+  "%Name":"obj_world_map",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_map",
+  "name":"obj_world_map",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Control_UI",
+    "path":"folders/Objects/Control_UI.yy",
   },
   "parentObjectId":null,
   "persistent":true,

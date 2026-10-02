@@ -10,8 +10,8 @@
   "name":"obj_button_cubert",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"WorldElements",
+    "path":"folders/Objects/WorldElements.yy",
   },
   "parentObjectId":null,
   "persistent":false,
