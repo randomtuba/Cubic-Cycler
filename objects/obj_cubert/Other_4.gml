@@ -16,5 +16,4 @@ if (collision_rectangle(x-31, y-31, x+31, y+31, collisions, true, true) != noone
 	//		tilemap_set(layer_tilemap_get_id("Tiles_1"), 0, floor(32*(x+i)/room_width), floor(20*(y+j)/room_height));
 	//	}
 	//}
-	
 }

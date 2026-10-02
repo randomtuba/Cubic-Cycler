@@ -38,8 +38,6 @@ global.level_map = [
 [rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
 ]
 
-
-
 global.generators_destroyed_map = []
 
 //fill it with falses at the start of the game
