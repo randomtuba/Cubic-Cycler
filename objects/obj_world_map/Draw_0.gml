@@ -1,3 +1,6 @@
+draw_set_color(c_white)
+draw_set_alpha(1)
+
 if(keyboard_check(vk_tab)){
 	//draw_set_alpha(0.7)
 	var _y = 100;
@@ -28,5 +31,6 @@ if(keyboard_check(vk_tab)){
 	}
 	draw_set_color(c_white)
 	draw_set_alpha(1)
-	
 }
+
+if (global.debug) { draw_text(8, 8, "DEBUG ENABLED - F3"); }
