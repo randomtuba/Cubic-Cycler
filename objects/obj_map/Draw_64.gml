@@ -1,6 +1,6 @@
 if(keyboard_check(vk_tab)){
 	//draw_set_alpha(0.7)
-	show_debug_message("DRAW EVENT: " + room_get_name(room));
+	//show_debug_message("DRAW EVENT: " + room_get_name(room));
 	var _y = 100;
 	var _mx = device_mouse_x_to_gui(0);
 	var _my = device_mouse_y_to_gui(0);
@@ -21,7 +21,7 @@ if(keyboard_check(vk_tab)){
 		}
 		if(_mx > _x && _mx < _x+100 && _my > _y && _my < _y+100){
 			draw_set_color(c_black);
-			show_debug_message("Is hovering");
+			//show_debug_message("Is hovering");
 			draw_rectangle(_x,_y, _x + 100,_y +100,false);
 			var w = 10;
 			draw_set_color(global.generators_destroyed_map[j][i] ? c_lime : c_red)
