@@ -176,24 +176,24 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	//instance_place_list(x, y, obj_spring, _touching_springs, false)
 	
 	// Tracks what directions have been hit
-	var _touched_spring_directions = [false, false, false, false]
+	var _touched_spring_directions = [noone, noone, noone, noone, noone, noone];
 	// Loop through the springs cubert is touching
 	for (var i = 0; i < array_length(_touching_springs); i++) {
 		var current_spring = _touching_springs[i]
 		// Add this spring's direction to the tracker
-		_touched_spring_directions[current_spring.facing_direction] = true
+		_touched_spring_directions[current_spring.facing_direction] = current_spring;
 		// Animate spring
 		current_spring.image_speed = 1
 	}
 	#region Apply spring velocity
-	if (_touched_spring_directions[Direction.Up]) {
+	if (_touched_spring_directions[Direction.Up] != noone) {
 		springyspring = 1
 		self.y_speed = -15
 	}
-	if (_touched_spring_directions[Direction.Down]) {
+	if (_touched_spring_directions[Direction.Down] != noone) {
 		y_speed = 15
 	}
-	if (_touched_spring_directions[Direction.Left]) {
+	if (_touched_spring_directions[Direction.Left] != noone) {
 		springxspring = 1
 		self.x_speed = -15;
 
@@ -201,13 +201,18 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		x_drag = 0.95
 		alarm[1] = sec/3
 	}
-	if (_touched_spring_directions[Direction.Right]) {
+	if (_touched_spring_directions[Direction.Right] != noone) {
 		springxspring = 1
 		self.x_speed = 15;
 
 		// Reduce drag temporarily
 		x_drag = 0.95
 		alarm[1] = sec/3
+	}
+	if (_touched_spring_directions[Direction.Yolo] != noone) {
+		var spring = _touched_spring_directions[Direction.Yolo];
+		self.x_speed = 15*dcos(spring.image_angle+90)
+		self.y_speed =-15*dsin(spring.image_angle+90)
 	}
 	#endregion Apply spring velocity
 	

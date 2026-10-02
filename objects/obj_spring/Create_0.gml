@@ -3,6 +3,7 @@ enum Direction {
 	Down,
 	Left,
 	Right,
+	Yolo,
 	None
 }
 
@@ -19,5 +20,8 @@ switch (facing_direction) {
 	break
 	case (Direction.Left):
 		image_angle = 90
+	break
+	case (Direction.Yolo):
+		//assume iamge_angle is given correctly
 	break
 }
