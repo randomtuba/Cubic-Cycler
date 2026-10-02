@@ -1,0 +1,6 @@
+draw_set_font(MainFont)
+draw_text(5, 0, "Controls:")
+draw_text(5, 60, "A / left arrow - Move Left")
+draw_text(5, 120, "D / right arrow - Move Right")
+draw_text(5, 180, "W / up arrow / space - Jump")
+draw_text(5, 240, "S / down arrow - Dive")
