@@ -128,14 +128,17 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		ds_list_destroy(_fragile_list);
 	}
 	
+	var _pushing_right_now = false
+	
 	//push box conditions
 	if (array_contains(_collisions, obj_pushbox)) {
 		var _pushbox_list = ds_list_create();
 		var _pushbox_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_pushbox, false, true, _pushbox_list, false);
 		
+		_pushing_right_now = false
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }//cubert push box
+			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2; _pushing_right_now = true }//cubert push box
 			if (abs(x - _box.x) < 58 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }//cubert above box
 			if (abs(x - _box.x) < 58 && y > _box.y) { _box.y_speed = min(_box.y_speed, y_speed); }//cubert under box
 		}
@@ -245,7 +248,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	//clear velocity when hitting something
 	if (reset_speeds_if_cant) {
 		//show_debug_message(_can_lr)
-		if (!_can_lr) { self.x_speed = 0;  }
+		if (!_can_lr && !_pushing_right_now) { self.x_speed = 0;  }
 		if (!_can_ud) { self.y_speed = 0 }
 	}
 	
