@@ -17,7 +17,6 @@ if (!is_main_cubert) {
 
 #region Loss State
 
-sprite_index = keyboard_check(ord("1")) ? spr_cubert_1 : spr_cubert;
 image_index = 2*lose_state
 if (lose_state) {
 	lose_timer -= 1
@@ -200,7 +199,7 @@ if (y > room_height) {
 global.default_x = x
 global.default_y = y
 
-if (keyboard_check(vk_f3) && mouse_check_button(mb_right)) { x = mouse_x; y = mouse_y; }
+if (global.debug && mouse_check_button(mb_right)) { x = mouse_x; y = mouse_y; }
 
 if (x_speed != 0) { image_xscale = sign(x_speed) * 0.5; }
 x_scale = lerp(x_scale, image_xscale, 0.9)

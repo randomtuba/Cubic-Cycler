@@ -135,8 +135,9 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
-			if (abs(x - _box.x) < 64 && y < _box.y) { _box.rider = self; _box.alarm[0] = 3; }
+			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }//cubert push box
+			if (abs(x - _box.x) < 64 && y < _box.y) { _box.rider = self; _box.alarm[0] = 3; }//cubert above box
+			if (abs(x - _box.x) < 64 && y > _box.y) { _box.y_speed = min(_box.y_speed, y_speed); }//cubert under box
 		}
 		
 		ds_list_destroy(_pushbox_list);

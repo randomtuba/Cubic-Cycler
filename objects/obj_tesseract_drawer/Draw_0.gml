@@ -13,7 +13,7 @@ ang_xz2_spd *= 0.99;
 ang_xy2_spd *= 0.99;
 
 
-if (keyboard_check(vk_f3)) {//debug
+if (global.debug) {
 	draw_set_color(c_red);
 	draw_line_width(x, y, x+r*dcos(ang_xy)*dcos(ang_xz), y-r*dsin(ang_xy), 2);
 }
@@ -21,7 +21,7 @@ if (keyboard_check(vk_f3)) {//debug
 draw_set_color(c_black);
 draw_tesseract();
 
-if (keyboard_check(vk_f3)) {//debug
+if (global.debug) {
 	draw_set_colour(c_yellow);
 	draw_tessa_square();
 
