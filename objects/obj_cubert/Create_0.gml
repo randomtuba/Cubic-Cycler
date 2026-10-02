@@ -268,6 +268,7 @@ function get_standing_on(collision_list, check_object) {
 		// Check collisions
 		for (var i=0; i<array_length(all_cuberts); i++) {
 			var q = all_cuberts[i];
+			if (global.generators_destroyed_map[global.level_x][global.level_y] == true && q != main_cubert) {continue;}
 			// Create list of touching objects
 			var _contact_list = ds_list_create();
 			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
@@ -295,6 +296,7 @@ function get_contacting(collision_list, check_object) {
 		// Check collisions
 		for (var i=0; i<array_length(all_cuberts); i++) {
 			var q = all_cuberts[i];
+			if (global.generators_destroyed_map[global.level_x][global.level_y] == true && q != main_cubert) {continue;}
 			// Create list of touching objects
 			var _contact_list = ds_list_create();
 			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
