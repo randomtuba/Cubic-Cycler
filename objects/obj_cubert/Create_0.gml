@@ -152,7 +152,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 			
 			for (var j=0; j<_faux_pushbox_count; j++) {
 				var _box = _faux_pushbox_list[|j];
-				if (abs(q.y - _box.y) < 33 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
+				if (abs(q.y - _box.y) < 33 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2; _pushing_right_now = true }
 				if (abs(q.x - _box.x) < 58 && q.y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 				if (abs(q.x - _box.x) < 58 && q.y > _box.y) { _box.y_speed = min(_box.y_speed, y_speed); }
 			}
