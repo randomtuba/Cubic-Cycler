@@ -77,10 +77,10 @@ function getObjSize(obj) {
 function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
 	var obj1_size = getObjSize(obj1)
 	var obj2_size = getObjSize(obj2)
-	var obj1_center = new wPoint(obj1.x - obj1.sprite_xoffset + abs(obj1.sprite_width) / 2 + x1Change,
-								obj1.y - obj1.sprite_yoffset + abs(obj1.sprite_height) / 2 + y1Change)
-	var obj2_center = new wPoint(obj2.x - obj2.sprite_xoffset + abs(obj2.sprite_width) / 2,
-								obj2.y - obj2.sprite_yoffset + abs(obj2.sprite_height) / 2)
+	var obj1_center = new wPoint(obj1.x - abs(obj1.sprite_xoffset) + abs(obj1.sprite_width) / 2 + x1Change,
+								obj1.y - abs(obj1.sprite_yoffset) + abs(obj1.sprite_height) / 2 + y1Change)
+	var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
+								obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
 	
 	// This will be returned at the end
 	var contact = {
@@ -97,8 +97,8 @@ function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
 	// Determine contact
 	
 	contact.hit = (
-		abs(dist.x) <= obj1_size.w / 2 + obj2_size.w / 2
-		&& abs(dist.y) <= obj1_size.h / 2 + obj2_size.h / 2
+		abs(dist.x) <= obj1_size.w + obj2_size.w
+		&& abs(dist.y) <= obj1_size.h + obj2_size.h
 	)
 	
 	return contact
@@ -110,7 +110,8 @@ function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
 /// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
-function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
+/// @param buffer (Optional) Used by _direction to determine how precise the collision should be, default 4
+function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None, buffer = 4) {
 	var isValid = true
 	var blockingObjects = []
 	
@@ -122,12 +123,12 @@ function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
 		}
 		
 		var contact = checkContacting(obj, compare, _x, _y)
-		show_debug_message(contact)
 		
 		if (contact.hit) {
 			var objSize = getObjSize(obj)
+			var xSpace = objSize.w * 5/6
+			var ySpace = objSize.h * 5/6
 			// Make sure the direction is valid
-			show_debug_message("Blocked by object")
 			switch _direction {
 				case Direction.None:
 					isValid = false
@@ -135,38 +136,34 @@ function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
 				break
 			
 				case Direction.Up:
-					if (contact.yDist < -objSize.h / 2) {
+					if (contact.yDist < buffer - ySpace && abs(contact.xDist) < xSpace) {
 						isValid = false
 						array_push(blockingObjects, compare)
 					}
 				break
 				
 				case Direction.Down:
-					if (contact.yDist > objSize.h / 2) {
+					if (contact.yDist > ySpace - buffer && abs(contact.xDist) < xSpace) {
 						isValid = false
 						array_push(blockingObjects, compare)
 					}
 				break
 			
 				case Direction.Left:
-					if (contact.xDist < -objSize.w / 2) {
+					if (contact.xDist < buffer - xSpace && abs(contact.yDist) < ySpace) {
 						isValid = false
 						array_push(blockingObjects, compare)
 					}
 				break
 			
 				case Direction.Right:
-					if (contact.xDist > objSize.w / 2) {
+					if (contact.xDist > xSpace - buffer && abs(contact.yDist) < ySpace) {
 						isValid = false
 						array_push(blockingObjects, compare)
 					}
 				break
 			}
 		}
-	}
-	
-	if (isValid) {
-		show_debug_message("Unblocked")
 	}
 	
 	return { valid : isValid, blockers : blockingObjects }
@@ -182,21 +179,36 @@ function checkGrounded(obj, collisions, buffer = 2) {
 }
 
 /// @desc Attempts to move an object by some offset
-/// Returns whether the move was valid and any blockers
+/// Returns whether the move was valid
 /// This will change the coordinates of the passed object if the move succeeds
 /// @param {Id.Instance} obj The object
 /// @param collisions An array containing all objects that should be considered solid
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
-/// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
-function attemptMove(obj, collisions, _x, _y, _direction = Direction.None) {
-	var validCheck = checkValidMove(obj, collisions, _x, _y, _direction)
+function attemptMove(obj, collisions, _x, _y) {
+	var succeededX = false
+	var succeededY = false
 	
-	if (validCheck.valid) {
+	var validDown = checkValidMove(obj, collisions, _x, _y, Direction.Down)
+	var validUp = checkValidMove(obj, collisions, _x, _y, Direction.Up)
+	var validRight = checkValidMove(obj, collisions, _x, _y, Direction.Right)
+	var validLeft = checkValidMove(obj, collisions, _x, _y, Direction.Left)
+	
+	if ((validRight.valid && _x > 0) || (validLeft.valid && _x < 0)) {
 		obj.x += _x
+		succeededX = true
+	}
+	if ((validDown.valid && _y > 0) || (validUp.valid && _y < 0)) {
 		obj.y += _y
+		succeededY = true
 	}
 	
-	return validCheck
+	show_debug_message("Move:")
+	show_debug_message(validDown)
+	show_debug_message(validUp)
+	show_debug_message(validRight)
+	show_debug_message(validLeft)
+	
+	return { x : succeededX, y : succeededY }
 }
 

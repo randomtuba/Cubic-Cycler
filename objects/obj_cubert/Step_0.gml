@@ -76,13 +76,11 @@ touching_left_tractor = false
 
 #region Coyote Time
 
-var _grounded_on_platform = place_meeting(x, y+6, obj_moving_platform)
-	|| faux_place_meeting(0, 6, obj_moving_platform)
-
-var _grounded = place_meeting(x, y+2, collisions) 
+/*var _grounded = place_meeting(x, y+2, collisions) 
 	|| faux_place_meeting(0, 2, collisions)
-	|| _grounded_on_platform
-var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);
+var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);*/
+var groundCheck = checkGrounded(self, collisions)
+var _grounded = !groundCheck.valid
 
 if (_grounded) {
 	coyote_time = global.coyote_time
@@ -94,26 +92,15 @@ if (_grounded) {
 
 #region Ground Collision and Diving
 
-if (_grounded_on_platform) {
-	// Get contacting platform
-	_platform = instance_place(x, y+6, obj_moving_platform)
-	_plat_y_speed = _platform.get_y_speed()
-	
-	y_speed = _plat_y_speed
-	
-	if (springyspring == 1) {
-		springyspring = 0
-	}
-	
-} else if (_grounded && springyspring == 0) {
-	y_speed = 0
+/*if (_grounded && springyspring == 0) {
+	//y_speed = 0
 } else if (_grounded && springyspring == 1) {
 	springyspring = 0
 } else if (_grounded2) {
-	y_speed = 1
-} else {
+	//y_speed = 1
+} else {*/
 	if (_down) { y_speed += 0.8 } else { y_speed += 0.4 }
-}
+//}
 
 #endregion Ground Collision and Diving
 
@@ -174,7 +161,13 @@ x_this_frame += x_speed
 y_this_frame += y_speed
 
 //move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
-attemptMove(self, collisions, x_this_frame, y_this_frame)
+var movement = attemptMove(self, collisions, x_this_frame, y_this_frame)
+if (!movement.x) {
+	x_speed = 0
+}
+if (!movement.y) {
+	y_speed = 0
+}
 
 x_this_frame = 0
 y_this_frame = 0
