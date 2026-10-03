@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Cubert_Collision",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Cubert_Collision",
+  "parent":{
+    "name":"Cubert",
+    "path":"folders/Objects/Cubert.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

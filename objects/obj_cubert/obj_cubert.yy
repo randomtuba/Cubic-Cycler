@@ -16,8 +16,8 @@
   "name":"obj_cubert",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Cubert",
+    "path":"folders/Objects/Cubert.yy",
   },
   "parentObjectId":null,
   "persistent":true,
