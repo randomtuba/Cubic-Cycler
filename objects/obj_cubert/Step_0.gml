@@ -173,7 +173,8 @@ touching_left_conveyor = false
 x_this_frame += x_speed
 y_this_frame += y_speed
 
-move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
+//move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
+attemptMove(self, collisions, x_this_frame, y_this_frame)
 
 x_this_frame = 0
 y_this_frame = 0

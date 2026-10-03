@@ -60,7 +60,7 @@ function wPoint(_x, _y) constructor {
 
 /// @desc Gets the size of an object
 /// Returned as a struct with width as .w and height as .h
-/// @param {Id.Instance} obj The object
+/// @param {Id.Instance, Id.TileMapElement} obj The object
 function getObjSize(obj) {
 	var obj_width = obj.sprite_index.bbox_right - obj.sprite_index.bbox_left
 	var obj_height = obj.sprite_index.bbox_bottom - obj.sprite_index.bbox_top
@@ -71,7 +71,7 @@ function getObjSize(obj) {
 /// @desc Determine whether two objects are touching, accounting for screenwrapping
 ///	Returns whether they are contacting and the distance along the X and Y axes
 /// @param {Id.Instance} obj1 The first object
-/// @param {Id.Instance} obj2 The second object
+/// @param {Id.Instance, Id.TileMapElement} obj2 The second object
 /// @param x1Change (Optional) Considers obj1 to be offset by this amount
 /// @param y1Change (Optional) Considers obj1 to be offset by this amount
 function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
@@ -110,9 +110,14 @@ function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
 /// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
 function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
 	var isValid = true
+	var blockingObjects = []
 	
 	for (var i = 0; i < array_length(collisions); i++) {
 		var compare = collisions[i]
+		// Skip the object / tileset if there are no active instances of it
+		if (!instance_exists(compare)) {
+			continue
+		}
 		
 		var contact = checkContacting(obj, compare, _x, _y)
 		
@@ -122,39 +127,45 @@ function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
 			switch _direction {
 				case Direction.None:
 					isValid = false
+					array_push(blockingObjects, compare)
 				break
 			
 				case Direction.Up:
 					if (contact.yDist < -objSize.h / 2) {
 						isValid = false
+						array_push(blockingObjects, compare)
 					}
 				break
 				
 				case Direction.Down:
 					if (contact.yDist > objSize.h / 2) {
 						isValid = false
+						array_push(blockingObjects, compare)
 					}
 				break
 			
 				case Direction.Left:
 					if (contact.xDist < -objSize.w / 2) {
 						isValid = false
+						array_push(blockingObjects, compare)
 					}
 				break
 			
 				case Direction.Right:
 					if (contact.xDist > objSize.w / 2) {
 						isValid = false
+						array_push(blockingObjects, compare)
 					}
 				break
 			}
 		}
 	}
 	
-	return isValid
+	return { valid : isValid, blockers : blockingObjects }
 }
 
 /// @desc Determine if an object is grounded
+/// Returns whether it is grounded and any objects that it is grounded on
 /// @param {Id.Instance} obj The object
 /// @param collisions An array containing all objects that should be considered solid
 /// @param buffer (Optional) The distance at which things can be considered touching, default 2
@@ -163,19 +174,21 @@ function checkGrounded(obj, collisions, buffer = 2) {
 }
 
 /// @desc Attempts to move an object by some offset
-/// Returns whether the move was valid
+/// Returns whether the move was valid and any blockers
+/// This will change the coordinates of the passed object if the move succeeds
 /// @param {Id.Instance} obj The object
 /// @param collisions An array containing all objects that should be considered solid
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
 /// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
 function attemptMove(obj, collisions, _x, _y, _direction = Direction.None) {
-	var valid = checkValidMove(obj, collisions, _x, _y, _direction)
+	var validCheck = checkValidMove(obj, collisions, _x, _y, _direction)
 	
-	if (valid) {
+	if (validCheck.valid) {
 		obj.x += _x
 		obj.y += _y
 	}
 	
-	return valid
+	return validCheck
 }
+
