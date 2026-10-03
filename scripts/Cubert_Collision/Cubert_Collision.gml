@@ -31,7 +31,7 @@ function wPoint(_x, _y) constructor {
 	function distanceTo(_x, _y) {
 		// Find smallest X distance, including by wrapping
 		var _xDist = _x - getX()
-		if (_x - abs(getX() - room_width) < abs(_xDist)) {
+		if (abs(_x - getX() - room_width) < abs(_xDist)) {
 			_xDist = _x - getX() - room_width
 		}
 		if (abs(_x - getX() + room_width) < abs(_xDist)) {
@@ -75,8 +75,12 @@ function getObjSize(obj) {
 /// @param x1Change (Optional) Considers obj1 to be offset by this amount
 /// @param y1Change (Optional) Considers obj1 to be offset by this amount
 function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
-	var obj1_center = new wPoint(obj1.x + x1Change, obj1.y + y1Change)
-	var obj2_center = new wPoint(obj2.x, obj2.y)
+	var obj1_size = getObjSize(obj1)
+	var obj2_size = getObjSize(obj2)
+	var obj1_center = new wPoint(obj1.x - obj1.sprite_xoffset + abs(obj1.sprite_width) / 2 + x1Change,
+								obj1.y - obj1.sprite_yoffset + abs(obj1.sprite_height) / 2 + y1Change)
+	var obj2_center = new wPoint(obj2.x - obj2.sprite_xoffset + abs(obj2.sprite_width) / 2,
+								obj2.y - obj2.sprite_yoffset + abs(obj2.sprite_height) / 2)
 	
 	// This will be returned at the end
 	var contact = {
@@ -91,12 +95,10 @@ function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
 	contact.yDist = dist.y
 	
 	// Determine contact
-	var obj1_size = getObjSize(obj1)
-	var obj2_size = getObjSize(obj2)
 	
 	contact.hit = (
-		abs(dist.x) <= obj1_size.w + obj2_size.w
-		&& abs(dist.y) <= obj1_size.h + obj2_size.h
+		abs(dist.x) <= obj1_size.w / 2 + obj2_size.w / 2
+		&& abs(dist.y) <= obj1_size.h / 2 + obj2_size.h / 2
 	)
 	
 	return contact
@@ -120,10 +122,12 @@ function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
 		}
 		
 		var contact = checkContacting(obj, compare, _x, _y)
+		show_debug_message(contact)
 		
 		if (contact.hit) {
 			var objSize = getObjSize(obj)
 			// Make sure the direction is valid
+			show_debug_message("Blocked by object")
 			switch _direction {
 				case Direction.None:
 					isValid = false
@@ -159,6 +163,10 @@ function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None) {
 				break
 			}
 		}
+	}
+	
+	if (isValid) {
+		show_debug_message("Unblocked")
 	}
 	
 	return { valid : isValid, blockers : blockingObjects }
