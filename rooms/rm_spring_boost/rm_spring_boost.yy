@@ -59,8 +59,8 @@
   ],
   "name":"rm_spring_boost",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"Act1",
+    "path":"folders/Rooms/Act1.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
