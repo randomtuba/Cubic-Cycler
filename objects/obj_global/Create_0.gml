@@ -13,8 +13,7 @@ depth += 100;
 
 #region Variables
 
-// fullscreen option
-fullscreen = false
+global.debug = true;
 
 // stores the position of the player
 global.default_x = 0
@@ -32,7 +31,7 @@ global.tractor_strength = 0.5
 global.level_x = 2
 global.level_y = 1
 global.level_map = [
-[-1, rm_pushbox_and_fragile, rm_many_buttons, rm_spikes],
+[rm_tesseract_1, rm_pushbox_and_fragile, rm_many_buttons, rm_spikes],
 [rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
 [rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
 [rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
@@ -61,14 +60,6 @@ global.checkpoint_level_y = 1
 #endregion Variables
 
 #region Enums
-
-enum Direction {
-	Up,
-	Down,
-	Left,
-	Right,
-	None
-}
 
 enum MovingPlatformType {
 	Bounce,
