@@ -96,7 +96,6 @@ function get_active_collisions(include_cubert = false) {
 		obj_conveyor,
 		obj_moving_platform
 	];
-	// Conditionally active
 	with obj_switch_block {
 		if is_on {
 			array_push(collisions, self)
@@ -107,7 +106,6 @@ function get_active_collisions(include_cubert = false) {
 			array_push(collisions, self)
 		}
 	}
-	// Optionally include cubert
 	if (include_cubert) {
 		with obj_cubert {
 			array_push(collisions, self)

@@ -217,8 +217,11 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		var _direction = array_get(_touching_platforms[1], i)
 		
 		// Get dragged with platforms
-		x_speed += _platform.get_x_speed()
-		y_speed += _platform.get_y_speed()
+		if (_direction == Direction.Down) {
+			x_speed += _platform.get_x_speed()
+		}
+		
+		//y_speed += _platform.get_y_speed()
 		
 		// If attempting to move into a platform, get stopped and pushed by the platform
 		if (_platform.get_x_speed() > 0 && x_speed < _platform.get_x_speed() && _direction == Direction.Left) {
