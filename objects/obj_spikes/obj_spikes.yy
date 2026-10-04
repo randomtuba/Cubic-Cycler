@@ -6,8 +6,8 @@
   "name":"obj_spikes",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cubic Cycler",
-    "path":"Cubic Cycler.yyp",
+    "name":"WorldElements",
+    "path":"folders/Objects/WorldElements.yy",
   },
   "parentObjectId":null,
   "persistent":false,

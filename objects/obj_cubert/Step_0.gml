@@ -191,7 +191,7 @@ if (x > room_width) {
     if (!instance_exists(obj_generator)) {
         global.level_x++
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(get_level_map()[global.level_y][global.level_x])
+			room_goto(global.level_map[global.level_y][global.level_x])
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
@@ -200,7 +200,7 @@ if (x > room_width) {
     if (!instance_exists(obj_generator)) {
         global.level_x--
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(get_level_map()[global.level_y][global.level_x])
+			room_goto(global.level_map[global.level_y][global.level_x])
 		} else { global.level_x++; }
     }
 }
@@ -212,7 +212,7 @@ if (y > room_height) {
     if (!instance_exists(obj_generator)) {
         global.level_y++
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(get_level_map()[global.level_y][global.level_x])
+			room_goto(global.level_map[global.level_y][global.level_x])
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
@@ -221,7 +221,7 @@ if (y > room_height) {
     if (!instance_exists(obj_generator)) {
         global.level_y--
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(get_level_map()[global.level_y][global.level_x])
+			room_goto(global.level_map[global.level_y][global.level_x])
 		} else { global.level_y++; }
     }
 }

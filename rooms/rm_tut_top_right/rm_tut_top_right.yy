@@ -29,8 +29,8 @@
   ],
   "name":"rm_tut_top_right",
   "parent":{
-    "name":"Tutorial",
-    "path":"folders/Rooms/Tutorial.yy",
+    "name":"Act1",
+    "path":"folders/Rooms/Act1.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
