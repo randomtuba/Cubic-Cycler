@@ -298,8 +298,8 @@ function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, 
 /// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
 /// @param {Real} _x The X offset to apply
 /// @param {Real} _y The Y offset to apply
-/// @param buffer (Optional) Used to determine how precise the directional collision should be, default 8
-function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 8) {
+/// @param buffer (Optional) Used to determine how precise the directional collision should be, default 4
+function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4) {
 	// These are returned later
 	// Can be indexed by the Direction enum
 	var isValid = [true, true, true, true, true]
@@ -350,8 +350,8 @@ function checkGrounded(obj, collisions, buffer = 2) {
 /// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
-/// @param buffer (Optional) The distance to check for directional collisions, default 8
-function attemptMove(obj, collisions, _x, _y, buffer = 8) {
+/// @param buffer (Optional) The distance to check for directional collisions, default 4
+function attemptMove(obj, collisions, _x, _y, buffer = 4) {
 	// This is returned later
 	var success = { x : false, y : false }
 	

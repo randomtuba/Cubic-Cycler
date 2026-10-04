@@ -357,3 +357,17 @@ function run_events(list) {
 		}
 	}
 }
+
+/// @desc Resets all variables that should be reset at the end of each frame	
+function frame_end_reset() {
+	x_this_frame = 0
+	y_this_frame = 0
+	
+	hit_right_conveyor = false
+	hit_left_conveyor = false
+	
+	hit_up_tractor = false
+	hit_down_tractor = false
+	hit_right_tractor = false
+	hit_left_tractor = false
+}

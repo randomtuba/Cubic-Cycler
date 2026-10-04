@@ -45,6 +45,9 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 var groundCheck = checkGrounded(self, collisions)
 var _grounded = !groundCheck.valid
 
+run_events(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
+run_events(groundCheck.blockers)
+
 #region Horizontal Movement
 
 x_speed += _lr * 0.75
@@ -121,31 +124,24 @@ if (coyote_time > 0) {
 		coyote_time = 0
 		jump_buffer = 0
 		
-		/* Apply speed from conveyors
-		if (touching_right_conveyor && !touching_left_conveyor) {
+		//Apply speed from conveyors
+		if (hit_right_conveyor && !hit_left_conveyor) {
 			x_speed += global.conveyor_speed
 			// Reduce drag temporarily
 			x_drag = 0.95
 			alarm[1] = sec/3
-		} else if (touching_left_conveyor && !touching_right_conveyor) {
+		} else if (hit_left_conveyor && !hit_right_conveyor) {
 			x_speed -= global.conveyor_speed
 			// Reduce drag temporarily
 			x_drag = 0.95
 			alarm[1] = sec/3
 		}
-		
-		touching_right_conveyor = false
-		touching_left_conveyor = false
-		*/
 	}
 }
 
 #endregion Jumping
 
 //move_and_collide(x_speed, y_speed, collisions)
-
-run_events(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
-run_events(groundCheck.blockers)
 
 x_this_frame += x_speed
 y_this_frame += y_speed
@@ -159,8 +155,7 @@ if (!movement.y) {
 	y_speed = 0
 }
 
-x_this_frame = 0
-y_this_frame = 0
+frame_end_reset()
 
 #endregion Movement
 	
