@@ -40,17 +40,15 @@ function restart() {
 		room_goto(rm_start)
 		global.level_x = 2
 		global.level_y = 1
-		x = 64
-		y = 480
+		pos.setPos(64, 480)
 	} else {
 		room_goto(global.checkpoint_room)
 		global.level_x = global.checkpoint_level_x
 		global.level_y = global.checkpoint_level_y
-		x = global.checkpoint_x
-		y = global.checkpoint_y
+		pos.setPos(global.checkpoint_x, global.checkpoint_y)
 	}
-	x_speed = 0
-	y_speed = 0
+	pos.x_speed = 0
+	pos.y_speed = 0
 }
 
 function update_collisions() {

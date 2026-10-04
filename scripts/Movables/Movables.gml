@@ -39,6 +39,16 @@ function Position(_x, _y, _parent) constructor {
 		updateParent()
 	}
 	
+	/// @desc Sets the position
+	/// @param {Real} _x The X position
+	/// @param {Real} _y The Y position
+	function setPos(_x, _y) {
+		point.setX(_x)
+		point.setY(_y)
+		
+		updateParent()
+	}
+	
 	/// @desc Updates the parent's X and Y coordinates
 	function updateParent() {
 		parent.x = point.getX()
