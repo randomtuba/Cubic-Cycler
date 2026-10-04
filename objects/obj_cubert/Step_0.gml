@@ -52,8 +52,6 @@ run_events(groundCheck.blockers)
 
 pos.x_speed += _lr * 0.75
 
-pos.x_speed *= x_drag
-pos.y_speed *= 0.99
 /*
 #region Tractor Beams
 
@@ -125,15 +123,15 @@ if (coyote_time > 0) {
 		jump_buffer = 0
 		
 		//Apply speed from conveyors
-		if (hit_right_conveyor && !hit_left_conveyor) {
+		if (pos.hit_right_conveyor && !pos.hit_left_conveyor) {
 			pos.x_speed += global.conveyor_speed
 			// Reduce drag temporarily
-			x_drag = 0.95
+			pos.x_drag = 0.95
 			alarm[1] = sec/3
-		} else if (hit_left_conveyor && !hit_right_conveyor) {
+		} else if (pos.hit_left_conveyor && !pos.hit_right_conveyor) {
 			pos.x_speed -= global.conveyor_speed
 			// Reduce drag temporarily
-			x_drag = 0.95
+			pos.x_drag = 0.95
 			alarm[1] = sec/3
 		}
 	}
@@ -152,8 +150,6 @@ if (!movement.x) {
 if (!movement.y) {
 	pos.y_speed = 0
 }
-
-frame_end_reset()
 
 #endregion Movement
 

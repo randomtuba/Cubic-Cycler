@@ -2,8 +2,9 @@
 /// Note: Directly modifying "point" may lead to strange behaviour, use move() and setPos()
 /// @param {Real} _x Starting X coordinate
 /// @param {Real} _y Starting Y coordinate
+/// @param {Real} _xdrag Multiplier applied to X speed every step
 /// @param {Id.Instance} _parent Reference to parent object
-function Position(_x, _y, _parent) constructor {
+function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 	parent = _parent
 	
 	point = new wPoint(_x, _y)
@@ -12,6 +13,8 @@ function Position(_x, _y, _parent) constructor {
 	y_speed = 0
 	x_this_frame = 0
 	y_this_frame = 0
+	x_drag = _xdrag
+	y_drag = _ydrag
 	
 	hit_right_conveyor = false
 	hit_left_conveyor = false
@@ -56,8 +59,11 @@ function Position(_x, _y, _parent) constructor {
 		parent.y = point.getY()
 	}
 	
-	/// @desc Resets all variables that should be reset at the end of the frame
-	function reset_frame_vars() {
+	/// @desc Runs all code that should be run at step end
+	function end_step() {
+		x_speed *= x_drag
+		y_speed *= y_drag
+		
 		x_this_frame = 0
 		y_this_frame = 0
 		

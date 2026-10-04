@@ -1,6 +1,6 @@
 // main vars
-x_speed = 0
-y_speed = 0
+pos = new Position(x, y, 0.90, 0.97, self)
+
 rotation = 0;
 collisions = []; update_collisions();
 rider = noone;

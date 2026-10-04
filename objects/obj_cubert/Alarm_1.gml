@@ -1,2 +1,2 @@
 ///@description Reset Horizontal Drag
-x_drag = 0.9
+pos.x_drag = 0.9

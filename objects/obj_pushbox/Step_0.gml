@@ -1,26 +1,18 @@
-var _grounded = place_meeting(x, y + 2, collisions)
 
-var _grounded2 = place_meeting(x, y - 2, collisions)
+var groundCheck = checkGrounded(self, collisions)
+var _grounded = !groundCheck.valid
+
+run_events(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
+run_events(groundCheck.blockers)
 
 if (_grounded and touchspring == 0) {
 	y_speed = 0
 } else if (_grounded and touchspring == 1){
 	touchspring = 0
-} else if (_grounded2) {
-	y_speed = 1
 } else {
 	y_speed += 0.4
 }
 
-x_speed *= 0.9
-y_speed *= 0.97
-
-//conveyer should move block - zach
-var _conveyor = instance_place(x, y + 2, obj_conveyor);
-
-if (_conveyor != noone) {
-    x_speed += _conveyor.points_right ? 0.5 : -0.5;
-}
 
 move_and_collide(x_speed, y_speed, collisions);
 
