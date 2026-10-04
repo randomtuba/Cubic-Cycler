@@ -14,7 +14,7 @@ touching_left_tractor = false
 
 function update_collisions() {
 	with (obj_global) {
-		other.collisions = get_active_collisions()
+		other.collisions = get_active_collisions(false)
 	}
 }
 // my attempt at moving plats functionality (commented out bc it doesn't work)

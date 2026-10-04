@@ -17,7 +17,6 @@ if (!is_main_cubert) {
 
 #region Loss State
 
-sprite_index = keyboard_check(ord("1")) ? spr_cubert_1 : spr_cubert;
 image_index = 2*lose_state
 if (lose_state) {
 	lose_timer -= 1
@@ -52,19 +51,6 @@ x_speed += _lr * 0.75
 x_speed *= x_drag
 y_speed *= 0.99
 
-#region Conveyors
-
-if (touching_right_conveyor && !touching_left_conveyor) {
-	x_this_frame += global.conveyor_speed
-} else if (touching_left_conveyor && !touching_right_conveyor) {
-	x_this_frame -= global.conveyor_speed
-}
-
-touching_right_conveyor = false
-touching_left_conveyor = false
-
-#endregion Conveyors
-
 #region Tractor Beams
 
 if (touching_up_tractor && !touching_down_tractor) {
@@ -90,7 +76,12 @@ touching_left_tractor = false
 
 #region Coyote Time
 
-var _grounded = place_meeting(x, y+2, collisions) || faux_place_meeting(0, 2, collisions);
+var _grounded_on_platform = place_meeting(x, y+6, obj_moving_platform)
+	|| faux_place_meeting(0, 6, obj_moving_platform)
+
+var _grounded = place_meeting(x, y+2, collisions) 
+	|| faux_place_meeting(0, 2, collisions)
+	|| _grounded_on_platform
 var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);
 
 if (_grounded) {
@@ -103,7 +94,18 @@ if (_grounded) {
 
 #region Ground Collision and Diving
 
-if (_grounded && springyspring == 0) {
+if (_grounded_on_platform) {
+	// Get contacting platform
+	_platform = instance_place(x, y+6, obj_moving_platform)
+	_plat_y_speed = _platform.get_y_speed()
+	
+	y_speed = _plat_y_speed
+	
+	if (springyspring == 1) {
+		springyspring = 0
+	}
+	
+} else if (_grounded && springyspring == 0) {
 	y_speed = 0
 } else if (_grounded && springyspring == 1) {
 	springyspring = 0
@@ -132,12 +134,41 @@ if (coyote_time > 0) {
 		
 		coyote_time = 0
 		jump_buffer = 0
+		
+		// Apply speed from conveyors
+		if (touching_right_conveyor && !touching_left_conveyor) {
+			x_speed += global.conveyor_speed
+			// Reduce drag temporarily
+			x_drag = 0.95
+			alarm[1] = sec/3
+		} else if (touching_left_conveyor && !touching_right_conveyor) {
+			x_speed -= global.conveyor_speed
+			// Reduce drag temporarily
+			x_drag = 0.95
+			alarm[1] = sec/3
+		}
+		
+		touching_right_conveyor = false
+		touching_left_conveyor = false
 	}
 }
 
 #endregion Jumping
 
 //move_and_collide(x_speed, y_speed, collisions)
+
+#region Conveyors
+
+if (touching_right_conveyor && !touching_left_conveyor) {
+	x_this_frame += global.conveyor_speed
+} else if (touching_left_conveyor && !touching_right_conveyor) {
+	x_this_frame -= global.conveyor_speed
+}
+
+touching_right_conveyor = false
+touching_left_conveyor = false
+
+#endregion Conveyors
 
 x_this_frame += x_speed
 y_this_frame += y_speed
@@ -199,6 +230,8 @@ if (y > room_height) {
 
 global.default_x = x
 global.default_y = y
+
+if (global.debug && mouse_check_button(mb_right)) { x = mouse_x; y = mouse_y; }
 
 if (x_speed != 0) { image_xscale = sign(x_speed) * 0.5; }
 x_scale = lerp(x_scale, image_xscale, 0.9)
