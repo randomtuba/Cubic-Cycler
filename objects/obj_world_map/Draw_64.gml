@@ -1,4 +1,4 @@
-if(keyboard_check(vk_tab)){
+if(keyboard_check(vk_tab) && room != rm_mainmenu && room != rm_controls){
 	//draw_set_alpha(0.7)
 	//show_debug_message("DRAW EVENT: " + room_get_name(room));
 	var _y = 100;
@@ -30,14 +30,11 @@ if(keyboard_check(vk_tab)){
 				if(mouse_check_button_pressed(mb_left) && (global.debug || global.generators_destroyed_map[j][i])){
 					global.level_x = j;
 					global.level_y = i;
-					room_goto(global.level_map[global.level_y][global.level_x]);
-					var room_name = global.level_map[global.level_y][global.level_x];
+					room_goto(get_level_map()[global.level_y][global.level_x]);
 					var level_spawn = get_spawn_coords_by_room(room);
 					with (obj_cubert) {
 						x = level_spawn[0];
 						y = level_spawn[1];
-				
-					
 					}
 				}
 			}

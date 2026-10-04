@@ -82,6 +82,7 @@
     {"id":{"name":"rm_tut_bottom_right","path":"rooms/rm_tut_bottom_right/rm_tut_bottom_right.yy",},},
     {"id":{"name":"rm_tut_top_left","path":"rooms/rm_tut_top_left/rm_tut_top_left.yy",},},
     {"id":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
+    {"id":{"name":"scr_global_scripts","path":"scripts/scr_global_scripts/scr_global_scripts.yy",},},
     {"id":{"name":"spr_block_fragile","path":"sprites/spr_block_fragile/spr_block_fragile.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},
     {"id":{"name":"spr_break_particle","path":"sprites/spr_break_particle/spr_break_particle.yy",},},

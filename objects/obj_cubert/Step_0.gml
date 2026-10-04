@@ -185,13 +185,14 @@ y_this_frame = 0
 update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
 
 // Horizontal
+var _map = get_level_map();
 if (x > room_width) {
     x = 0
     if (place_meeting(x, y, collisions)) x = room_width
     if (!instance_exists(obj_generator)) {
         global.level_x++
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(global.level_map[global.level_y][global.level_x])
+			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
@@ -200,7 +201,7 @@ if (x > room_width) {
     if (!instance_exists(obj_generator)) {
         global.level_x--
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(global.level_map[global.level_y][global.level_x])
+			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_x++; }
     }
 }
@@ -212,7 +213,7 @@ if (y > room_height) {
     if (!instance_exists(obj_generator)) {
         global.level_y++
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(global.level_map[global.level_y][global.level_x])
+			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
@@ -221,7 +222,7 @@ if (y > room_height) {
     if (!instance_exists(obj_generator)) {
         global.level_y--
 		if (room_index_bounded(global.level_x, global.level_y)) {
-			room_goto(global.level_map[global.level_y][global.level_x])
+			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_y++; }
     }
 }
