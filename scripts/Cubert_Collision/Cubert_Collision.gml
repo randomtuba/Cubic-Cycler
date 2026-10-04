@@ -80,10 +80,10 @@ function MapContact(_map) constructor {
 }
 
 /// @desc Returns whether a thing is a reference to a tilemap
+/// Technically, this checks whether something is not an object
 /// @param thing The thing to check
 function isTilemap(thing) {
 	return !instance_exists(thing)
-	//return tilemap_get(thing, 1, 1) != -1
 }
 
 /// @desc Gets the size of an object
@@ -94,11 +94,12 @@ function getObjSize(obj) {
 	// Consider tilemaps to be of size 0
 	if (isTilemap(obj)) {
 		return { w : 0, h : 0 }
+		
 	} else {
-		var obj_width = obj.sprite_index.bbox_right - obj.sprite_index.bbox_left
-		var obj_height = obj.sprite_index.bbox_bottom - obj.sprite_index.bbox_top
-	
-		return { w : obj_width, h : obj_height }
+		return {
+			w : obj.sprite_index.bbox_right - obj.sprite_index.bbox_left,
+			h : obj.sprite_index.bbox_bottom - obj.sprite_index.bbox_top
+		}
 	}
 }
 
@@ -129,6 +130,7 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 			// If successful, determine which direction the collision was in
 			if (tile == 1) {
 				contact.directions[Direction.None] = true
+				// Check whether it's still colliding after small movements towards the center of obj
 				var xMoved = tilemap_get_at_pixel(map, check.x - _x * buffer, check.y)
 				var yMoved = tilemap_get_at_pixel(map, check.x, check.y - _y * buffer)
 				
@@ -196,7 +198,6 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4) {
 				
 			}
 			
-			
 			ds_list_destroy(hitObjects)
 		}
 	}
@@ -256,9 +257,11 @@ function contactMeetsDirection(obj, contact, _direction, buffer = 4) {
 /// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
 /// @param buffer (Optional) Used by _direction to determine how precise the collision should be, default 4
 function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, buffer = 4) {
+	// These are returned later
 	var isValid = true
 	var blockers = []
 	
+	// List of all contacts, either Struct.Contact or Struct.MapContact
 	var contacts = checkContactGM(obj, collisions, _x, _y, buffer)
 	
 	for (var i = 0; i < array_length(contacts); i++) {
@@ -285,6 +288,48 @@ function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, 
 	return { valid : isValid, blockers }
 }
 
+/// @desc Determines whether it would be valid to move an object by some offset
+/// Returns arrays intended to be indexed by the Direction enum
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
+/// @param {Real} _x The X offset to apply
+/// @param {Real} _y The Y offset to apply
+/// @param buffer (Optional) Used to determine how precise the directional collision should be, default 8
+function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 8) {
+	// These are returned later
+	// Can be indexed by the Direction enum
+	var isValid = [true, true, true, true, true]
+	var blockers = [[], [], [], [], []]
+	
+	// List of all contacts, either Struct.Contact or Struct.MapContact
+	var contacts = checkContactGM(obj, collisions, _x, _y, buffer)
+	
+	for (var i = 0; i < array_length(contacts); i++) {
+		var c = contacts[i]
+		if (is_instanceof(c, MapContact)) {
+			// Tilemap collision
+			for (var j = 0; j < 5; j++) {
+				if (c.directions[j]) {
+					isValid[j] = false
+					array_push(blockers[j], c.obj)
+				}
+			}
+		} else {
+			// Regular collision
+			for (var j = 0; j < 5; j++) {
+				var matchesDirection = contactMeetsDirection(obj, c, j, buffer)
+		
+				if (matchesDirection) {
+					isValid[j] = false
+					array_push(blockers[j], c.obj)
+				}
+			}
+		}
+	}
+	
+	return { valid : isValid, blockers }
+}
+
 /// @desc Determine if an object is grounded
 /// Returns whether it is grounded and any objects that it is grounded on
 /// @param {Id.Instance} obj The object
@@ -301,30 +346,23 @@ function checkGrounded(obj, collisions, buffer = 2) {
 /// @param collisions An array containing all objects that should be considered solid
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
-function attemptMove(obj, collisions, _x, _y) {
-	var succeededX = false
-	var succeededY = false
+/// @param buffer (Optional) The distance to check for directional collisions, default 8
+function attemptMove(obj, collisions, _x, _y, buffer = 8) {
+	// This is returned later
+	var success = { x : false, y : false }
 	
-	var validDown = checkValidMoveGM(obj, collisions, _x, _y, Direction.Down, 8)
-	var validUp = checkValidMoveGM(obj, collisions, _x, _y, Direction.Up, 8)
-	var validRight = checkValidMoveGM(obj, collisions, _x, _y, Direction.Right, 8)
-	var validLeft = checkValidMoveGM(obj, collisions, _x, _y, Direction.Left, 8)
+	var valid = checkValidMoveAllDirections(obj, collisions, _x, _y, buffer)
 	
-	if ((validRight.valid && _x > 0) || (validLeft.valid && _x < 0)) {
+	// Prevent movement into obstacles
+	if ((valid.valid[Direction.Right] && _x > 0) || (valid.valid[Direction.Left] && _x < 0)) {
 		obj.x += _x
-		succeededX = true
+		success.x = true
 	}
-	if ((validDown.valid && _y > 0) || (validUp.valid && _y < 0)) {
+	if ((valid.valid[Direction.Down] && _y > 0) || (valid.valid[Direction.Up] && _y < 0)) {
 		obj.y += _y
-		succeededY = true
+		success.y = true
 	}
 	
-	show_debug_message("Move:")
-	show_debug_message(validDown)
-	show_debug_message(validUp)
-	show_debug_message(validRight)
-	show_debug_message(validLeft)
-	
-	return { x : succeededX, y : succeededY }
+	return success
 }
 
