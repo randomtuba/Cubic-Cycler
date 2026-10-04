@@ -45,8 +45,8 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 var groundCheck = checkGrounded(self, collisions)
 var _grounded = !groundCheck.valid
 
-run_events(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
-run_events(groundCheck.blockers)
+runEvents(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
+runEvents(groundCheck.blockers)
 
 #region Horizontal Movement
 

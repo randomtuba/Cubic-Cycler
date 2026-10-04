@@ -82,7 +82,7 @@
     {"id":{"name":"rm_tut_bottom_right","path":"rooms/rm_tut_bottom_right/rm_tut_bottom_right.yy",},},
     {"id":{"name":"rm_tut_top_left","path":"rooms/rm_tut_top_left/rm_tut_top_left.yy",},},
     {"id":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
-    {"id":{"name":"Cubert_Collision","path":"scripts/Cubert_Collision/Cubert_Collision.yy",},},
+    {"id":{"name":"Collision","path":"scripts/Collision/Collision.yy",},},
     {"id":{"name":"Movables","path":"scripts/Movables/Movables.yy",},},
     {"id":{"name":"spr_block_fragile","path":"sprites/spr_block_fragile/spr_block_fragile.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},

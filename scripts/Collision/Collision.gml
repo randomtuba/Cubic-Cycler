@@ -115,8 +115,8 @@ function getObjSize(obj) {
 		
 	} else {
 		return {
-			w : obj.sprite_index.bbox_right - obj.sprite_index.bbox_left,
-			h : obj.sprite_index.bbox_bottom - obj.sprite_index.bbox_top
+			w : obj.mask_index.bbox_right - obj.mask_index.bbox_left,
+			h : obj.mask_index.bbox_bottom - obj.mask_index.bbox_top
 		}
 	}
 }
@@ -412,4 +412,22 @@ function getContacting(obj, collisions) {
 	}
 	
 	return contacts
+}
+	
+/// @desc Calls the apply_interaction(obj) function of all objects in list
+/// @param list The list of objects to work on
+function runEvents(list) {
+	for (var i = 0; i < array_length(list); i++) {
+		var obj = list[i]
+		with obj {
+			try {
+				apply_interaction(other)
+			} catch (_exception) {
+				show_debug_message("")
+				show_debug_message("Error when calling apply_interaction() function from " + string(object_index) + ":")
+				show_debug_message(_exception)
+				show_debug_message("")
+			}
+		}
+	}
 }

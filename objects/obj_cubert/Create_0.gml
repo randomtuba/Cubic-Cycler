@@ -327,20 +327,3 @@ function get_contacting(collision_list, check_object) {
 	return return_list
 }
 	
-/// @desc Calls the apply_interaction(obj) function of all objects in list
-/// @param list The list of objects to work on
-function run_events(list) {
-	for (var i = 0; i < array_length(list); i++) {
-		var obj = list[i]
-		with obj {
-			try {
-				apply_interaction(other)
-			} catch (_exception) {
-				show_debug_message("")
-				show_debug_message("Error when calling apply_interaction() function from " + string(object_index) + ":")
-				show_debug_message(_exception)
-				show_debug_message("")
-			}
-		}
-	}
-}
