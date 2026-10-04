@@ -31,7 +31,7 @@ function apply_interaction(obj) {
 			break
 			case (Direction.Right):
 				springxspring = 1
-				pos.x_speed = -15;
+				pos.x_speed = 15;
 
 				// Reduce drag temporarily
 				pos.x_drag = 0.95
@@ -39,7 +39,7 @@ function apply_interaction(obj) {
 			break
 			case (Direction.Left):
 				springxspring = 1
-				pos.x_speed = 15;
+				pos.x_speed = -15;
 
 				// Reduce drag temporarily
 				pos.x_drag = 0.95
