@@ -51,6 +51,9 @@ function wPoint(_x, _y) constructor {
 	}
 	
 	/// @desc Gets the distance to another wPoint, accounting for screenwraps
+	/// - CAN BE NEGATIVE -
+	/// Positive means the point is down or to the right
+	/// Negative means the point is up or to the left
 	/// @param {Struct.wPoint} _wPoint Point to check
 	/// @return Struct containing X and Y distances as .x and .y respectively
 	function distanceToPoint(_wPoint) {
@@ -58,115 +61,206 @@ function wPoint(_x, _y) constructor {
 	}
 }
 
+/// @desc Struct for keeping track of object collisions
+/// @param {Bool} _hit Whether the objects are colliding
+/// @param {Real} _xDist The X distance between the objects
+/// @param {Real} _yDist The Y distance between the objects
+/// @param {Id.Instance, Id.TileMapElement} _obj The object that was hit
+function Contact(_hit, _xDist, _yDist, _obj) constructor {
+	hit = _hit
+	xDist = _xDist
+	yDist = _yDist
+	obj = _obj
+}
+
+/// @desc Returns whether a thing is a reference to a tilemap
+/// This currently spams warnings, please help
+/// @param thing The thing to check
+function isTilemap(thing) {
+	return tilemap_get(thing, 1, 1) != -1
+}
+
 /// @desc Gets the size of an object
 /// Returned as a struct with width as .w and height as .h
+/// Tilemaps are considered size 0 on both axes
 /// @param {Id.Instance, Id.TileMapElement} obj The object
 function getObjSize(obj) {
-	var obj_width = obj.sprite_index.bbox_right - obj.sprite_index.bbox_left
-	var obj_height = obj.sprite_index.bbox_bottom - obj.sprite_index.bbox_top
+	// Consider tilemaps to be of size 0
+	if (isTilemap(obj)) {
+		return { w : 0, h : 0 }
+	} else {
+		var obj_width = obj.sprite_index.bbox_right - obj.sprite_index.bbox_left
+		var obj_height = obj.sprite_index.bbox_bottom - obj.sprite_index.bbox_top
 	
-	return { w : obj_width, h : obj_height }
+		return { w : obj_width, h : obj_height }
+	}
 }
 
-/// @desc Determine whether two objects are touching, accounting for screenwrapping
-///	Returns whether they are contacting and the distance along the X and Y axes
-/// @param {Id.Instance} obj1 The first object
-/// @param {Id.Instance, Id.TileMapElement} obj2 The second object
-/// @param x1Change (Optional) Considers obj1 to be offset by this amount
-/// @param y1Change (Optional) Considers obj1 to be offset by this amount
-function checkContacting(obj1, obj2, x1Change = 0, y1Change = 0) {
-	var obj1_size = getObjSize(obj1)
-	var obj2_size = getObjSize(obj2)
-	var obj1_center = new wPoint(obj1.x - abs(obj1.sprite_xoffset) + abs(obj1.sprite_width) / 2 + x1Change,
-								obj1.y - abs(obj1.sprite_yoffset) + abs(obj1.sprite_height) / 2 + y1Change)
-	var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
-								obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
+/// @desc Checks for contact using Game Maker's built in methods
+/// @param {Id.Instance} obj The object to check
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} compare The list of things to consider solid
+/// @param x1Change (Optional) Considers obj to be offset by this amount
+/// @param y1Change (Optional) Considers obj to be offset by this amount
+function checkContactGM(obj, compare, x1Change = 0, y1Change = 0) {
+	var obj1_center = new wPoint(obj.x - abs(obj.sprite_xoffset) + abs(obj.sprite_width) / 2 + x1Change,
+								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change)
 	
-	// This will be returned at the end
-	var contact = {
-		hit : false,
-		xDist : 0,
-		yDist : 0
+	// This is returned at the end
+	var contacts = []
+	
+	// Account for screenwrapped positions, 9 total
+	for (var _x = -1; _x <= 1; _x++) {
+		for (var _y = -1; _y <= 1; _y++) {
+			// Get hit objects
+			var hitObjects = ds_list_create()
+			with (obj) {
+				instance_place_list(x + room_width * _x, y + room_height * _y, compare, hitObjects, false)
+			}
+			
+			// Store any hits alongside their distances
+			for (var i = 0; i < ds_list_size(hitObjects); i++) {
+				var obj2 = ds_list_find_value(hitObjects, i)
+				
+				if (isTilemap(obj2)) {
+					show_debug_message("Tilemap Collision")
+					var obj1_size = getObjSize(obj)
+					// Try to find all colliding tiles, based on 9 points around obj1_center
+					for (var _x2 = -1; _x2 <= 1; _x2++) {
+						for (var _y2 = -1; _y2 <= 1; _y2++) {
+							var check = {
+								x : (obj1_center.getX() + _x2 * (obj1_size.w / 2)) % room_width,
+								y : (obj1_center.getY() + _y2 * (obj1_size.h / 2)) % room_width,
+							}
+							
+							var tile = tilemap_get_at_pixel(obj2, check.x, check.y)
+						
+							var contact = new Contact(
+								bool(tile),
+								_x2 * obj1_size.w / 2,
+								_y2 * obj1_size.h / 2,
+								obj2
+							)
+							array_push(contacts, contact)
+						}
+					}
+				} else {
+					// Regular object collision
+					var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
+											obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
+					var dist = obj1_center.distanceToPoint(obj2_center)
+					var contact = new Contact(true, dist.x, dist.y, obj2) 
+					array_push(contacts, contact)
+				}
+				
+			}
+			
+			
+			ds_list_destroy(hitObjects)
+		}
 	}
 	
-	// Get distances
-	var dist = obj1_center.distanceToPoint(obj2_center)
-	contact.xDist = dist.x
-	contact.yDist = dist.y
-	
-	// Determine contact
-	
-	contact.hit = (
-		abs(dist.x) <= obj1_size.w + obj2_size.w
-		&& abs(dist.y) <= obj1_size.h + obj2_size.h
-	)
-	
-	return contact
+	return contacts
 }
 
-/// @desc Determines whether it would be valid to move an object by some offset
-/// @param {Id.Instance} obj The object
-/// @param collisions An array containing all objects that should be considered solid
-/// @param _x The X offset to apply
-/// @param _y The Y offset to apply
-/// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
-/// @param buffer (Optional) Used by _direction to determine how precise the collision should be, default 4
-function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None, buffer = 4) {
-	var isValid = true
-	var blockingObjects = []
-	
-	for (var i = 0; i < array_length(collisions); i++) {
-		var compare = collisions[i]
-		// Skip the object / tileset if there are no active instances of it
-		if (!instance_exists(compare)) {
-			continue
-		}
-		
-		var contact = checkContacting(obj, compare, _x, _y)
-		
-		if (contact.hit) {
-			var objSize = getObjSize(obj)
-			var xSpace = objSize.w * 5/6
-			var ySpace = objSize.h * 5/6
-			// Make sure the direction is valid
+/// @desc Returns whether a contact is in the correct direction
+/// @param {Id.Instance} obj The object colliding
+/// @param {Struct.Contact} contact The contact
+/// @param {Enum.Direction} _direction The desired direction
+/// @param buffer (Optional) Determines how precise the directional collision should be, default 4
+function contactMeetsDirection(obj, contact, _direction, buffer = 4) {
+	if (contact.hit) {
+		if (isTilemap(contact.obj)) {
 			switch _direction {
-				case Direction.None:
-					isValid = false
-					array_push(blockingObjects, compare)
+				case Direction.Up:
+					if (contact.yDist < 0) {
+						return true
+					}
 				break
 			
-				case Direction.Up:
-					if (contact.yDist < buffer - ySpace && abs(contact.xDist) < xSpace) {
-						isValid = false
-						array_push(blockingObjects, compare)
+				case Direction.Down:
+					if (contact.yDist > 0) {
+						return true
 					}
 				break
 				
-				case Direction.Down:
-					if (contact.yDist > ySpace - buffer && abs(contact.xDist) < xSpace) {
-						isValid = false
-						array_push(blockingObjects, compare)
-					}
-				break
-			
 				case Direction.Left:
-					if (contact.xDist < buffer - xSpace && abs(contact.yDist) < ySpace) {
-						isValid = false
-						array_push(blockingObjects, compare)
+					if (contact.xDist < 0) {
+						return true
+					}
+				break
+		
+				case Direction.Right:
+					if (contact.xDist > 0) {
+						return true
 					}
 				break
 			
-				case Direction.Right:
-					if (contact.xDist > xSpace - buffer && abs(contact.yDist) < ySpace) {
-						isValid = false
-						array_push(blockingObjects, compare)
+				case Direction.None:
+					return true
+			}
+		} else {
+			var obj1Size = getObjSize(obj)
+			var obj2Size = getObjSize(contact.obj)
+			var xSpace = (obj1Size.w / 2 + obj1Size.w / 2) * 7/8
+			var ySpace = (obj1Size.h / 2 + obj2Size.h / 2) * 7/8
+			// Make sure the direction is valid
+			switch _direction {
+				case Direction.Up:
+					if (buffer > (contact.yDist + ySpace) && abs(contact.xDist) < xSpace) {
+						return true
 					}
 				break
+			
+				case Direction.Down:
+					if (-buffer < (contact.yDist - ySpace) && abs(contact.xDist) < xSpace) {
+						return true
+					}
+				break
+				
+				case Direction.Left:
+					if (buffer > (contact.xDist + xSpace) && abs(contact.yDist) < ySpace) {
+						return true
+					}
+				break
+		
+				case Direction.Right:
+					if (-buffer < (contact.xDist - xSpace) && abs(contact.yDist) < ySpace) {
+						return true
+					}
+				break
+			
+				case Direction.None:
+					return true
 			}
 		}
 	}
+	return false
+}
+
+/// @desc Determines whether it would be valid to move an object by some offset using Game Maker's built-in functions
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
+/// @param {Real} _x The X offset to apply
+/// @param {Real} _y The Y offset to apply
+/// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
+/// @param buffer (Optional) Used by _direction to determine how precise the collision should be, default 4
+function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, buffer = 4) {
+	var isValid = true
+	var blockers = []
 	
-	return { valid : isValid, blockers : blockingObjects }
+	var contacts = checkContactGM(obj, collisions, _x, _y)
+	
+	for (var i = 0; i < array_length(contacts); i++) {
+		var c = contacts[i]
+		var matchesDirection = contactMeetsDirection(obj, c, _direction, buffer)
+		
+		if (matchesDirection) {
+			isValid = false
+			array_push(blockers, c.obj)
+		}
+	}
+	
+	return { valid : isValid, blockers }
 }
 
 /// @desc Determine if an object is grounded
@@ -175,7 +269,7 @@ function checkValidMove(obj, collisions, _x, _y, _direction = Direction.None, bu
 /// @param collisions An array containing all objects that should be considered solid
 /// @param buffer (Optional) The distance at which things can be considered touching, default 2
 function checkGrounded(obj, collisions, buffer = 2) {
-	return checkValidMove(obj, collisions, 0, buffer, Direction.Down)
+	return checkValidMoveGM(obj, collisions, 0, buffer, Direction.Down)
 }
 
 /// @desc Attempts to move an object by some offset
@@ -189,10 +283,10 @@ function attemptMove(obj, collisions, _x, _y) {
 	var succeededX = false
 	var succeededY = false
 	
-	var validDown = checkValidMove(obj, collisions, _x, _y, Direction.Down)
-	var validUp = checkValidMove(obj, collisions, _x, _y, Direction.Up)
-	var validRight = checkValidMove(obj, collisions, _x, _y, Direction.Right)
-	var validLeft = checkValidMove(obj, collisions, _x, _y, Direction.Left)
+	var validDown = checkValidMoveGM(obj, collisions, _x, _y, Direction.Down)
+	var validUp = checkValidMoveGM(obj, collisions, _x, _y, Direction.Up)
+	var validRight = checkValidMoveGM(obj, collisions, _x, _y, Direction.Right)
+	var validLeft = checkValidMoveGM(obj, collisions, _x, _y, Direction.Left)
 	
 	if ((validRight.valid && _x > 0) || (validLeft.valid && _x < 0)) {
 		obj.x += _x
