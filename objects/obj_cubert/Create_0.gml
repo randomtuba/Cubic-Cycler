@@ -1,8 +1,6 @@
 // main vars
-x_speed = 0
-y_speed = 0
-x_this_frame = 0
-y_this_frame = 0
+pos = new Position(x, y, self)
+
 rotation = 0;
 x_scale = 0.5;
 //collision_map = layer_tilemap_get_id("Tiles_1")
@@ -18,15 +16,6 @@ jump_buffer = 0
 springyspring = 0
 springxspring = 0
 
-// Conveyors and Tractor Beams
-hit_right_conveyor = false
-hit_left_conveyor = false
-hit_up_tractor = false
-hit_down_tractor = false
-hit_right_tractor = false
-hit_left_tractor = false
-
-
 // cool effects
 jump_k = 0;
 jump_j_max = sec;
@@ -39,7 +28,7 @@ main_cubert_off_i = [0, 0];
 non_main_cuberts = [];
 all_cuberts = []
 alarm[0] = 1;
-current_room_data = []; update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
+current_room_data = []; update_current_room_data(room, x, y, pos.x_speed, pos.y_speed, global.level_x, global.level_y);
 
 function update_current_room_data(_room, _x, _y, _x_speed, _y_speed, _level_x, _level_y) {
 	current_room_data = [_room, _x, _y, _x_speed, _y_speed, _level_x, _level_y];

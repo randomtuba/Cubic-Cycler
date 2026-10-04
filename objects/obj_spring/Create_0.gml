@@ -1,11 +1,3 @@
-enum Direction {
-	Up,
-	Down,
-	Left,
-	Right,
-	Yolo,
-	None
-}
 
 // Sprite Rotation
 switch (facing_direction) {
@@ -27,18 +19,19 @@ switch (facing_direction) {
 }
 
 function apply_interaction(obj) {
+	image_speed = 1
 	with obj {
 		switch (other.facing_direction) {
 			case (Direction.Up):
 				springyspring = 1
-				self.y_speed = -15
+				pos.y_speed = -15
 			break
 			case (Direction.Down):
-				y_speed = 15
+				pos.y_speed = 15
 			break
 			case (Direction.Right):
 				springxspring = 1
-				self.x_speed = -15;
+				pos.x_speed = -15;
 
 				// Reduce drag temporarily
 				x_drag = 0.95
@@ -46,7 +39,7 @@ function apply_interaction(obj) {
 			break
 			case (Direction.Left):
 				springxspring = 1
-				self.x_speed = 15;
+				pos.x_speed = 15;
 
 				// Reduce drag temporarily
 				x_drag = 0.95
@@ -54,8 +47,8 @@ function apply_interaction(obj) {
 			break
 			case (Direction.Yolo):
 				var spring = _touched_spring_directions[Direction.Yolo];
-				self.x_speed = 15*dcos(spring.image_angle+90)
-				self.y_speed =-15*dsin(spring.image_angle+90)
+				pos.x_speed = 15*dcos(spring.image_angle+90)
+				pos.y_speed =-15*dsin(spring.image_angle+90)
 			break
 		}
 	}

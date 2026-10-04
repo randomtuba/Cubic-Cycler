@@ -50,10 +50,10 @@ run_events(groundCheck.blockers)
 
 #region Horizontal Movement
 
-x_speed += _lr * 0.75
+pos.x_speed += _lr * 0.75
 
-x_speed *= x_drag
-y_speed *= 0.99
+pos.x_speed *= x_drag
+pos.y_speed *= 0.99
 /*
 #region Tractor Beams
 
@@ -101,7 +101,7 @@ if (_grounded) {
 } else if (_grounded2) {
 	//y_speed = 1
 } else {*/
-	if (_down) { y_speed += 0.8 } else { y_speed += 0.4 }
+	if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
 //}
 
 #endregion Ground Collision and Diving
@@ -118,7 +118,7 @@ if (_jump) {
 // Jump
 if (coyote_time > 0) {
 	if (jump_buffer > 0) { 
-		y_speed = -10
+		pos.y_speed = -10
 		//jump_k = 1
 		
 		coyote_time = 0
@@ -126,12 +126,12 @@ if (coyote_time > 0) {
 		
 		//Apply speed from conveyors
 		if (hit_right_conveyor && !hit_left_conveyor) {
-			x_speed += global.conveyor_speed
+			pos.x_speed += global.conveyor_speed
 			// Reduce drag temporarily
 			x_drag = 0.95
 			alarm[1] = sec/3
 		} else if (hit_left_conveyor && !hit_right_conveyor) {
-			x_speed -= global.conveyor_speed
+			pos.x_speed -= global.conveyor_speed
 			// Reduce drag temporarily
 			x_drag = 0.95
 			alarm[1] = sec/3
@@ -143,30 +143,26 @@ if (coyote_time > 0) {
 
 //move_and_collide(x_speed, y_speed, collisions)
 
-x_this_frame += x_speed
-y_this_frame += y_speed
-
 //move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
-var movement = attemptMove(self, collisions, x_this_frame, y_this_frame)
+var motion = pos.getMotion()
+var movement = attemptMove(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
 if (!movement.x) {
-	x_speed = 0
+	pos.x_speed = 0
 }
 if (!movement.y) {
-	y_speed = 0
+	pos.y_speed = 0
 }
 
 frame_end_reset()
 
 #endregion Movement
-	
+
 #region Room Wrapping
 
-update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
+update_current_room_data(room, x, y, pos.x_speed, pos.y_speed, global.level_x, global.level_y);
 
 // Horizontal
 if (x > room_width) {
-    x = 0
-    if (place_meeting(x, y, collisions)) x = room_width
     if (!instance_exists(obj_generator)) {
         global.level_x++
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -174,8 +170,6 @@ if (x > room_width) {
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
-    x = room_width
-    if (place_meeting(x, y, collisions)) x = 0
     if (!instance_exists(obj_generator)) {
         global.level_x--
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -186,8 +180,6 @@ if (x > room_width) {
 
 // Vertical
 if (y > room_height) {
-    y = 0
-    if (place_meeting(x, y, collisions)) y = room_height
     if (!instance_exists(obj_generator)) {
         global.level_y++
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -195,8 +187,6 @@ if (y > room_height) {
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
-    y = room_height
-    if (place_meeting(x, y, collisions)) y = 0
     if (!instance_exists(obj_generator)) {
         global.level_y--
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -212,8 +202,8 @@ global.default_y = y
 
 if (global.debug && mouse_check_button(mb_right)) { x = mouse_x; y = mouse_y; }
 
-if (x_speed != 0) {
-	image_xscale = sign(x_speed) * 0.5;
+if (pos.x_speed != 0) {
+	image_xscale = sign(pos.x_speed) * 0.5;
 }
 x_scale = lerp(x_scale, image_xscale, 0.9)
 

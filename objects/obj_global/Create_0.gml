@@ -67,6 +67,16 @@ enum MovingPlatformType {
 	Stationary
 }
 
+enum Direction {
+	Up,
+	Down,
+	Left,
+	Right,
+	Yolo,
+	None
+}
+
+
 #endregion Enums
 
 #region Functions

@@ -7,7 +7,7 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 
 #endregion
 
-rotation = lerp(rotation, _down ? -90*sign(x_scale) : -0.5*clamp(y_speed, -20, 20)*sign(image_xscale), 0.75);
+rotation = lerp(rotation, _down ? -90*sign(x_scale) : -0.5*clamp(pos.y_speed, -20, 20)*sign(image_xscale), 0.75);
 if (jump_k > 0) { jump_k--; }
 var jump_p = jump_k/jump_j_max;
 var _xw = clamp(-0.5, -0.020*bounciness*dsin(360*jump_p)*jump_p, 0.5);

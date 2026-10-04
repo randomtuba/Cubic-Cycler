@@ -11,16 +11,30 @@ function wPoint(_x, _y) constructor {
 		return _x_internal
 	}
 	
-	function setX(_x) {
-		_x_internal = _x % room_width
+	function setX(_x, wraps = true) {
+		if (wraps) {
+			while (_x < 0) {
+				_x += room_width
+			}
+			_x_internal = _x % room_width
+		} else {
+			_x_internal = _x
+		}
 	}
 	
 	function getY() {
 		return _y_internal
 	}
 	
-	function setY(_y) {
-		_y_internal = _y % room_height
+	function setY(_y, wraps = true) {
+		if (wraps) {
+			while (_y < 0) {
+				_y += room_height
+			}
+			_y_internal = _y % room_height
+		} else {
+			_y_internal = _y
+		}
 	}
 	
 	/// @desc Gets the distance to a point, accounting for screenwraps
@@ -351,7 +365,8 @@ function checkGrounded(obj, collisions, buffer = 2) {
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
 /// @param buffer (Optional) The distance to check for directional collisions, default 4
-function attemptMove(obj, collisions, _x, _y, buffer = 4) {
+/// @param {Bool} wraps (Optional) Whether to screenwrap or not, default true
+function attemptMove(obj, collisions, _x, _y, buffer = 4, wraps = true) {
 	// This is returned later
 	var success = { x : false, y : false }
 	
@@ -359,11 +374,11 @@ function attemptMove(obj, collisions, _x, _y, buffer = 4) {
 	
 	// Prevent movement into obstacles
 	if ((valid.valid[Direction.Right] && _x > 0) || (valid.valid[Direction.Left] && _x < 0)) {
-		obj.x += _x
+		obj.pos.move(_x, 0, wraps)
 		success.x = true
 	}
 	if ((valid.valid[Direction.Down] && _y > 0) || (valid.valid[Direction.Up] && _y < 0)) {
-		obj.y += _y
+		obj.pos.move(0, _y, wraps)
 		success.y = true
 	}
 	
