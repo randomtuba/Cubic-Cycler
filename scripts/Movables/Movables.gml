@@ -1,4 +1,5 @@
 /// @desc Struct for tracking position and related variables of movable objects
+/// Note: Directly modifying "point" may lead to strange behaviour, use move() and setPos()
 /// @param {Real} _x Starting X coordinate
 /// @param {Real} _y Starting Y coordinate
 /// @param {Id.Instance} _parent Reference to parent object
