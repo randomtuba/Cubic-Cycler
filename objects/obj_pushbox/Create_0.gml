@@ -8,6 +8,6 @@ touchspring = 0
 
 function update_collisions() {
 	with (obj_global) {
-		other.collisions = get_active_collisions(false)
+		other.collisions = get_active_collisions()
 	}
 }

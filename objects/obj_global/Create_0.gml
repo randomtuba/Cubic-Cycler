@@ -13,7 +13,8 @@ depth += 100;
 
 #region Variables
 
-global.debug = true;
+// fullscreen option
+fullscreen = false
 
 // stores the position of the player
 global.default_x = 0
@@ -31,11 +32,12 @@ global.tractor_strength = 0.5
 global.level_x = 2
 global.level_y = 1
 global.level_map = [
-[rm_tesseract_1, rm_pushbox_and_fragile, rm_many_buttons, rm_spikes],
+[-1, -1, -1, rm_spikes],
 [rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
 [rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
-[rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
+[-1, rm_fragile_blocks, rm_doubledown, rm_awkward],
 ]
+// rm_awkward
 
 global.generators_destroyed_map = []
 
@@ -46,8 +48,6 @@ for (var i=0; i<array_length(global.level_map); i++) {
 		array_push(global.generators_destroyed_map[i], false);
 	}
 }
-
-global.kleinbottles_collected = []
 
 // stores checkpoint data
 global.checkpoint_id = -1
@@ -60,6 +60,14 @@ global.checkpoint_level_y = 1
 #endregion Variables
 
 #region Enums
+
+enum Direction {
+	Up,
+	Down,
+	Left,
+	Right,
+	None
+}
 
 enum MovingPlatformType {
 	Bounce,
@@ -87,6 +95,7 @@ function get_active_collisions(include_cubert = false) {
 		obj_conveyor,
 		obj_moving_platform
 	];
+	// Conditionally active
 	with obj_switch_block {
 		if is_on {
 			array_push(collisions, self)
@@ -97,6 +106,7 @@ function get_active_collisions(include_cubert = false) {
 			array_push(collisions, self)
 		}
 	}
+	// Optionally include cubert
 	if (include_cubert) {
 		with obj_cubert {
 			array_push(collisions, self)

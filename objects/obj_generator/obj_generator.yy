@@ -9,8 +9,8 @@
   "name":"obj_generator",
   "overriddenProperties":[],
   "parent":{
-    "name":"WorldElements",
-    "path":"folders/Objects/WorldElements.yy",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

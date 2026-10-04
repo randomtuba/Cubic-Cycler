@@ -10,8 +10,8 @@
   "name":"obj_checkpoint",
   "overriddenProperties":[],
   "parent":{
-    "name":"WorldElements",
-    "path":"folders/Objects/WorldElements.yy",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

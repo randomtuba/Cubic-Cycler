@@ -128,19 +128,15 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		ds_list_destroy(_fragile_list);
 	}
 	
-	var _pushing_right_now = false
-	
 	//push box conditions
 	if (array_contains(_collisions, obj_pushbox)) {
 		var _pushbox_list = ds_list_create();
 		var _pushbox_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_pushbox, false, true, _pushbox_list, false);
 		
-		_pushing_right_now = false
 		for (var i=0; i<_pushbox_count; i++) {
 			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2; _pushing_right_now = true }//cubert push box
-			if (abs(x - _box.x) < 58 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }//cubert above box
-			if (abs(x - _box.x) < 58 && y > _box.y) { _box.y_speed = min(_box.y_speed, y_speed); }//cubert under box
+			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
+			if (abs(x - _box.x) < 58 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
 		}
 		
 		ds_list_destroy(_pushbox_list);
@@ -152,9 +148,8 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 			
 			for (var j=0; j<_faux_pushbox_count; j++) {
 				var _box = _faux_pushbox_list[|j];
-				if (abs(q.y - _box.y) < 33 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2; _pushing_right_now = true }
+				if (abs(q.y - _box.y) < 24 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
 				if (abs(q.x - _box.x) < 58 && q.y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
-				if (abs(q.x - _box.x) < 58 && q.y > _box.y) { _box.y_speed = min(_box.y_speed, y_speed); }
 			}
 			
 			ds_list_destroy(_faux_pushbox_list);
@@ -166,7 +161,6 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	var _touching_conveyors = get_standing_on(_collisions, obj_conveyor)
 	for (var i = 0; i < array_length(_touching_conveyors); i++) {
 		var _conveyor = array_get(_touching_conveyors, i)
-		// Set tracker variables (prevents getting too much speed)
 		if (_conveyor.points_right) {
 			touching_right_conveyor = true
 		} else {
@@ -174,66 +168,15 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		}
 	}
 	
-	// Springs
-	var _touching_springs = get_contacting([obj_spring], obj_spring)[0]
-	//instance_place_list(x, y, obj_spring, _touching_springs, false)
-	
-	// Tracks what directions have been hit
-	var _touched_spring_directions = [noone, noone, noone, noone, noone, noone];
-	// Loop through the springs cubert is touching
-	for (var i = 0; i < array_length(_touching_springs); i++) {
-		var current_spring = _touching_springs[i]
-		// Add this spring's direction to the tracker
-		_touched_spring_directions[current_spring.facing_direction] = current_spring;
-		// Animate spring
-		current_spring.image_speed = 1
-	}
-	#region Apply spring velocity
-	if (_touched_spring_directions[Direction.Up] != noone) {
-		springyspring = 1
-		self.y_speed = -15
-	}
-	if (_touched_spring_directions[Direction.Down] != noone) {
-		y_speed = 15
-	}
-	if (_touched_spring_directions[Direction.Left] != noone) {
-		springxspring = 1
-		self.x_speed = -15;
-
-		// Reduce drag temporarily
-		x_drag = 0.95
-		alarm[1] = sec/3
-	}
-	if (_touched_spring_directions[Direction.Right] != noone) {
-		springxspring = 1
-		self.x_speed = 15;
-
-		// Reduce drag temporarily
-		x_drag = 0.95
-		alarm[1] = sec/3
-	}
-	if (_touched_spring_directions[Direction.Yolo] != noone) {
-		var spring = _touched_spring_directions[Direction.Yolo];
-		self.x_speed = 15*dcos(spring.image_angle+90)
-		self.y_speed =-15*dsin(spring.image_angle+90)
-	}
-	#endregion Apply spring velocity
-	
-	
 	// Moving Platforms
 	var _touching_platforms = get_contacting(_collisions, obj_moving_platform)
 	for (var i = 0; i < array_length(_touching_platforms[0]); i++) {
 		var _platform = array_get(_touching_platforms[0], i)
 		var _direction = array_get(_touching_platforms[1], i)
 		
-		// Get dragged with platforms
-		if (_direction == Direction.Down) {
-			x_speed += _platform.get_x_speed()
-		}
+		x_speed += _platform.get_x_speed()
+		y_speed += _platform.get_y_speed()
 		
-		//y_speed += _platform.get_y_speed()
-		
-		// If attempting to move into a platform, get stopped and pushed by the platform
 		if (_platform.get_x_speed() > 0 && x_speed < _platform.get_x_speed() && _direction == Direction.Left) {
 			x_speed = _platform.get_x_speed()
 		}
@@ -253,12 +196,7 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 	_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
 	_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
-	//clear velocity when hitting something
-	if (reset_speeds_if_cant) {
-		//show_debug_message(_can_lr)
-		if (!_can_lr && !_pushing_right_now) { self.x_speed = 0;  }
-		if (!_can_ud) { self.y_speed = 0 }
-	}
+	
 	
 	//slowly decrease percent of x_speed and y_speed until it's possible to fit
 	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
@@ -270,7 +208,13 @@ function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, r
 		_iter--;
 	}
 	x += _can_lr * x_speed;
-	y += _can_ud * y_speed;	
+	y += _can_ud * y_speed;
+	
+	//clear velocity when hitting something
+	if (reset_speeds_if_cant) {
+		if (!_can_lr) { self.x_speed = 0 }
+		if (!_can_ud) { self.y_speed = 0 }
+	}
 }
 
 function get_standing_on(collision_list, check_object) {
@@ -280,7 +224,6 @@ function get_standing_on(collision_list, check_object) {
 		// Check collisions
 		for (var i=0; i<array_length(all_cuberts); i++) {
 			var q = all_cuberts[i];
-			if (global.generators_destroyed_map[global.level_x][global.level_y] == true && q != main_cubert) {continue;}
 			// Create list of touching objects
 			var _contact_list = ds_list_create();
 			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
@@ -308,7 +251,6 @@ function get_contacting(collision_list, check_object) {
 		// Check collisions
 		for (var i=0; i<array_length(all_cuberts); i++) {
 			var q = all_cuberts[i];
-			if (global.generators_destroyed_map[global.level_x][global.level_y] == true && q != main_cubert) {continue;}
 			// Create list of touching objects
 			var _contact_list = ds_list_create();
 			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
