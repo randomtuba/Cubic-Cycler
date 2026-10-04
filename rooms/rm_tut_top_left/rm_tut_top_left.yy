@@ -28,8 +28,8 @@
   ],
   "name":"rm_tut_top_left",
   "parent":{
-    "name":"Act1",
-    "path":"folders/Rooms/Act1.yy",
+    "name":"Tutorial",
+    "path":"folders/Rooms/Tutorial.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

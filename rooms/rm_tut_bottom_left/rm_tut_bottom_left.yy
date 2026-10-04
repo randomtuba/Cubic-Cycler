@@ -32,8 +32,8 @@
   ],
   "name":"rm_tut_bottom_left",
   "parent":{
-    "name":"Act1",
-    "path":"folders/Rooms/Act1.yy",
+    "name":"Tutorial",
+    "path":"folders/Rooms/Tutorial.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
