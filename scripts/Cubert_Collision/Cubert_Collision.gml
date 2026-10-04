@@ -1,3 +1,5 @@
+#region Structs
+
 /// @desc Points that automatically screenwrap, use get and set functions
 /// @param _x Starting X coordinate
 /// @param _y Starting Y coordinate
@@ -79,6 +81,8 @@ function MapContact(_map) constructor {
 	obj = _map
 }
 
+#endregion Structs
+
 /// @desc Returns whether a thing is a reference to a tilemap
 /// Technically, this checks whether something is not an object
 /// @param thing The thing to check
@@ -122,7 +126,7 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 		for (var _y = -1; _y <= 1; _y++) {
 			var check = {
 				x : (obj_center.getX() + _x * (obj_size.w / 2)) % room_width,
-				y : (obj_center.getY() + _y * (obj_size.h / 2)) % room_width,
+				y : (obj_center.getY() + _y * (obj_size.h / 2)) % room_height,
 			}
 			
 			var tile = tilemap_get_at_pixel(map, check.x, check.y)
@@ -131,8 +135,8 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 			if (tile == 1) {
 				contact.directions[Direction.None] = true
 				// Check whether it's still colliding after small movements towards the center of obj
-				var xMoved = tilemap_get_at_pixel(map, check.x - _x * buffer, check.y)
-				var yMoved = tilemap_get_at_pixel(map, check.x, check.y - _y * buffer)
+				var xMoved = tilemap_get_at_pixel(map, check.x - _x * (abs(x1Change) + buffer), check.y)
+				var yMoved = tilemap_get_at_pixel(map, check.x, check.y - _y * (abs(y1Change) + buffer))
 				
 				if (yMoved == 0) {
 					// Was a vertical collision (Priority over horizontal)
@@ -343,7 +347,7 @@ function checkGrounded(obj, collisions, buffer = 2) {
 /// Returns whether the move was valid
 /// This will change the coordinates of the passed object if the move succeeds
 /// @param {Id.Instance} obj The object
-/// @param collisions An array containing all objects that should be considered solid
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
 /// @param _x The X offset to apply
 /// @param _y The Y offset to apply
 /// @param buffer (Optional) The distance to check for directional collisions, default 8
@@ -366,3 +370,31 @@ function attemptMove(obj, collisions, _x, _y, buffer = 8) {
 	return success
 }
 
+/// @desc Gets all touching objects from the passed collisions
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be counted
+function getContacting(obj, collisions) {
+	// This is returned at the end
+	var contacts = []
+	
+	// Account for screenwrapped positions, 9 total
+	for (var _x = -1; _x <= 1; _x++) {
+		for (var _y = -1; _y <= 1; _y++) {
+			// Get hit objects
+			var hitObjects = ds_list_create()
+			with (obj) {
+				instance_place_list(x + room_width * _x, y + room_height * _y, collisions, hitObjects, false)
+			}
+			
+			// Store any hits
+			for (var i = 0; i < ds_list_size(hitObjects); i++) {
+				var obj2 = ds_list_find_value(hitObjects, i)
+				array_push(contacts, obj2)
+			}
+			
+			ds_list_destroy(hitObjects)
+		}
+	}
+	
+	return contacts
+}

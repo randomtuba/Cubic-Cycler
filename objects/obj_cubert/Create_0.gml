@@ -19,12 +19,12 @@ springyspring = 0
 springxspring = 0
 
 // Conveyors and Tractor Beams
-touching_right_conveyor = false
-touching_left_conveyor = false
-touching_up_tractor = false
-touching_down_tractor = false
-touching_right_tractor = false
-touching_left_tractor = false
+hit_right_conveyor = false
+hit_left_conveyor = false
+hit_up_tractor = false
+hit_down_tractor = false
+hit_right_tractor = false
+hit_left_tractor = false
 
 
 // cool effects
@@ -338,4 +338,22 @@ function get_contacting(collision_list, check_object) {
 		}
 	}
 	return return_list
+}
+	
+/// @desc Calls the apply_interaction(obj) function of all objects in list
+/// @param list The list of objects to work on
+function run_events(list) {
+	for (var i = 0; i < array_length(list); i++) {
+		var obj = list[i]
+		with obj {
+			try {
+				apply_interaction(other)
+			} catch (_exception) {
+				show_debug_message("")
+				show_debug_message("Error when calling apply_interaction() function from " + string(object_index) + ":")
+				show_debug_message(_exception)
+				show_debug_message("")
+			}
+		}
+	}
 }

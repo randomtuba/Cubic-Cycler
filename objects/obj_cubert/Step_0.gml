@@ -32,7 +32,6 @@ if (keyboard_check(ord("R"))) restart()
 
 #endregion Loss State
 
-
 #region Controls
 
 var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
@@ -41,8 +40,10 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 
 #endregion
 
-
 #region Movement
+
+var groundCheck = checkGrounded(self, collisions)
+var _grounded = !groundCheck.valid
 
 #region Horizontal Movement
 
@@ -50,7 +51,7 @@ x_speed += _lr * 0.75
 
 x_speed *= x_drag
 y_speed *= 0.99
-
+/*
 #region Tractor Beams
 
 if (touching_up_tractor && !touching_down_tractor) {
@@ -71,7 +72,7 @@ touching_right_tractor = false
 touching_left_tractor = false
 
 #endregion Tractor Beams
-
+*/
 #endregion Horizontal Movement
 
 #region Coyote Time
@@ -79,8 +80,6 @@ touching_left_tractor = false
 /*var _grounded = place_meeting(x, y+2, collisions) 
 	|| faux_place_meeting(0, 2, collisions)
 var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);*/
-var groundCheck = checkGrounded(self, collisions)
-var _grounded = !groundCheck.valid
 
 if (_grounded) {
 	coyote_time = global.coyote_time
@@ -122,7 +121,7 @@ if (coyote_time > 0) {
 		coyote_time = 0
 		jump_buffer = 0
 		
-		// Apply speed from conveyors
+		/* Apply speed from conveyors
 		if (touching_right_conveyor && !touching_left_conveyor) {
 			x_speed += global.conveyor_speed
 			// Reduce drag temporarily
@@ -137,6 +136,7 @@ if (coyote_time > 0) {
 		
 		touching_right_conveyor = false
 		touching_left_conveyor = false
+		*/
 	}
 }
 
@@ -144,18 +144,8 @@ if (coyote_time > 0) {
 
 //move_and_collide(x_speed, y_speed, collisions)
 
-#region Conveyors
-
-if (touching_right_conveyor && !touching_left_conveyor) {
-	x_this_frame += global.conveyor_speed
-} else if (touching_left_conveyor && !touching_right_conveyor) {
-	x_this_frame -= global.conveyor_speed
-}
-
-touching_right_conveyor = false
-touching_left_conveyor = false
-
-#endregion Conveyors
+run_events(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
+run_events(groundCheck.blockers)
 
 x_this_frame += x_speed
 y_this_frame += y_speed

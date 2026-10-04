@@ -4,6 +4,7 @@
 
 #macro COLLISION_UPDATE_LISTENERS [obj_cubert, obj_pushbox, obj_moving_platform]
 #macro FREELY_MOVABLE_OBJECTS [obj_cubert, obj_pushbox]
+#macro HAVE_CONTACT_BEHAVIOUR [obj_spring, obj_button, obj_button_cubert, obj_checkpoint, obj_generator, obj_spikes, obj_spikeball]
 
 #endregion Macros
 
