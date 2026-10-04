@@ -26,14 +26,14 @@
           1,0,0,1,-2147483648,-2147483648,-7,0,-7,-2147483648,2,0,-2147483648,-4,0,-2,1,-4,0,4,1,0,0,1,-4,0,-2,
           1,-3,0,-3,-2147483648,-2,0,-2,-2147483648,2,0,-2147483648,-10,0,6,1,-2147483648,-2147483648,1,-2147483648,
           -2147483648,-8,0,-2,-2147483648,-2,0,1,-2147483648,-4,0,-2,1,-6,0,5,-2147483648,1,0,-2147483648,1,-7,
-          0,-2,1,-2,0,3,-2147483648,0,0,-64,1,-20,-2147483648,-6,0,-29,-2147483648,-3,0,-6,-2147483648,
+          0,-2,1,-2,0,1,-2147483648,-4,0,-28,1,-2,0,-32,1,-20,-2147483648,-6,0,-29,-2147483648,-3,0,-6,-2147483648,
         ],"TileDataFormat":1,},"tilesetId":{"name":"tileset_block","path":"tilesets/tileset_block/tileset_block.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4289900419,"depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
   "name":"rm_tut_bottom_left",
   "parent":{
-    "name":"Act1",
-    "path":"folders/Rooms/Act1.yy",
+    "name":"Tutorial",
+    "path":"folders/Rooms/Tutorial.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

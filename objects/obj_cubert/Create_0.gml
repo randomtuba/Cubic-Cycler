@@ -71,9 +71,9 @@ function update_collisions() {
 }
 
 function room_index_bounded(_i = global.level_x, _j = global.level_y) {
-	return (_j >= 0) && (_j < array_length(global.level_map)) &&
-		(_i >= 0) && (_i < array_length(global.level_map[0])) &&
-		global.level_map[_j][_i] != -1
+	return (_j >= 0) && (_j < array_length(get_level_map())) &&
+		(_i >= 0) && (_i < array_length(get_level_map()[0])) &&
+		get_level_map()[_j][_i] != -1
 }
 
 
