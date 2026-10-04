@@ -13,6 +13,11 @@ ang_xy_spd = pi/20;
 ang_xz2_spd = 0;
 ang_xy2_spd = 0;
 
+spr = spr_cubert;
+
+collected = false;
+collect_k = 0;
+
 
 function get_tessa_point(_ang_xz = ang_xz, _ang_xy = ang_xy, _r = r) {
 	return [_r*dcos(_ang_xy)*dcos(_ang_xz), -_r*dsin(_ang_xy)];//if there's z it would take +r*dsin(ang_xz)
@@ -24,7 +29,7 @@ function draw_tessa_point(_x = x, _y = y, _ang_xz = ang_xz, _ang_xy = ang_xy, _r
 	return p;
 }
 
-function draw_tessa_square(_x = x, _y = y, _ang_xz = ang_xz, _ang_xy = ang_xy, _r = r) {
+function draw_tessa_square(_x = x, _y = y, _ang_xz = ang_xz, _ang_xy = ang_xy, _r = r, with_spr = collected) {
 	var p0 = get_tessa_point(_ang_xz, _ang_xy, _r);
 	p0[0] += _x;
 	p0[1] += _y;
@@ -48,6 +53,8 @@ function draw_tessa_square(_x = x, _y = y, _ang_xz = ang_xz, _ang_xy = ang_xy, _
 	//connect 1 to 3, 2 to 4
 	draw_line_width(pul[0], pul[1], pur[0], pur[1], 3);
 	draw_line_width(pdl[0], pdl[1], pdr[0], pdr[1], 3);
+	
+	if (with_spr) { draw_sprite_pos(spr, 0, pul[0], pul[1], pdl[0], pdl[1], pdr[0], pdr[1], pur[0], pur[1], 1-power(1-collect_k, 2)); }
 	
 	return [pul, pdl, pur, pdr];
 }
