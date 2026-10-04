@@ -24,14 +24,23 @@ if (_conveyor != noone) {
 
 move_and_collide(x_speed, y_speed, collisions);
 
-//x_this_frame += x_speed
-//y_this_frame += y_speed
-//move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
-//x_this_frame = 0
-//y_this_frame = 0
+var box_or_fake_box_find_cubert = false;
+var box_or_fake_box_find_cubert_i = 0;
+var box_or_fake_box_find_cubert_j = 0;
+for (var i=-1; i<2; i++) {
+	for (var j=-1; j<2; j++) {
+		if (place_meeting(x+i*room_width, y+j*room_height, obj_cubert)) {
+			box_or_fake_box_find_cubert_i = i;
+			box_or_fake_box_find_cubert_j = j;
+			box_or_fake_box_find_cubert = true;
+			break;
+		}
+	}
+	if (box_or_fake_box_find_cubert) { break; }
+}
 
-if (place_meeting(x, y, obj_cubert)) { 
-	if (obj_cubert.y < y) {x = xprevious; y = yprevious; y_speed = 0;}
+if (box_or_fake_box_find_cubert) { 
+	if (obj_cubert.y > y+room_height*box_or_fake_box_find_cubert_j) { x = xprevious; y = yprevious; y_speed = 0; }
 }
 if (instance_exists(obj_generator)) {
 	// Horizontal
@@ -54,26 +63,9 @@ if (instance_exists(obj_generator)) {
 }
 
 if (instance_exists(rider) && rider.y_speed >= 0 && abs(rider.x - x) < 58) {
+	//rider.move_and_collide_with_faux(0, -24, rider.collisions, 32, false, false);
 	rider.move_and_collide_with_faux(0, 50, rider.collisions, 32, false, false);
 	//rider.y -= y_speed;
 	//rider.y_speed = y_speed+2;
 	//rider.y = bbox_top + 1 - rider.sprite_height/2;
 }
-#region Tractor Beams
-
-if (touching_up_tractor && !touching_down_tractor) {
-	y_speed -= global.tractor_strength
-} else if (touching_down_tractor && !touching_up_tractor) {
-	y_speed += global.tractor_strength
-}
-
-if (touching_right_tractor && !touching_left_tractor) {
-	x_speed += global.tractor_strength
-} else if (touching_left_tractor && !touching_right_tractor) {
-	x_speed -= global.tractor_strength
-}
-
-touching_up_tractor = false
-touching_down_tractor = false
-touching_right_tractor = false
-touching_left_tractor = false
