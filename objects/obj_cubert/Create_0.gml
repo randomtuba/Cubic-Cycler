@@ -3,7 +3,6 @@ pos = new Position(x, y, 0.90, 0.99, self)
 
 rotation = 0;
 x_scale = 0.5;
-//collision_map = layer_tilemap_get_id("Tiles_1")
 collisions = []; update_collisions();
 
 // lose state

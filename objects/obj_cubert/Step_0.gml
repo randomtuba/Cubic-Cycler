@@ -169,7 +169,11 @@ if (y > room_height) {
 global.default_x = x
 global.default_y = y
 
-if (global.debug && mouse_check_button(mb_right)) { x = mouse_x; y = mouse_y; }
+if (global.debug && mouse_check_button(mb_right)) { 
+	pos.setPos(mouse_x, mouse_y)
+	pos.x_speed = 0
+	pos.y_speed = 0
+}
 
 if (pos.x_speed != 0) {
 	image_xscale = sign(pos.x_speed) * 0.5;
