@@ -19,10 +19,7 @@ function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 	hit_right_conveyor = false
 	hit_left_conveyor = false
 	
-	hit_up_tractor = false
-	hit_down_tractor = false
-	hit_right_tractor = false
-	hit_left_tractor = false
+	hit_tractors = [false, false, false, false, false]
 	
 	/// @desc Returns the current X and Y motion
 	function getMotion() {
@@ -70,9 +67,6 @@ function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 		hit_right_conveyor = false
 		hit_left_conveyor = false
 		
-		hit_up_tractor = false
-		hit_down_tractor = false
-		hit_right_tractor = false
-		hit_left_tractor = false
+		hit_tractors = [false, false, false, false, false]
 	}
 }

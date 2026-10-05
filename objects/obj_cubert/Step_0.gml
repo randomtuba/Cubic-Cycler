@@ -1,19 +1,3 @@
-#region Follow Main Cubert (Side Cuberts Only)
-
-if (!is_main_cubert) {
-	if (instance_exists(main_cubert) && main_cubert != self) { 
-		x = main_cubert.x + main_cubert_off_i[0]*room_width;
-		y = main_cubert.y + main_cubert_off_i[1]*room_height;
-		image_index = main_cubert.image_index;
-		image_xscale = main_cubert.image_xscale;
-		image_yscale = main_cubert.image_yscale;
-		visible = false;//(instance_exists(obj_generator));
-	}
-	
-	return;
-}
-
-#endregion Follow Main Cubert (Side Cuberts Only)
 
 #region Loss State
 
@@ -42,7 +26,7 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 
 #region Movement
 
-var groundCheck = checkGrounded(self, collisions, 8)
+var groundCheck = checkGrounded(self, collisions, 5)
 var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
@@ -51,35 +35,9 @@ runEventsAndGrounded(groundCheck.blockers)
 
 pos.x_speed += _lr * 0.75
 
-/*
-#region Tractor Beams
-
-if (touching_up_tractor && !touching_down_tractor) {
-	y_speed -= global.tractor_strength
-} else if (touching_down_tractor && !touching_up_tractor) {
-	y_speed += global.tractor_strength
-}
-
-if (touching_right_tractor && !touching_left_tractor) {
-	x_speed += global.tractor_strength
-} else if (touching_left_tractor && !touching_right_tractor) {
-	x_speed -= global.tractor_strength
-}
-
-touching_up_tractor = false
-touching_down_tractor = false
-touching_right_tractor = false
-touching_left_tractor = false
-
-#endregion Tractor Beams
-*/
 #endregion Horizontal Movement
 
 #region Coyote Time
-
-/*var _grounded = place_meeting(x, y+2, collisions) 
-	|| faux_place_meeting(0, 2, collisions)
-var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);*/
 
 if (_grounded) {
 	coyote_time = global.coyote_time
@@ -89,19 +47,11 @@ if (_grounded) {
 
 #endregion Coyote Time
 
-#region Ground Collision and Diving
+#region Gravity
 
-/*if (_grounded && springyspring == 0) {
-	//y_speed = 0
-} else if (_grounded && springyspring == 1) {
-	springyspring = 0
-} else if (_grounded2) {
-	//y_speed = 1
-} else {*/
-	if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
-//}
+if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
 
-#endregion Ground Collision and Diving
+#endregion Gravity
 
 #region Jumping
 
@@ -112,12 +62,17 @@ if (_jump) {
 	jump_buffer--
 }
 
+// Cooldown
+if (jump_cooldown > 0) {
+	jump_cooldown--
+}
+
 // Jump
 if (coyote_time > 0) {
-	if (jump_buffer > 0) { 
+	if (jump_buffer > 0 && jump_cooldown == 0) { 
 		pos.y_speed = -10
-		//jump_k = 1
 		
+		jump_cooldown = 10
 		coyote_time = 0
 		jump_buffer = 0
 		
@@ -138,9 +93,6 @@ if (coyote_time > 0) {
 
 #endregion Jumping
 
-//move_and_collide(x_speed, y_speed, collisions)
-
-//move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
 var motion = pos.getMotion()
 var movement = attemptMove(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
 
@@ -148,10 +100,12 @@ var movement = attemptMove(self, collisions, motion.x, motion.y, 4, instance_exi
 // "d" is a direction
 for (var d = 0; d < 5; d++) {
 	var set = movement.blockers[d]
+	
 	for (var i = 0; i < array_length(set); i++) {
 		var obj = set[i]
 		if (instance_exists(obj) && obj.object_index == obj_pushbox) {
 			interact_with_pushbox(obj, d)
+			// Don't reset speed when pushing a box
 			if (d == Direction.Left || d == Direction.Right) {
 				movement.x = true
 			} else if (d == Direction.Up || d == Direction.Down) {
@@ -161,6 +115,7 @@ for (var d = 0; d < 5; d++) {
 	}
 }
 
+// Reset speed if blocked
 if (!movement.x) {
 	pos.x_speed = 0
 }
@@ -170,9 +125,7 @@ if (!movement.y) {
 
 #endregion Movement
 
-#region Room Wrapping
-
-update_current_room_data(room, x, y, pos.x_speed, pos.y_speed, global.level_x, global.level_y);
+#region Room Changing
 
 // Horizontal
 if (x > room_width) {
@@ -208,7 +161,7 @@ if (y > room_height) {
     }
 }
 
-#endregion Room Wrapping
+#endregion Room Changing
 
 global.default_x = x
 global.default_y = y
@@ -219,7 +172,3 @@ if (pos.x_speed != 0) {
 	image_xscale = sign(pos.x_speed) * 0.5;
 }
 x_scale = lerp(x_scale, image_xscale, 0.9)
-
-
-//var _crouch = !(keyboard_check(vk_down) || keyboard_check(ord("S"))) || place_meeting(x, y+2, collisions)
-//image_index = !_crouch;
