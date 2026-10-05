@@ -1,6 +1,6 @@
 image_angle += 10
 
-if (get_destroyed_generator_count() >= 4) {
+if (get_destroyed_generator_count() >= 4 || global.debug) {
 	visible = true
 } else {
 	visible = false
