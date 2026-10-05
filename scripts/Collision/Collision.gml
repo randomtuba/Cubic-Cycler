@@ -367,10 +367,14 @@ function checkGrounded(obj, collisions, buffer = 2) {
 /// @param buffer (Optional) The distance to check for directional collisions, default 4
 /// @param {Bool} wraps (Optional) Whether to screenwrap or not, default true
 function attemptMove(obj, collisions, _x, _y, buffer = 4, wraps = true) {
-	// This is returned later
-	var success = { x : false, y : false }
-	
 	var valid = checkValidMoveAllDirections(obj, collisions, _x, _y, buffer)
+	
+	// This is returned later
+	var success = {
+		x : false,
+		y : false,
+		blockers : valid.blockers
+	}
 	
 	// Prevent movement into obstacles
 	if ((valid.valid[Direction.Right] && _x > 0) || (valid.valid[Direction.Left] && _x < 0)) {
@@ -428,6 +432,33 @@ function runEvents(list) {
 				show_debug_message(_exception)
 				show_debug_message("")
 			}
+		}
+	}
+}
+
+/// @desc Calls the apply_interaction(obj) function of one object
+/// @param list The object to work on
+function runEvent(obj) {
+	with obj {
+		try {
+			apply_interaction(other)
+		} catch (_exception) {
+			show_debug_message("")
+			show_debug_message("Error when calling apply_interaction() function from " + string(object_index) + ":")
+			show_debug_message(_exception)
+			show_debug_message("")
+		}
+	}
+}
+	
+/// @desc Calls the apply_interaction(obj) function of all contacting objects and ground objects in the passed list
+/// @param list The list of objects to check for grounded interactions
+function runEventsAndGrounded(groundedObjects) {
+	runEvents(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
+	for (var i = 0; i < array_length(groundedObjects); i++) {
+		var current = groundedObjects[i]
+		if (array_contains(HAVE_GROUNDED_BEHAVIOUR, current)) {
+			runEvent(current)
 		}
 	}
 }

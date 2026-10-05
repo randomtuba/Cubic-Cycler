@@ -327,3 +327,68 @@ function get_contacting(collision_list, check_object) {
 	return return_list
 }
 	
+/// @desc Handles interaction with a pushbox
+/// @param {Id.Instance} box The pushbox
+/// @param {Enum.Direction} dir The collision direction from cubert's perspective
+function interact_with_pushbox(box, dir) {
+	switch (dir) {
+		case Direction.None:
+		case Direction.Down:
+			// Adjust speed
+			var new_speed = (pos.y_speed + box.pos.y_speed) / 2 * 0.97
+			pos.y_speed = new_speed
+			box.pos.y_speed = new_speed
+			
+			// Snap self
+			selfSize = getObjSize(self)
+			boxSize = getObjSize(box)
+			pos.setPos(
+				pos.point.getX(),
+				box.pos.point.getY() - boxSize.h / 2 - selfSize.h / 2 - 4
+			)
+		break
+		
+		case Direction.Up:
+			// Adjust speed
+			var new_speed = (pos.y_speed + box.pos.y_speed) / 2
+			pos.y_speed = new_speed
+			box.pos.y_speed = new_speed
+			
+			// Snap box
+			selfSize = getObjSize(self)
+			boxSize = getObjSize(box)
+			box.pos.setPos(
+				box.pos.point.getX(),
+				pos.point.getY() - boxSize.h / 2 - selfSize.h / 2 - 7
+			)
+		break
+		
+		case Direction.Right:
+			// Adjust speed
+			var speed_change = pos.x_speed / 20
+			pos.x_speed -= speed_change
+			box.pos.x_speed += speed_change
+			
+			// Snap to box
+			selfSize = getObjSize(self)
+			boxSize = getObjSize(box)
+			pos.setPos(
+				box.pos.point.getX() - boxSize.w / 2 - selfSize.w / 2 - 3,
+				pos.point.getY()
+			)
+		break
+		
+		case Direction.Left:
+			// Adjust speed
+			var speed_change = pos.x_speed / 20
+			pos.x_speed -= speed_change
+			box.pos.x_speed += speed_change
+			
+			// Snap to box
+			selfSize = getObjSize(self)
+			boxSize = getObjSize(box)
+			pos.setPos(box.pos.point.getX() + boxSize.w / 2 + selfSize.w / 2 + 3, pos.point.getY())
+		break
+	}
+}
+

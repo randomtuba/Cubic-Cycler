@@ -42,11 +42,10 @@ var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(
 
 #region Movement
 
-var groundCheck = checkGrounded(self, collisions)
+var groundCheck = checkGrounded(self, collisions, 8)
 var _grounded = !groundCheck.valid
 
-runEvents(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
-runEvents(groundCheck.blockers)
+runEventsAndGrounded(groundCheck.blockers)
 
 #region Horizontal Movement
 
@@ -144,6 +143,24 @@ if (coyote_time > 0) {
 //move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
 var motion = pos.getMotion()
 var movement = attemptMove(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
+
+// Pushbox interactions
+// "d" is a direction
+for (var d = 0; d < 5; d++) {
+	var set = movement.blockers[d]
+	for (var i = 0; i < array_length(set); i++) {
+		var obj = set[i]
+		if (instance_exists(obj) && obj.object_index == obj_pushbox) {
+			interact_with_pushbox(obj, d)
+			if (d == Direction.Left || d == Direction.Right) {
+				movement.x = true
+			} else if (d == Direction.Up || d == Direction.Down) {
+				movement.y = true
+			}
+		}
+	}
+}
+
 if (!movement.x) {
 	pos.x_speed = 0
 }
