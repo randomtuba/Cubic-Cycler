@@ -499,7 +499,6 @@ function runEventWithDirection(obj, dir) {
 	}
 }
 	
-
 /// @desc Calls the apply_interaction(obj) function of all contacting objects and ground objects in the passed list
 /// @param list The list of objects to check for grounded interactions
 function runEventsAndGrounded(groundedObjects) {

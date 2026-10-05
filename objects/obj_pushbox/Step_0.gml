@@ -1,5 +1,5 @@
 
-var groundCheck = checkGrounded(self, collisions)
+var groundCheck = checkGrounded(self, collisions, 5)
 var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)

@@ -18,7 +18,8 @@ function apply_interaction(obj, dir) {
 			case Direction.None:
 			case Direction.Down:
 				// Adjust speed
-				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.95
+				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
+				show_debug_message(new_speed)
 				pos.y_speed = new_speed
 				other.pos.y_speed = new_speed
 			
@@ -27,7 +28,7 @@ function apply_interaction(obj, dir) {
 				boxSize = getObjSize(other)
 				pos.setPos(
 					pos.point.getX(),
-					other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + 1
+					other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 4, 0)
 				)
 			break
 		

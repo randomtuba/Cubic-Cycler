@@ -3,6 +3,7 @@
 /// @param {Real} _x Starting X coordinate
 /// @param {Real} _y Starting Y coordinate
 /// @param {Real} _xdrag Multiplier applied to X speed every step
+/// @param {Real} _ydrag Multiplier applied to Y speed every step
 /// @param {Id.Instance} _parent Reference to parent object
 function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 	parent = _parent
