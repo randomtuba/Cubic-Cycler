@@ -483,6 +483,23 @@ function runEvent(obj) {
 	}
 }
 	
+/// @desc Calls the apply_interaction(obj) function of one object with an associated direction
+/// @param list The object to work on
+/// @param dir The direction
+function runEventWithDirection(obj, dir) {
+	with obj {
+		try {
+			apply_interaction(other, dir)
+		} catch (_exception) {
+			show_debug_message("")
+			show_debug_message("Error when calling apply_interaction() function from " + string(object_index) + ":")
+			show_debug_message(_exception)
+			show_debug_message("")
+		}
+	}
+}
+	
+
 /// @desc Calls the apply_interaction(obj) function of all contacting objects and ground objects in the passed list
 /// @param list The list of objects to check for grounded interactions
 function runEventsAndGrounded(groundedObjects) {
@@ -491,6 +508,20 @@ function runEventsAndGrounded(groundedObjects) {
 		var current = groundedObjects[i]
 		if (instance_exists(current) && array_contains(HAVE_GROUNDED_BEHAVIOUR, current.object_index)) {
 			runEvent(current)
+		}
+	}
+}
+
+/// @desc Calls the apply_interaction(obj) function of all blockers with an interaction
+/// @param blockers The list of objects to work on
+function runBlockerEvents(blockers) {
+	// "d" is a direction
+	for (var d = 0; d < 5; d++) {
+		for (var i = 0; i < array_length(blockers[d]); i++) {
+			var current = blockers[d][i]
+			if (instance_exists(current) && array_contains(HAVE_BLOCKER_BEHAVIOUR, current.object_index)) {
+				runEventWithDirection(current, d)
+			}
 		}
 	}
 }

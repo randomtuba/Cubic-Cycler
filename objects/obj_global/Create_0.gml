@@ -6,6 +6,7 @@
 #macro FREELY_MOVABLE_OBJECTS [obj_cubert, obj_pushbox]
 #macro HAVE_CONTACT_BEHAVIOUR [obj_spring, obj_button, obj_button_cubert, obj_checkpoint, obj_generator, obj_spikes, obj_spikeball]
 #macro HAVE_GROUNDED_BEHAVIOUR [obj_conveyor]
+#macro HAVE_BLOCKER_BEHAVIOUR [obj_pushbox, obj_block_fragile]
 
 #endregion Macros
 

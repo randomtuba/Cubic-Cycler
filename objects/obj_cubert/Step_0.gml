@@ -72,7 +72,7 @@ if (coyote_time > 0) {
 	if (jump_buffer > 0 && jump_cooldown == 0) { 
 		pos.y_speed = -10
 		
-		jump_cooldown = 10
+		jump_cooldown = sec / 3
 		coyote_time = 0
 		jump_buffer = 0
 		
@@ -96,16 +96,15 @@ if (coyote_time > 0) {
 var motion = pos.getMotion()
 var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
 
-// Pushbox interactions
+runBlockerEvents(movement.blockers)
+
+// Don't reset speed when pushing a box
 // "d" is a direction
 for (var d = 0; d < 5; d++) {
 	var set = movement.blockers[d]
-	
 	for (var i = 0; i < array_length(set); i++) {
 		var obj = set[i]
 		if (instance_exists(obj) && obj.object_index == obj_pushbox) {
-			interact_with_pushbox(obj, d)
-			// Don't reset speed when pushing a box
 			if (d == Direction.Left || d == Direction.Right) {
 				movement.x = true
 			} else if (d == Direction.Up || d == Direction.Down) {
@@ -133,6 +132,7 @@ if (x > room_width) {
         global.level_x++
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX() - room_width, pos.point.getY())
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
@@ -140,6 +140,7 @@ if (x > room_width) {
         global.level_x--
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX() + room_width, pos.point.getY())
 		} else { global.level_x++; }
     }
 }
@@ -150,6 +151,7 @@ if (y > room_height) {
         global.level_y++
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX(), pos.point.getY() - room_height)
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
@@ -157,6 +159,7 @@ if (y > room_height) {
         global.level_y--
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(global.level_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX(), pos.point.getY() + room_height)
 		} else { global.level_y++; }
     }
 }
