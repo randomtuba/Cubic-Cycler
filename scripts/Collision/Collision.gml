@@ -115,8 +115,8 @@ function getObjSize(obj) {
 		
 	} else {
 		return {
-			w : obj.mask_index.bbox_right - obj.mask_index.bbox_left,
-			h : obj.mask_index.bbox_bottom - obj.mask_index.bbox_top
+			w : abs(obj.object_index.bbox_right - obj.object_index.bbox_left),
+			h : abs(obj.object_index.bbox_bottom - obj.object_index.bbox_top)
 		}
 	}
 }
@@ -232,7 +232,7 @@ function contactMeetsDirection(obj, contact, _direction, buffer = 4) {
 	if (contact.hit) {
 		var obj1Size = getObjSize(obj)
 		var obj2Size = getObjSize(contact.obj)
-		var xSpace = (obj1Size.w / 2 + obj1Size.w / 2) * 7/8
+		var xSpace = (obj1Size.w / 2 + obj2Size.w / 2) * 7/8
 		var ySpace = (obj1Size.h / 2 + obj2Size.h / 2) * 7/8
 		// Make sure the direction is valid
 		switch _direction {
@@ -389,6 +389,38 @@ function attemptMove(obj, collisions, _x, _y, buffer = 4, wraps = true) {
 	return success
 }
 
+/// @desc Attempts to move an object by some offset, separated into several steps
+/// Returns whether the move was valid
+/// This will change the coordinates of the passed object if the move succeeds
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
+/// @param _x The X offset to apply
+/// @param _y The Y offset to apply
+/// @param buffer (Optional) The distance to check for directional collisions, default 4
+/// @param {Bool} wraps (Optional) Whether to screenwrap or not, default true
+/// @param steps (Optional) Number of steps, default 4
+function attemptMoveInSteps(obj, collisions, _x, _y, buffer = 4, wraps = true, steps = 4) {
+	var xPerStep = _x / steps
+	var yPerStep = _y / steps
+	
+	// This is returned later
+	var success = {
+		x : true,
+		y : true,
+		blockers : []
+	}
+	
+	for (var step = 1; step <= steps; step++) {
+		var result = attemptMove(obj, collisions, xPerStep, yPerStep, buffer, wraps)
+		
+		if (step == steps) {
+			success = result
+		}
+	}
+	
+	return success
+}
+
 /// @desc Gets all touching objects from the passed collisions
 /// @param {Id.Instance} obj The object
 /// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be counted
@@ -457,7 +489,7 @@ function runEventsAndGrounded(groundedObjects) {
 	runEvents(getContacting(self, HAVE_CONTACT_BEHAVIOUR))
 	for (var i = 0; i < array_length(groundedObjects); i++) {
 		var current = groundedObjects[i]
-		if (array_contains(HAVE_GROUNDED_BEHAVIOUR, current)) {
+		if (instance_exists(current) && array_contains(HAVE_GROUNDED_BEHAVIOUR, current.object_index)) {
 			runEvent(current)
 		}
 	}

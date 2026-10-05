@@ -94,7 +94,7 @@ if (coyote_time > 0) {
 #endregion Jumping
 
 var motion = pos.getMotion()
-var movement = attemptMove(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
+var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
 
 // Pushbox interactions
 // "d" is a direction

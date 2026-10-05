@@ -58,7 +58,7 @@ function interact_with_pushbox(box, dir) {
 		case Direction.None:
 		case Direction.Down:
 			// Adjust speed
-			var new_speed = (pos.y_speed + box.pos.y_speed) / 2 * 0.97
+			var new_speed = (pos.y_speed + box.pos.y_speed) / 2 * 0.95
 			pos.y_speed = new_speed
 			box.pos.y_speed = new_speed
 			
@@ -67,7 +67,7 @@ function interact_with_pushbox(box, dir) {
 			boxSize = getObjSize(box)
 			pos.setPos(
 				pos.point.getX(),
-				box.pos.point.getY() - boxSize.h / 2 - selfSize.h / 2 - 3
+				box.pos.point.getY() - boxSize.h / 2 - selfSize.h / 2 + 1
 			)
 		break
 		
@@ -82,7 +82,7 @@ function interact_with_pushbox(box, dir) {
 			boxSize = getObjSize(box)
 			box.pos.setPos(
 				box.pos.point.getX(),
-				pos.point.getY() - boxSize.h / 2 - selfSize.h / 2 - 7
+				pos.point.getY() - boxSize.h / 2 - selfSize.h / 2
 			)
 		break
 		
@@ -96,7 +96,7 @@ function interact_with_pushbox(box, dir) {
 			selfSize = getObjSize(self)
 			boxSize = getObjSize(box)
 			pos.setPos(
-				box.pos.point.getX() - boxSize.w / 2 - selfSize.w / 2 - 3,
+				box.pos.point.getX() - boxSize.w / 2 - selfSize.w / 2,
 				pos.point.getY()
 			)
 		break
@@ -110,7 +110,10 @@ function interact_with_pushbox(box, dir) {
 			// Snap to box
 			selfSize = getObjSize(self)
 			boxSize = getObjSize(box)
-			pos.setPos(box.pos.point.getX() + boxSize.w / 2 + selfSize.w / 2 + 3, pos.point.getY())
+			pos.setPos(
+				box.pos.point.getX() + boxSize.w / 2 + selfSize.w / 2,
+				pos.point.getY()
+			)
 		break
 	}
 }
