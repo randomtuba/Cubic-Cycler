@@ -28,16 +28,16 @@ if (lose_state) {
 	return;
 }
 
-if (keyboard_check(ord("R"))) restart()
+if (keyboard_check(ord("R")) && !immobile) restart()
 
 #endregion Loss State
 
 
 #region Controls
 
-var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
-var _down = keyboard_check(vk_down) || keyboard_check(ord("S"))
-var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)
+var _lr = !immobile ? ((keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))) : false
+var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && !immobile
+var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)) && !immobile
 
 #endregion
 

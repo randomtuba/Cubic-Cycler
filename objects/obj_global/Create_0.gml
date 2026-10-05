@@ -43,10 +43,13 @@ global.act1_map = [
 	[rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
 ]
 
+// stores current act
+global.act = 0
+
 global.generators_destroyed_map = []
 
 //fill it with falses at the start of the game
-var _map = get_level_map();
+_map = get_level_map();
 for (var i=0; i<array_length(_map); i++) {
 	array_push(global.generators_destroyed_map, []);
 	for (var j=0; j<array_length(_map[0]); j++) {

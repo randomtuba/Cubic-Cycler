@@ -7,6 +7,7 @@ rotation = 0;
 x_scale = 0.5;
 //collision_map = layer_tilemap_get_id("Tiles_1")
 collisions = []; update_collisions();
+immobile = false
 
 // lose state
 lose_state = false

@@ -3,7 +3,11 @@ function scr_global_scripts(){
 }
 
 function get_level_map() {
-	return global.tutorial_map;
+	if (global.act == 0) {
+		return global.tutorial_map;
+	} else {
+		return global.act1_map;
+	}
 }
 
 function get_destroyed_generator_count() {
