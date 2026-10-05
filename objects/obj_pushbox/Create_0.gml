@@ -69,7 +69,7 @@ function apply_interaction(obj, dir) {
 			
 				// Snap to box
 				objSize = getObjSize(self)
-				boxSize = getObjSize(box)
+				boxSize = getObjSize(other)
 				pos.setPos(
 					other.pos.point.getX() + boxSize.w / 2 + objSize.w / 2,
 					pos.point.getY()
