@@ -191,6 +191,7 @@ if (x > room_width) {
     if (place_meeting(x, y, collisions)) x = room_width
     if (!instance_exists(obj_generator)) {
         global.level_x++
+		if (global.level_x >= array_length(_map[global.level_y])) global.level_x = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_x--; }
@@ -200,6 +201,7 @@ if (x > room_width) {
     if (place_meeting(x, y, collisions)) x = 0
     if (!instance_exists(obj_generator)) {
         global.level_x--
+		if (global.level_x < 0) global.level_x = array_length(_map[global.level_y]) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_x++; }
@@ -212,6 +214,7 @@ if (y > room_height) {
     if (place_meeting(x, y, collisions)) y = room_height
     if (!instance_exists(obj_generator)) {
         global.level_y++
+		if (global.level_y >= array_length(_map)) global.level_y = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_y--; }
@@ -221,6 +224,7 @@ if (y > room_height) {
     if (place_meeting(x, y, collisions)) y = 0
     if (!instance_exists(obj_generator)) {
         global.level_y--
+		if (global.level_y < 0) global.level_y = array_length(_map) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
 		} else { global.level_y++; }
