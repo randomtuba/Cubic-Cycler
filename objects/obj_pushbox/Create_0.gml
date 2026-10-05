@@ -52,7 +52,7 @@ function apply_interaction(obj, dir) {
 				pos.x_speed -= speed_change
 				other.pos.x_speed += speed_change
 			
-				// Snap to box
+				// Snap obj
 				objSize = getObjSize(self)
 				boxSize = getObjSize(other)
 				pos.setPos(
@@ -67,7 +67,7 @@ function apply_interaction(obj, dir) {
 				pos.x_speed -= speed_change
 				other.pos.x_speed += speed_change
 			
-				// Snap to box
+				// Snap obj
 				objSize = getObjSize(self)
 				boxSize = getObjSize(other)
 				pos.setPos(
