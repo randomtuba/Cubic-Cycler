@@ -11,8 +11,8 @@
   "name":"obj_global",
   "overriddenProperties":[],
   "parent":{
-    "name":"Control_UI",
-    "path":"folders/Objects/Control_UI.yy",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":true,
