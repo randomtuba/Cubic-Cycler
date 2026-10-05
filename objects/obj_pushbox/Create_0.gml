@@ -19,7 +19,6 @@ function apply_interaction(obj, dir) {
 			case Direction.Down:
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
-				show_debug_message(new_speed)
 				pos.y_speed = new_speed
 				other.pos.y_speed = new_speed
 			
