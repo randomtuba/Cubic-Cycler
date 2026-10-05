@@ -96,10 +96,10 @@ if (_grounded) {
 
 if (_grounded_on_platform) {
 	// Get contacting platform
-	_platform = instance_place(x, y+6, obj_moving_platform)
+	/* _platform = instance_place(x, y+6, obj_moving_platform)
 	_plat_y_speed = _platform.get_y_speed()
 	
-	y_speed = _plat_y_speed
+	y_speed = _plat_y_speed */
 	
 	if (springyspring == 1) {
 		springyspring = 0

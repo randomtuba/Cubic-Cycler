@@ -7,5 +7,6 @@ switch (room) {
 	break
 	case rm_tut_bottom_left:
 		draw_text(350, 100, "Press R to restart to\nyour last checkpoint.")
+		if (!instance_exists(obj_generator)) draw_text(350, 200, "Now try going back to the start!")
 	break
 }
