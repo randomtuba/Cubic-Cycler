@@ -12,6 +12,16 @@ ang_xy2_spd += angle_difference(ang_xy, ang_xy2)*0.001;
 ang_xz2_spd *= 0.99;
 ang_xy2_spd *= 0.99;
 
+if (collected && instance_exists(obj_cubert)) {
+	ang_xz_spd *= 0.92;
+	ang_xy_spd *= 0.92;
+	ang_xz_spd += 0.2;
+	x = lerp(xstart, obj_cubert.x, collect_k);
+	y = lerp(ystart, obj_cubert.y, collect_k);
+}
+
+if (instance_exists(obj_cubert) && point_distance(x, y, obj_cubert.x, obj_cubert.y) < 100) { collected = true; }
+collect_k = lerp(collect_k, collected, 0.01);
 
 if (global.debug) {
 	draw_set_color(c_red);
