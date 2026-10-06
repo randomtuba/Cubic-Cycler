@@ -28,8 +28,15 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v2","%Name":"type","filters":[],"listItems":[],"multiselect":false,"name":"type","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"MovingPlatformType.Stationary","varType":4,},
-    {"$GMObjectProperty":"v2","%Name":"move_direction","filters":[],"listItems":[],"multiselect":false,"name":"move_direction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Direction.Right","varType":4,},
+    {"$GMObjectProperty":"v2","%Name":"type","filters":[],"listItems":[
+        "MovingPlatformType.Bounce",
+      ],"multiselect":false,"name":"type","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"MovingPlatformType.Bounce","varType":6,},
+    {"$GMObjectProperty":"v2","%Name":"move_direction","filters":[],"listItems":[
+        "Direction.Right",
+        "Direction.Left",
+        "Direction.Down",
+        "Direction.Up",
+      ],"multiselect":false,"name":"move_direction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Direction.Right","varType":6,},
     {"$GMObjectProperty":"v2","%Name":"move_speed","filters":[],"listItems":[],"multiselect":false,"name":"move_speed","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"3.0","varType":0,},
     {"$GMObjectProperty":"v2","%Name":"connected_objects","filters":[],"listItems":[],"multiselect":false,"name":"connected_objects","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"[]","varType":4,},
   ],

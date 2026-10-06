@@ -12,6 +12,7 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Control_UI","folderPath":"folders/Objects/Control_UI.yy","name":"Control_UI","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Cubert","folderPath":"folders/Objects/Cubert.yy","name":"Cubert","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Particles","folderPath":"folders/Objects/Particles.yy","name":"Particles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"WorldElements","folderPath":"folders/Objects/WorldElements.yy","name":"WorldElements","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -90,6 +91,10 @@
     {"id":{"name":"rm_tut_bottom_right","path":"rooms/rm_tut_bottom_right/rm_tut_bottom_right.yy",},},
     {"id":{"name":"rm_tut_top_left","path":"rooms/rm_tut_top_left/rm_tut_top_left.yy",},},
     {"id":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
+<<<<<<< HEAD
+    {"id":{"name":"Collision","path":"scripts/Collision/Collision.yy",},},
+    {"id":{"name":"Movables","path":"scripts/Movables/Movables.yy",},},
+=======
     {"id":{"name":"scr_global_scripts","path":"scripts/scr_global_scripts/scr_global_scripts.yy",},},
     {"id":{"name":"rmspr_awkward","path":"sprites/rmspr_awkward/rmspr_awkward.yy",},},
     {"id":{"name":"rmspr_climb","path":"sprites/rmspr_climb/rmspr_climb.yy",},},
@@ -103,6 +108,7 @@
     {"id":{"name":"rmspr_tut_top_left","path":"sprites/rmspr_tut_top_left/rmspr_tut_top_left.yy",},},
     {"id":{"name":"rmspr_tut_top_right_1","path":"sprites/rmspr_tut_top_right_1/rmspr_tut_top_right_1.yy",},},
     {"id":{"name":"rmspr_tut_top_right","path":"sprites/rmspr_tut_top_right/rmspr_tut_top_right.yy",},},
+>>>>>>> pre_pre_mass_commit
     {"id":{"name":"spr_block_fragile","path":"sprites/spr_block_fragile/spr_block_fragile.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},
     {"id":{"name":"spr_break_particle","path":"sprites/spr_break_particle/spr_break_particle.yy",},},
