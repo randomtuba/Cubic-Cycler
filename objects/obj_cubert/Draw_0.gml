@@ -1,15 +1,9 @@
 
 #region Controls (Copy from Step)
 
-<<<<<<< HEAD
 var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
-var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && checkGrounded(self, collisions).valid
+var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && checkGrounded(self, collisions).valid && !immobile
 var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)
-=======
-var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A"))) && !immobile
-var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && !(place_meeting(x, y+2, collisions) || faux_place_meeting(0, 2, collisions)) && !immobile
-var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)) && !immobile
->>>>>>> pre_pre_mass_commit
 
 #endregion
 
