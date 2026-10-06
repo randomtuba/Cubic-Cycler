@@ -66,7 +66,7 @@ function apply_interaction(obj, dir) {
 				var speed_change = pos.x_speed / 20
 				pos.x_speed -= speed_change
 				other.pos.x_speed += speed_change
-			
+				
 				// Snap obj
 				objSize = getObjSize(self)
 				boxSize = getObjSize(other)
