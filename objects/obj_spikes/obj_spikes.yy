@@ -1,13 +1,15 @@
 {
   "$GMObject":"",
   "%Name":"obj_spikes",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_spikes",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"WorldElements",
+    "path":"folders/Objects/WorldElements.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -8,8 +8,8 @@
   "name":"obj_tractor_beam",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"WorldElements",
+    "path":"folders/Objects/WorldElements.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -26,8 +26,12 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v2","%Name":"is_vertical","filters":[],"listItems":[],"multiselect":false,"name":"is_vertical","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
-    {"$GMObjectProperty":"v2","%Name":"is_up_or_right","filters":[],"listItems":[],"multiselect":false,"name":"is_up_or_right","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
+    {"$GMObjectProperty":"v2","%Name":"facing_direction","filters":[],"listItems":[
+        "Direction.Up",
+        "Direction.Down",
+        "Direction.Left",
+        "Direction.Right",
+      ],"multiselect":false,"name":"facing_direction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Direction.Up","varType":6,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

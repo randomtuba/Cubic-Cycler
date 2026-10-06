@@ -1,11 +1,8 @@
 // main vars
-x_speed = 0
-y_speed = 0
-x_this_frame = 0
-y_this_frame = 0
+pos = new Position(x, y, 0.90, 0.99, self)
+
 rotation = 0;
 x_scale = 0.5;
-//collision_map = layer_tilemap_get_id("Tiles_1")
 collisions = []; update_collisions();
 immobile = false
 
@@ -16,53 +13,29 @@ lose_timer = 0
 // quality of life vars
 coyote_time = 0
 jump_buffer = 0
+jump_cooldown = 0
 springyspring = 0
 springxspring = 0
-
-// Conveyors and Tractor Beams
-touching_right_conveyor = false
-touching_left_conveyor = false
-touching_up_tractor = false
-touching_down_tractor = false
-touching_right_tractor = false
-touching_left_tractor = false
-
 
 // cool effects
 jump_k = 0;
 jump_j_max = sec;
 bounciness = 1;
 
-// create visual warp cuberts
-main_cubert = self;
-is_main_cubert = true;
-main_cubert_off_i = [0, 0];
-non_main_cuberts = [];
-all_cuberts = []
-alarm[0] = 1;
-current_room_data = []; update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
-
-function update_current_room_data(_room, _x, _y, _x_speed, _y_speed, _level_x, _level_y) {
-	current_room_data = [_room, _x, _y, _x_speed, _y_speed, _level_x, _level_y];
-	return current_room_data;
-}
-
 function restart() {
 	if (global.checkpoint_id == -1) {
 		room_goto(rm_start)
 		global.level_x = 2
 		global.level_y = 1
-		x = 64
-		y = 480
+		pos.setPos(64, 480)
 	} else {
 		room_goto(global.checkpoint_room)
 		global.level_x = global.checkpoint_level_x
 		global.level_y = global.checkpoint_level_y
-		x = global.checkpoint_x
-		y = global.checkpoint_y
+		pos.setPos(global.checkpoint_x, global.checkpoint_y)
 	}
-	x_speed = 0
-	y_speed = 0
+	pos.x_speed = 0
+	pos.y_speed = 0
 }
 
 function update_collisions() {
@@ -78,209 +51,4 @@ function room_index_bounded(_i = global.level_x, _j = global.level_y) {
 		(_i >= 0) && (_i < array_length(_map[0])) &&
 		_map[_j][_i] != -1 */
 }
-
-
-function faux_place_meeting(_xoff, _yoff, _collisions) {
-	var _touch = false;
-	for (var i=0; i<array_length(non_main_cuberts); i++) {
-		var q = non_main_cuberts[i];
-		if (place_meeting(q.x+_xoff, q.y+_yoff, _collisions)) { _touch = true; break; }
-		var _i = q.main_cubert_off_i[0];
-		var _j = q.main_cubert_off_i[1];
-		if (global.generators_destroyed_map[global.level_x][global.level_y] == true && !room_index_bounded(global.level_x-_i, global.level_y-_j)) {
-			var _x = q.x+_xoff - abs(sprite_width/2)*_i;
-			var _y = q.y+_yoff - abs(sprite_height/2)*_j;
-			//draw_circle(_x, _y, 5, false); //was for debugging 
-			if (2 <= _x && _x <= room_width-2 && 2 <= _y && _y <= room_height-2) { _touch = true; }
-		}
-	}
-	//if room invalid left && my right faux cubert
-	return _touch;
-}
-
-
-function move_and_collide_with_faux(x_speed, y_speed, _collisions, _iter = 32, reset_speeds_if_cant = true, apply_bounce = true) {
-	//check any of the 9 cuberts can move
-	var _can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
-	var _can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
-	var _can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
 	
-	if (y_speed > 0 && apply_bounce && !_can_ud && self.jump_k <= 0) { self.jump_k = self.jump_j_max+abs(y_speed); self.bounciness = abs(y_speed); }
-	
-	//todo: make the 9 able to increment break timer
-	if (array_contains(_collisions, obj_block_fragile)) {
-		var _fragile_list = ds_list_create();
-		var _fragile_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_block_fragile, false, true, _fragile_list, false);
-		for (var i=0; i<_fragile_count; i++) {
-			if ((keyboard_check(vk_down) || keyboard_check(ord("S"))) && !(place_meeting(x, y+2, collisions) || faux_place_meeting(0, 2, collisions))) {
-				_fragile_list[|i].break_timer = 0
-			}
-			_fragile_list[|i].is_breaking = true;
-		}
-		
-		for (var i=0; i<array_length(non_main_cuberts); i++) {
-			var q = non_main_cuberts[i];
-			var _faux_fragile_list = ds_list_create();
-			var _faux_fragile_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, obj_block_fragile, false, true, _faux_fragile_list, false);
-			for (var j=0; j<_faux_fragile_count; j++) { if (instance_exists(_faux_fragile_list[|j])) { _faux_fragile_list[|j].break_timer-=1; } }
-			ds_list_destroy(_faux_fragile_list);
-			
-		}
-		
-		
-		ds_list_destroy(_fragile_list);
-	}
-	
-	//push box conditions
-	if (array_contains(_collisions, obj_pushbox)) {
-		var _pushbox_list = ds_list_create();
-		var _pushbox_count = collision_rectangle_list(x+x_speed-sprite_width/2, y+y_speed-sprite_height/2, x+x_speed+sprite_width/2, y+y_speed+sprite_height/2, obj_pushbox, false, true, _pushbox_list, false);
-		
-		for (var i=0; i<_pushbox_count; i++) {
-			var _box = _pushbox_list[|i];
-			if (abs(y - _box.y) < 33 && sign(_box.x-x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
-			if (abs(x - _box.x) < 58 && y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
-		}
-		
-		ds_list_destroy(_pushbox_list);
-		
-		for (var i=0; i<array_length(non_main_cuberts); i++) {
-			var q = non_main_cuberts[i];
-			var _faux_pushbox_list = ds_list_create();
-			var _faux_pushbox_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, obj_pushbox, false, true, _pushbox_list, false);
-			
-			for (var j=0; j<_faux_pushbox_count; j++) {
-				var _box = _faux_pushbox_list[|j];
-				if (abs(q.y - _box.y) < 24 && sign(_box.x-q.x) == sign(x_speed)) { _box.x_speed = x_speed / 2 }
-				if (abs(q.x - _box.x) < 58 && q.y < _box.y) { _box.rider = self; _box.alarm[0] = 2; }
-			}
-			
-			ds_list_destroy(_faux_pushbox_list);
-			
-		}
-	}
-	
-	// Conveyors
-	var _touching_conveyors = get_standing_on(_collisions, obj_conveyor)
-	for (var i = 0; i < array_length(_touching_conveyors); i++) {
-		var _conveyor = array_get(_touching_conveyors, i)
-		if (_conveyor.points_right) {
-			touching_right_conveyor = true
-		} else {
-			touching_left_conveyor = true
-		}
-	}
-	
-	// Moving Platforms
-	var _touching_platforms = get_contacting(_collisions, obj_moving_platform)
-	for (var i = 0; i < array_length(_touching_platforms[0]); i++) {
-		var _platform = array_get(_touching_platforms[0], i)
-		var _direction = array_get(_touching_platforms[1], i)
-		
-		x_speed += _platform.get_x_speed()
-		y_speed += _platform.get_y_speed()
-		
-		if (_platform.get_x_speed() > 0 && x_speed < _platform.get_x_speed() && _direction == Direction.Left) {
-			x_speed = _platform.get_x_speed()
-		}
-		if (_platform.get_x_speed() < 0 && x_speed > _platform.get_x_speed() && _direction == Direction.Right) {
-			x_speed = _platform.get_x_speed()
-		}
-		if (_platform.get_y_speed() > 0 && y_speed < _platform.get_y_speed() && _direction == Direction.Up) {
-			y_speed = _platform.get_y_speed()
-		}
-		if (_platform.get_y_speed() < 0 && y_speed > _platform.get_y_speed() && _direction == Direction.Down) {
-			y_speed = _platform.get_y_speed()
-		}
-	}
-	
-	// Update can_move variables after the speed changes
-	_can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
-	_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
-	_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
-	
-	
-	
-	//slowly decrease percent of x_speed and y_speed until it's possible to fit
-	while (_iter > 0 && (!_can_ud  || !_can_lr || (_can_lr && _can_ud && !_can_both))) {
-		if (!_can_lr) { x_speed *= (_iter-1)/_iter; }
-		if (!_can_ud || (_can_lr && _can_ud && !_can_both)) { y_speed *= (_iter-1)/_iter; }
-		_can_both = !place_meeting(x+x_speed, y+y_speed, _collisions) && !faux_place_meeting(x_speed, y_speed, _collisions)
-		_can_ud = !place_meeting(x, y+y_speed, _collisions) && !faux_place_meeting(0, y_speed, _collisions)
-		_can_lr = !place_meeting(x+x_speed, y, _collisions) && !faux_place_meeting(x_speed, 0, _collisions)
-		_iter--;
-	}
-	x += _can_lr * x_speed;
-	y += _can_ud * y_speed;
-	
-	//clear velocity when hitting something
-	if (reset_speeds_if_cant) {
-		if (!_can_lr) { self.x_speed = 0 }
-		if (!_can_ud) { self.y_speed = 0 }
-	}
-}
-
-function get_standing_on(collision_list, check_object) {
-	var return_list = []
-	if (array_contains(collision_list, check_object)) {
-	
-		// Check collisions
-		for (var i=0; i<array_length(all_cuberts); i++) {
-			var q = all_cuberts[i];
-			// Create list of touching objects
-			var _contact_list = ds_list_create();
-			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
-			
-			// Check through touching objects for strictly standing on top
-			for (var j = 0; j < _contact_count; j++) {
-				var _contact = _contact_list[|j];
-				if (abs((q.y + 32) - _contact.y) < 10) {
-					// Add object to the return list
-					array_push(return_list, _contact)
-				}
-			}
-			// Destroy list as it's no longer in use
-			ds_list_destroy(_contact_list);
-			
-		}
-	}
-	return return_list
-}
-
-function get_contacting(collision_list, check_object) {
-	var return_list = [[], []]
-	if (array_contains(collision_list, check_object)) {
-	
-		// Check collisions
-		for (var i=0; i<array_length(all_cuberts); i++) {
-			var q = all_cuberts[i];
-			// Create list of touching objects
-			var _contact_list = ds_list_create();
-			var _contact_count = collision_rectangle_list(q.x+x_speed-sprite_width/2, q.y+y_speed-sprite_height/2, q.x+x_speed+sprite_width/2, q.y+y_speed+sprite_height/2, check_object, false, true, _contact_list, false);
-			
-			// Run through touching objects
-			for (var j = 0; j < _contact_count; j++) {
-				var _contact = _contact_list[|j];
-				// Add object to the return list
-				array_push(return_list[0], _contact)
-				
-				// Add collision direction (from reference point of cubert)
-				if (abs((q.x + abs(q.sprite_width / 2)) - _contact.x) < 4) {
-					array_push(return_list[1], Direction.Right)
-				} else if (abs((q.x - abs(q.sprite_width / 2)) - (_contact.x + _contact.sprite_width)) < 4) {
-					array_push(return_list[1], Direction.Left)
-				} else if (abs((q.y + abs(q.sprite_height / 2)) - _contact.y) < 4) {
-					array_push(return_list[1], Direction.Down)
-				} else if (abs((q.y - abs(q.sprite_height / 2)) - (_contact.y + _contact.sprite_height)) < 4) {
-					array_push(return_list[1], Direction.Up)
-				} else {
-					array_push(return_list[1], Direction.None)
-				}
-			}
-			// Destroy list as it's no longer in use
-			ds_list_destroy(_contact_list);
-			
-		}
-	}
-	return return_list
-}

@@ -1,19 +1,3 @@
-#region Follow Main Cubert (Side Cuberts Only)
-
-if (!is_main_cubert) {
-	if (instance_exists(main_cubert) && main_cubert != self) { 
-		x = main_cubert.x + main_cubert_off_i[0]*room_width;
-		y = main_cubert.y + main_cubert_off_i[1]*room_height;
-		image_index = main_cubert.image_index;
-		image_xscale = main_cubert.image_xscale;
-		image_yscale = main_cubert.image_yscale;
-		visible = false;//(instance_exists(obj_generator));
-	}
-	
-	return;
-}
-
-#endregion Follow Main Cubert (Side Cuberts Only)
 
 #region Loss State
 
@@ -32,7 +16,6 @@ if (keyboard_check(ord("R")) && !immobile) restart()
 
 #endregion Loss State
 
-
 #region Controls
 
 var _lr = !immobile ? ((keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))) : false
@@ -41,48 +24,20 @@ var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check
 
 #endregion
 
-
 #region Movement
+
+var groundCheck = checkGrounded(self, collisions, 5)
+var _grounded = !groundCheck.valid
+
+runEventsAndGrounded(groundCheck.blockers)
 
 #region Horizontal Movement
 
-x_speed += _lr * 0.75
-
-x_speed *= x_drag
-y_speed *= 0.99
-
-#region Tractor Beams
-
-if (touching_up_tractor && !touching_down_tractor) {
-	y_speed -= global.tractor_strength
-} else if (touching_down_tractor && !touching_up_tractor) {
-	y_speed += global.tractor_strength
-}
-
-if (touching_right_tractor && !touching_left_tractor) {
-	x_speed += global.tractor_strength
-} else if (touching_left_tractor && !touching_right_tractor) {
-	x_speed -= global.tractor_strength
-}
-
-touching_up_tractor = false
-touching_down_tractor = false
-touching_right_tractor = false
-touching_left_tractor = false
-
-#endregion Tractor Beams
+pos.x_speed += _lr * 0.75
 
 #endregion Horizontal Movement
 
 #region Coyote Time
-
-var _grounded_on_platform = place_meeting(x, y+6, obj_moving_platform)
-	|| faux_place_meeting(0, 6, obj_moving_platform)
-
-var _grounded = place_meeting(x, y+2, collisions) 
-	|| faux_place_meeting(0, 2, collisions)
-	|| _grounded_on_platform
-var _grounded2 = place_meeting(x, y-2, collisions) || faux_place_meeting(0, -2, collisions);
 
 if (_grounded) {
 	coyote_time = global.coyote_time
@@ -92,30 +47,11 @@ if (_grounded) {
 
 #endregion Coyote Time
 
-#region Ground Collision and Diving
+#region Gravity
 
-if (_grounded_on_platform) {
-	// Get contacting platform
-	/* _platform = instance_place(x, y+6, obj_moving_platform)
-	_plat_y_speed = _platform.get_y_speed()
-	
-	y_speed = _plat_y_speed */
-	
-	if (springyspring == 1) {
-		springyspring = 0
-	}
-	
-} else if (_grounded && springyspring == 0) {
-	y_speed = 0
-} else if (_grounded && springyspring == 1) {
-	springyspring = 0
-} else if (_grounded2) {
-	y_speed = 1
-} else {
-	if (_down) { y_speed += 0.8 } else { y_speed += 0.4 }
-}
+if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
 
-#endregion Ground Collision and Diving
+#endregion Gravity
 
 #region Jumping
 
@@ -126,121 +62,125 @@ if (_jump) {
 	jump_buffer--
 }
 
+// Cooldown
+if (jump_cooldown > 0) {
+	jump_cooldown--
+}
+
 // Jump
 if (coyote_time > 0) {
-	if (jump_buffer > 0) { 
-		y_speed = -10
-		//jump_k = 1
+	if (jump_buffer > 0 && jump_cooldown == 0) { 
+		pos.y_speed = -10
 		
+		jump_cooldown = sec / 3
 		coyote_time = 0
 		jump_buffer = 0
 		
-		// Apply speed from conveyors
-		if (touching_right_conveyor && !touching_left_conveyor) {
-			x_speed += global.conveyor_speed
+		//Apply speed from conveyors
+		if (pos.hit_right_conveyor && !pos.hit_left_conveyor) {
+			pos.x_speed += global.conveyor_speed
 			// Reduce drag temporarily
-			x_drag = 0.95
+			pos.x_drag = 0.95
 			alarm[1] = sec/3
-		} else if (touching_left_conveyor && !touching_right_conveyor) {
-			x_speed -= global.conveyor_speed
+		} else if (pos.hit_left_conveyor && !pos.hit_right_conveyor) {
+			pos.x_speed -= global.conveyor_speed
 			// Reduce drag temporarily
-			x_drag = 0.95
+			pos.x_drag = 0.95
 			alarm[1] = sec/3
 		}
-		
-		touching_right_conveyor = false
-		touching_left_conveyor = false
 	}
 }
 
 #endregion Jumping
 
-//move_and_collide(x_speed, y_speed, collisions)
+var motion = pos.getMotion()
+var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
 
-#region Conveyors
+runBlockerEvents(movement.blockers)
 
-if (touching_right_conveyor && !touching_left_conveyor) {
-	x_this_frame += global.conveyor_speed
-} else if (touching_left_conveyor && !touching_right_conveyor) {
-	x_this_frame -= global.conveyor_speed
+// Don't reset speed when pushing a box
+// "d" is a direction
+for (var d = 0; d < 5; d++) {
+	var set = movement.blockers[d]
+	for (var i = 0; i < array_length(set); i++) {
+		var obj = set[i]
+		if (instance_exists(obj) && obj.object_index == obj_pushbox) {
+			if (d == Direction.Left || d == Direction.Right) {
+				movement.x = true
+			} else if (d == Direction.Up || d == Direction.Down) {
+				movement.y = true
+			}
+		}
+	}
 }
 
-touching_right_conveyor = false
-touching_left_conveyor = false
-
-#endregion Conveyors
-
-x_this_frame += x_speed
-y_this_frame += y_speed
-
-move_and_collide_with_faux(x_this_frame, y_this_frame, collisions)
-
-x_this_frame = 0
-y_this_frame = 0
+// Reset speed if blocked
+if (!movement.x) {
+	pos.x_speed = 0
+}
+if (!movement.y) {
+	pos.y_speed = 0
+}
 
 #endregion Movement
-	
-#region Room Wrapping
 
-update_current_room_data(room, x, y, x_speed, y_speed, global.level_x, global.level_y);
+#region Room Changing
 
 // Horizontal
 var _map = get_level_map();
 if (x > room_width) {
-    x = 0
-    if (place_meeting(x, y, collisions)) x = room_width
     if (!instance_exists(obj_generator)) {
         global.level_x++
 		if (global.level_x >= array_length(_map[global.level_y])) global.level_x = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX() - room_width, pos.point.getY())
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
-    x = room_width
-    if (place_meeting(x, y, collisions)) x = 0
     if (!instance_exists(obj_generator)) {
         global.level_x--
 		if (global.level_x < 0) global.level_x = array_length(_map[global.level_y]) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX() + room_width, pos.point.getY())
 		} else { global.level_x++; }
     }
 }
 
 // Vertical
 if (y > room_height) {
-    y = 0
-    if (place_meeting(x, y, collisions)) y = room_height
     if (!instance_exists(obj_generator)) {
         global.level_y++
 		if (global.level_y >= array_length(_map)) global.level_y = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX(), pos.point.getY() - room_height)
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
-    y = room_height
-    if (place_meeting(x, y, collisions)) y = 0
     if (!instance_exists(obj_generator)) {
         global.level_y--
 		if (global.level_y < 0) global.level_y = array_length(_map) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
+			pos.setPos(pos.point.getX(), pos.point.getY() + room_height)
 		} else { global.level_y++; }
     }
 }
 
-#endregion Room Wrapping
+#endregion Room Changing
 
 global.default_x = x
 global.default_y = y
 
-if (global.debug && mouse_check_button(mb_right)) { x = mouse_x; y = mouse_y; }
+if (global.debug && mouse_check_button(mb_right)) { 
+	pos.setPos(mouse_x, mouse_y)
+	pos.x_speed = 0
+	pos.y_speed = 0
+}
 
-if (x_speed != 0) { image_xscale = sign(x_speed) * 0.5; }
+if (pos.x_speed != 0) {
+	image_xscale = sign(pos.x_speed) * 0.5;
+}
 x_scale = lerp(x_scale, image_xscale, 0.9)
-
-
-//var _crouch = !(keyboard_check(vk_down) || keyboard_check(ord("S"))) || place_meeting(x, y+2, collisions)
-//image_index = !_crouch;
