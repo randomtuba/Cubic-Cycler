@@ -31,21 +31,31 @@ global.conveyor_speed = 5
 global.tractor_strength = 0.5
 
 // stores the map layout and current room
-global.level_x = 2
-global.level_y = 1
-global.level_map = [
-[rm_tesseract_1, rm_pushbox_and_fragile, rm_many_buttons, rm_spikes],
-[rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
-[rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
-[rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
+global.level_x = 0
+global.level_y = 0
+
+global.tutorial_map = [
+	[rm_tut_top_left, rm_tut_top_right],
+	[rm_tut_bottom_left, rm_tut_bottom_right],
 ]
+
+global.act1_map = [
+	[rm_tesseract_1, rm_pushbox_and_fragile, rm_many_buttons, rm_spikes],
+	[rm_spring_boost, rm_pushbox_intro, rm_start, rm_spring_intro],
+	[rm_climb, rm_pushbox_fall, rm_spring_box, rm_spring_hard],
+	[rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
+]
+
+// stores current act
+global.act = 0
 
 global.generators_destroyed_map = []
 
 //fill it with falses at the start of the game
-for (var i=0; i<array_length(global.level_map); i++) {
+_map = get_level_map();
+for (var i=0; i<array_length(_map); i++) {
 	array_push(global.generators_destroyed_map, []);
-	for (var j=0; j<array_length(global.level_map[0]); j++) {
+	for (var j=0; j<array_length(_map[0]); j++) {
 		array_push(global.generators_destroyed_map[i], false);
 	}
 }
@@ -56,9 +66,9 @@ global.kleinbottles_collected = []
 global.checkpoint_id = -1
 global.checkpoint_x = room_width/2
 global.checkpoint_y = room_height/2
-global.checkpoint_room = rm_template
-global.checkpoint_level_x = 2
-global.checkpoint_level_y = 1
+global.checkpoint_room = rm_tut_top_left
+global.checkpoint_level_x = 0
+global.checkpoint_level_y = 0
 
 #endregion Variables
 

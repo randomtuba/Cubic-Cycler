@@ -4,6 +4,7 @@ pos = new Position(x, y, 0.90, 0.99, self)
 rotation = 0;
 x_scale = 0.5;
 collisions = []; update_collisions();
+immobile = false
 
 // lose state
 lose_state = false
@@ -44,8 +45,10 @@ function update_collisions() {
 }
 
 function room_index_bounded(_i = global.level_x, _j = global.level_y) {
-	return (_j >= 0) && (_j < array_length(global.level_map)) &&
-		(_i >= 0) && (_i < array_length(global.level_map[0])) &&
-		global.level_map[_j][_i] != -1
+	var _map = get_level_map();
+	return true
+	/* return (_j >= 0) && (_j < array_length(_map)) &&
+		(_i >= 0) && (_i < array_length(_map[0])) &&
+		_map[_j][_i] != -1 */
 }
 	

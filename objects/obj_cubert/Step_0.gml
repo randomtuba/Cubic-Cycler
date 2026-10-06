@@ -12,15 +12,15 @@ if (lose_state) {
 	return;
 }
 
-if (keyboard_check(ord("R"))) restart()
+if (keyboard_check(ord("R")) && !immobile) restart()
 
 #endregion Loss State
 
 #region Controls
 
-var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
-var _down = keyboard_check(vk_down) || keyboard_check(ord("S"))
-var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)
+var _lr = !immobile ? ((keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))) : false
+var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && !immobile
+var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)) && !immobile
 
 #endregion
 
@@ -49,7 +49,30 @@ if (_grounded) {
 
 #region Gravity
 
+<<<<<<< HEAD
 if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
+=======
+if (_grounded_on_platform) {
+	// Get contacting platform
+	/* _platform = instance_place(x, y+6, obj_moving_platform)
+	_plat_y_speed = _platform.get_y_speed()
+	
+	y_speed = _plat_y_speed */
+	
+	if (springyspring == 1) {
+		springyspring = 0
+	}
+	
+} else if (_grounded && springyspring == 0) {
+	y_speed = 0
+} else if (_grounded && springyspring == 1) {
+	springyspring = 0
+} else if (_grounded2) {
+	y_speed = 1
+} else {
+	if (_down) { y_speed += 0.8 } else { y_speed += 0.4 }
+}
+>>>>>>> pre_pre_mass_commit
 
 #endregion Gravity
 
@@ -127,20 +150,31 @@ if (!movement.y) {
 #region Room Changing
 
 // Horizontal
+var _map = get_level_map();
 if (x > room_width) {
     if (!instance_exists(obj_generator)) {
         global.level_x++
+		if (global.level_x >= array_length(_map[global.level_y])) global.level_x = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
+<<<<<<< HEAD
 			room_goto(global.level_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX() - room_width, pos.point.getY())
+=======
+			room_goto(_map[global.level_y][global.level_x])
+>>>>>>> pre_pre_mass_commit
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
     if (!instance_exists(obj_generator)) {
         global.level_x--
+		if (global.level_x < 0) global.level_x = array_length(_map[global.level_y]) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
+<<<<<<< HEAD
 			room_goto(global.level_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX() + room_width, pos.point.getY())
+=======
+			room_goto(_map[global.level_y][global.level_x])
+>>>>>>> pre_pre_mass_commit
 		} else { global.level_x++; }
     }
 }
@@ -149,17 +183,27 @@ if (x > room_width) {
 if (y > room_height) {
     if (!instance_exists(obj_generator)) {
         global.level_y++
+		if (global.level_y >= array_length(_map)) global.level_y = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
+<<<<<<< HEAD
 			room_goto(global.level_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX(), pos.point.getY() - room_height)
+=======
+			room_goto(_map[global.level_y][global.level_x])
+>>>>>>> pre_pre_mass_commit
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
     if (!instance_exists(obj_generator)) {
         global.level_y--
+		if (global.level_y < 0) global.level_y = array_length(_map) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
+<<<<<<< HEAD
 			room_goto(global.level_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX(), pos.point.getY() + room_height)
+=======
+			room_goto(_map[global.level_y][global.level_x])
+>>>>>>> pre_pre_mass_commit
 		} else { global.level_y++; }
     }
 }
