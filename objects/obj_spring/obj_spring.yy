@@ -38,8 +38,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_springy",
-    "path":"sprites/spr_springy/spr_springy.yy",
+    "name":"spr_spring",
+    "path":"sprites/spr_spring/spr_spring.yy",
   },
   "spriteMaskId":null,
   "visible":true,
