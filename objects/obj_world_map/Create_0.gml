@@ -36,10 +36,22 @@ function get_room_thumb(_room = room) {
 		case rm_tut_bottom_left:		return rmspr_tut_bottom_left_1;
 		case rm_tut_bottom_right:		return rmspr_tut_bottom_right_1;
 		//act1
-		case rm_awkward:				return rmspr_awkward;
-		case rm_climb:					return rmspr_climb;
-		case rm_doubledown:				return rmspr_doubledown;
-		case rm_fall:					return rmspr_fall;
+		case rm_awkward:				return rmspr_awkward_1;
+		case rm_climb:					return rmspr_climb_1;
+		case rm_doubledown:				return rmspr_doubledown_1;
+		case rm_fall:					return rmspr_fall_1;
+		case rm_fragile_blocks:			return rmspr_fragile_blocks_1;
+		case rm_many_buttons:			return rmspr_many_buttons_1;
+		case rm_pushbox_and_fragile:	return rmspr_pushbox_and_fragile_1;
+		case rm_pushbox_fall:			return rmspr_pushbox_fall_1;
+		case rm_pushbox_intro:			return rmspr_pushbox_intro_1;
+		case rm_spikes:					return rmspr_spikes_1;
+		case rm_spring_boost:			return rmspr_spring_boost_1;
+		case rm_spring_box:				return rmspr_spring_box_1;
+		case rm_spring_hard:			return rmspr_spring_hard_unfairly_even_1;
+		case rm_spring_intro:			return rmspr_spring_intro_1;
+		case rm_start:					return rmspr_start_1;
+		case rm_tesseract_1:			return rmspr_tesseract_1_1;
 		//
 		default:						return -1;
 	}
