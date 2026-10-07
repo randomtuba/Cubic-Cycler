@@ -24,17 +24,19 @@ if (enable_k > 0) {
 		var _x = _init_x;
 		for(var j = 0; j<array_length(_map); j++){
 			
-			draw_set_color(global.generators_destroyed_map[j][i] ? c_lime : c_red)
+			var _level_beat = global.generators_destroyed_map[j][i];
+			var _is_current_level = (global.level_x == j && global.level_y == i);
+			draw_set_color(_level_beat ? c_lime : c_red)
 			draw_rectangle(_x,_y, _x + gap,_y +gap*ratio,false);
 			
 			var _speci_room = get_level_map()[i][j];
 			var _spr = get_room_thumb(_speci_room);
 			if (_spr != -1) {
+				if (!_level_beat && !_is_current_level) { _spr = rmsprquestion; }
 				draw_sprite_stretched(_spr, 0, _x, _y, gap, gap*ratio);
 				draw_rectangle_thick_outline(_x,_y, _x + gap, _y+gap*ratio, w/2);
 			}
 			
-			var _is_current_level = (global.level_x == j && global.level_y == i);
 			if(_is_current_level){
 				draw_set_color(c_blue);
 				draw_rectangle_thick_outline(_x,_y, _x + gap, _y+gap*ratio, w);
