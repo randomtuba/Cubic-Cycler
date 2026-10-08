@@ -22,7 +22,7 @@ switch move_direction {
 collisions = []; update_collisions()
 
 function move_by_direction() {
-	pos.move(pos.x_speed, pos.y_speed, instance_exists(obj_generator))
+	pos.move(pos.x_speed, pos.y_speed, should_screenwrap())
 	
 	for (var i = 0; i < array_length(connected_objects); i++) {
 		current_object = connected_objects[i]
@@ -109,7 +109,7 @@ function turn_if_colliding() {
 		}
 		if (instance_exists(obj) && (array_contains(FREELY_MOVABLE_OBJECTS, obj.object_index))) {
 			match_speed(obj)
-			var success = attemptMove(obj, obj.collisions, pos.x_speed, pos.y_speed, 4, instance_exists(obj_generator))
+			var success = attemptMove(obj, obj.collisions, pos.x_speed, pos.y_speed, 4, should_screenwrap())
 			if ((success.x && pos.x_speed != 0) || (success.y && pos.y_speed != 0)) {
 				continue
 			}

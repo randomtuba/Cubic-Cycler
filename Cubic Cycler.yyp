@@ -150,6 +150,7 @@
     {"id":{"name":"spr_cubert","path":"sprites/spr_cubert/spr_cubert.yy",},},
     {"id":{"name":"spr_door","path":"sprites/spr_door/spr_door.yy",},},
     {"id":{"name":"spr_gateway","path":"sprites/spr_gateway/spr_gateway.yy",},},
+    {"id":{"name":"spr_generator_off","path":"sprites/spr_generator_off/spr_generator_off.yy",},},
     {"id":{"name":"spr_generator","path":"sprites/spr_generator/spr_generator.yy",},},
     {"id":{"name":"spr_kleinbottle","path":"sprites/spr_kleinbottle/spr_kleinbottle.yy",},},
     {"id":{"name":"spr_logo_placeholder","path":"sprites/spr_logo_placeholder/spr_logo_placeholder.yy",},},

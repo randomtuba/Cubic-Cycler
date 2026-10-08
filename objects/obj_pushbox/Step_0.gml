@@ -11,7 +11,7 @@ if (!_grounded) {
 
 // Movement
 var motion = pos.getMotion()
-var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
+var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, should_screenwrap())
 
 // Don't reset speed when pushing a box
 // "d" is a direction

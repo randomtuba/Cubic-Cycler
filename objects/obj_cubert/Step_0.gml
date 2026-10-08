@@ -94,7 +94,7 @@ if (coyote_time > 0) {
 #endregion Jumping
 
 var motion = pos.getMotion()
-var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
+var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, should_screenwrap())
 
 runBlockerEvents(movement.blockers)
 
@@ -129,7 +129,7 @@ if (!movement.y) {
 // Horizontal
 var _map = get_level_map();
 if (x > room_width) {
-    if (!instance_exists(obj_generator)) {
+    if (!should_screenwrap()) {
         global.level_x++
 		if (global.level_x >= array_length(_map[global.level_y])) global.level_x = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -138,7 +138,7 @@ if (x > room_width) {
 		} else { global.level_x--; }
     }
 } else if (x < 0) {
-    if (!instance_exists(obj_generator)) {
+    if (!should_screenwrap()) {
         global.level_x--
 		if (global.level_x < 0) global.level_x = array_length(_map[global.level_y]) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -150,7 +150,7 @@ if (x > room_width) {
 
 // Vertical
 if (y > room_height) {
-    if (!instance_exists(obj_generator)) {
+    if (!should_screenwrap()) {
         global.level_y++
 		if (global.level_y >= array_length(_map)) global.level_y = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
@@ -159,7 +159,7 @@ if (y > room_height) {
 		} else { global.level_y--; }
     }
 } else if (y < 0) {
-    if (!instance_exists(obj_generator)) {
+    if (!should_screenwrap()) {
         global.level_y--
 		if (global.level_y < 0) global.level_y = array_length(_map) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
