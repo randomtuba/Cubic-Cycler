@@ -146,7 +146,7 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 			var tile = tilemap_get_at_pixel(map, check.x, check.y)
 			
 			// If successful, determine which direction the collision was in
-			if (tile != 0) {
+			if (tile > 0) {
 				contact.directions[Direction.None] = true
 				// Check whether it's still colliding after small movements towards the center of obj
 				var xMoved = tilemap_get_at_pixel(map, check.x - _x * (abs(x1Change) + buffer), check.y)
