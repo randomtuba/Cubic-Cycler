@@ -1,4 +1,4 @@
-if (instance_exists(obj_generator)) {
+if (should_screenwrap()) {
 	image_alpha = 0.25
 } else {
 	image_alpha = 0
