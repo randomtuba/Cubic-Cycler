@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"Movables",
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"WorldElements",
+    "path":"folders/Objects/WorldElements.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

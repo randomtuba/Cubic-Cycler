@@ -55,8 +55,7 @@ if (enable_k > 0) {
 					room_goto(get_level_map()[global.level_y][global.level_x]);
 					var level_spawn = get_spawn_coords_by_room(room);
 					with (obj_cubert) {
-						x = level_spawn[0];
-						y = level_spawn[1];
+						pos.setPos(level_spawn[0], level_spawn[1])
 					}
 				}
 			}
