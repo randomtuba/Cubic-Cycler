@@ -1,5 +1,5 @@
 if (global.checkpoint_id == id) {
-	image_index = 1
+	sprite_index = spr_checkpoint_on
 } else {
-	image_index = 0
+	sprite_index = spr_checkpoint_off
 }
