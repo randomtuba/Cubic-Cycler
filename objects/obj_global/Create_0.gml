@@ -16,7 +16,7 @@ depth += 100;
 
 #region Variables
 
-global.debug = true;
+global.debug = false;
 
 // stores the position of the player
 global.default_x = 0
