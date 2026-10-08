@@ -1,7 +1,7 @@
 
 #region Loss State
 
-image_index = 2*lose_state
+image_index = lose_state
 if (lose_state) {
 	lose_timer -= 1
 	if (lose_timer <= 0) {
