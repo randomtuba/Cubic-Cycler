@@ -2,7 +2,7 @@
 pos = new Position(x, y, 0.90, 0.99, self)
 
 rotation = 0;
-x_scale = 1;
+x_scale = 0.5;
 collisions = []; update_collisions();
 immobile = false
 

@@ -187,6 +187,6 @@ if (global.debug && mouse_check_button(mb_right)) {
 }
 
 if (pos.x_speed != 0) {
-	image_xscale = sign(pos.x_speed);
+	image_xscale = sign(pos.x_speed) * 0.5;
 }
 x_scale = lerp(x_scale, image_xscale, 0.9)
