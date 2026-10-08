@@ -1,5 +1,15 @@
 pos = new Position(x, y, 1, 1, self)
 
+// Store offsets of all connected objects
+connected_offsets = []
+for (var i = 0; i < array_length(connected_objects); i++) {
+	var obj = connected_objects[i]
+	array_push(connected_offsets, {
+		x : obj.x - pos.point.getX(),
+		y : obj.y - pos.point.getY()
+	})
+}
+
 // Set initial speed
 switch move_direction {
 	case Direction.Up:
@@ -26,8 +36,8 @@ function move_by_direction() {
 	
 	for (var i = 0; i < array_length(connected_objects); i++) {
 		current_object = connected_objects[i]
-		current_object.x += pos.x_speed()
-		current_object.y += pos.y_speed()
+		current_object.x = pos.point.getX() + connected_offsets[i].x
+		current_object.y = pos.point.getY() + connected_offsets[i].y
 	}
 }
 
@@ -104,7 +114,7 @@ function turn_if_colliding() {
 	for (var i = 0; i < array_length(contacts); i++) {
 		var obj = contacts[i]
 		// Skip objects that are behind the platform
-		if (is_behind(obj.pos.point.getX(), obj.pos.point.getY())) {
+		if (instance_exists(obj) && is_behind(obj.pos.point.getX(), obj.pos.point.getY())) {
 			continue
 		}
 		if (instance_exists(obj) && (array_contains(FREELY_MOVABLE_OBJECTS, obj.object_index))) {

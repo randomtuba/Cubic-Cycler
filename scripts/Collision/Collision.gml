@@ -127,6 +127,24 @@ function should_screenwrap() {
 	return false
 }
 
+/// @desc Screenwraps a point
+/// @param {Real} _x The X coordinate
+/// @param {Real} _y The Y coordinate
+function wrap_point(_x, _y) {
+	while (_x < 0) {
+		_x += room_width
+	}
+	while (_y < 0) {
+		_y += room_height
+	}
+	_x = _x % room_width
+	_y = _y % room_height
+	return {
+		x : _x,
+		y : _y
+	}
+}
+
 /// @desc Returns whether a thing is a reference to a tilemap
 /// Technically, this checks whether something is not an object
 /// @param thing The thing to check
