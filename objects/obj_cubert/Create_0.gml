@@ -17,10 +17,11 @@ jump_cooldown = 0
 springyspring = 0
 springxspring = 0
 
-// cool effects
+// Landing "bouncy" vfx
 jump_k = 0;
 jump_j_max = sec;
-bounciness = 1;
+bounciness = 10;
+was_grounded = false
 
 function restart() {
 	if (global.checkpoint_id == -1) {

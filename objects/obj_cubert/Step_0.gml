@@ -31,6 +31,12 @@ var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
 
+// "Bouncy" landing vfx
+if (_grounded && !was_grounded) {
+	jump_k = jump_j_max
+}
+was_grounded = _grounded
+
 #region Horizontal Movement
 
 pos.x_speed += _lr * 0.75
