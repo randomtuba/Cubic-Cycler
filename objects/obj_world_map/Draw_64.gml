@@ -73,8 +73,8 @@ if (enable_k > 0) {
 	
 	draw_set_color(c_dkgray);
 	draw_rectangle_thick_outline(_init_x, _init_y, _init_x+2*((room_width/2)-_init_x), _y, w, true);
-	draw_set_color(_click ? c_red : c_black);
-	draw_circle(_mx, _my, 5, false);
+	draw_set_color(_click ? c_blue : c_black);
+	draw_circle(_mx, _my, 6, false);
 	draw_set_color(c_white);
 	draw_circle(_mx, _my, 3, false);
 	draw_set_color(c_white)
