@@ -25,10 +25,17 @@ was_grounded = false
 
 function restart() {
 	if (global.checkpoint_id == -1) {
-		room_goto(rm_start)
-		global.level_x = 2
-		global.level_y = 1
-		pos.setPos(64, 480)
+		if (global.act == 1) {
+			room_goto(rm_start)
+			global.level_x = 2
+			global.level_y = 1
+			pos.setPos(64, 480)
+		} else {
+			room_goto(rm_tut_top_left)
+			global.level_x = 0
+			global.level_y = 0
+			pos.setPos(128, 480)
+		}
 	} else {
 		room_goto(global.checkpoint_room)
 		global.level_x = global.checkpoint_level_x

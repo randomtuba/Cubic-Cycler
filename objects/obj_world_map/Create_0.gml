@@ -2,7 +2,6 @@ depth -= 999
 enabled = false;
 enable_k = 0;
 
-
 function get_spawn_coords_by_room(_room = room) {
 	switch(_room) {
 		//tutorial

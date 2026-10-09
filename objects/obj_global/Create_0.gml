@@ -17,6 +17,7 @@ depth += 100;
 #region Variables
 
 global.debug = false;
+global.gamepad = false;
 
 // stores the position of the player
 global.default_x = 0
