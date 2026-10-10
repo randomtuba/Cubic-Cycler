@@ -1,4 +1,5 @@
-if (global.debug && keyboard_check_pressed(vk_f5)) { game_restart(); }
+var _game_restart = keyboard_check_pressed(vk_f5);
+if (global.debug && _game_restart) { game_restart(); }
 
 //on mac, i can't use f11 for some reaoson
 if (keyboard_check_pressed(vk_f11) || (global.debug && keyboard_check_pressed(vk_f4))) {

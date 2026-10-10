@@ -12,15 +12,17 @@ if (lose_state) {
 	return;
 }
 
-if (keyboard_check(ord("R")) && !immobile) restart()
+if ((keyboard_check(ord("R")) || gamepad_button_check(0, gp_start)) && !immobile) { restart(); return; }
 
 #endregion Loss State
 
 #region Controls
 
-var _lr = !immobile ? ((keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))) : false
-var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && !immobile
-var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)) && !immobile
+var _right = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+var _left = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+var _lr = !immobile ? (_right - _left) : false
+var _down = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !immobile
+var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !immobile
 
 #endregion
 

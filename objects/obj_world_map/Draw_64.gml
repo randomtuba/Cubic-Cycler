@@ -1,12 +1,18 @@
-var _press = (keyboard_check(vk_tab) && room != rm_mainmenu && room != rm_controls);
+var _press = ((keyboard_check(vk_tab) || gamepad_button_check(0, gp_select)) && room != rm_mainmenu && room != rm_controls);
 enabled = (enabled && (enable_k < 0.95 || _press)) || (_press && !enabled && enable_k < 0.35); //kind of withhold your command until it finishes moving
 enable_k = lerp(enable_k, enabled, 0.2);
+
+var _mx = device_mouse_x_to_gui(0);
+var _my = device_mouse_y_to_gui(0);
+var _click = mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face1) || gamepad_button_value(0, gp_shoulderr) > 0.5 || gamepad_button_value(0, gp_shoulderrb) > 0.5;
+if (gamepad_is_connected(0) && global.gamepad) {
+	_mx = (room_width)*(0.5+0.5*gamepad_axis_value(0, gp_axisrh))
+	_my = (room_height)*(0.5+0.5*gamepad_axis_value(0, gp_axisrv))
+}
 
 if (enable_k > 0) {
 	//draw_set_alpha(0.7)
 	//show_debug_message("DRAW EVENT: " + room_get_name(room));
-	var _mx = device_mouse_x_to_gui(0);
-	var _my = device_mouse_y_to_gui(0);
 	var _map = get_level_map();
 	
 	var gap = 100*room_width/room_height;
@@ -48,7 +54,7 @@ if (enable_k > 0) {
 				draw_set_color(c_black);
 				draw_rectangle_thick_outline(_x,_y, _x + gap, _y +gap*ratio, w);
 			
-				var _is_clicked_with_permission = mouse_check_button_pressed(mb_left) && (global.debug || global.generators_destroyed_map[j][i]);
+				var _is_clicked_with_permission = _click && (global.debug || global.generators_destroyed_map[j][i]);
 				if(_is_clicked_with_permission){
 					global.level_y = i;
 					global.level_x = j;
@@ -67,7 +73,12 @@ if (enable_k > 0) {
 	
 	draw_set_color(c_dkgray);
 	draw_rectangle_thick_outline(_init_x, _init_y, _init_x+2*((room_width/2)-_init_x), _y, w, true);
+	draw_set_color(_click ? c_blue : c_black);
+	draw_circle(_mx, _my, 6, false);
+	draw_set_color(c_white);
+	draw_circle(_mx, _my, 3, false);
 	draw_set_color(c_white)
 	draw_set_alpha(1)
+	
 	
 }

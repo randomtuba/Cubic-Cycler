@@ -1,9 +1,11 @@
 
 #region Controls (Copy from Step)
 
-var _lr = (keyboard_check(vk_right)||keyboard_check(ord("D"))) - (keyboard_check(vk_left)||keyboard_check(ord("A")))
-var _down = (keyboard_check(vk_down) || keyboard_check(ord("S"))) && checkGrounded(self, collisions).valid && !immobile
-var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space)
+var _right = keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr) || gamepad_axis_value(0, gp_axislh) > 0.1
+var _left = keyboard_check(vk_left)||keyboard_check(ord("A")) || gamepad_button_check(0, gp_padl) || gamepad_axis_value(0, gp_axislh) < -0.1
+var _lr = _right - _left
+var _down = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && checkGrounded(self, collisions).valid && !immobile
+var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5
 
 #endregion
 
