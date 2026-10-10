@@ -19,6 +19,9 @@ depth += 100;
 global.debug = false;
 global.gamepad = false;
 
+global.use_background = true
+global.background_scale = 2
+
 // stores the position of the player
 global.default_x = 0
 global.default_y = 0
