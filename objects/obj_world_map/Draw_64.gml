@@ -58,10 +58,14 @@ if (enable_k > 0) {
 				if(_is_clicked_with_permission){
 					global.level_y = i;
 					global.level_x = j;
+					
 					room_goto(get_level_map()[global.level_y][global.level_x]);
-					var level_spawn = get_spawn_coords_by_room(room);
+					var room_name = get_level_map()[global.level_y][global.level_x];
+					var level_spawn = get_spawn_coords_by_room(room_name);
+					
+		
 					with (obj_cubert) {
-						pos.setPos(level_spawn[0], level_spawn[1])
+						pos.setPos(level_spawn[0], level_spawn[1]);
 					}
 				}
 			}
