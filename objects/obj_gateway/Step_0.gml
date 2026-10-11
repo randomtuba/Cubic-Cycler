@@ -25,6 +25,11 @@ if (active) {
 			}
 		}
 		
+		// set new checkpoint data
+		global.checkpoint_room = rm_start
+		global.checkpoint_level_x = 2
+		global.checkpoint_level_y = 1
+		
 		// go to rm_start
 		global.level_x = 2
 		global.level_y = 1
