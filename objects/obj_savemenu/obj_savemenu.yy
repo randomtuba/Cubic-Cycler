@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite75",
-    "path":"sprites/Sprite75/Sprite75.yy",
+    "name":"spr_save_menu",
+    "path":"sprites/spr_save_menu/spr_save_menu.yy",
   },
   "spriteMaskId":null,
   "visible":true,
