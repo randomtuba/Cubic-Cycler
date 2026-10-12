@@ -1,9 +1,17 @@
 image_angle += 10
 
-if (get_destroyed_generator_count() >= 4 || global.debug) {
-	visible = true
+if (global.act == 0) {
+	if (get_destroyed_generator_count() >= 4 || global.debug) {
+		visible = true
+	} else {
+		visible = false
+	}
 } else {
-	visible = false
+	if (obj_tesseract_drawer.collect_timer > sec * 5) {
+		visible = true
+	} else {
+		visible = false
+	}
 }
 
 if (active) {
@@ -25,15 +33,24 @@ if (active) {
 			}
 		}
 		
-		// set new checkpoint data
-		global.checkpoint_room = rm_start
-		global.checkpoint_level_x = 2
-		global.checkpoint_level_y = 1
-		
-		// go to rm_start
-		global.level_x = 2
-		global.level_y = 1
-		room_goto(rm_start)
+		// set new checkpoint data and go to start room
+		if (global.act == 1) {
+			global.checkpoint_room = rm_start
+			global.checkpoint_level_x = 2
+			global.checkpoint_level_y = 1
+			
+			global.level_x = 2
+			global.level_y = 1
+			room_goto(rm_start)
+		} else {
+			global.checkpoint_room = rm_camera_intro
+			global.checkpoint_level_x = 0
+			global.checkpoint_level_y = 0
+			
+			global.level_x = 0
+			global.level_y = 0
+			room_goto(rm_camera_intro)
+		}
 		
 		// unfreeze cubert
 		with (obj_cubert) immobile = false

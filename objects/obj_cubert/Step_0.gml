@@ -51,7 +51,12 @@ if (_grounded) {
 
 #region Gravity
 
-if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
+if (!immobile) {
+	if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
+} else {
+	pos.x_speed *= 0.8
+	pos.y_speed *= 0.8
+}
 
 #endregion Gravity
 
