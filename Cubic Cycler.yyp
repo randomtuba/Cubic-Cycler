@@ -17,6 +17,7 @@
     {"$GMFolder":"","%Name":"WorldElements","folderPath":"folders/Objects/WorldElements.yy","name":"WorldElements","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Act1","folderPath":"folders/Rooms/Act1.yy","name":"Act1","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Act2","folderPath":"folders/Rooms/Act2.yy","name":"Act2","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Menus","folderPath":"folders/Rooms/Menus.yy","name":"Menus","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tutorial","folderPath":"folders/Rooms/Tutorial.yy","name":"Tutorial","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Unused","folderPath":"folders/Rooms/Unused.yy","name":"Unused","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -70,6 +71,7 @@
     {"id":{"name":"obj_tut_drawer","path":"objects/obj_tut_drawer/obj_tut_drawer.yy",},},
     {"id":{"name":"obj_world_map","path":"objects/obj_world_map/obj_world_map.yy",},},
     {"id":{"name":"rm_awkward","path":"rooms/rm_awkward/rm_awkward.yy",},},
+    {"id":{"name":"rm_camera_intro","path":"rooms/rm_camera_intro/rm_camera_intro.yy",},},
     {"id":{"name":"rm_climb","path":"rooms/rm_climb/rm_climb.yy",},},
     {"id":{"name":"rm_controls","path":"rooms/rm_controls/rm_controls.yy",},},
     {"id":{"name":"rm_doubledown","path":"rooms/rm_doubledown/rm_doubledown.yy",},},
@@ -202,6 +204,7 @@
     {"roomId":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
     {"roomId":{"name":"rm_tut_bottom_right","path":"rooms/rm_tut_bottom_right/rm_tut_bottom_right.yy",},},
     {"roomId":{"name":"rm_tut_bottom_left","path":"rooms/rm_tut_bottom_left/rm_tut_bottom_left.yy",},},
+    {"roomId":{"name":"rm_camera_intro","path":"rooms/rm_camera_intro/rm_camera_intro.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

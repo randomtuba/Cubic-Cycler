@@ -16,7 +16,7 @@ depth += 100;
 
 #region Variables
 
-global.debug = false;
+global.debug = true;
 global.gamepad = false;
 
 global.use_background = true
