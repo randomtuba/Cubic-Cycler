@@ -27,7 +27,7 @@ function apply_interaction(obj, dir) {
 				boxSize = getObjSize(other)
 				pos.setPos(
 					pos.point.getX(),
-					other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 4, 0)
+					other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 3, 0)
 				)
 			break
 		
