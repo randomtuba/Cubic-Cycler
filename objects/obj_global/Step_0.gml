@@ -2,7 +2,7 @@ var _game_restart = keyboard_check_pressed(vk_f5);
 if (global.debug && _game_restart) { game_restart(); }
 
 //on mac, i can't use f11 for some reaoson
-if (keyboard_check_pressed(vk_f11) || (global.debug && keyboard_check_pressed(vk_f4))) {
+if (keyboard_check_pressed(vk_f11) || keyboard_check_pressed(vk_f4)) {
 	if (window_get_fullscreen()) {
 		window_set_fullscreen(false);
 		window_set_size(1024, 640)
