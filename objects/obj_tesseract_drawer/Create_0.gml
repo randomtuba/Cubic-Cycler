@@ -19,6 +19,8 @@ collected = false;
 collect_k = 0;
 collect_timer = 0;
 
+depth -= 999;
+
 function get_tessa_point(_ang_xz = ang_xz, _ang_xy = ang_xy, _r = r) {
 	return [_r*dcos(_ang_xy)*dcos(_ang_xz), -_r*dsin(_ang_xy)];//if there's z it would take +r*dsin(ang_xz)
 }

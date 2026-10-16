@@ -1,12 +1,12 @@
 {
   "$GMRoom":"v1",
-  "%Name":"rm_camera_intro",
+  "%Name":"rm2_camera_intro",
   "creationCodeFile":"",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_15B3F7A1_6","path":"rooms/rm_camera_intro/rm_camera_intro.yy",},
+    {"name":"inst_15B3F7A1_6","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -22,7 +22,7 @@
           -2147483648,-32,19,-1312,-2147483648,
         ],"TileDataFormat":1,},"tilesetId":{"name":"tileset_block","path":"tilesets/tileset_block/tileset_block.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
   ],
-  "name":"rm_camera_intro",
+  "name":"rm2_camera_intro",
   "parent":{
     "name":"Act2",
     "path":"folders/Rooms/Act2.yy",
