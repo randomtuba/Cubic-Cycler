@@ -161,11 +161,6 @@ function get_active_collisions(include_cubert = false) {
 			array_push(collisions, self)
 		}
 	}
-	with obj_door {
-		if !is_open {
-			array_push(collisions, self)
-		}
-	}
 	if (include_cubert) {
 		with obj_cubert {
 			array_push(collisions, self)
