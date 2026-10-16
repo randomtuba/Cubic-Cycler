@@ -24,7 +24,10 @@ jump_j_max = sec;
 bounciness = 10;
 was_grounded = false
 
+checkpoint_read_file();
+
 function restart() {
+	checkpoint_read_file()
 	if (global.checkpoint_id == -1) {
 		if (global.act == 1) {
 			room_goto(rm_start)
@@ -38,6 +41,10 @@ function restart() {
 			pos.setPos(128, 480)
 		}
 	} else {
+		//if (global.actsaved > global.act) {
+		//	actPlus()
+		//}	
+		show_debug_message("checkpoint_id = " + string(global.checkpoint_id));
 		room_goto(global.checkpoint_room)
 		global.level_x = global.checkpoint_level_x
 		global.level_y = global.checkpoint_level_y
@@ -60,4 +67,6 @@ function room_index_bounded(_i = global.level_x, _j = global.level_y) {
 		(_i >= 0) && (_i < array_length(_map[0])) &&
 		_map[_j][_i] != -1 */
 }
+
+
 	
