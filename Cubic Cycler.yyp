@@ -10,6 +10,7 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"Sounds","folderPath":"folders/Sounds.yy","name":"Sounds","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Control_UI","folderPath":"folders/Objects/Control_UI.yy","name":"Control_UI","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Cubert","folderPath":"folders/Objects/Cubert.yy","name":"Cubert","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -99,6 +100,8 @@
     {"id":{"name":"Collision","path":"scripts/Collision/Collision.yy",},},
     {"id":{"name":"Movables","path":"scripts/Movables/Movables.yy",},},
     {"id":{"name":"scr_global_scripts","path":"scripts/scr_global_scripts/scr_global_scripts.yy",},},
+    {"id":{"name":"sfx_generator_break","path":"sounds/sfx_generator_break/sfx_generator_break.yy",},},
+    {"id":{"name":"sfx_teleport_quick","path":"sounds/sfx_teleport_quick/sfx_teleport_quick.yy",},},
     {"id":{"name":"rmspr_awkward_1","path":"sprites/rmspr_awkward_1/rmspr_awkward_1.yy",},},
     {"id":{"name":"rmspr_awkward","path":"sprites/rmspr_awkward/rmspr_awkward.yy",},},
     {"id":{"name":"rmspr_climb_1","path":"sprites/rmspr_climb_1/rmspr_climb_1.yy",},},
