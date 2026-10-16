@@ -1,4 +1,5 @@
 // main vars
+depth = -999
 pos = new Position(x, y, 0.90, 0.99, self)
 
 rotation = 0;
