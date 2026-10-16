@@ -6,6 +6,7 @@ if (global.generators_destroyed_map[global.level_x][global.level_y]) {
 
 function turn_off() {
 	if (isOn) {
+		audio_play_sound(sfx_generator_break, 0, false)
 		sprite_index = spr_generator_off
 		isOn = false
 	}
