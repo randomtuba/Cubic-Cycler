@@ -6,7 +6,6 @@ if (global.generators_destroyed_map[global.level_x][global.level_y]) {
 
 function turn_off() {
 	if (isOn) {
-		audio_play_sound(sfx_generator_break, 0, false)
 		sprite_index = spr_generator_off
 		isOn = false
 	}
@@ -14,6 +13,7 @@ function turn_off() {
 
 function apply_interaction(obj) {
 	if (obj.object_index == obj_cubert) {
+		if (!global.generators_destroyed_map[global.level_x][global.level_y]) audio_play_sound(sfx_generator_break, 0, false)
 		global.generators_destroyed_map[global.level_x][global.level_y] = true;
 		turn_off()
 	}

@@ -163,6 +163,7 @@
     {"id":{"name":"spr_checkpoint_off","path":"sprites/spr_checkpoint_off/spr_checkpoint_off.yy",},},
     {"id":{"name":"spr_checkpoint_on","path":"sprites/spr_checkpoint_on/spr_checkpoint_on.yy",},},
     {"id":{"name":"spr_conveyor_1","path":"sprites/spr_conveyor_1/spr_conveyor_1.yy",},},
+    {"id":{"name":"spr_conveyor_2","path":"sprites/spr_conveyor_2/spr_conveyor_2.yy",},},
     {"id":{"name":"spr_conveyor","path":"sprites/spr_conveyor/spr_conveyor.yy",},},
     {"id":{"name":"spr_cubert_1","path":"sprites/spr_cubert_1/spr_cubert_1.yy",},},
     {"id":{"name":"spr_cubert_2","path":"sprites/spr_cubert_2/spr_cubert_2.yy",},},
