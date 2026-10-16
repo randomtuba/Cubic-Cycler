@@ -43,13 +43,13 @@ if (active) {
 			global.level_y = 1
 			room_goto(rm_start)
 		} else {
-			global.checkpoint_room = rm_camera_intro
+			global.checkpoint_room = rm2_camera_intro
 			global.checkpoint_level_x = 0
 			global.checkpoint_level_y = 0
 			
 			global.level_x = 0
 			global.level_y = 0
-			room_goto(rm_camera_intro)
+			room_goto(rm2_camera_intro)
 		}
 		
 		// unfreeze cubert

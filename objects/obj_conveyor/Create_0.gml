@@ -7,7 +7,7 @@ if (!points_right) {
 }
 
 
-sprite_set_speed(sprite_index, 6, spritespeed_framespersecond)
+sprite_set_speed(sprite_index, 12, spritespeed_framespersecond)
 
 function apply_interaction(obj) {
 	with obj {

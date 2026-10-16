@@ -63,7 +63,10 @@ for (var vert = 0; vert < array_length(base_tes_coordinates); vert++) {
 			array_push(edge_indices,[vert,othervert]);
 		}
 	}
-}
+  
+  
+depth = -1000
+
 
 
 camera_pos_4d = [0,0,0,4.5] // looking at it from kata or whatever
