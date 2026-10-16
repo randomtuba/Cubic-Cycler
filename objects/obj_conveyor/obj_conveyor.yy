@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_conveyor_1",
-    "path":"sprites/spr_conveyor_1/spr_conveyor_1.yy",
+    "name":"spr_conveyor_2",
+    "path":"sprites/spr_conveyor_2/spr_conveyor_2.yy",
   },
   "spriteMaskId":null,
   "visible":true,
