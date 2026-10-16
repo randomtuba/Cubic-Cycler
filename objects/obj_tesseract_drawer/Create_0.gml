@@ -63,7 +63,7 @@ for (var vert = 0; vert < array_length(base_tes_coordinates); vert++) {
 			array_push(edge_indices,[vert,othervert]);
 		}
 	}
-  
+}
   
 depth = -1000
 
