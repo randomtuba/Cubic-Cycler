@@ -41,9 +41,9 @@ function restart() {
 			pos.setPos(128, 480)
 		}
 	} else {
-		//if (global.actsaved > global.act) {
-		//	actPlus()
-		//}	
+		if (global.actsaved > global.act) {
+			actPlus()
+		}	
 		show_debug_message("checkpoint_id = " + string(global.checkpoint_id));
 		room_goto(global.checkpoint_room)
 		global.level_x = global.checkpoint_level_x
