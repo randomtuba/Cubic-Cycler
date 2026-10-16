@@ -19,6 +19,8 @@ depth += 100;
 global.debug = true;
 global.gamepad = false;
 
+global.camera_follows_player_for_act2 = false;
+
 global.use_background = true
 global.background_scale = 2
 
@@ -96,6 +98,46 @@ enum Direction {
 #endregion Enums
 
 #region Functions
+
+function update_camera(camera_size = [1024, 640], follow_allowed = false, follow_object = noone, follow_interpolate = 1) {
+	//camera_size[] is how much the camera can see of the room, regardless of room size
+	//x_off and y_off are target positions for camera
+	view_visible[0] = true;
+	view_enabled = true;
+	
+	var x_off = 0;
+	var y_off = 0;
+	if (follow_allowed) {
+		if (!instance_exists(follow_object)) { follow_object = instance_nearest(x, y, obj_cubert); }
+		if (instance_exists(follow_object)) {
+			x_off = clamp(follow_object.x - camera_size[0]/2, 0, room_width - camera_size[0]/2);
+			y_off = clamp(follow_object.y - camera_size[1]/2, 0, room_height - camera_size[1]/2);
+			
+			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
+			y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
+		}
+	}
+	
+	camera_set_view_pos(view_camera[0], x_off, y_off);
+	camera_set_view_size(view_camera[0], camera_size[0], camera_size[1]);
+	view_wport[0] = camera_size[0];
+	view_hport[0] = camera_size[1];
+	
+	var c=0;
+	for (var i=-1; i<2; i++) {
+		for (var j=-1; j<2; j++) {
+			if ((i!=0 && j!=0) || (i==0 && j==0)) { continue; }
+			c++;
+			view_visible[c] = true;
+			camera_set_view_pos(view_camera[c], x_off+i*camera_size[0], y_off+j*camera_size[1]);
+			camera_set_view_size(view_camera[c], camera_size[0], camera_size[1]);
+			view_wport[c] = camera_size[0];
+			view_hport[c] = camera_size[1];
+			view_xport[c] = 0;
+			view_yport[c] = 0;
+		}
+	}
+}
 
 function send_collision_updates() {
 	for (i = 0; i < array_length(COLLISION_UPDATE_LISTENERS); i++) {
