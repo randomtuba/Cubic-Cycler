@@ -14,6 +14,12 @@ randomize()
 
 depth += 100;
 
+// start music
+with (obj_music_handler) {
+	audio_stop_sound(100)
+	play_new_song()
+}
+
 #region Variables
 
 global.debug = true;
