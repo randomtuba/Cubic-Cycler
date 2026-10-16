@@ -19,3 +19,8 @@ if (global.debug && keyboard_check(vk_backspace)){
 	global.generators_destroyed_map[global.level_x][global.level_y] = true;
 	with (obj_generator) { instance_destroy() }
 }
+
+
+if (global.camera_follows_player_for_act2) {
+	update_camera([1024, 640], true, instance_nearest(x, y, obj_cubert), 0.5);
+}
