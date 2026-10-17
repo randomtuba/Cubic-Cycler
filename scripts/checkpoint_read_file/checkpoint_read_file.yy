@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"checkpoint_write_file",
+  "%Name":"checkpoint_read_file",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"checkpoint_write_file",
+  "name":"checkpoint_read_file",
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

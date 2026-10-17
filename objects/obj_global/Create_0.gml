@@ -26,6 +26,7 @@ global.debug = true;
 global.gamepad = false;
 
 global.camera_follows_player_for_act2 = false;
+global.cam_size = [1024, 640];
 
 global.use_background = true
 global.background_scale = 2
@@ -58,13 +59,17 @@ global.act1_map = [
 	[rm_fall, rm_fragile_blocks, rm_doubledown, rm_awkward],
 ]
 
+global.act2_map = [
+	[rm2_camera_intro],
+]
+
 // stores current act
 global.act = 0
 
 global.generators_destroyed_map = []
 
 //fill it with falses at the start of the game
-_map = get_level_map();
+var _map = get_level_map();
 for (var i=0; i<array_length(_map); i++) {
 	array_push(global.generators_destroyed_map, []);
 	for (var j=0; j<array_length(_map[0]); j++) {
@@ -108,16 +113,16 @@ enum Direction {
 function update_camera(camera_size = [1024, 640], follow_allowed = false, follow_object = noone, follow_interpolate = 1) {
 	//camera_size[] is how much the camera can see of the room, regardless of room size
 	//x_off and y_off are target positions for camera
-	view_visible[0] = true;
 	view_enabled = true;
+	view_visible[0] = true;
 	
 	var x_off = 0;
 	var y_off = 0;
 	if (follow_allowed) {
 		if (!instance_exists(follow_object)) { follow_object = instance_nearest(x, y, obj_cubert); }
 		if (instance_exists(follow_object)) {
-			x_off = clamp(follow_object.x - camera_size[0]/2, 0, room_width - camera_size[0]/2);
-			y_off = clamp(follow_object.y - camera_size[1]/2, 0, room_height - camera_size[1]/2);
+			x_off = clamp(follow_object.x - camera_size[0]/2, 0, room_width - camera_size[0]);
+			y_off = clamp(follow_object.y - camera_size[1]/2, 0, room_height - camera_size[1]);
 			
 			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
 			y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
@@ -129,20 +134,25 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	view_wport[0] = camera_size[0];
 	view_hport[0] = camera_size[1];
 	
-	var c=0;
-	for (var i=-1; i<2; i++) {
-		for (var j=-1; j<2; j++) {
-			if ((i!=0 && j!=0) || (i==0 && j==0)) { continue; }
-			c++;
-			view_visible[c] = true;
-			camera_set_view_pos(view_camera[c], x_off+i*camera_size[0], y_off+j*camera_size[1]);
-			camera_set_view_size(view_camera[c], camera_size[0], camera_size[1]);
-			view_wport[c] = camera_size[0];
-			view_hport[c] = camera_size[1];
-			view_xport[c] = 0;
-			view_yport[c] = 0;
-		}
-	}
+	//if (!follow_allowed) {
+	//	var c=0;
+	//	for (var i=-1; i<2; i++) {
+	//		for (var j=-1; j<2; j++) {
+	//			if ((i!=0 && j!=0) || (i==0 && j==0)) { continue; }
+	//			c++;
+	//			view_visible[c] = true;
+	//			camera_set_view_pos(view_camera[c], x_off + i*camera_size[0], y_off + j*camera_size[1]);
+	//			camera_set_view_size(view_camera[c], camera_size[0], camera_size[1]);
+	//			view_wport[c] = camera_size[0];
+	//			view_hport[c] = camera_size[1];
+	//			view_xport[c] = 0;
+	//			view_yport[c] = 0;
+	//		}
+	//	}
+	//} else {
+	//	for (var c=2; c<9; c++) { view_visible[c] = false; }
+		
+	//}
 }
 
 function send_collision_updates() {

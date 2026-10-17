@@ -12,21 +12,10 @@ for (var i = 0; i < array_length(connected_objects); i++) {
 
 // Set initial speed
 switch move_direction {
-	case Direction.Up:
-		pos.y_speed = -move_speed
-	break
-
-	case Direction.Down:
-		pos.y_speed = move_speed
-	break
-
-	case Direction.Left:
-		pos.x_speed = -move_speed
-	break
-
-	case Direction.Right:
-		pos.x_speed = move_speed
-	break
+	case Direction.Up:		pos.y_speed = -move_speed; break
+	case Direction.Down:	pos.y_speed = move_speed; break
+	case Direction.Left:	pos.x_speed = -move_speed; break
+	case Direction.Right:	pos.x_speed = move_speed; break
 }
 
 collisions = []; update_collisions()
@@ -42,39 +31,21 @@ function move_by_direction() {
 }
 
 function is_behind(_x, _y) {
-	switch move_direction {
-		case Direction.Up:
-			return _y > pos.point.getY()
-	
-		case Direction.Down:
-			return _y < pos.point.getY()
-	
-		case Direction.Left:
-			return _x > pos.point.getX()
-	
-		case Direction.Right:
-			return _x < pos.point.getX()
+	switch move_direction { //should there be break;s here?
+		case Direction.Up:		return _y > pos.point.getY()
+		case Direction.Down:	return _y < pos.point.getY()
+		case Direction.Left:	return _x > pos.point.getX()
+		case Direction.Right:	return _x < pos.point.getX()
 	}
 	
 }
 
 function turn_around() {
 	switch move_direction {
-		case Direction.Up:
-			move_direction = Direction.Down
-		break
-	
-		case Direction.Down:
-			move_direction = Direction.Up
-		break
-	
-		case Direction.Left:
-			move_direction = Direction.Right
-		break
-	
-		case Direction.Right:
-			move_direction = Direction.Left
-		break
+		case Direction.Up:		move_direction = Direction.Down; break
+		case Direction.Down:	move_direction = Direction.Up; break
+		case Direction.Left:	move_direction = Direction.Right; break
+		case Direction.Right:	move_direction = Direction.Left; break
 	}
 	pos.x_speed *= -1
 	pos.y_speed *= -1

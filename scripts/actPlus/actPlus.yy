@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"checkpoint_read_file",
+  "%Name":"actPlus",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"checkpoint_read_file",
+  "name":"actPlus",
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

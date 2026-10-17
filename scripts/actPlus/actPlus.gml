@@ -2,7 +2,7 @@ function actPlus(){
 	if (true) {// go to next act
 		
 		// refresh map var and generators destroyed map
-		_map = get_level_map();
+		var _map = get_level_map();
 		global.generators_destroyed_map = []
 		for (var i=0; i<array_length(_map); i++) {
 			array_push(global.generators_destroyed_map, []);
@@ -20,6 +20,14 @@ function actPlus(){
 			global.level_x = 2
 			global.level_y = 1
 			room_goto(rm_start)
+		} else if (global.act == 0) {
+			global.checkpoint_room = rm_tut_top_left
+			global.checkpoint_level_x = 0
+			global.checkpoint_level_y = 0
+			
+			global.level_x = 0
+			global.level_y = 0
+			room_goto(rm_tut_top_left)
 		} else {
 			global.checkpoint_room = rm2_camera_intro
 			global.checkpoint_level_x = 0
@@ -31,6 +39,6 @@ function actPlus(){
 		}
 		
 		// unfreeze cubert
-		with (obj_cubert) immobile = false
+		with (obj_cubert) { immobile = false }
 	}	
 }

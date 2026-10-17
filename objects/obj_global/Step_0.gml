@@ -15,12 +15,13 @@ if (keyboard_check_pressed(vk_f11) || keyboard_check_pressed(vk_f4)) {
 }
 
 // Disable generators quickly (DEBUG TOOL)
-if (global.debug && keyboard_check(vk_backspace)){
-	global.generators_destroyed_map[global.level_x][global.level_y] = true;
-	with (obj_generator) { instance_destroy() }
+if (global.debug && keyboard_check_pressed(vk_backspace)){
+	var status = global.generators_destroyed_map[global.level_x][global.level_y];
+	with (obj_generator) { turn_off(!status); }
+	global.generators_destroyed_map[global.level_x][global.level_y] = !status;
 }
 
 
 if (global.camera_follows_player_for_act2) {
-	update_camera([1024, 640], true, instance_nearest(x, y, obj_cubert), 0.5);
+	update_camera(global.cam_size, true, instance_nearest(x, y, obj_cubert), 0.5);
 }

@@ -1,3 +1,6 @@
+active = false
+timer = 0
+
 function apply_interaction(obj) {
 	
 	cooldown = 0;
