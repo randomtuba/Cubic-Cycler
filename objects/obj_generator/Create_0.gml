@@ -10,7 +10,7 @@ function turn_off(actually_turn_on = false) {
 		isOn = false
 	}
 	if (actually_turn_on && !isOn) {
-		audio_play_sound(sfx_generator_break, 0, false)
+		if (!actually_turn_on) audio_play_sound(sfx_generator_break, 0, false)
 		sprite_index = spr_generator
 		isOn = true
 	}
