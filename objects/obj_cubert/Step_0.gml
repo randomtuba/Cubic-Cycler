@@ -12,7 +12,7 @@ if (lose_state) {
 	return;
 }
 
-if ((keyboard_check(ord("R")) || gamepad_button_check(0, gp_start)) && !immobile) { restart(); return; }
+if ((keyboard_check_pressed(ord("R")) || gamepad_button_check_pressed(0, gp_start)) && !immobile) { restart(); return; }
 
 #endregion Loss State
 

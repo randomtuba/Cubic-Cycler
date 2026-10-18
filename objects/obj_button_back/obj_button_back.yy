@@ -9,8 +9,8 @@
   "name":"obj_button_back",
   "overriddenProperties":[],
   "parent":{
-    "name":"Control_UI",
-    "path":"folders/Objects/Control_UI.yy",
+    "name":"Objects_Ctrl",
+    "path":"folders/Objects_Ctrl.yy",
   },
   "parentObjectId":null,
   "persistent":false,
