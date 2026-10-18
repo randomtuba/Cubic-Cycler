@@ -4,10 +4,11 @@ enable_k = lerp(enable_k, enabled, 0.2);
 
 var _mx = device_mouse_x_to_gui(0);
 var _my = device_mouse_y_to_gui(0);
+
 var _click = mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face1) || gamepad_button_value(0, gp_shoulderr) > 0.5 || gamepad_button_value(0, gp_shoulderrb) > 0.5;
 if (gamepad_is_connected(0) && global.gamepad) {
-	_mx = (room_width)*(0.5+0.5*gamepad_axis_value(0, gp_axisrh))
-	_my = (room_height)*(0.5+0.5*gamepad_axis_value(0, gp_axisrv))
+	_mx = (global.cam_size[0])*(0.5+0.5*gamepad_axis_value(0, gp_axisrh))
+	_my = (global.cam_size[1])*(0.5+0.5*gamepad_axis_value(0, gp_axisrv))
 }
 
 if (enable_k > 0) {
@@ -15,15 +16,15 @@ if (enable_k > 0) {
 	//show_debug_message("DRAW EVENT: " + room_get_name(room));
 	var _map = get_level_map();
 	
-	var gap = 100*room_width/room_height;
-	var ratio = room_height/room_width;
+	var gap = 100*global.cam_size[0]/global.cam_size[1];
+	var ratio = global.cam_size[1]/global.cam_size[0];
 	var w = 6;
-	var _cx = room_width/2;
-	var _cy = room_height/2;
+	var _cx = global.cam_size[0]/2;
+	var _cy = global.cam_size[1]/2;
 	var _oi = array_length(_map[0])/2;
 	var _oj = array_length(_map)/2;
 	
-	var _init_y = lerp(room_height+gap, _cy-_oj*gap*ratio, (enable_k<enabled)? enable_k : 2-enable_k);
+	var _init_y = lerp(global.cam_size[1]+gap, _cy-_oj*gap*ratio, (enable_k<enabled)? enable_k : 2-enable_k);
 	var _init_x = _cx-_oi*gap;
 	var _y = _init_y ;
 	for(var i = 0; i<array_length(_map[0]); i++){
@@ -76,7 +77,7 @@ if (enable_k > 0) {
 	}
 	
 	draw_set_color(c_dkgray);
-	draw_rectangle_thick_outline(_init_x, _init_y, _init_x+2*((room_width/2)-_init_x), _y, w, true);
+	draw_rectangle_thick_outline(_init_x, _init_y, _init_x+2*((global.cam_size[0]/2)-_init_x), _y, w, true);
 	draw_set_color(_click ? c_blue : c_black);
 	draw_circle(_mx, _my, 6, false);
 	draw_set_color(c_white);
