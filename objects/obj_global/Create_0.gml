@@ -54,7 +54,8 @@ global.act1_map = [
 ]
 
 global.act2_map = [
-	[rm2_camera_intro],
+	[rm2_camera_intro, rm2_dubious],
+	[rm2_dubious, rm2_dubious],
 ]
 
 // stores current act

@@ -101,6 +101,7 @@
     {"id":{"name":"rm_tut_top_left","path":"rooms/rm_tut_top_left/rm_tut_top_left.yy",},},
     {"id":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
     {"id":{"name":"rm2_camera_intro","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},},
+    {"id":{"name":"rm2_dubious","path":"rooms/rm2_dubious/rm2_dubious.yy",},},
     {"id":{"name":"actPlus","path":"scripts/actPlus/actPlus.yy",},},
     {"id":{"name":"checkpoint_read_file","path":"scripts/checkpoint_read_file/checkpoint_read_file.yy",},},
     {"id":{"name":"checkpoint_write_file","path":"scripts/checkpoint_write_file/checkpoint_write_file.yy",},},
@@ -223,6 +224,7 @@
     {"roomId":{"name":"rm_tut_bottom_right","path":"rooms/rm_tut_bottom_right/rm_tut_bottom_right.yy",},},
     {"roomId":{"name":"rm_tut_bottom_left","path":"rooms/rm_tut_bottom_left/rm_tut_bottom_left.yy",},},
     {"roomId":{"name":"rm2_camera_intro","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},},
+    {"roomId":{"name":"rm2_dubious","path":"rooms/rm2_dubious/rm2_dubious.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
