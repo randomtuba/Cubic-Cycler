@@ -28,11 +28,17 @@ checkpoint_read_file();
 
 function restart() {
 	checkpoint_read_file()
+	
 	if (global.checkpoint_id == -1) {
 		if (global.act == 1) {
 			room_goto(rm_start)
 			global.level_x = 2
 			global.level_y = 1
+			pos.setPos(64, 480)
+		} else if (global.act == 2) {
+			room_goto(rm2_camera_intro)
+			global.level_x = 0
+			global.level_y = 0
 			pos.setPos(64, 480)
 		} else {
 			room_goto(rm_tut_top_left)
@@ -62,10 +68,10 @@ function update_collisions() {
 
 function room_index_bounded(_i = global.level_x, _j = global.level_y) {
 	var _map = get_level_map();
-	return true
-	/* return (_j >= 0) && (_j < array_length(_map)) &&
+	//return true
+	return (_j >= 0) && (_j < array_length(_map)) &&
 		(_i >= 0) && (_i < array_length(_map[0])) &&
-		_map[_j][_i] != -1 */
+		_map[_j][_i] != -1
 }
 
 

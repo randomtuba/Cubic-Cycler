@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"checkpoint_write_file",
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -7,7 +7,8 @@ if (global.act == 0) {
 		visible = false
 	}
 } else {
-	if (obj_tesseract_drawer.collect_timer > sec * 5) {
+	var _tessa = instance_nearest(x, y, obj_tesseract_drawer);
+	if (!instance_exists(_tessa) || _tessa.collect_timer > sec * 5) {
 		visible = true
 	} else {
 		visible = false

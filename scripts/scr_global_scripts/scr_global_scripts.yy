@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_global_scripts",
   "parent":{
-    "name":"Cubic Cycler",
-    "path":"Cubic Cycler.yyp",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
