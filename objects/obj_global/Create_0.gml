@@ -130,7 +130,10 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	camera_set_view_size(view_camera[0], camera_size[0], camera_size[1]);
 	view_wport[0] = camera_size[0];
 	view_hport[0] = camera_size[1];
+	view_xport[0] = 0;
+	view_yport[0] = 0;
 	
+	//commented so now we only use camera0
 	//if (!follow_allowed) {
 	//	var c=0;
 	//	for (var i=-1; i<2; i++) {

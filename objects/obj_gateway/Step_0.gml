@@ -8,7 +8,7 @@ if (global.act == 0) {
 	}
 } else {
 	var _tessa = instance_nearest(x, y, obj_tesseract_drawer);
-	if (!instance_exists(_tessa) || _tessa.collect_timer > sec * 5) {
+	if (!instance_exists(_tessa) || _tessa.collect_timer > sec * 2.5) {
 		visible = true
 	} else {
 		visible = false
@@ -21,6 +21,7 @@ if (active) {
 		image_xscale += sin((timer / sec) * pi * 2) / 3
 		image_yscale += sin((timer / sec) * pi * 2) / 3
 	} else {
+		global.act++;
 		actPlus()
 	}
 }

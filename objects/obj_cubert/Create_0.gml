@@ -47,7 +47,7 @@ function restart() {
 			pos.setPos(128, 480)
 		}
 	} else {
-		if (global.actsaved > global.act) {
+		if (global.actsaved != global.act) {
 			actPlus()
 		}	
 		show_debug_message("checkpoint_id = " + string(global.checkpoint_id));

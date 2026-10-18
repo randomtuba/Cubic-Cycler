@@ -6,10 +6,10 @@ function apply_interaction(obj) {
 	
 	cooldown = 0;
 
-// cooldown for checkpoints
+	// cooldown for checkpoints
 	if (cooldown > 0) { cooldown--; return; }
 
-// obj_checkpoint - apply_interaction
+	// obj_checkpoint - apply_interaction
 	function apply_interaction(obj) {
 		if (cooldown > 0) return;   
 		cooldown = 2 * room_speed;       

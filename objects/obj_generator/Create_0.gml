@@ -6,11 +6,13 @@ if (global.generators_destroyed_map[global.level_x][global.level_y]) {
 
 function turn_off(actually_turn_on = false) {
 	if (isOn) {
+		//turn it off
+		audio_play_sound(sfx_generator_break, 0, false)
 		sprite_index = spr_generator_off
 		isOn = false
 	}
 	if (actually_turn_on && !isOn) {
-		if (!actually_turn_on) audio_play_sound(sfx_generator_break, 0, false)
+		//turn it on
 		sprite_index = spr_generator
 		isOn = true
 	}
