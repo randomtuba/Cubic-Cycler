@@ -1,8 +1,9 @@
 function actPlus(){
 	if (true) {// go to next act
-		
+
+		global.act = global.actsaved;
 		// refresh map var and generators destroyed map
-		var _map = get_level_map();
+		_map = get_level_map();
 		global.generators_destroyed_map = []
 		for (var i=0; i<array_length(_map); i++) {
 			array_push(global.generators_destroyed_map, []);

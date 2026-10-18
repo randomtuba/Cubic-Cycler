@@ -14,12 +14,6 @@ randomize()
 
 depth += 100;
 
-// start music
-with (obj_music_handler) {
-	audio_stop_sound(100)
-	play_new_song()
-}
-
 #region Variables
 
 global.debug = true;
@@ -34,7 +28,7 @@ global.background_scale = 2
 // stores the position of the player
 global.default_x = 0
 global.default_y = 0
-
+global.actsaved = 0
 // platformer physics quality of life
 global.coyote_time = 5
 global.input_buffer_time = 5
@@ -80,12 +74,15 @@ for (var i=0; i<array_length(_map); i++) {
 global.kleinbottles_collected = []
 
 // stores checkpoint data
-global.checkpoint_id = -1
-global.checkpoint_x = room_width/2
-global.checkpoint_y = room_height/2
-global.checkpoint_room = rm_tut_top_left
-global.checkpoint_level_x = 0
-global.checkpoint_level_y = 0
+if (!checkpoint_read_file()) {
+    global.checkpoint_id = -1
+	global.checkpoint_x = room_width/2
+	global.checkpoint_y = room_height/2
+	global.checkpoint_room = rm_tut_top_left
+	global.checkpoint_level_x = 0
+	global.checkpoint_level_y = 0
+}
+
 
 #endregion Variables
 
@@ -154,6 +151,8 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 		
 	//}
 }
+
+
 
 function send_collision_updates() {
 	for (i = 0; i < array_length(COLLISION_UPDATE_LISTENERS); i++) {

@@ -21,7 +21,6 @@ if (active) {
 		image_xscale += sin((timer / sec) * pi * 2) / 3
 		image_yscale += sin((timer / sec) * pi * 2) / 3
 	} else {
-		global.act++
 		actPlus()
 	}
 }
