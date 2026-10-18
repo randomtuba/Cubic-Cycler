@@ -10,7 +10,7 @@
   "compression":3,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":75.10204,
+  "duration":73.846146,
   "exportDir":"",
   "name":"mus_ambiescence",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mus_ambiescence.mp3",
+  "soundFile":"mus_ambiescence.wav",
   "volume":1.0,
 }
