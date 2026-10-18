@@ -5,47 +5,41 @@
 /// @param _y Starting Y coordinate
 /// @param wraps Whether to screenwrap during object creation
 function wPoint(_x, _y, wraps = true) constructor {
-	if (wraps) {
-		while (_x < 0) {
-			_x += room_width
-		}
-		while (_y < 0) {
-			_y += room_height
-		}
-		_x = _x % room_width
-		_y = _y % room_height
-	}
-	_x_internal = _x
-	_y_internal = _y
+	var cam_left = camera_get_view_x(view_camera[0])
+	var cam_top = camera_get_view_y(view_camera[1])
 	
-	function getX() {
-		return _x_internal
+	_x -= cam_left
+	_y -= cam_top
+	if (wraps) {
+		while (_x < 0) { _x += global.cam_size[0] }
+		while (_y < 0) { _y += global.cam_size[1] }
+		_x = _x % global.cam_size[0]
+		_y = _y % global.cam_size[1]
 	}
+	_x_internal = _x + cam_left
+	_y_internal = _y + cam_top
+	
+	function getX() { return _x_internal }
+	function getY() { return _y_internal }
 	
 	function setX(_x, wraps = true) {
-		if (wraps) {
-			while (_x < 0) {
-				_x += room_width
-			}
-			_x_internal = _x % room_width
-		} else {
-			_x_internal = _x
-		}
-	}
-	
-	function getY() {
-		return _y_internal
+		if (!wraps) { _x_internal = _x; return; } 
+		
+		var cam_left = camera_get_view_x(view_camera[0])
+		_x -= cam_left
+		while (_x < 0) { _x += global.cam_size[0] }
+		_x = _x % global.cam_size[0]
+		_x_internal = _x + cam_left
 	}
 	
 	function setY(_y, wraps = true) {
-		if (wraps) {
-			while (_y < 0) {
-				_y += room_height
-			}
-			_y_internal = _y % room_height
-		} else {
-			_y_internal = _y
-		}
+		if (!wraps) { _y_internal = _y; return; }
+		
+		var cam_top = camera_get_view_y(view_camera[1])
+		_y -= cam_top
+		while (_y < 0) { _y += global.cam_size[1] }
+		_y = _y % global.cam_size[1]
+		_y_internal = _y + cam_top
 	}
 	
 	/// @desc Gets the distance to a point, accounting for screenwraps
@@ -58,21 +52,13 @@ function wPoint(_x, _y, wraps = true) constructor {
 	function distanceTo(_x, _y) {
 		// Find smallest X distance, including by wrapping
 		var _xDist = _x - getX()
-		if (abs(_x - getX() - room_width) < abs(_xDist)) {
-			_xDist = _x - getX() - room_width
-		}
-		if (abs(_x - getX() + room_width) < abs(_xDist)) {
-			_xDist = _x - getX() + room_width
-		}
+		if (abs(_x - getX() - global.cam_size[0]) < abs(_xDist)) { _xDist = _x - getX() - global.cam_size[0] }
+		if (abs(_x - getX() + global.cam_size[0]) < abs(_xDist)) { _xDist = _x - getX() + global.cam_size[0] }
 		
 		// Find smallest Y distance, including by wrapping
 		var _yDist = _y - getY()
-		if (abs(_y - getY() - room_height) < abs(_yDist)) {
-			_yDist = _y - getY() - room_height
-		}
-		if (abs(_y - getY() + room_height) < abs(_yDist)) {
-			_yDist = _y - getY() + room_height
-		}
+		if (abs(_y - getY() - global.cam_size[1]) < abs(_yDist)) { _yDist = _y - getY() - global.cam_size[1] }
+		if (abs(_y - getY() + global.cam_size[1]) < abs(_yDist)) { _yDist = _y - getY() + global.cam_size[1] }
 		
 		return { x : _xDist, y : _yDist }
 	}
@@ -117,13 +103,7 @@ function MapContact(_map) constructor {
 
 /// @desc Returns whether screenwrapping is active
 function should_screenwrap() {
-	if (instance_exists(obj_generator)) {
-		with (obj_generator) {
-			if (isOn) {
-				return true
-			}
-		}
-	}
+	with (obj_generator) { if (isOn) { return true } }
 	return false
 }
 
@@ -131,17 +111,18 @@ function should_screenwrap() {
 /// @param {Real} _x The X coordinate
 /// @param {Real} _y The Y coordinate
 function wrap_point(_x, _y) {
-	while (_x < 0) {
-		_x += room_width
-	}
-	while (_y < 0) {
-		_y += room_height
-	}
-	_x = _x % room_width
-	_y = _y % room_height
+	var cam_left = camera_get_view_x(view_camera[0]);
+	var cam_top = camera_get_view_y(view_camera[1]);
+	
+	_x -= cam_left
+	_y -= cam_top
+	while (_x < 0) { _x += global.cam_size[0] }
+	while (_y < 0) { _y += global.cam_size[1] }
+	_x = _x % global.cam_size[0]
+	_y = _y % global.cam_size[1]
 	return {
-		x : _x,
-		y : _y
+		x : _x + cam_left,
+		y : _y + cam_top
 	}
 }
 
