@@ -1,6 +1,4 @@
 function actPlus(){
-	if (true) {// go to next act
-
 		//global.act = global.actsaved;
 		// refresh map var and generators destroyed map
 		_map = get_level_map();
@@ -41,5 +39,4 @@ function actPlus(){
 		
 		// unfreeze cubert
 		with (obj_cubert) { immobile = false }
-	}	
 }
