@@ -10,5 +10,3 @@ if (song_ended) {
 		play_new_song()
 	}
 }
-
-show_debug_message(string(song_ended) + " " + string(song_timer))
