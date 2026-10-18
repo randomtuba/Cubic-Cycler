@@ -115,6 +115,7 @@
     {"id":{"name":"mus_framing_device","path":"sounds/mus_framing_device/mus_framing_device.yy",},},
     {"id":{"name":"mus_nowwithdrums","path":"sounds/mus_nowwithdrums/mus_nowwithdrums.yy",},},
     {"id":{"name":"mus_tuff_stuff","path":"sounds/mus_tuff_stuff/mus_tuff_stuff.yy",},},
+    {"id":{"name":"sfx_button_press","path":"sounds/sfx_button_press/sfx_button_press.yy",},},
     {"id":{"name":"sfx_checkpoint","path":"sounds/sfx_checkpoint/sfx_checkpoint.yy",},},
     {"id":{"name":"sfx_generator_break","path":"sounds/sfx_generator_break/sfx_generator_break.yy",},},
     {"id":{"name":"sfx_teleport_quick","path":"sounds/sfx_teleport_quick/sfx_teleport_quick.yy",},},
