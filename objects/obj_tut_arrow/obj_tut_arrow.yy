@@ -8,8 +8,8 @@
   "name":"obj_tut_arrow",
   "overriddenProperties":[],
   "parent":{
-    "name":"WorldElements",
-    "path":"folders/Objects/WorldElements.yy",
+    "name":"Objects_simple_UI",
+    "path":"folders/Objects_simple_UI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

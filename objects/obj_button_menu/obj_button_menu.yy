@@ -10,8 +10,8 @@
   "name":"obj_button_menu",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects_Ctrl",
-    "path":"folders/Objects_Ctrl.yy",
+    "name":"Objects_simple_UI",
+    "path":"folders/Objects_simple_UI.yy",
   },
   "parentObjectId":null,
   "persistent":false,
