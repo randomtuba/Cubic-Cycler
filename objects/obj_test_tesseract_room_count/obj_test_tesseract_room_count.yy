@@ -9,8 +9,8 @@
   "name":"obj_test_tesseract_room_count",
   "overriddenProperties":[],
   "parent":{
-    "name":"WorldElements",
-    "path":"folders/Objects/WorldElements.yy",
+    "name":"Objects_simple_UI",
+    "path":"folders/Objects_simple_UI.yy",
   },
   "parentObjectId":null,
   "persistent":true,

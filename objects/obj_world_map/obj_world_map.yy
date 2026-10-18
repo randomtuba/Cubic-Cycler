@@ -9,8 +9,8 @@
   "name":"obj_world_map",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects_Ctrl",
-    "path":"folders/Objects_Ctrl.yy",
+    "name":"Objects_control",
+    "path":"folders/Objects_control.yy",
   },
   "parentObjectId":null,
   "persistent":true,
