@@ -59,8 +59,8 @@ function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 	
 	/// @desc Runs all code that should be run at step end
 	function end_step() {
-		x_speed *= x_drag
-		y_speed *= y_drag
+		//x_speed *= x_drag
+		//y_speed *= y_drag
 		
 		x_this_frame = 0
 		y_this_frame = 0

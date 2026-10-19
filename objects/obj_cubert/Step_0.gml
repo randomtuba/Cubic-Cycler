@@ -52,7 +52,9 @@ if (_grounded) {
 #region Gravity
 
 if (!immobile) {
-	if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
+	var _r = _down ? 0.8 : 0.4;
+	pos.x_speed += _r * dcos(gravity_direction)
+	pos.y_speed -= _r * dsin(gravity_direction)
 } else {
 	pos.x_speed *= 0.8
 	pos.y_speed *= 0.8
@@ -191,6 +193,10 @@ if (global.debug && mouse_check_button(mb_right)) {
 	pos.setPos(mouse_x, mouse_y)
 	pos.x_speed = 0
 	pos.y_speed = 0
+}
+
+if (global.debug && mouse_check_button(mb_middle)) {
+	gravity_direction = 90*floor((point_direction(x, y, mouse_x, mouse_y)+45)/90)
 }
 
 if (pos.x_speed != 0) {
