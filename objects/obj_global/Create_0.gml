@@ -41,6 +41,9 @@ global.tractor_strength = 0.5
 global.level_x = 0
 global.level_y = 0
 
+// is screen wrap active for act 2?
+global.pedestal_active = true
+
 global.tutorial_map = [
 	[rm_tut_top_left, rm_tut_top_right],
 	[rm_tut_bottom_left, rm_tut_bottom_right],

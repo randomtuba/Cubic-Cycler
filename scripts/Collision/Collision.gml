@@ -103,8 +103,12 @@ function MapContact(_map) constructor {
 
 /// @desc Returns whether screenwrapping is active
 function should_screenwrap() {
-	with (obj_generator) { if (isOn) { return true } }
-	return false
+	if (string_starts_with(string(room), "ref room rm2_")) {
+		return global.pedestal_active
+	} else {
+		with (obj_generator) { if (isOn) { return true } }
+		return false
+	}
 }
 
 /// @desc Screenwraps a point
