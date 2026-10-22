@@ -41,17 +41,18 @@ pos.x_speed += _lr * 0.75
 
 #region Coyote Time
 
-if (_grounded) { coyote_time = global.coyote_time }
-else if (coyote_time > 0) { coyote_time-- }
+if (_grounded) {
+	coyote_time = global.coyote_time
+} else if (coyote_time > 0) {
+	coyote_time--
+}
 
 #endregion Coyote Time
 
 #region Gravity
 
 if (!immobile) {
-	var _r = _down ? 0.8 : 0.4;
-	pos.x_speed += _r * dcos(gravity_direction)
-	pos.y_speed -= _r * dsin(gravity_direction)
+	if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
 } else {
 	pos.x_speed *= 0.8
 	pos.y_speed *= 0.8
@@ -62,11 +63,16 @@ if (!immobile) {
 #region Jumping
 
 // Buffer
-if (_jump) { jump_buffer = global.input_buffer_time }
-else if (jump_buffer > 0) { jump_buffer-- }
+if (_jump) {
+	jump_buffer = global.input_buffer_time
+} else if (jump_buffer > 0) {
+	jump_buffer--
+}
 
 // Cooldown
-if (jump_cooldown > 0) { jump_cooldown-- }
+if (jump_cooldown > 0) {
+	jump_cooldown--
+}
 
 // Jump
 if (coyote_time > 0) {
@@ -116,11 +122,17 @@ for (var d = 0; d < 5; d++) {
 }
 
 // Reset speed if blocked
-if (!movement.x) { pos.x_speed = 0 }
-if (!movement.y) { pos.y_speed = 0 }
+if (!movement.x) {
+	pos.x_speed = 0
+}
+if (!movement.y) {
+	pos.y_speed = 0
+}
 
 // "Bouncy" landing vfx
-if (!movement.y && !was_grounded) { jump_k = jump_j_max }
+if (!movement.y && !was_grounded) {
+	jump_k = jump_j_max
+}
 was_grounded = !movement.y
 
 #endregion Movement
@@ -181,10 +193,8 @@ if (global.debug && mouse_check_button(mb_right)) {
 	pos.y_speed = 0
 }
 
-if (global.debug && mouse_check_button(mb_middle)) {
-	gravity_direction = 90*floor((point_direction(x, y, mouse_x, mouse_y)+45)/90)
+if (pos.x_speed != 0) {
+	image_xscale = sign(pos.x_speed) * 1;
 }
-
-if (pos.x_speed != 0) { image_xscale = sign(pos.x_speed) * 1; }
 x_scale = lerp(x_scale, image_xscale, 0.9)
 
