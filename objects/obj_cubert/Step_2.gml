@@ -1,1 +1,1 @@
-pos.end_step()
+pos.end_step(gravity_direction)

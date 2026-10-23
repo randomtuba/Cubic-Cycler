@@ -391,8 +391,12 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4) {
 /// @param {Id.Instance} obj The object
 /// @param collisions An array containing all objects that should be considered solid
 /// @param buffer (Optional) The distance at which things can be considered touching, default 2
-function checkGrounded(obj, collisions, buffer = 2) {
-	return checkValidMoveGM(obj, collisions, 0, buffer, Direction.Down)
+function checkGrounded(obj, collisions, buffer = 2, grav_dir = 270) {
+	var _Dir = Direction.Down;
+	if (abs(angle_difference(grav_dir, 0)) < 45) { _Dir = Direction.Right; }
+	if (abs(angle_difference(grav_dir, 90)) < 45) { _Dir = Direction.Up; }
+	if (abs(angle_difference(grav_dir, 180)) < 45) { _Dir = Direction.Left; }
+	return checkValidMoveGM(obj, collisions, 0, buffer, _Dir)
 }
 
 /// @desc Attempts to move an object by some offset

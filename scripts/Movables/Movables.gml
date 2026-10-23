@@ -58,9 +58,10 @@ function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 	}
 	
 	/// @desc Runs all code that should be run at step end
-	function end_step() {
-		x_speed *= x_drag
-		y_speed *= y_drag
+	function end_step(_grav_dir = 270) {
+		//a certain abs(dsin(ang)) being 1 means that that __drag is being canceled
+		x_speed *= (x_drag + (1-x_drag)*abs(dsin(_grav_dir+90))) * (y_drag + (1-y_drag)*abs(dcos(_grav_dir+90)))
+		y_speed *= (y_drag + (1-y_drag)*abs(dsin(_grav_dir+90))) * (x_drag + (1-x_drag)*abs(dcos(_grav_dir+90)))
 		
 		x_this_frame = 0
 		y_this_frame = 0

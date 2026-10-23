@@ -4,4 +4,9 @@ if (global.debug) {
 	draw_text(16, 16, "\n\nlevel_x="+string(global.level_x))
 	draw_text(16, 16, "\n\n\nlevel_y="+string(global.level_y))
 	draw_text(16, 16, "\n\n\n\ncubert count="+string(instance_number(obj_cubert)))
+	if (instance_exists(obj_cubert)) {
+		var _cub = instance_nearest(x, y, obj_cubert);
+		var _cub_grouned = checkGrounded(_cub, _cub.collisions, 5, _cub.gravity_direction);
+		draw_text(16, 16, "\n\n\n\n\ncubert grounded = "+(_cub_grouned?"true":"false"));
+	}
 }

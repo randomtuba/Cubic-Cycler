@@ -1,7 +1,7 @@
 
 #region Controls (Copy from Step)
 
-var _inAir = checkGrounded(self, collisions, 5).valid
+var _inAir = checkGrounded(self, collisions, 5, gravity_direction).valid
 
 var _right = keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr) || gamepad_axis_value(0, gp_axislh) > 0.1
 var _left = keyboard_check(vk_left)||keyboard_check(ord("A")) || gamepad_button_check(0, gp_padl) || gamepad_axis_value(0, gp_axislh) < -0.1
@@ -25,7 +25,7 @@ for (var i=-1; i<2; i++) {
 	for (var j=-1; j<2; j++) {
 		var x_o = i*global.cam_size[0];
 		var y_o = j*global.cam_size[1];
-		draw_sprite_ext(spr_cubert_2, image_index, x+x_o, y+y_o, x_scale*(1+_xw), image_yscale*(1+_yh), rotation, c_white, image_alpha*visible);
+		draw_sprite_ext(spr_cubert_2, image_index, x+x_o, y+y_o, x_scale*(1+_xw), image_yscale*(1+_yh), rotation+gravity_direction-270, c_white, image_alpha*visible);
 		//draw_circle(x+x_o, y+y_o, 3, true);
 		//draw_text(x+x_o+64*i, y+y_o+16*j, "("+string(x_o)+","+string(y_o)+")");
 	}

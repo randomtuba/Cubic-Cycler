@@ -28,31 +28,31 @@ var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check
 
 #region Movement
 
-var groundCheck = checkGrounded(self, collisions, 5)
+var groundCheck = checkGrounded(self, collisions, 5, gravity_direction+180)
 var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
 
 #region Horizontal Movement
 
-pos.x_speed += _lr * 0.75
+pos.x_speed += _lr * 0.75 * dcos(gravity_direction+90)
+pos.y_speed -= _lr * 0.75 * dsin(gravity_direction+90)
 
 #endregion Horizontal Movement
 
 #region Coyote Time
 
-if (_grounded) {
-	coyote_time = global.coyote_time
-} else if (coyote_time > 0) {
-	coyote_time--
-}
+if (_grounded) { coyote_time = global.coyote_time }
+else if (coyote_time > 0) { coyote_time-- }
 
 #endregion Coyote Time
 
 #region Gravity
 
 if (!immobile) {
-	if (_down) { pos.y_speed += 0.8 } else { pos.y_speed += 0.4 }
+	var _r = _down ? 0.8 : 0.4;
+	pos.x_speed += _r * dcos(gravity_direction)
+	pos.y_speed -= _r * dsin(gravity_direction)
 } else {
 	pos.x_speed *= 0.8
 	pos.y_speed *= 0.8
@@ -63,21 +63,17 @@ if (!immobile) {
 #region Jumping
 
 // Buffer
-if (_jump) {
-	jump_buffer = global.input_buffer_time
-} else if (jump_buffer > 0) {
-	jump_buffer--
-}
+if (_jump) { jump_buffer = global.input_buffer_time }
+else if (jump_buffer > 0) { jump_buffer-- }
 
 // Cooldown
-if (jump_cooldown > 0) {
-	jump_cooldown--
-}
+if (jump_cooldown > 0) { jump_cooldown-- }
 
 // Jump
 if (coyote_time > 0) {
-	if (jump_buffer > 0 && jump_cooldown == 0) { 
-		pos.y_speed = -10
+	if (jump_buffer > 0 && jump_cooldown <= 0) { 
+		pos.y_speed = 10 * dsin(gravity_direction)
+		pos.x_speed = -10 * dcos(gravity_direction)
 		
 		jump_cooldown = sec / 3
 		coyote_time = 0
@@ -112,28 +108,21 @@ for (var d = 0; d < 5; d++) {
 	for (var i = 0; i < array_length(set); i++) {
 		var obj = set[i]
 		if (instance_exists(obj) && obj.object_index == obj_pushbox) {
-			if (d == Direction.Left || d == Direction.Right) {
-				movement.x = true
-			} else if (d == Direction.Up || d == Direction.Down) {
-				movement.y = true
-			}
+			if (d == Direction.Left || d == Direction.Right) { movement.x = true }
+			else if (d == Direction.Up || d == Direction.Down) { movement.y = true }
 		}
 	}
 }
 
 // Reset speed if blocked
-if (!movement.x) {
-	pos.x_speed = 0
-}
-if (!movement.y) {
-	pos.y_speed = 0
-}
+if (!movement.x) { pos.x_speed = 0 }
+if (!movement.y) { pos.y_speed = 0 }
 
 // "Bouncy" landing vfx
-if (!movement.y && !was_grounded) {
-	jump_k = jump_j_max
-}
-was_grounded = !movement.y
+
+var _would_grounded = !movement.y*abs(dsin(gravity_direction)) + !movement.x*abs(dcos(gravity_direction))
+if (_would_grounded && !was_grounded) { jump_k = jump_j_max }
+was_grounded = _would_grounded
 
 #endregion Movement
 
@@ -150,7 +139,8 @@ if (x > room_width) {
 			pos.setPos(pos.point.getX() - room_width, pos.point.getY())
 		} else { global.level_x--; }
     }
-} else if (x < 0) {
+}
+else if (x < 0) {
     if (!should_screenwrap()) {
         global.level_x--
 		if (global.level_x < 0) global.level_x = array_length(_map[global.level_y]) - 1
@@ -171,7 +161,8 @@ if (y > room_height) {
 			pos.setPos(pos.point.getX(), pos.point.getY() - room_height)
 		} else { global.level_y--; }
     }
-} else if (y < 0) {
+}
+else if (y < 0) {
     if (!should_screenwrap()) {
         global.level_y--
 		if (global.level_y < 0) global.level_y = array_length(_map) - 1
@@ -193,8 +184,11 @@ if (global.debug && mouse_check_button(mb_right)) {
 	pos.y_speed = 0
 }
 
-if (pos.x_speed != 0) {
-	image_xscale = sign(pos.x_speed) * 1;
+if (global.debug && mouse_check_button(mb_middle)) {
+	var _ang_seg = 90-60*keyboard_check(vk_lshift);
+	gravity_direction = _ang_seg*floor((point_direction(x, y, mouse_x, mouse_y)+_ang_seg/2)/_ang_seg)
 }
+
+if (pos.x_speed != 0) { image_xscale = sign(pos.x_speed) * 1; }
 x_scale = lerp(x_scale, image_xscale, 0.9)
 
