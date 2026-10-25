@@ -1,0 +1,1 @@
+gravity_direction = other.image_angle;
