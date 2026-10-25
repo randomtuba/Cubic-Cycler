@@ -384,7 +384,8 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4) {
 /// @param buffer (Optional) The distance at which things can be considered touching, default 2
 function checkGrounded(obj, collisions, buffer = 2, grav_dir = 270) {
 	var _Dir = angle_direction_to_enum_Direction(grav_dir);
-	return checkValidMoveGM(obj, collisions, 0, buffer, _Dir);
+	var _simple_ang = enum_Direction_to_angle_direction(_Dir);
+	return checkValidMoveGM(obj, collisions, buffer*dcos(_simple_ang), -buffer*dsin(_simple_ang), _Dir);
 }
 
 
@@ -394,6 +395,14 @@ function angle_direction_to_enum_Direction(_ang = 0) {
 	if (abs(angle_difference(_ang, 180)) < 45) { _Dir = Direction.Left; }
 	if (abs(angle_difference(_ang, 270)) < 45) { _Dir = Direction.Down; }
 	return _Dir;
+}
+
+function enum_Direction_to_angle_direction(_Dir = Direction.None) {
+	var _ang = 90;
+	if (_Dir == Direction.Down) { _ang = 270; }
+	if (_Dir == Direction.Left) { _ang = 180; }
+	if (_Dir == Direction.Right) { _ang = 0; }
+	return _ang;
 }
 
 /// @desc Attempts to move an object by some offset
