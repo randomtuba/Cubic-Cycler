@@ -27,3 +27,6 @@ if (global.camera_follows_player_for_act2) {
 	update_camera(global.cam_size, true, global.pedestal_active ? global.pedestal : noone, a*!should_screenwrap());
 	//no interpolate during should_screenwrap means camera should stay still
 }
+
+if (keyboard_check_pressed(vk_f3)) { global.debug = !global.debug; }
+if (keyboard_check_pressed(ord("M"))) { global.minimap = !global.minimap; }

@@ -24,5 +24,3 @@ draw_set_color(c_white);
 //for (var i=0; i<4; i++) {
 //	view_visible[i+1] = (should_screenwrap())
 //}
-
-if (keyboard_check_pressed(vk_f3)) { global.debug = !global.debug; }

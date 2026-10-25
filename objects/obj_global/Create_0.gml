@@ -17,6 +17,7 @@ depth += 100;
 #region Variables
 
 global.debug = true;
+global.minimap = true;
 global.gamepad = false;
 
 global.camera_follows_player_for_act2 = false;
@@ -139,10 +140,10 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	
 	camera_set_view_pos(view_camera[0], x_off, y_off);
 	camera_set_view_size(view_camera[0], camera_size[0], camera_size[1]);
-	view_wport[0] = camera_size[0];
-	view_hport[0] = camera_size[1];
 	view_xport[0] = 0;
 	view_yport[0] = 0;
+	view_wport[0] = camera_size[0];
+	view_hport[0] = camera_size[1];
 	
 	//commented so now we only use camera0
 	//if (!follow_allowed) {

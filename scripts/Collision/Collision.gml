@@ -232,7 +232,7 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4) {
 			// Get hit objects
 			var hitObjects = ds_list_create()
 			with (obj) {
-				instance_place_list(x + x1Change + room_width * _x, y + y1Change + room_height * _y, compare, hitObjects, false)
+				instance_place_list(x + x1Change + global.cam_size[0] * _x, y + y1Change + global.cam_size[1] * _y, compare, hitObjects, false)
 			}
 			
 			// Store any hits alongside their distances
