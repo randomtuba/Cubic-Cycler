@@ -24,6 +24,6 @@ if (global.debug && keyboard_check_pressed(vk_backspace)){
 
 if (global.camera_follows_player_for_act2) {
 	var a = 0.2;
-	update_camera(global.cam_size, true, instance_nearest(x, y, obj_cubert), a*!should_screenwrap());
+	update_camera(global.cam_size, true, global.pedestal_active ? global.pedestal : noone, a*!should_screenwrap());
 	//no interpolate during should_screenwrap means camera should stay still
 }

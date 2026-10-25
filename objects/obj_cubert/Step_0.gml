@@ -184,7 +184,7 @@ if (global.debug && mouse_check_button(mb_right)) {
 	pos.y_speed = 0
 }
 
-if (global.debug && mouse_check_button(mb_middle)) {
+if (global.debug && (mouse_check_button(mb_middle) || keyboard_check(ord("G")))) {
 	var _ang_seg = 90-60*keyboard_check(vk_lshift);
 	gravity_direction = _ang_seg*floor((point_direction(x, y, mouse_x, mouse_y)+_ang_seg/2)/_ang_seg)
 }

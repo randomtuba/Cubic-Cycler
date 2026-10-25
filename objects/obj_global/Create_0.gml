@@ -21,6 +21,7 @@ global.gamepad = false;
 
 global.camera_follows_player_for_act2 = false;
 global.cam_size = [1024, 640];
+global.pedestal = noone
 
 global.use_background = true
 global.background_scale = 2
@@ -58,7 +59,7 @@ global.act1_map = [
 
 global.act2_map = [
 	[rm2_camera_intro, rm2_dubious],
-	[rm2_dubious, rm2_dubious],
+	[rm2_dubious, rm2_central],
 ]
 
 // stores current act
@@ -122,8 +123,14 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	if (follow_allowed) {
 		if (!instance_exists(follow_object)) { follow_object = instance_nearest(x, y, obj_cubert); }
 		if (instance_exists(follow_object)) {
-			x_off = clamp(follow_object.x - camera_size[0]/2, 0, room_width - camera_size[0]);
-			y_off = clamp(follow_object.y - camera_size[1]/2, 0, room_height - camera_size[1]);
+			var _x = follow_object.x;
+			var _y = follow_object.y;
+			if (follow_object.object_index == obj_pedestal) {
+				_x = follow_object.camera_x_coord_left;
+				_y = follow_object.camera_y_coord_top;
+			}
+			x_off = clamp(_x - camera_size[0]/2, 0, room_width - camera_size[0]);
+			y_off = clamp(_y - camera_size[1]/2, 0, room_height - camera_size[1]);
 			
 			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
 			y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
