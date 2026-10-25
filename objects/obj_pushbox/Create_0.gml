@@ -5,6 +5,7 @@ rotation = 0;
 collisions = []; update_collisions();
 rider = noone;
 touchspring = 0
+shredding = false; shredded_pixels = 0;
 
 function update_collisions() {
 	with (obj_global) {

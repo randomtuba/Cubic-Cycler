@@ -1,0 +1,9 @@
+speed = random_range(1,4)
+gravity = 0.5
+alpha_max_timer = 0.4*sec - random_range(0, 0.2)*sec;
+alarm[0] = alpha_max_timer;
+rotspd = random_range(-2, 2)
+u = 0
+l = 0
+r = sprite_width
+d = sprite_height

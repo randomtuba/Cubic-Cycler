@@ -65,6 +65,7 @@
     {"id":{"name":"obj_pedestal","path":"objects/obj_pedestal/obj_pedestal.yy",},},
     {"id":{"name":"obj_pushbox","path":"objects/obj_pushbox/obj_pushbox.yy",},},
     {"id":{"name":"obj_savemenu","path":"objects/obj_savemenu/obj_savemenu.yy",},},
+    {"id":{"name":"obj_slicer_particle","path":"objects/obj_slicer_particle/obj_slicer_particle.yy",},},
     {"id":{"name":"obj_spike_low","path":"objects/obj_spike_low/obj_spike_low.yy",},},
     {"id":{"name":"obj_spikeball","path":"objects/obj_spikeball/obj_spikeball.yy",},},
     {"id":{"name":"obj_spikes","path":"objects/obj_spikes/obj_spikes.yy",},},

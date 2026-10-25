@@ -455,9 +455,7 @@ function attemptMoveInSteps(obj, collisions, _x, _y, buffer = 4, wraps = true, s
 	for (var step = 1; step <= steps; step++) {
 		var result = attemptMove(obj, collisions, xPerStep, yPerStep, buffer, wraps)
 		
-		if (step == steps) {
-			success = result
-		}
+		if (step == steps) { success = result }
 	}
 	
 	return success

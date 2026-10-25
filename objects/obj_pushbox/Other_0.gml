@@ -1,0 +1,1 @@
+if (!should_screenwrap()) { shredding = true; instance_destroy(); }
