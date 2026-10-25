@@ -1,1 +1,1 @@
-if (!should_screenwrap() || shredding) { shred(); instance_destroy(); }
+if (!should_screenwrap() || shredding) { instance_destroy(); }

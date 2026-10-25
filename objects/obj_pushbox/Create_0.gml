@@ -29,7 +29,7 @@ function shred() {
 				p.u = i;
 			}
 		}
-		shredded_pixels = to_shred;
+		shredded_pixels = max(shredded_pixels, to_shred);
 	}
 	
 	if (bbox_right > room_width) {
@@ -45,7 +45,7 @@ function shred() {
 				p.u = i;
 			}
 		}
-		shredded_pixels = to_shred;
+		shredded_pixels = max(shredded_pixels, to_shred);
 	}
 	
 	if (bbox_top < 0) {
@@ -61,7 +61,7 @@ function shred() {
 				p.u = shredded_pixels+j;
 			}
 		}
-		shredded_pixels = to_shred;
+		shredded_pixels = max(shredded_pixels, to_shred);
 	}
 	
 	if (bbox_bottom > room_height) {
@@ -77,8 +77,7 @@ function shred() {
 				p.u = sprite_height-to_shred+j;
 			}
 		}
-		shredded_pixels = to_shred;
-	
+		shredded_pixels = max(shredded_pixels, to_shred);
 	}
 }
 
