@@ -275,31 +275,22 @@ function contactMeetsDirection(obj, contact, _direction, buffer = 4) {
 		// Make sure the direction is valid
 		switch _direction {
 			case Direction.Up:
-				if (buffer > (contact.yDist + ySpace) && abs(contact.xDist) < xSpace) {
-					return true
-				}
+				if (buffer > (contact.yDist + ySpace) && abs(contact.xDist) < xSpace) { return true }
 			break
 		
 			case Direction.Down:
-				if (-buffer < (contact.yDist - ySpace) && abs(contact.xDist) < xSpace) {
-					return true
-				}
+				if (-buffer < (contact.yDist - ySpace) && abs(contact.xDist) < xSpace) { return true }
 			break
 			
 			case Direction.Left:
-				if (buffer > (contact.xDist + xSpace) && abs(contact.yDist) < ySpace) {
-					return true
-				}
+				if (buffer > (contact.xDist + xSpace) && abs(contact.yDist) < ySpace) { return true }
 			break
 		
 			case Direction.Right:
-				if (-buffer < (contact.xDist - xSpace) && abs(contact.yDist) < ySpace) {
-					return true
-				}
+				if (-buffer < (contact.xDist - xSpace) && abs(contact.yDist) < ySpace) { return true }
 			break
 		
-			case Direction.None:
-				return true
+			case Direction.None: return true
 		}
 	}
 	return false
@@ -392,11 +383,17 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4) {
 /// @param collisions An array containing all objects that should be considered solid
 /// @param buffer (Optional) The distance at which things can be considered touching, default 2
 function checkGrounded(obj, collisions, buffer = 2, grav_dir = 270) {
-	var _Dir = Direction.Down;
-	if (abs(angle_difference(grav_dir, 0)) < 45) { _Dir = Direction.Right; }
-	if (abs(angle_difference(grav_dir, 90)) < 45) { _Dir = Direction.Up; }
-	if (abs(angle_difference(grav_dir, 180)) < 45) { _Dir = Direction.Left; }
-	return checkValidMoveGM(obj, collisions, 0, buffer, _Dir)
+	var _Dir = angle_direction_to_enum_Direction(grav_dir);
+	return checkValidMoveGM(obj, collisions, 0, buffer, _Dir);
+}
+
+
+function angle_direction_to_enum_Direction(_ang = 0) {
+	var _Dir = Direction.Right;
+	if (abs(angle_difference(_ang, 90)) < 45) { _Dir = Direction.Up; }
+	if (abs(angle_difference(_ang, 180)) < 45) { _Dir = Direction.Left; }
+	if (abs(angle_difference(_ang, 270)) < 45) { _Dir = Direction.Down; }
+	return _Dir;
 }
 
 /// @desc Attempts to move an object by some offset

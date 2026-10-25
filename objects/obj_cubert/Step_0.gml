@@ -28,7 +28,7 @@ var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check
 
 #region Movement
 
-var groundCheck = checkGrounded(self, collisions, 5, gravity_direction+180)
+var groundCheck = checkGrounded(self, collisions, 5, gravity_direction);
 var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
@@ -72,8 +72,8 @@ if (jump_cooldown > 0) { jump_cooldown-- }
 // Jump
 if (coyote_time > 0) {
 	if (jump_buffer > 0 && jump_cooldown <= 0) { 
-		pos.y_speed = 10 * dsin(gravity_direction)
-		pos.x_speed = -10 * dcos(gravity_direction)
+		pos.x_speed = +10 * dcos(gravity_direction+180)
+		pos.y_speed = -10 * dsin(gravity_direction+180)
 		
 		jump_cooldown = sec / 3
 		coyote_time = 0
