@@ -22,7 +22,7 @@ var jump_p = jump_k/jump_j_max;
 var _xw = clamp(-0.020*bounciness*dsin(360*jump_p)*jump_p, -0.5, 0.5);
 var _yh = clamp(0.005*bounciness*dsin(360*jump_p)*jump_p, -0.2, 0.2);
 
-var _do_multiple = should_screenwrap();
+var _do_multiple = should_screenwrap() || true;
 for (var i=-1+!_do_multiple; i<2-!_do_multiple; i++) {
 	for (var j=-1+!_do_multiple; j<2-!_do_multiple; j++) {
 		var x_o = i*global.cam_size[0];

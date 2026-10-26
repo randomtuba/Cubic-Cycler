@@ -113,11 +113,12 @@ enum Direction {
 
 #region Functions
 
-function update_camera(camera_size = [1024, 640], follow_allowed = false, follow_object = noone, follow_interpolate = 1) {
+function update_camera(camera_size = [1024, 640], follow_allowed = false, follow_object = noone, follow_interpolate = 1, instant_interpolate_collision = false) {
 	//camera_size[] is how much the camera can see of the room, regardless of room size
 	//x_off and y_off are target positions for camera
 	view_enabled = true;
 	view_visible[0] = true;
+	view_visible[2] = false;
 	
 	var x_off = 0;
 	var y_off = 0;
@@ -133,6 +134,11 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 			x_off = clamp(_x - camera_size[0]/2, 0, room_width - camera_size[0]);
 			y_off = clamp(_y - camera_size[1]/2, 0, room_height - camera_size[1]);
 			
+			if (instant_interpolate_collision) {
+				camera_set_view_pos(view_camera[2], x_off, y_off);
+				camera_set_view_size(view_camera[2], camera_size[0], camera_size[1]);
+			}
+			
 			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
 			y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
 		}
@@ -140,6 +146,10 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	
 	camera_set_view_pos(view_camera[0], x_off, y_off);
 	camera_set_view_size(view_camera[0], camera_size[0], camera_size[1]);
+	if (!instant_interpolate_collision) {
+		camera_set_view_pos(view_camera[2], x_off, y_off);
+		camera_set_view_size(view_camera[2], camera_size[0], camera_size[1]);
+	}
 	view_xport[0] = 0;
 	view_yport[0] = 0;
 	view_wport[0] = camera_size[0];
