@@ -5,8 +5,8 @@
 /// @param _y Starting Y coordinate
 /// @param wraps Whether to screenwrap during object creation
 function wPoint(_x, _y, wraps = true) constructor {
-	var cam_left = camera_get_view_x(view_camera[2])
-	var cam_top = camera_get_view_y(view_camera[2])
+	var cam_left = camera_get_view_x(view_camera[7])
+	var cam_top = camera_get_view_y(view_camera[7])
 	
 	_x -= cam_left
 	_y -= cam_top
@@ -25,7 +25,7 @@ function wPoint(_x, _y, wraps = true) constructor {
 	function setX(_x, wraps = true) {
 		if (!wraps) { _x_internal = _x; return; } 
 		
-		var cam_left = camera_get_view_x(view_camera[2])
+		var cam_left = camera_get_view_x(view_camera[7])
 		_x -= cam_left
 		while (_x < 0) { _x += global.cam_size[0] }
 		_x = _x % global.cam_size[0]
@@ -35,7 +35,7 @@ function wPoint(_x, _y, wraps = true) constructor {
 	function setY(_y, wraps = true) {
 		if (!wraps) { _y_internal = _y; return; }
 		
-		var cam_top = camera_get_view_y(view_camera[2])
+		var cam_top = camera_get_view_y(view_camera[7])
 		_y -= cam_top
 		while (_y < 0) { _y += global.cam_size[1] }
 		_y = _y % global.cam_size[1]
@@ -115,8 +115,8 @@ function should_screenwrap() {
 /// @param {Real} _x The X coordinate
 /// @param {Real} _y The Y coordinate
 function wrap_point(_x, _y) {
-	var cam_left = camera_get_view_x(view_camera[2]);
-	var cam_top = camera_get_view_y(view_camera[2]);
+	var cam_left = camera_get_view_x(view_camera[7]);
+	var cam_top = camera_get_view_y(view_camera[7]);
 	
 	_x -= cam_left
 	_y -= cam_top

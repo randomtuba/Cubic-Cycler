@@ -7,8 +7,17 @@ var room_name = room_get_name(room);
 if (string_starts_with(room_name, "rm2")) {
 	global.camera_follows_player_for_act2 = true;
 	update_camera(global.cam_size, true, instance_nearest(x, y, obj_cubert), 1);
+} else { update_camera(global.cam_size); }
+
+if (string_starts_with(room_name, "rm3")) {
+	global.camera_3d_for_act3 = true;
+	window_set_fullscreen(false);
+	
+} else if (global.camera_3d_for_act3) {
+	global.camera_3d_for_act3 = false;
+	window_set_fullscreen(false);
+	window_set_size(global.cam_size[0], global.cam_size[1]);
 }
-else { update_camera(global.cam_size); }
 
 
 

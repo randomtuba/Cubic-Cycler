@@ -106,6 +106,7 @@
     {"id":{"name":"rm2_camera_intro","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},},
     {"id":{"name":"rm2_central","path":"rooms/rm2_central/rm2_central.yy",},},
     {"id":{"name":"rm2_dubious","path":"rooms/rm2_dubious/rm2_dubious.yy",},},
+    {"id":{"name":"rm3_test","path":"rooms/rm3_test/rm3_test.yy",},},
     {"id":{"name":"actPlus","path":"scripts/actPlus/actPlus.yy",},},
     {"id":{"name":"checkpoint_read_file","path":"scripts/checkpoint_read_file/checkpoint_read_file.yy",},},
     {"id":{"name":"checkpoint_write_file","path":"scripts/checkpoint_write_file/checkpoint_write_file.yy",},},
@@ -165,6 +166,7 @@
     {"id":{"name":"rmsprquestion","path":"sprites/rmsprquestion/rmsprquestion.yy",},},
     {"id":{"name":"spr_background","path":"sprites/spr_background/spr_background.yy",},},
     {"id":{"name":"spr_block_fragile","path":"sprites/spr_block_fragile/spr_block_fragile.yy",},},
+    {"id":{"name":"spr_block_top_only","path":"sprites/spr_block_top_only/spr_block_top_only.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},
     {"id":{"name":"spr_break_particle","path":"sprites/spr_break_particle/spr_break_particle.yy",},},
     {"id":{"name":"spr_button_back","path":"sprites/spr_button_back/spr_button_back.yy",},},
@@ -232,6 +234,7 @@
     {"roomId":{"name":"rm2_camera_intro","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},},
     {"roomId":{"name":"rm2_dubious","path":"rooms/rm2_dubious/rm2_dubious.yy",},},
     {"roomId":{"name":"rm2_central","path":"rooms/rm2_central/rm2_central.yy",},},
+    {"roomId":{"name":"rm3_test","path":"rooms/rm3_test/rm3_test.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

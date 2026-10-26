@@ -22,7 +22,7 @@ var jump_p = jump_k/jump_j_max;
 var _xw = clamp(-0.020*bounciness*dsin(360*jump_p)*jump_p, -0.5, 0.5);
 var _yh = clamp(0.005*bounciness*dsin(360*jump_p)*jump_p, -0.2, 0.2);
 
-var _do_multiple = should_screenwrap() || true;
+var _do_multiple = should_screenwrap() && !(global.camera_3d_progress > 0);
 for (var i=-1+!_do_multiple; i<2-!_do_multiple; i++) {
 	for (var j=-1+!_do_multiple; j<2-!_do_multiple; j++) {
 		var x_o = i*global.cam_size[0];
@@ -33,3 +33,17 @@ for (var i=-1+!_do_multiple; i<2-!_do_multiple; i++) {
 	}
 }
 //draw_sprite_ext(spr_cubert_2, image_index, x, y, x_scale*(1+_xw), image_yscale*(1+_yh), rotation, c_white, image_alpha*visible);
+
+if (global.camera_3d_progress > 0) {
+	var p = global.camera_3d_progress;
+	var r = obj_global.camera_3d_depth_ratio;
+	var ang_up = rotation+90;
+	var dist_r = abs(sprite_height)*(0.45*p*r*0.8 + 0.45);
+	if (abs(rotation) < 45) {
+		draw_sprite_ext(sprite_index, 2, x+dist_r*dcos(ang_up)*dsin(ang_up), y-dist_r*dsin(ang_up), x_scale*(1+_xw), image_yscale*(1+_yh)*p*p*r, rotation+gravity_direction-270, c_white, image_alpha*visible);
+	} else {
+		ang_up -= 90;
+		if (dsin(ang_up) < 0) { ang_up += 180; }
+		draw_sprite_ext(sprite_index, 2, x+dist_r*dcos(ang_up)*dsin(ang_up), y-dist_r*dsin(ang_up), x_scale*(1+_xw), image_yscale*(1+_yh)*p*p*r, (rotation-90)+gravity_direction-270, c_white, image_alpha*visible);
+	}
+}

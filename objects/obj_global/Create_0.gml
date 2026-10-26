@@ -13,6 +13,7 @@
 randomize()
 
 depth += 100;
+timer = 0;
 
 #region Variables
 
@@ -22,7 +23,13 @@ global.gamepad = false;
 
 global.camera_follows_player_for_act2 = false;
 global.cam_size = [1024, 640];
-global.pedestal = noone
+global.pedestal = noone;
+global.camera_3d_for_act3 = false;
+global.camera_3d_progress = 0;
+global.camera_3d_cubert_depth = 0;
+global.camera_3d_cubert_depth_k = 0;
+camera_3d_progress_prev = 0;
+camera_3d_depth_ratio = 0.25;
 
 global.use_background = true
 global.background_scale = 2
@@ -113,12 +120,39 @@ enum Direction {
 
 #region Functions
 
+function update_camera_3d() {
+	var depth_count_3d = floor(room_height / global.cam_size[1]); //1, 2, 3, ...
+	var y_increase_due_depth = sprite_get_height(spr_block_top_only)*2*camera_3d_depth_ratio;
+	var p = global.camera_3d_progress;
+		
+	window_set_size(global.cam_size[0], global.cam_size[1] + 8*floor(y_increase_due_depth*p/8));
+		
+	view_enabled = true;
+	
+	for (var i=0; i<depth_count_3d; i++) {
+		camera_set_view_pos(view_camera[i], 0, i*global.cam_size[1]);
+		camera_set_view_size(view_camera[i], global.cam_size[0], global.cam_size[1]);
+		view_visible[i] = true;
+		view_xport[i] = 0;
+		view_yport[i] = y_increase_due_depth*p*i;
+		view_wport[i] = global.cam_size[0];
+		view_hport[i] = global.cam_size[1]+y_increase_due_depth*p*(i+1);
+	}
+	for (var i=depth_count_3d; i<7; i++) { view_visible[i] = false; }
+		
+	//set this as whichever one cubert is in (instant)
+	//if (!instant_interpolate_collision) {
+	//	camera_set_view_pos(view_camera[7], x_off, y_off);
+	//	camera_set_view_size(view_camera[7], camera_size[0], camera_size[1]);
+	//}
+}
+
 function update_camera(camera_size = [1024, 640], follow_allowed = false, follow_object = noone, follow_interpolate = 1, instant_interpolate_collision = false) {
 	//camera_size[] is how much the camera can see of the room, regardless of room size
 	//x_off and y_off are target positions for camera
 	view_enabled = true;
 	view_visible[0] = true;
-	view_visible[2] = false;
+	view_visible[7] = false;
 	
 	var x_off = 0;
 	var y_off = 0;
@@ -135,8 +169,8 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 			y_off = clamp(_y - camera_size[1]/2, 0, room_height - camera_size[1]);
 			
 			if (instant_interpolate_collision) {
-				camera_set_view_pos(view_camera[2], x_off, y_off);
-				camera_set_view_size(view_camera[2], camera_size[0], camera_size[1]);
+				camera_set_view_pos(view_camera[7], x_off, y_off);
+				camera_set_view_size(view_camera[7], camera_size[0], camera_size[1]);
 			}
 			
 			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
@@ -147,8 +181,8 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	camera_set_view_pos(view_camera[0], x_off, y_off);
 	camera_set_view_size(view_camera[0], camera_size[0], camera_size[1]);
 	if (!instant_interpolate_collision) {
-		camera_set_view_pos(view_camera[2], x_off, y_off);
-		camera_set_view_size(view_camera[2], camera_size[0], camera_size[1]);
+		camera_set_view_pos(view_camera[7], x_off, y_off);
+		camera_set_view_size(view_camera[7], camera_size[0], camera_size[1]);
 	}
 	view_xport[0] = 0;
 	view_yport[0] = 0;

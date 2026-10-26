@@ -1,5 +1,5 @@
 if (global.minimap) {
-	view_visible[1] = true;
+	view_visible[6] = true;
 	draw_set_color(c_black);
 	draw_set_alpha(0.2);
 	var _l = camera_get_view_x(view_camera[0]);
@@ -8,13 +8,11 @@ if (global.minimap) {
 	draw_set_alpha(1);
 	draw_set_color(c_white);
 	
-	camera_set_view_pos(view_camera[1], 0, 0)
-	camera_set_view_size(view_camera[1], room_width, room_height)
-	view_xport[1] = global.cam_size[0]*3/4;
-	view_wport[1] = global.cam_size[0]/4;
+	camera_set_view_pos(view_camera[6], 0, 0)
+	camera_set_view_size(view_camera[6], room_width, room_height)
+	view_xport[6] = global.cam_size[0]*3/4;
+	view_wport[6] = global.cam_size[0]/4;
 
-	view_yport[1] = global.cam_size[1]*3/4;
-	view_hport[1] = global.cam_size[1]/4;
-} else {
-	view_visible[1] = false;
+	view_yport[6] = global.cam_size[1]*3/4;
+	view_hport[6] = global.cam_size[1]/4;
 }
