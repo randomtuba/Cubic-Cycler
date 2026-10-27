@@ -44,9 +44,10 @@ function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 	/// @desc Sets the position
 	/// @param {Real} _x The X position
 	/// @param {Real} _y The Y position
-	function setPos(_x, _y) {
-		point.setX(_x)
-		point.setY(_y)
+	/// @param {Bool} wraps (Optional) Whether to screenwrap or not, default true
+	function setPos(_x, _y, wraps = true) {
+		point.setX(_x, wraps)
+		point.setY(_y, wraps)
 		
 		updateParent()
 	}
