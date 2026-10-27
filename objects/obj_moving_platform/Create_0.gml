@@ -32,7 +32,7 @@ function move_by_direction() {
 
 function is_behind(_x, _y) {
 	var dist = pos.point.distanceTo(_x, _y)
-	switch move_direction { //should there be break;s here?
+	switch move_direction {
 		case Direction.Up:		return dist.y > 0
 		case Direction.Down:	return dist.y < 0
 		case Direction.Left:	return dist.x > 0
