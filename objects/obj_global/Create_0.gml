@@ -235,6 +235,11 @@ function get_active_collisions(include_cubert = false) {
 			array_push(collisions, self)
 		}
 	}
+	with obj_generator_number_switch {
+		if is_on {
+			array_push(collisions, self)
+		}
+	}
 	if (include_cubert) {
 		with obj_cubert {
 			array_push(collisions, self)
