@@ -31,11 +31,12 @@ function move_by_direction() {
 }
 
 function is_behind(_x, _y) {
+	var dist = pos.point.distanceTo(_x, _y)
 	switch move_direction { //should there be break;s here?
-		case Direction.Up:		return _y > pos.point.getY()
-		case Direction.Down:	return _y < pos.point.getY()
-		case Direction.Left:	return _x > pos.point.getX()
-		case Direction.Right:	return _x < pos.point.getX()
+		case Direction.Up:		return dist.y > 0
+		case Direction.Down:	return dist.y < 0
+		case Direction.Left:	return dist.x > 0
+		case Direction.Right:	return dist.x < 0
 	}
 	
 }
