@@ -1,4 +1,4 @@
-var _do_multiple = !shredding && !(global.camera_3d_progress > 0);
+var _do_multiple = !shredding && !(global.camera_3d_progress > 0) && should_screenwrap();
 for (var i=-1+!_do_multiple; i<2-!_do_multiple; i++) {
 	for (var j=-1+!_do_multiple; j<2-!_do_multiple; j++) {
 		var x_o = i*global.cam_size[0];

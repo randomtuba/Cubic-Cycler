@@ -179,7 +179,7 @@ global.default_x = x
 global.default_y = y
 
 
-if (global.debug && keyboard_check_pressed(ord("E"))) {
+if (global.debug && keyboard_check_pressed(ord("E")) && string_starts_with(room_get_name(room), "rm3")) {
 	pos.move(0, -(2*keyboard_check(vk_shift)-1)*global.cam_size[1], false);
 	if (y > room_height) { pos.move(0, -room_height, false); } 
 	if (y < 0) { pos.move(0, +room_height, false); } 

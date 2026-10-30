@@ -103,7 +103,7 @@ function MapContact(_map) constructor {
 
 /// @desc Returns whether screenwrapping is active
 function should_screenwrap() {
-	if (string_starts_with(string(room), "ref room rm2_")) {
+	if (string_starts_with(room_get_name(room), "rm2")) {
 		return global.pedestal_active
 	} else {
 		with (obj_generator) { if (isOn) { return true } }
@@ -342,7 +342,7 @@ function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, 
 /// @param {Real} _x The X offset to apply
 /// @param {Real} _y The Y offset to apply
 /// @param buffer (Optional) Used to determine how precise the directional collision should be, default 4
-function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4) {
+function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4, wraps_obj = true) {
 	// These are returned later
 	// Can be indexed by the Direction enum
 	var isValid = [true, true, true, true, true]
@@ -366,6 +366,9 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4) {
 			for (var j = 0; j < 5; j++) {
 				var matchesDirection = contactMeetsDirection(obj, c, j, buffer)
 		
+				//if im not wrapping yet the object blocking me is too far, then what gives
+				if (!instance_exists(c) || (!wraps_obj && point_distance(obj.pos.point.getX(), obj.pos.point.getY(), c.x, c.y) > 500)) { continue; }
+				
 				if (matchesDirection) {
 					isValid[j] = false
 					array_push(blockers[j], c.obj)
@@ -415,7 +418,7 @@ function enum_Direction_to_angle_direction(_Dir = Direction.None) {
 /// @param buffer (Optional) The distance to check for directional collisions, default 4
 /// @param {Bool} wraps (Optional) Whether to screenwrap or not, default true
 function attemptMove(obj, collisions, _x, _y, buffer = 4, wraps = true) {
-	var valid = checkValidMoveAllDirections(obj, collisions, _x, _y, buffer)
+	var valid = checkValidMoveAllDirections(obj, collisions, _x, _y, buffer, wraps)
 	
 	// This is returned later
 	var success = {
