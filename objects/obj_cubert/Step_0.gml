@@ -180,8 +180,9 @@ global.default_y = y
 
 
 if (global.debug && keyboard_check_pressed(ord("E"))) {
-	pos.move(0, global.cam_size[1], false);
+	pos.move(0, -(2*keyboard_check(vk_shift)-1)*global.cam_size[1], false);
 	if (y > room_height) { pos.move(0, -room_height, false); } 
+	if (y < 0) { pos.move(0, +room_height, false); } 
 }
 
 if (global.debug && mouse_check_button(mb_right)) { 

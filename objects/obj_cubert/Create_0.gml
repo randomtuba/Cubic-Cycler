@@ -61,9 +61,7 @@ function restart() {
 }
 
 function update_collisions() {
-	with (obj_global) {
-		other.collisions = get_active_collisions()
-	}
+	with (obj_global) { other.collisions = get_active_collisions() }
 }
 
 function room_index_bounded(_i = global.level_x, _j = global.level_y) {

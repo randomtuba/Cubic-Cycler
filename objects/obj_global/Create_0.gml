@@ -122,10 +122,11 @@ enum Direction {
 
 function update_camera_3d() {
 	var depth_count_3d = floor(room_height / global.cam_size[1]); //1, 2, 3, ...
-	var y_increase_due_depth = sprite_get_height(spr_block_top_only)*2*camera_3d_depth_ratio;
+	var y_increase_due_depth = sprite_get_height(spr_block_top_only)*camera_3d_depth_ratio;
 	var p = global.camera_3d_progress;
-		
-	window_set_size(global.cam_size[0], global.cam_size[1] + 8*floor(y_increase_due_depth*p/8));
+	
+	//var view_vertical_off = global.cam_size[1] + 8*floor(depth_count_3d*y_increase_due_depth*p/8)
+	window_set_size(global.cam_size[0], global.cam_size[1] + p*(depth_count_3d-1)*y_increase_due_depth);//+ 8*floor((depth_count_3d-1)*y_increase_due_depth*p/8)
 		
 	view_enabled = true;
 	
@@ -134,9 +135,9 @@ function update_camera_3d() {
 		camera_set_view_size(view_camera[i], global.cam_size[0], global.cam_size[1]);
 		view_visible[i] = true;
 		view_xport[i] = 0;
-		view_yport[i] = y_increase_due_depth*p*i;
+		view_yport[i] = p*i*y_increase_due_depth//4 * 8 * floor (i * y_increase_due_depth * p / 8);
 		view_wport[i] = global.cam_size[0];
-		view_hport[i] = global.cam_size[1]+y_increase_due_depth*p*(i+1);
+		view_hport[i] = global.cam_size[1] + p*i*y_increase_due_depth;
 	}
 	for (var i=depth_count_3d; i<7; i++) { view_visible[i] = false; }
 		
@@ -231,19 +232,13 @@ function get_active_collisions(include_cubert = false) {
 		obj_moving_platform
 	];
 	with obj_switch_block {
-		if is_on {
-			array_push(collisions, self)
-		}
+		if is_on { array_push(collisions, self) }
 	}
 	with obj_generator_number_switch {
-		if is_on {
-			array_push(collisions, self)
-		}
+		if is_on { array_push(collisions, self) }
 	}
 	if (include_cubert) {
-		with obj_cubert {
-			array_push(collisions, self)
-		}
+		with obj_cubert { array_push(collisions, self) }
 	}
 	
 	return collisions

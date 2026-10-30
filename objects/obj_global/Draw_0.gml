@@ -25,7 +25,7 @@ if (global.camera_3d_progress != camera_3d_progress_prev) { update_camera_3d(); 
 camera_3d_progress_prev = global.camera_3d_progress;
 
 
-if (global.camera_3d_progress > 0 || keyboard_check_pressed(ord("E"))) {
+if (global.camera_3d_progress > 0 && keyboard_check_pressed(ord("E"))) {
 	var tile_layer_id = layer_tilemap_get_id("Tiles_1");
 	for (var tx=0; tx<tilemap_get_width(tile_layer_id); tx++) {
 		for (var ty=0; ty<tilemap_get_height(tile_layer_id); ty++) {
@@ -66,6 +66,7 @@ if (global.camera_3d_progress > 0 || keyboard_check_pressed(ord("E"))) {
 	}
 }
 
+if (keyboard_check_pressed(vk_f1)) { room_goto(rm3_test_2); }
 if (keyboard_check_pressed(vk_f2)) { room_goto(rm3_test); }
 
 
