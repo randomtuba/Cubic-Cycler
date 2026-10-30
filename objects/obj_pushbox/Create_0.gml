@@ -6,6 +6,8 @@ collisions = []; update_collisions();
 rider = noone;
 touchspring = 0
 shredding = false; shredded_pixels = 0;
+wraps = true
+alarm[1] = 1
 
 randomise();
 
@@ -23,6 +25,7 @@ function shred() {
 		var to_shred = -bbox_left;
 		for (var i=0; i<sprite_height; i+=seg) {
 			for (var j=0; j<to_shred-shredded_pixels; j+=seg) {
+				if (instance_number(obj_slicer_particle) > 200) { continue; }
 				var p = instance_create_depth(2, y-sprh+i, depth-1, obj_slicer_particle);
 				p.gravity_direction = gravity_direction+180+random_range(-10, 10);
 				p.l = shredded_pixels+j;
@@ -39,6 +42,7 @@ function shred() {
 		var to_shred = bbox_right - room_width;
 		for (var i=0; i<sprite_height; i+=seg) {
 			for (var j=0; j<to_shred-shredded_pixels; j+=seg) {
+				if (instance_number(obj_slicer_particle) > 200) { continue; }
 				var p = instance_create_depth(room_width-2, y-sprh+i, depth-1, obj_slicer_particle);
 				p.gravity_direction = gravity_direction+180+random_range(-10, 10);
 				p.l = sprite_width-to_shred+j;
@@ -55,6 +59,7 @@ function shred() {
 		var to_shred = -bbox_top;
 		for (var i=0; i<sprite_width; i+= seg) {
 			for (var j=0; j<to_shred-shredded_pixels; j+=seg) {
+				if (instance_number(obj_slicer_particle) > 200) { continue; }
 				var p = instance_create_depth(x-sprw+i, 2, depth-1, obj_slicer_particle);
 				p.gravity_direction = gravity_direction+180+random_range(-10, 10);
 				p.l = i;
@@ -71,6 +76,7 @@ function shred() {
 		var to_shred = bbox_bottom - room_height;
 		for (var i=0; i<sprite_width; i+=seg) {
 			for (var j=0; j<to_shred-shredded_pixels; j+=seg) {
+				if (instance_number(obj_slicer_particle) > 200) { continue; }
 				var p = instance_create_depth(x-sprw+i, room_height-2, depth-1, obj_slicer_particle);
 				p.gravity_direction = gravity_direction+180+random_range(-10, 10);
 				p.l = i;

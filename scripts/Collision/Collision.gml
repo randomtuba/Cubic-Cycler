@@ -111,6 +111,10 @@ function should_screenwrap() {
 	}
 }
 
+function am_i_in_view(_x, _y, _l = camera_get_view_x(view_camera[7]), _u = camera_get_view_y(view_camera[7]), _w = global.cam_size[0], _h = global.cam_size[1]) {
+	return (_l < _x && _x < _l + _w) && (_u < _y && _y < _u + _h)
+}
+
 /// @desc Screenwraps a point
 /// @param {Real} _x The X coordinate
 /// @param {Real} _y The Y coordinate

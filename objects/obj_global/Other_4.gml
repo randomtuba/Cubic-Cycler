@@ -8,6 +8,7 @@ if (string_starts_with(room_name, "rm2")) {
 	global.camera_follows_player_for_act2 = true;
 	update_camera(global.cam_size, true, instance_nearest(x, y, obj_cubert), 1);
 	global.pedestal_active = false;
+	//with (obj_pushbox) { wraps = am_i_in_view(xstart, ystart); }
 	
 } else { update_camera(global.cam_size); }
 
