@@ -7,6 +7,8 @@ var room_name = room_get_name(room);
 if (string_starts_with(room_name, "rm2")) {
 	global.camera_follows_player_for_act2 = true;
 	update_camera(global.cam_size, true, instance_nearest(x, y, obj_cubert), 1);
+	global.pedestal_active = false;
+	
 } else { update_camera(global.cam_size); }
 
 if (string_starts_with(room_name, "rm3")) {
