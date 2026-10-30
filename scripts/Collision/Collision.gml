@@ -219,7 +219,7 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 /// @param x1Change (Optional) Considers obj to be offset by this amount
 /// @param y1Change (Optional) Considers obj to be offset by this amount
 /// @param buffer (Optional) Determines how precise the directional collision should be, default 4
-function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4) {
+function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wraps_obj = true) {
 	var obj1_center = new wPoint(obj.x - abs(obj.sprite_xoffset) + abs(obj.sprite_width) / 2 + x1Change,
 								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change)
 	
@@ -248,6 +248,8 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4) {
 					var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
 											obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
 					var dist = obj1_center.distanceToPoint(obj2_center)
+					if (point_distance(obj.pos.point.getX(), obj.pos.point.getY(), obj2.x, obj2.y) > 200 && !wraps_obj) { continue; }
+					
 					var contact = new Contact(true, dist.x, dist.y, obj2) 
 					array_push(contacts, contact)
 				}
@@ -349,7 +351,7 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4, wraps_
 	var blockers = [[], [], [], [], []]
 	
 	// List of all contacts, either Struct.Contact or Struct.MapContact
-	var contacts = checkContactGM(obj, collisions, _x, _y, buffer)
+	var contacts = checkContactGM(obj, collisions, _x, _y, buffer, wraps_obj)
 	
 	for (var i = 0; i < array_length(contacts); i++) {
 		var c = contacts[i]
@@ -367,12 +369,13 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4, wraps_
 				var matchesDirection = contactMeetsDirection(obj, c, j, buffer)
 		
 				//if im not wrapping yet the object blocking me is too far, then what gives
-				if (!instance_exists(c) || (!wraps_obj && point_distance(obj.pos.point.getX(), obj.pos.point.getY(), c.x, c.y) > 500)) { continue; }
+				//if (!instance_exists(c)) { continue; }
+				//draw_line(obj.pos.point.getX(), obj.pos.point.getY(), c.x, c.y);
+				//if ((instance_exists(c) && !wraps_obj && point_distance(obj.pos.point.getX(), obj.pos.point.getY(), c.x, c.y) > 500)) { continue; }
+				//if (!wraps_obj && point_distance(0, 0, c.xDist, c.yDist) > 150) { continue; }
 				
-				if (matchesDirection) {
-					isValid[j] = false
-					array_push(blockers[j], c.obj)
-				}
+				
+				if (matchesDirection) { isValid[j] = false; array_push(blockers[j], c.obj) }
 			}
 		}
 	}
