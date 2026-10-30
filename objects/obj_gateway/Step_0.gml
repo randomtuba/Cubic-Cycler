@@ -8,7 +8,7 @@ if (global.act == 0) {
 	}
 } else {
 	var _tessa = instance_nearest(x, y, obj_tesseract_drawer);
-	if (global.debug || !instance_exists(_tessa) || _tessa.collect_timer > sec * 2.5) {
+	if (global.debug || !instance_exists(_tessa) || _tessa.collect_timer > sec * 5) {
 		visible = true
 	} else {
 		visible = false
