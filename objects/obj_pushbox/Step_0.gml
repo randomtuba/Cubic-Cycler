@@ -20,7 +20,9 @@ if (shredding) {
 
 // Movement
 var motion = pos.getMotion()
-var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, instance_exists(obj_generator))
+var mov_x_spd = am_i_in_view(pos.point.getX(), pos.point.getY()) ? motion.x : 0;
+var mov_y_spd = am_i_in_view(pos.point.getX(), pos.point.getY()) ? motion.y : 0;
+var movement = attemptMoveInSteps(self, collisions, mov_x_spd, mov_y_spd, 4, wraps&&should_screenwrap())
 
 // Don't reset speed when pushing a box
 // "d" is a direction

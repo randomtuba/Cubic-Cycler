@@ -136,7 +136,7 @@ if (x > room_width) {
 		if (global.level_x >= array_length(_map[global.level_y])) global.level_x = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
-			pos.setPos(pos.point.getX() - room_width, pos.point.getY())
+			pos.setPos(pos.point.getX() - room_width, pos.point.getY(), false)
 		} else { global.level_x--; }
     }
 }
@@ -146,7 +146,7 @@ else if (x < 0) {
 		if (global.level_x < 0) global.level_x = array_length(_map[global.level_y]) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
-			pos.setPos(pos.point.getX() + room_width, pos.point.getY())
+			pos.setPos(pos.point.getX() + room_width, pos.point.getY(), false)
 		} else { global.level_x++; }
     }
 }
@@ -158,7 +158,7 @@ if (y > room_height) {
 		if (global.level_y >= array_length(_map)) global.level_y = 0
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
-			pos.setPos(pos.point.getX(), pos.point.getY() - room_height)
+			pos.setPos(pos.point.getX(), pos.point.getY() - room_height, false)
 		} else { global.level_y--; }
     }
 }
@@ -168,7 +168,7 @@ else if (y < 0) {
 		if (global.level_y < 0) global.level_y = array_length(_map) - 1
 		if (room_index_bounded(global.level_x, global.level_y)) {
 			room_goto(_map[global.level_y][global.level_x])
-			pos.setPos(pos.point.getX(), pos.point.getY() + room_height)
+			pos.setPos(pos.point.getX(), pos.point.getY() + room_height, false)
 		} else { global.level_y++; }
     }
 }

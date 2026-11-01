@@ -3,9 +3,6 @@ ang_xy = 0;//from right (0deg) to up (90deg), can go full circle ofc
 //ang_xz2 = 0;
 //ang_xy2 = 0;
 
-rad = 32;
-r = rad;
-r2 = rad*2;
 timer = 0;
 
 ang_xz_spd = 4/20;
@@ -67,6 +64,8 @@ for (var vert = 0; vert < array_length(base_tes_coordinates); vert++) {
   
 depth = -1000
 
+curhue = 255
+tesscolor = make_colour_hsv(255,255,0)
 
 
 camera_pos_4d = [0,0,0,4.5] // looking at it from kata or whatever
@@ -113,11 +112,13 @@ function project_tessa() {
 }
 
 function draw_tessa() {
-	draw_set_color(c_black);
 	//get the projected transformed tesseract
 	var tes = project_tessa()
+	var oldcolor = draw_get_colour()
+	draw_set_color(tesscolor)
 	for (var edgi = 0; edgi < array_length(edge_indices); edgi++) {
 		var edge = edge_indices[edgi]
-		draw_line_width(x+tes[edge[0]][0]*scale, y+tes[edge[0]][1]*scale, x+tes[edge[1]][0]*scale, y+tes[edge[1]][1]*scale, 2);
+		draw_line_width(x+tes[edge[0]][0]*scale, y+tes[edge[0]][1]*scale, x+tes[edge[1]][0]*scale, y+tes[edge[1]][1]*scale, 3);
 	}
+	draw_set_color(oldcolor)
 }

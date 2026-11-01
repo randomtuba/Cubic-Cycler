@@ -172,6 +172,8 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 			if (instant_interpolate_collision) {
 				camera_set_view_pos(view_camera[7], x_off, y_off);
 				camera_set_view_size(view_camera[7], camera_size[0], camera_size[1]);
+				
+				with (obj_pushbox) { wraps = am_i_in_view(x, y, x_off, y_off); }
 			}
 			
 			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
@@ -189,6 +191,11 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 	view_yport[0] = 0;
 	view_wport[0] = camera_size[0];
 	view_hport[0] = camera_size[1];
+	
+	view_xport[7] = 0;
+	view_yport[7] = 0;
+	view_wport[7] = camera_size[0];
+	view_hport[7] = camera_size[1];
 	
 	//commented so now we only use camera0
 	//if (!follow_allowed) {
