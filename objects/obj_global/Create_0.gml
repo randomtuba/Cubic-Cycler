@@ -66,8 +66,11 @@ global.act1_map = [
 ]
 
 global.act2_map = [
-	[rm2_camera_intro, rm2_dubious],
-	[rm2_dubious, rm2_central],
+	[-1, -1,-1,-1,-1],
+	[-1, -1,-1,-1,-1],
+	[-1, -1,rm2_gravity_intro,-1,-1],
+	[-1, -1,rm2_camera_intro,-1,-1],
+	[-1, -1,-1,-1,-1],
 ]
 
 // stores current act
