@@ -1,3 +1,5 @@
+wraps = true
+
 function apply_interaction(obj) {
 	cooldown = 0;
 

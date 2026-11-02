@@ -175,6 +175,8 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 				camera_set_view_size(view_camera[7], camera_size[0], camera_size[1]);
 				
 				with (obj_pushbox) { wraps = am_i_in_view(x, y, x_off, y_off); }
+				with (obj_checkpoint) { wraps = am_i_in_view(x, y, x_off, y_off); }
+				with (obj_generator) { wraps = am_i_in_view(x, y, x_off, y_off); }
 			}
 			
 			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);

@@ -6,7 +6,7 @@ collisions = []; update_collisions();
 rider = noone;
 touchspring = 0
 shredding = false; shredded_pixels = 0;
-wraps = true
+wraps = true;
 alarm[1] = 1
 
 randomise();

@@ -115,6 +115,14 @@ function am_i_in_view(_x, _y, _l = camera_get_view_x(view_camera[7]), _u = camer
 	return (_l < _x && _x < _l + _w) && (_u < _y && _y < _u + _h)
 }
 
+function is_my_bbox_in_view(_obj, _l = camera_get_view_x(view_camera[7]), _u = camera_get_view_y(view_camera[7]), _w = global.cam_size[0], _h = global.cam_size[1]) {
+	with (_obj) {
+		var _coll = collision_rectangle(_l, _u, _l+_w, _u+_h, _obj, false, false);
+		if (_coll != noone) { return true}
+	}
+	return false;
+}
+
 /// @desc Screenwraps a point
 /// @param {Real} _x The X coordinate
 /// @param {Real} _y The Y coordinate

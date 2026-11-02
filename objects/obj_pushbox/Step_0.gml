@@ -12,6 +12,7 @@ if (!_grounded || shredding) {
 }
 
 if (shredding) {
+	wraps = false;
 	pos.wraps = false;
 	pos.move(pos.x_speed, pos.y_speed, false);
 	return;
