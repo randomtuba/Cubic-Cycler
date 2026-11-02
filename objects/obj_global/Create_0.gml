@@ -66,7 +66,7 @@ global.act1_map = [
 ]
 
 global.act2_map = [
-	[rm2_camera_intro, rm2_dubious],
+	[rm2_camera_intro, rm2_mp_1],
 	[rm2_dubious, rm2_central],
 ]
 
