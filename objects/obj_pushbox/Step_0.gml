@@ -4,8 +4,7 @@ var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
 
-var in_view = am_i_in_view(pos.point.getX(), pos.point.getY());// || (global.camera_3d_for_act3 && am_i_in_view_x(pos.point.getX()));
-//todo: apparently motion & warping is currently inherintly a camera 7 thing, anything that moves and warps must tp there
+var in_view = am_i_in_view(pos.point.getX(), pos.point.getY()) || (global.camera_3d_for_act3 && am_i_in_view_x(pos.point.getX()));
 
 // Gravity
 if ((!_grounded || shredding) && in_view) {

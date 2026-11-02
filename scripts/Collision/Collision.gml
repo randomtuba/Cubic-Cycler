@@ -42,6 +42,22 @@ function wPoint(_x, _y, wraps = true) constructor {
 		_y_internal = _y + cam_top
 	}
 	
+	function setXcam(_x, _cam) {//wraps assumed true
+		var cam_left = camera_get_view_x(_cam)
+		_x -= cam_left
+		while (_x < 0) { _x += global.cam_size[0] }
+		_x = _x % global.cam_size[0]
+		_x_internal = _x + cam_left
+	}
+	
+	function setYcam(_y, _cam) { //wraps assumed true
+		var cam_top = camera_get_view_y(_cam)
+		_y -= cam_top
+		while (_y < 0) { _y += global.cam_size[1] }
+		_y = _y % global.cam_size[1]
+		_y_internal = _y + cam_top
+	}
+	
 	/// @desc Gets the distance to a point, accounting for screenwraps
 	/// - CAN BE NEGATIVE -
 	/// Positive means the point is down or to the right
@@ -580,16 +596,29 @@ function attemptMove_2(obj, collisions, _x, _y, buffer = 4, wraps_x = true, wrap
 	}
 	
 	// Prevent movement into obstacles
+	var _cam = (wraps_x || wraps_y) ? get_cam_that_im_in(x, y) : view_camera[7];
 	if ((valid.valid[Direction.Right] && _x > 0) || (valid.valid[Direction.Left] && _x < 0)) {
-		obj.pos.move(_x, 0, wraps_x)
+		if (wraps_x) { obj.pos.moveWithCam(_x, 0, _cam); }
+		else { obj.pos.move(_x, 0, wraps_x); }
 		success.x = true
 	}
-	if ((valid.valid[Direction.Down] && _y > 0) || (valid.valid[Direction.Up] && _y < 0)) {
-		obj.pos.move(0, _y, wraps_y)
+	if ((valid.valid[Direction.Down] && _y > 0) || (valid.valid[Direction.Up] && _y < 0)) { //todo:  make this work for y too
+		if (wraps_y) { obj.pos.moveWithCam(0, _y, _cam); }
+		else { obj.pos.move(0, _y, wraps_y); }
 		success.y = true
 	}
 	
 	return success
+}
+
+function get_cam_that_im_in(x, y) {
+	if (am_i_in_view(x, y)) { return view_camera[7]; }
+	for (var i=0; i<7; i++) {
+		if (am_i_in_view(x, y, camera_get_view_x(view_camera[i]), camera_get_view_y(view_camera[i]))) {
+			return view_camera[i];
+		}
+	}
+	return view_camera[7];
 }
 
 /// @desc Attempts to move an object by some offset, separated into several steps

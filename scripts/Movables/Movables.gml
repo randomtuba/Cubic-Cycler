@@ -41,6 +41,13 @@ function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
 		updateParent()
 	}
 	
+	function moveWithCam(_x, _y, _cam) {//wraps assumed true
+		point.setXcam(point.getX() + _x, _cam)
+		point.setYcam(point.getY() + _y, _cam)
+		
+		updateParent()
+	}
+	
 	/// @desc Sets the position
 	/// @param {Real} _x The X position
 	/// @param {Real} _y The Y position
