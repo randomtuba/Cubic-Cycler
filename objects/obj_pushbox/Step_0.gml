@@ -4,13 +4,15 @@ var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
 
+var in_view = am_i_in_view(pos.point.getX(), pos.point.getY());// || (global.camera_3d_for_act3 && am_i_in_view_x(pos.point.getX()));
+//todo: apparently motion & warping is currently inherintly a camera 7 thing, anything that moves and warps must tp there
+
 // Gravity
-if (!_grounded || shredding) {
+if ((!_grounded || shredding) && in_view) {
 	var _g = 0.4
 	pos.x_speed += _g * dcos(gravity_direction);
 	pos.y_speed -= _g * dsin(gravity_direction);
 }
-
 if (shredding) {
 	wraps = false;
 	pos.wraps = false;
@@ -21,9 +23,9 @@ if (shredding) {
 
 // Movement
 var motion = pos.getMotion()
-var mov_x_spd = am_i_in_view(pos.point.getX(), pos.point.getY()) ? motion.x : 0;
-var mov_y_spd = am_i_in_view(pos.point.getX(), pos.point.getY()) ? motion.y : 0;
-var movement = attemptMoveInSteps(self, collisions, mov_x_spd, mov_y_spd, 4, wraps&&should_screenwrap())
+var mov_x_spd = in_view ? motion.x : 0;
+var mov_y_spd = in_view ? motion.y : 0;
+var movement = attemptMoveInSteps_2(self, collisions, mov_x_spd, mov_y_spd, 4, wraps&&should_screenwrap(), wraps&&should_screenwrap()&&!global.camera_3d_for_act3)
 
 // Don't reset speed when pushing a box
 // "d" is a direction

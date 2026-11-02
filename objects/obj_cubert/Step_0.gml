@@ -97,7 +97,7 @@ if (coyote_time > 0) {
 #endregion Jumping
 
 var motion = pos.getMotion()
-var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, should_screenwrap())
+var movement = attemptMoveInSteps_2(self, collisions, motion.x, motion.y, 4, should_screenwrap(), should_screenwrap()&&!global.camera_3d_for_act3)
 
 runBlockerEvents(movement.blockers)
 

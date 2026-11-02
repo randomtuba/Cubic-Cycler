@@ -140,7 +140,12 @@ function update_camera_3d() {
 		view_wport[i] = global.cam_size[0];
 		view_hport[i] = global.cam_size[1] + p*i*y_increase_due_depth;
 	}
+	
 	for (var i=depth_count_3d; i<7; i++) { view_visible[i] = false; }
+				
+	with (obj_pushbox) { wraps = am_i_in_view_x(x); }
+	with (obj_checkpoint) { wraps = am_i_in_view_x(x); }
+	with (obj_generator) { wraps = am_i_in_view_x(x); }
 		
 	//set this as whichever one cubert is in (instant)
 	//if (!instant_interpolate_collision) {
