@@ -29,11 +29,11 @@ function actPlus(){
 			room_goto(rm_tut_top_left)
 		} else {
 			global.checkpoint_room = rm2_camera_intro
-			global.checkpoint_level_x = 1
-			global.checkpoint_level_y = 1
+			global.checkpoint_level_x = 2
+			global.checkpoint_level_y = 3
 			
-			global.level_x = 1
-			global.level_y = 1
+			global.level_x = 2
+			global.level_y = 3
 			room_goto(rm2_camera_intro)
 		}
 		

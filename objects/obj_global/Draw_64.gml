@@ -12,5 +12,7 @@ if (global.debug) {
 		var _Dir = angle_direction_to_enum_Direction(_cub.gravity_direction);
 		var _Dir_Arr = ["Up", "Down", "Left", "Right"];
 		draw_text(16, 16, "\n\n\n\n\n\ncubert grav Dir = "+_Dir_Arr[_Dir]);
+		draw_text(16, 16, "\n\n\n\n\n\n\ncubert x = " + string(_cub.x));
+		draw_text(16, 16, "\n\n\n\n\n\n\n\ncubert y = " + string(_cub.y));
 	}
 }

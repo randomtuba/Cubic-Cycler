@@ -17,6 +17,7 @@ function apply_interaction(obj) {
 		global.checkpoint_room = room
 		global.checkpoint_level_x = global.level_x
 		global.checkpoint_level_y = global.level_y
+		global.checkpoint_level_gravity = image_angle - 90;
 
 		checkpoint_write_file();
 	}

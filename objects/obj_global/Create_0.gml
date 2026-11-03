@@ -66,9 +66,11 @@ global.act1_map = [
 ]
 
 global.act2_map = [
-	[-1, -1, -1],
-	[rm2_go_zoom, rm2_camera_intro, rm2_mp_1],
-	[-1, rm2_dubious, rm2_central],
+	[-1, -1,-1,-1,-1],
+	[-1, -1,-1,-1,-1],
+	[-1, -1,rm2_gravity_intro,-1,-1],
+	[-1, -1,rm2_camera_intro,-1,-1],
+	[-1, -1,-1,-1,-1],
 ]
 
 // stores current act
@@ -183,9 +185,11 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 				with (obj_checkpoint) { wraps = am_i_in_view(x, y, x_off, y_off); }
 				with (obj_generator) { wraps = am_i_in_view(x, y, x_off, y_off); }
 			}
-			
-			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
-			y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
+			//testing checkpoint fixes
+			if (follow_interpolate > 0) {
+				x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
+				y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
+			}
 		}
 	}
 	
