@@ -1,4 +1,5 @@
 isOn = true
+wraps = true
 
 if (global.generators_destroyed_map[global.level_x][global.level_y]) {
 	turn_off()

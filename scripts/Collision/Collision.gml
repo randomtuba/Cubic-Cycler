@@ -42,6 +42,22 @@ function wPoint(_x, _y, wraps = true) constructor {
 		_y_internal = _y + cam_top
 	}
 	
+	function setXcam(_x, _cam) {//wraps assumed true
+		var cam_left = camera_get_view_x(_cam)
+		_x -= cam_left
+		while (_x < 0) { _x += global.cam_size[0] }
+		_x = _x % global.cam_size[0]
+		_x_internal = _x + cam_left
+	}
+	
+	function setYcam(_y, _cam) { //wraps assumed true
+		var cam_top = camera_get_view_y(_cam)
+		_y -= cam_top
+		while (_y < 0) { _y += global.cam_size[1] }
+		_y = _y % global.cam_size[1]
+		_y_internal = _y + cam_top
+	}
+	
 	/// @desc Gets the distance to a point, accounting for screenwraps
 	/// - CAN BE NEGATIVE -
 	/// Positive means the point is down or to the right
@@ -113,6 +129,19 @@ function should_screenwrap() {
 
 function am_i_in_view(_x, _y, _l = camera_get_view_x(view_camera[7]), _u = camera_get_view_y(view_camera[7]), _w = global.cam_size[0], _h = global.cam_size[1]) {
 	return (_l < _x && _x < _l + _w) && (_u < _y && _y < _u + _h)
+}
+
+function am_i_in_view_x(_x, _l = camera_get_view_x(view_camera[7]), _w = global.cam_size[0]) {
+	return (_l < _x && _x < _l + _w)
+}
+
+
+function is_my_bbox_in_view(_obj, _l = camera_get_view_x(view_camera[7]), _u = camera_get_view_y(view_camera[7]), _w = global.cam_size[0], _h = global.cam_size[1]) {
+	with (_obj) {
+		var _coll = collision_rectangle(_l, _u, _l+_w, _u+_h, _obj, false, false);
+		if (_coll != noone) { return true}
+	}
+	return false;
 }
 
 /// @desc Screenwraps a point
@@ -223,7 +252,7 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 /// @param x1Change (Optional) Considers obj to be offset by this amount
 /// @param y1Change (Optional) Considers obj to be offset by this amount
 /// @param buffer (Optional) Determines how precise the directional collision should be, default 4
-function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wraps_obj = true) {
+function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wraps = true) {
 	var obj1_center = new wPoint(obj.x - abs(obj.sprite_xoffset) + abs(obj.sprite_width) / 2 + x1Change,
 								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change)
 	
@@ -252,7 +281,60 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wr
 					var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
 											obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
 					var dist = obj1_center.distanceToPoint(obj2_center)
-					if (point_distance(obj.pos.point.getX(), obj.pos.point.getY(), obj2.x, obj2.y) > 200 && !wraps_obj) { continue; }
+					if (point_distance(obj.pos.point.getX(), obj.pos.point.getY(), obj2.x, obj2.y) > 200 && !wraps) { continue; }
+					
+					var contact = new Contact(true, dist.x, dist.y, obj2) 
+					array_push(contacts, contact)
+				}
+				
+			}
+			
+			ds_list_destroy(hitObjects)
+		}
+	}
+	
+	return contacts
+}
+
+/// @desc Checks for contact using Game Maker's built in methods
+/// @param {Id.Instance} obj The object to check
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} compare The list of things to consider solid
+/// @param x1Change (Optional) Considers obj to be offset by this amount
+/// @param y1Change (Optional) Considers obj to be offset by this amount
+/// @param buffer (Optional) Determines how precise the directional collision should be, default 4
+function checkContactGM_2(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wraps_x = true, wraps_y = true) {
+	var obj1_center = new wPoint(obj.x - abs(obj.sprite_xoffset) + abs(obj.sprite_width) / 2 + x1Change,
+								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change)
+	
+	// This is returned at the end
+	var contacts = []
+	
+	// Account for screenwrapped positions, 9 total
+	for (var _x = -1; _x <= 1; _x++) {
+		for (var _y = -1; _y <= 1; _y++) {
+			// Get hit objects
+			var hitObjects = ds_list_create()
+			with (obj) {
+				instance_place_list(x + x1Change + global.cam_size[0] * _x, y + y1Change + global.cam_size[1] * _y, compare, hitObjects, false)
+			}
+			
+			// Store any hits alongside their distances
+			for (var i = 0; i < ds_list_size(hitObjects); i++) {
+				var obj2 = ds_list_find_value(hitObjects, i)
+				
+				if (isTilemap(obj2)) {
+					// Tilemap collision
+					var contact = checkContactTilemap(obj, obj2, x1Change, y1Change, buffer)
+					array_push(contacts, contact)
+				} else {
+					// Regular object collision
+					//todo fix
+					var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
+											obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
+					var dist = obj1_center.distanceToPoint(obj2_center)
+					if (point_distance(obj.pos.point.getX(), obj.pos.point.getY(), obj2.x, obj2.y) > 200 && (!wraps_x && !wraps_y)) { continue; }
+					if (point_distance(obj.pos.point.getX(), obj.pos.point.getY(), obj2.x, obj.pos.point.getY()) > 200 && (!wraps_x)) { continue; }
+					if (point_distance(obj.pos.point.getX(), obj.pos.point.getY(), obj.pos.point.getX(), obj2.y) > 200 && (!wraps_y)) { continue; }
 					
 					var contact = new Contact(true, dist.x, dist.y, obj2) 
 					array_push(contacts, contact)
@@ -387,6 +469,52 @@ function checkValidMoveAllDirections(obj, collisions, _x, _y, buffer = 4, wraps_
 	return { valid : isValid, blockers }
 }
 
+/// @desc Determines whether it would be valid to move an object by some offset
+/// Returns arrays intended to be indexed by the Direction enum
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
+/// @param {Real} _x The X offset to apply
+/// @param {Real} _y The Y offset to apply
+/// @param buffer (Optional) Used to determine how precise the directional collision should be, default 4
+function checkValidMoveAllDirections_2(obj, collisions, _x, _y, buffer = 4, wraps_x = true, wraps_y = true) {
+	// These are returned later
+	// Can be indexed by the Direction enum
+	var isValid = [true, true, true, true, true]
+	var blockers = [[], [], [], [], []]
+	
+	// List of all contacts, either Struct.Contact or Struct.MapContact
+	var contacts = checkContactGM_2(obj, collisions, _x, _y, buffer, wraps_x, wraps_y)
+	
+	for (var i = 0; i < array_length(contacts); i++) {
+		var c = contacts[i]
+		if (is_instanceof(c, MapContact)) {
+			// Tilemap collision
+			for (var j = 0; j < 5; j++) {
+				if (c.directions[j]) {
+					isValid[j] = false
+					array_push(blockers[j], c.obj)
+				}
+			}
+		} else {
+			// Regular collision
+			for (var j = 0; j < 5; j++) {
+				var matchesDirection = contactMeetsDirection(obj, c, j, buffer)
+		
+				//if im not wrapping yet the object blocking me is too far, then what gives
+				//if (!instance_exists(c)) { continue; }
+				//draw_line(obj.pos.point.getX(), obj.pos.point.getY(), c.x, c.y);
+				//if ((instance_exists(c) && !wraps_obj && point_distance(obj.pos.point.getX(), obj.pos.point.getY(), c.x, c.y) > 500)) { continue; }
+				//if (!wraps_obj && point_distance(0, 0, c.xDist, c.yDist) > 150) { continue; }
+				
+				
+				if (matchesDirection) { isValid[j] = false; array_push(blockers[j], c.obj) }
+			}
+		}
+	}
+	
+	return { valid : isValid, blockers }
+}
+
 /// @desc Determine if an object is grounded
 /// Returns whether it is grounded and any objects that it is grounded on
 /// @param {Id.Instance} obj The object
@@ -447,6 +575,52 @@ function attemptMove(obj, collisions, _x, _y, buffer = 4, wraps = true) {
 	return success
 }
 
+/// @desc Attempts to move an object by some offset
+/// Returns whether the move was valid
+/// This will change the coordinates of the passed object if the move succeeds
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
+/// @param _x The X offset to apply
+/// @param _y The Y offset to apply
+/// @param buffer (Optional) The distance to check for directional collisions, default 4
+/// @param {Bool} wraps (Optional) Whether to screenwrap in x or not, default true
+/// @param {Bool} wraps (Optional) Whether to screenwrap in y or not, default true
+function attemptMove_2(obj, collisions, _x, _y, buffer = 4, wraps_x = true, wraps_y = true) {
+	var valid = checkValidMoveAllDirections_2(obj, collisions, _x, _y, buffer, wraps_x, wraps_y)
+	
+	// This is returned later
+	var success = {
+		x : false,
+		y : false,
+		blockers : valid.blockers
+	}
+	
+	// Prevent movement into obstacles
+	var _cam = (wraps_x || wraps_y) ? get_cam_that_im_in(x, y) : view_camera[7];
+	if ((valid.valid[Direction.Right] && _x > 0) || (valid.valid[Direction.Left] && _x < 0)) {
+		if (wraps_x) { obj.pos.moveWithCam(_x, 0, _cam); }
+		else { obj.pos.move(_x, 0, wraps_x); }
+		success.x = true
+	}
+	if ((valid.valid[Direction.Down] && _y > 0) || (valid.valid[Direction.Up] && _y < 0)) { //todo:  make this work for y too
+		if (wraps_y) { obj.pos.moveWithCam(0, _y, _cam); }
+		else { obj.pos.move(0, _y, wraps_y); }
+		success.y = true
+	}
+	
+	return success
+}
+
+function get_cam_that_im_in(x, y) {
+	if (am_i_in_view(x, y)) { return view_camera[7]; }
+	for (var i=0; i<7; i++) {
+		if (am_i_in_view(x, y, camera_get_view_x(view_camera[i]), camera_get_view_y(view_camera[i]))) {
+			return view_camera[i];
+		}
+	}
+	return view_camera[7];
+}
+
 /// @desc Attempts to move an object by some offset, separated into several steps
 /// Returns whether the move was valid
 /// This will change the coordinates of the passed object if the move succeeds
@@ -470,6 +644,37 @@ function attemptMoveInSteps(obj, collisions, _x, _y, buffer = 4, wraps = true, s
 	
 	for (var step = 1; step <= steps; step++) {
 		var result = attemptMove(obj, collisions, xPerStep, yPerStep, buffer, wraps)
+		
+		if (step == steps) { success = result }
+	}
+	
+	return success
+}
+
+/// @desc Attempts to move an object by some offset, separated into several steps
+/// Returns whether the move was valid
+/// This will change the coordinates of the passed object if the move succeeds
+/// @param {Id.Instance} obj The object
+/// @param {Id.TileMapElement, Asset.GMObject, Constant.All, Array} collisions An array containing all objects that should be considered solid
+/// @param _x The X offset to apply
+/// @param _y The Y offset to apply
+/// @param buffer (Optional) The distance to check for directional collisions, default 4
+/// @param {Bool} wraps_x (Optional) Whether to screenwrap in x or not, default true
+/// @param {Bool} wraps_y (Optional) Whether to screenwrap in y or not, default true
+/// @param steps (Optional) Number of steps, default 4
+function attemptMoveInSteps_2(obj, collisions, _x, _y, buffer = 4, wraps_x = true, wraps_y = true, steps = 4) {
+	var xPerStep = _x / steps
+	var yPerStep = _y / steps
+	
+	// This is returned later
+	var success = {
+		x : true,
+		y : true,
+		blockers : []
+	}
+	
+	for (var step = 1; step <= steps; step++) {
+		var result = attemptMove_2(obj, collisions, xPerStep, yPerStep, buffer, wraps_x, wraps_y)
 		
 		if (step == steps) { success = result }
 	}

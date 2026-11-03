@@ -114,7 +114,7 @@ if (coyote_time > 0) {
 #endregion Jumping
 
 var motion = pos.getMotion()
-var movement = attemptMoveInSteps(self, collisions, motion.x, motion.y, 4, should_screenwrap())
+var movement = attemptMoveInSteps_2(self, collisions, motion.x, motion.y, 4, should_screenwrap(), should_screenwrap()&&!global.camera_3d_for_act3)
 
 runBlockerEvents(movement.blockers)
 
@@ -196,7 +196,7 @@ global.default_x = x
 global.default_y = y
 
 
-if (global.debug && keyboard_check_pressed(ord("E")) && string_starts_with(room_get_name(room), "rm3")) {
+if (global.debug && keyboard_check_pressed(ord("Q")) && string_starts_with(room_get_name(room), "rm3")) {
 	pos.move(0, -(2*keyboard_check(vk_shift)-1)*global.cam_size[1], false);
 	if (y > room_height) { pos.move(0, -room_height, false); } 
 	if (y < 0) { pos.move(0, +room_height, false); } 

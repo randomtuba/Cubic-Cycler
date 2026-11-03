@@ -6,7 +6,7 @@ collisions = []; update_collisions();
 rider = noone;
 touchspring = 0
 shredding = false; shredded_pixels = 0;
-wraps = true
+wraps = true;
 alarm[1] = 1
 
 randomise();
@@ -93,6 +93,8 @@ function update_collisions() {
 
 function apply_interaction(obj, dir) {
 	with obj {
+		if (global.camera_3d_for_act3 && !am_i_in_view(x, y) || !am_i_in_view(other.x, other.y)) { return; }
+		
 		switch (dir) {
 			case Direction.None:
 			case Direction.Down:

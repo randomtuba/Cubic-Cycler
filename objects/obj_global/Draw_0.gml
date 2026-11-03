@@ -25,7 +25,7 @@ if (global.camera_3d_progress != camera_3d_progress_prev) { update_camera_3d(); 
 camera_3d_progress_prev = global.camera_3d_progress;
 
 
-if (global.camera_3d_progress > 0 || keyboard_check_pressed(ord("E"))) {
+if (global.camera_3d_progress > 0 || keyboard_check_pressed(ord("Q"))) {
 	var tile_layer_id = layer_tilemap_get_id("Tiles_1");
 	for (var tx=0; tx<tilemap_get_width(tile_layer_id); tx++) {
 		for (var ty=0; ty<tilemap_get_height(tile_layer_id); ty++) {
@@ -35,8 +35,10 @@ if (global.camera_3d_progress > 0 || keyboard_check_pressed(ord("E"))) {
 			//var coll2 = collision_rectangle(tx*32, (ty+1-5*camera_3d_depth_ratio*0.8)*32, (tx+1)*32, (ty+1-3*camera_3d_depth_ratio*0.8)*32+4, [obj_checkpoint, obj_spring, obj_spikes], false, true);
 			if ((0 < tile_index  && tile_index  <= 12) || tile_index == 49 || tile_index == 53/* || (coll != noone && coll2 == noone && coll.image_angle = 0)*/) {
 				//draw_circle(tx*32, ty*32, 5, true);
-				draw_sprite_ext(spr_block_top_only, 0, tx*32, (ty-2*global.camera_3d_progress*camera_3d_depth_ratio*2*0.8)*32, 1, 2*global.camera_3d_progress*camera_3d_depth_ratio*0.8, 0, c_white, 1);
-				draw_sprite_ext(spr_block_top_only, 0, tx*32, (ty-2*global.camera_3d_progress*camera_3d_depth_ratio*0.8)*32, 1, 2*global.camera_3d_progress*camera_3d_depth_ratio*0.8, 0, c_white, 1);
+				
+				var in_view = !am_i_in_view(tx*32+16, (ty-2*global.camera_3d_progress*camera_3d_depth_ratio*1.5*0.8)*32);
+				draw_sprite_ext(spr_block_top_only, in_view, tx*32, (ty-2*global.camera_3d_progress*camera_3d_depth_ratio*2*0.8)*32, 1, 2*global.camera_3d_progress*camera_3d_depth_ratio*0.8, 0, c_white, 1);
+				draw_sprite_ext(spr_block_top_only, in_view, tx*32, (ty-2*global.camera_3d_progress*camera_3d_depth_ratio*0.8)*32, 1, 2*global.camera_3d_progress*camera_3d_depth_ratio*0.8, 0, c_white, 1);
 			}
 		}
 	}
