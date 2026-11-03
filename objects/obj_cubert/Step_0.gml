@@ -35,7 +35,14 @@ runEventsAndGrounded(groundCheck.blockers)
 
 #region Horizontal Movement
 
-pos.x_speed += _lr * 0.75 * dcos(gravity_direction+90)
+if(gravity_direction == 90){
+	pos.x_speed += -(_lr * 0.75 * dcos(gravity_direction+90))
+}
+else{
+	pos.x_speed += _lr * 0.75 * dcos(gravity_direction+90)
+	
+}
+
 pos.y_speed -= _lr * 0.75 * dsin(gravity_direction+90)
 
 #endregion Horizontal Movement
