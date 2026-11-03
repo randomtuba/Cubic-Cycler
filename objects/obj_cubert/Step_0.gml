@@ -35,16 +35,26 @@ runEventsAndGrounded(groundCheck.blockers)
 
 #region Horizontal Movement
 
-if(gravity_direction == 90){
-	pos.x_speed += -(_lr * 0.75 * dcos(gravity_direction+90))
+var move_dir = gravity_direction + 90;
+var move_x = dcos(move_dir);
+var move_y = dsin(move_dir);
+// Keep controls consistent for up and down, and left and right
+if (  (abs(move_x) > abs(move_y)) ) {
+	if(move_x < 0){
+        move_x = -move_x;
+        move_y = -move_y;
+	}
 }
 else{
-	pos.x_speed += _lr * 0.75 * dcos(gravity_direction+90)
-	
+	if(move_y < 0) {
+   
+        move_x = -move_x;
+        move_y = -move_y;
+	}
 }
-
-pos.y_speed -= _lr * 0.75 * dsin(gravity_direction+90)
-
+//updates according to gravity
+pos.x_speed += _lr * 0.75 * move_x;
+pos.y_speed += _lr * 0.75 * move_y;
 #endregion Horizontal Movement
 
 #region Coyote Time
