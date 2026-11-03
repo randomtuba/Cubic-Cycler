@@ -178,9 +178,11 @@ function update_camera(camera_size = [1024, 640], follow_allowed = false, follow
 				
 				with (obj_pushbox) { wraps = am_i_in_view(x, y, x_off, y_off); }
 			}
-			
-			x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
-			y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
+			//testing checkpoint fixes
+			if (follow_interpolate > 0) {
+				x_off = lerp(camera_get_view_x(view_camera[0]), x_off, follow_interpolate);
+				y_off = lerp(camera_get_view_y(view_camera[0]), y_off, follow_interpolate);
+			}
 		}
 	}
 	
