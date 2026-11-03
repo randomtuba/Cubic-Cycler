@@ -76,7 +76,7 @@ function restart() {
 			pos.setPos(global.checkpoint_x, global.checkpoint_y)
 			}
 		gravity_direction = global.checkpoint_level_gravity;
-		//update_camera(global.cam_size, true, self, 1, true);
+		
 	}
 	pos.x_speed = 0
 	pos.y_speed = 0
