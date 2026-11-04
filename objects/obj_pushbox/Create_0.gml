@@ -97,7 +97,7 @@ function apply_interaction(obj, dir) {
 		
 		switch (dir) {
 			case Direction.None:
-			case Direction.Down:
+			case Direction.Down: {
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
 				pos.y_speed = new_speed
@@ -110,9 +110,9 @@ function apply_interaction(obj, dir) {
 					pos.point.getX(),
 					other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 3, 0)
 				)
-			break
+			} break
 		
-			case Direction.Up:
+			case Direction.Up: {
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2
 				pos.y_speed = new_speed
@@ -125,9 +125,9 @@ function apply_interaction(obj, dir) {
 					other.pos.point.getX(),
 					pos.point.getY() - boxSize.h / 2 - objSize.h / 2
 				)
-			break
+			} break
 		
-			case Direction.Right:
+			case Direction.Right: {
 				// Adjust speed
 				var speed_change = pos.x_speed / 20
 				pos.x_speed -= speed_change
@@ -140,9 +140,9 @@ function apply_interaction(obj, dir) {
 					other.pos.point.getX() - boxSize.w / 2 - objSize.w / 2,
 					pos.point.getY()
 				)
-			break
+			} break
 		
-			case Direction.Left:
+			case Direction.Left: {
 				// Adjust speed
 				var speed_change = pos.x_speed / 20
 				pos.x_speed -= speed_change
@@ -155,7 +155,7 @@ function apply_interaction(obj, dir) {
 					other.pos.point.getX() + boxSize.w / 2 + objSize.w / 2,
 					pos.point.getY()
 				)
-			break
+			} break
 		}
 	}
 }

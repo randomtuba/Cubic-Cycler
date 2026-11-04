@@ -118,6 +118,16 @@ enum Direction {
 	None
 }
 
+enum ConveyorVisualType {
+	Center,
+	End_Right,
+	End_Left,
+	Center_Covered,
+	End_Right_Covered_Out,
+	End_Right_Covered_Down,
+	End_Left_Covered_Out,
+	End_Left_Covered_Down
+}
 
 #endregion Enums
 
