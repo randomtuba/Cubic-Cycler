@@ -5,7 +5,9 @@ for (var i = 0; i < array_length(global.generators_destroyed_map); i++) {
 	generatorCount += array_length(global.generators_destroyed_map[i]);	
 }*/
 
-draw_text(900, 100, $"{get_destroyed_generator_count()} / 12 generators destroyed");
+if (room == rm_tesseract_1) {
+	draw_text(400, 120, $"{get_destroyed_generator_count()} / 12 generators destroyed");
+}
 
 /*switch (room) {
 	case rm_tut_top_left:

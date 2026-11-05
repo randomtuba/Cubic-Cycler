@@ -126,7 +126,15 @@ enum ConveyorVisualType {
 	End_Right_Covered_Out,
 	End_Right_Covered_Down,
 	End_Left_Covered_Out,
-	End_Left_Covered_Down
+	End_Left_Covered_Down,
+	Center_Horizontal,
+	End_Up,
+	End_Down,
+	Center_Horizontal_Covered,
+	End_Up_Covered_Out,
+	End_Up_Covered_Down,
+	End_Down_Covered_Out,
+	End_Down_Covered_Down
 }
 
 #endregion Enums
