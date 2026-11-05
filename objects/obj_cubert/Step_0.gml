@@ -86,6 +86,10 @@ else if (jump_buffer > 0) { jump_buffer-- }
 // Cooldown
 if (jump_cooldown > 0) { jump_cooldown-- }
 
+if ((pos.hit_left_conveyor || pos.hit_right_conveyor) && !(pos.hit_left_conveyor && pos.hit_right_conveyor)) {
+	conveyor_buffer = global.coyote_time
+} else if (conveyor_buffer > 0) { conveyor_buffer-- }
+
 // Jump
 if (coyote_time > 0) {
 	if (jump_buffer > 0 && jump_cooldown <= 0) { 
@@ -97,13 +101,8 @@ if (coyote_time > 0) {
 		jump_buffer = 0
 		
 		//Apply speed from conveyors
-		if (pos.hit_right_conveyor && !pos.hit_left_conveyor) {
+		if (conveyor_buffer > 0) {
 			pos.x_speed += global.conveyor_speed
-			// Reduce drag temporarily
-			pos.x_drag = 0.95
-			alarm[1] = sec/3
-		} else if (pos.hit_left_conveyor && !pos.hit_right_conveyor) {
-			pos.x_speed -= global.conveyor_speed
 			// Reduce drag temporarily
 			pos.x_drag = 0.95
 			alarm[1] = sec/3

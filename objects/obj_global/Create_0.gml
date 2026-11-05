@@ -69,7 +69,7 @@ global.act2_map = [
 	[-1, -1,-1,-1,-1],
 	[-1, -1,-1,-1,-1],
 	[-1, -1,rm2_gravity_intro,-1,-1],
-	[-1, -1,rm2_camera_intro,-1,-1],
+	[-1, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,-1],
 	[-1, -1,-1,-1,-1],
 ]
 

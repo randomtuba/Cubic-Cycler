@@ -17,6 +17,7 @@ jump_buffer = 0
 jump_cooldown = 0
 springyspring = 0
 springxspring = 0
+conveyor_buffer = 0
 
 // Landing "bouncy" vfx
 jump_k = 0;
