@@ -66,6 +66,8 @@ else if (coyote_time > 0) { coyote_time-- }
 
 #region Gravity
 
+runGravityEvents()
+
 if (!immobile) {
 	var _r = _down ? 0.8 : 0.4;
 	pos.x_speed += _r * dcos(gravity_direction)

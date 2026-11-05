@@ -716,21 +716,12 @@ function getContacting(obj, collisions) {
 function runEvents(list) {
 	for (var i = 0; i < array_length(list); i++) {
 		var obj = list[i]
-		with obj {
-			try {
-				apply_interaction(other)
-			} catch (_exception) {
-				show_debug_message("")
-				show_debug_message("Error when calling apply_interaction() function from " + string(object_index) + ":")
-				show_debug_message(_exception)
-				show_debug_message("")
-			}
-		}
+		runEvent(obj)
 	}
 }
 
 /// @desc Calls the apply_interaction(obj) function of one object
-/// @param list The object to work on
+/// @param {Id.Instance} obj The object to work on
 function runEvent(obj) {
 	with obj {
 		try {
@@ -782,6 +773,74 @@ function runBlockerEvents(blockers) {
 			if (instance_exists(current) && array_contains(HAVE_BLOCKER_BEHAVIOUR, current.object_index)) {
 				runEventWithDirection(current, d)
 			}
+		}
+	}
+}
+
+/// @desc Runs the gravity events if touching those fields
+function runGravityEvents() {
+	
+	var gravLeft = layer_tilemap_get_id("Gravity_Left")
+	if (gravLeft != -1) {
+		var collision = checkContactTilemap(self, gravLeft)
+		var hit = false
+		for (var i = 0; i < 5; i++) {
+			if (collision.directions[i]) {
+				hit = true
+				break
+			}
+		}
+		
+		if (hit) {
+			gravity_direction = 180
+		}
+	}
+	
+	var gravRight = layer_tilemap_get_id("Gravity_Right")
+	if (gravRight != -1) {
+		var collision = checkContactTilemap(self, gravRight)
+		var hit = false
+		for (var i = 0; i < 5; i++) {
+			if (collision.directions[i]) {
+				hit = true
+				break
+			}
+		}
+		
+		if (hit) {
+			gravity_direction = 0
+		}
+	}
+	
+	var gravUp = layer_tilemap_get_id("Gravity_Up")
+	if (gravUp != -1) {
+		var collision = checkContactTilemap(self, gravUp)
+		var hit = false
+		for (var i = 0; i < 5; i++) {
+			if (collision.directions[i]) {
+				hit = true
+				break
+			}
+		}
+		
+		if (hit) {
+			gravity_direction = 90
+		}
+	}
+	
+	var gravDown = layer_tilemap_get_id("Gravity_Down")
+	if (gravDown != -1) {
+		var collision = checkContactTilemap(self, gravDown)
+		var hit = false
+		for (var i = 0; i < 5; i++) {
+			if (collision.directions[i]) {
+				hit = true
+				break
+			}
+		}
+		
+		if (hit) {
+			gravity_direction = -90
 		}
 	}
 }

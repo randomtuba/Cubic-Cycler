@@ -114,8 +114,8 @@ enum Direction {
 	Down,
 	Left,
 	Right,
-	Yolo,
-	None
+	None,
+	Yolo
 }
 
 enum ConveyorVisualType {
