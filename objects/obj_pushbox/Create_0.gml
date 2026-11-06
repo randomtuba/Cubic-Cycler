@@ -102,6 +102,10 @@ function apply_interaction(obj, dir) {
 			case Direction.Down: {
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
+				// If the pushbox is grounded, just stop the object
+				if (!checkGrounded(other, collisions).valid) {
+					new_speed = 0
+				}
 				pos.y_speed = new_speed
 				other.pos.y_speed = new_speed
 			
