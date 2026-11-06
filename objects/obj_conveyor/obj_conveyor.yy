@@ -29,6 +29,7 @@
     {"$GMObjectProperty":"v2","%Name":"direction","filters":[],"listItems":[
         "Direction.Right",
         "Direction.Left",
+        "Direction.Up",
       ],"multiselect":false,"name":"direction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Direction.Right","varType":6,},
     {"$GMObjectProperty":"v2","%Name":"visual_type","filters":[],"listItems":[
         "ConveyorVisualType.Center",
@@ -39,6 +40,14 @@
         "ConveyorVisualType.End_Right_Covered_Down",
         "ConveyorVisualType.End_Left_Covered_Out",
         "ConveyorVisualType.End_Left_Covered_Down",
+        "ConveyorVisualType.Center_Horizontal",
+        "ConveyorVisualType.End_Up",
+        "ConveyorVisualType.End_Down",
+        "ConveyorVisualType.Center_Horizontal_Covered",
+        "ConveyorVisualType.End_Up_Covered_Out",
+        "ConveyorVisualType.End_Up_Covered_Down",
+        "ConveyorVisualType.End_Down_Covered_Out",
+        "ConveyorVisualType.End_Down_Covered_Down",
       ],"multiselect":false,"name":"visual_type","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"ConveyorVisualType.Center","varType":6,},
   ],
   "resourceType":"GMObject",

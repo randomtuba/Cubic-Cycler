@@ -10,7 +10,6 @@
   },
   "defaultScriptType":1,
   "Folders":[
-    {"$GMFolder":"","%Name":"Tilesets","folderPath":"folders/Tilesets.yy","name":"Tilesets","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects_control","folderPath":"folders/Objects_control.yy","name":"Objects_control","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects_simple_UI","folderPath":"folders/Objects_simple_UI.yy","name":"Objects_simple_UI","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -34,6 +33,7 @@
     {"$GMFolder":"","%Name":"Act1","folderPath":"folders/Sprites/RoomThumbnailsSmall/Act1.yy","name":"Act1","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tutorial","folderPath":"folders/Sprites/RoomThumbnailsSmall/Tutorial.yy","name":"Tutorial","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Unused","folderPath":"folders/Sprites/Unused.yy","name":"Unused","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Tilesets","folderPath":"folders/Tilesets.yy","name":"Tilesets","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[],
