@@ -5,10 +5,11 @@
 /// @param {Real} _xdrag Multiplier applied to X speed every step
 /// @param {Real} _ydrag Multiplier applied to Y speed every step
 /// @param {Id.Instance} _parent Reference to parent object
-function Position(_x, _y, _xdrag, _ydrag, _parent) constructor {
+/// @param {Bool} _wraps Whether to screenwrap the creation coordinates
+function Position(_x, _y, _xdrag, _ydrag, _parent, _wraps = true) constructor {
 	parent = _parent
 	
-	point = new wPoint(_x, _y)
+	point = new wPoint(_x, _y, _wraps)
 
 	x_speed = 0
 	y_speed = 0
