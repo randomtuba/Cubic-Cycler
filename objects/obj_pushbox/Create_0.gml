@@ -96,7 +96,9 @@ function apply_interaction(obj, dir) {
 		if (global.camera_3d_for_act3 && !am_i_in_view(x, y) || !am_i_in_view(other.x, other.y)) { return; }
 		
 		switch (dir) {
-			case Direction.None:
+			case Direction.None: {
+				// Nothing happens, this shouldn't really be reached
+			} break
 			case Direction.Down: {
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
