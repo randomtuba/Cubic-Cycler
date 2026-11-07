@@ -203,7 +203,8 @@ function getObjSize(obj) {
 /// @param buffer (Optional) Determines how precise the directional collision should be, default 4	
 function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 	var obj_center = new wPoint(obj.x - abs(obj.sprite_xoffset) + abs(obj.sprite_width) / 2 + x1Change,
-								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change)
+								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change,
+								should_screenwrap())
 	var obj_size = getObjSize(obj)
 	
 	// This is returned later
@@ -801,7 +802,7 @@ function runBlockerEvents(blockers) {
 /// @desc Runs the gravity events if touching those fields
 function runGravityEvents() {
 	
-	var gravLeft = layer_tilemap_get_id("Gravity_Left")
+	var gravLeft = layer_exists("Gravity_Left") ? layer_tilemap_get_id("Gravity_Left") : -1;
 	if (gravLeft != -1) {
 		var collision = checkContactTilemap(self, gravLeft)
 		var hit = false
@@ -817,7 +818,7 @@ function runGravityEvents() {
 		}
 	}
 	
-	var gravRight = layer_tilemap_get_id("Gravity_Right")
+	var gravRight = layer_exists("Gravity_Right") ? layer_tilemap_get_id("Gravity_Right") : -1;
 	if (gravRight != -1) {
 		var collision = checkContactTilemap(self, gravRight)
 		var hit = false
@@ -833,7 +834,7 @@ function runGravityEvents() {
 		}
 	}
 	
-	var gravUp = layer_tilemap_get_id("Gravity_Up")
+	var gravUp = layer_exists("Gravity_Up") ? layer_tilemap_get_id("Gravity_Up") : -1;
 	if (gravUp != -1) {
 		var collision = checkContactTilemap(self, gravUp)
 		var hit = false
@@ -849,7 +850,7 @@ function runGravityEvents() {
 		}
 	}
 	
-	var gravDown = layer_tilemap_get_id("Gravity_Down")
+	var gravDown = layer_exists("Gravity_Down") ? layer_tilemap_get_id("Gravity_Down") : -1;
 	if (gravDown != -1) {
 		var collision = checkContactTilemap(self, gravDown)
 		var hit = false

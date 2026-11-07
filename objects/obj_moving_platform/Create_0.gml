@@ -1,4 +1,4 @@
-pos = new Position(x, y, 1, 1, self, should_screenwrap())
+pos = new Position(x, y, 1, 1, self, false)
 
 // Store offsets of all connected objects
 connected_offsets = []

@@ -1,5 +1,5 @@
 // main vars
-pos = new Position(x, y, 0.90, 0.97, self)
+pos = new Position(x, y, 0.90, 0.97, self, false)
 
 rotation = 0;
 collisions = []; update_collisions();

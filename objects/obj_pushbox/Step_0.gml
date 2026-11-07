@@ -4,7 +4,8 @@ var _grounded = !groundCheck.valid
 
 runEventsAndGrounded(groundCheck.blockers)
 
-var in_view = am_i_in_view(pos.point.getX(), pos.point.getY()) || (global.camera_3d_for_act3 && am_i_in_view_x(pos.point.getX()));
+var in_view = am_i_in_view(pos.point.getX(), pos.point.getY()) || (global.camera_3d_for_act3 && am_i_in_view_x(pos.point.getX()))
+	|| (string_starts_with(room_get_name(room), "rm2") && !should_screenwrap());
 
 // Gravity
 if ((!_grounded || shredding) && in_view) {
