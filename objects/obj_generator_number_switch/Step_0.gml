@@ -1,4 +1,5 @@
 if (is_on && get_destroyed_generator_count() >= 12) {
 	is_on = false;
 	fix_sprite();
+	with (obj_global) send_collision_updates();
 }
