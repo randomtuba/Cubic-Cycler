@@ -127,6 +127,14 @@ function should_screenwrap() {
 	}
 }
 
+/// @desc Returns whether the camera is locked in Act 2 and obj is outside the locked viewport
+function is_outside_locked_view(obj) {
+	if (!should_screenwrap() || !string_starts_with(room_get_name(room), "rm2")) { return false }
+	var lr = camera_get_view_x(view_camera[7])
+	var ud = camera_get_view_y(view_camera[7])
+	return obj.bbox_right < lr || obj.bbox_left > lr + global.cam_size[0] || obj.bbox_bottom < ud || obj.bbox_top > ud + global.cam_size[1]
+}
+
 function am_i_in_view(_x, _y, _l = camera_get_view_x(view_camera[7]), _u = camera_get_view_y(view_camera[7]), _w = global.cam_size[0], _h = global.cam_size[1]) {
 	return (_l < _x && _x < _l + _w) && (_u < _y && _y < _u + _h)
 }
@@ -278,6 +286,9 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wr
 					array_push(contacts, contact)
 				} else {
 					// Regular object collision
+					
+					if (is_outside_locked_view(obj2)) { continue; }
+					
 					var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
 											obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
 					var dist = obj1_center.distanceToPoint(obj2_center)
@@ -328,7 +339,9 @@ function checkContactGM_2(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, 
 					array_push(contacts, contact)
 				} else {
 					// Regular object collision
-					//todo fix
+					
+					if (is_outside_locked_view(obj2)) { continue; }
+					
 					var obj2_center = new wPoint(obj2.x - abs(obj2.sprite_xoffset) + abs(obj2.sprite_width) / 2,
 											obj2.y - abs(obj2.sprite_yoffset) + abs(obj2.sprite_height) / 2)
 					var dist = obj1_center.distanceToPoint(obj2_center)
