@@ -1,6 +1,6 @@
 function actPlus(){
 		if (global.act < global.actsaved) {
-            global.act = global.actsaved;
+           // global.act = global.actsaved;
 		}
 		// refresh map var and generators destroyed map
 		_map = get_level_map();

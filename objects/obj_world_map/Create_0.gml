@@ -22,6 +22,7 @@ function get_spawn_coords_by_room(_room = room) {
 		case rm_many_buttons:			return [864, 320];
 		case rm_awkward:				return [576, 0];
 		case rm_pushbox_and_fragile:	return [960, 288];
+		case rm_tesseract_1:            return [960, 288];
 		//
 		default:						return [160, 480];
 	}
