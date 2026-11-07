@@ -21,7 +21,7 @@ switch move_direction {
 collisions = []; update_collisions()
 
 function move_by_direction() {
-	pos.move(pos.x_speed, pos.y_speed, should_screenwrap())
+	pos.move(pos.x_speed, pos.y_speed, should_screenwrap() && am_i_in_view(pos.point.getX(), pos.point.getY()))
 	
 	for (var i = 0; i < array_length(connected_objects); i++) {
 		current_object = connected_objects[i]

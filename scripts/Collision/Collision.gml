@@ -270,6 +270,10 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wr
 	// Account for screenwrapped positions, 9 total
 	for (var _x = -1; _x <= 1; _x++) {
 		for (var _y = -1; _y <= 1; _y++) {
+			
+			// Skip checking fake cubert stuff when camera is unlocked
+			if (!should_screenwrap() && (_x != 0 || _y != 0)) { continue; }
+			
 			// Get hit objects
 			var hitObjects = ds_list_create()
 			with (obj) {
@@ -323,6 +327,10 @@ function checkContactGM_2(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, 
 	// Account for screenwrapped positions, 9 total
 	for (var _x = -1; _x <= 1; _x++) {
 		for (var _y = -1; _y <= 1; _y++) {
+			
+			// Skip checking fake cubert stuff when camera is unlocked
+			if (!should_screenwrap() && (_x != 0 || _y != 0)) { continue; }
+			
 			// Get hit objects
 			var hitObjects = ds_list_create()
 			with (obj) {
