@@ -30,6 +30,7 @@
         "Direction.Right",
         "Direction.Left",
         "Direction.Up",
+        "Direction.Down",
       ],"multiselect":false,"name":"direction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Direction.Right","varType":6,},
     {"$GMObjectProperty":"v2","%Name":"visual_type","filters":[],"listItems":[
         "ConveyorVisualType.Center",

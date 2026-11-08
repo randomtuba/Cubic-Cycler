@@ -69,7 +69,7 @@ global.act2_map = [
 	[-1, -1,-1,-1,-1],
 	[-1, rm2_gravity2_secret,rm2_gravity2,-1,-1],
 	[-1, -1,rm2_gravity_intro,-1,-1],
-	[-1, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,-1],
+	[rm2_wall_launch, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,-1],
 	[-1, -1,-1,-1,-1],
 ]
 
@@ -126,15 +126,7 @@ enum ConveyorVisualType {
 	End_Right_Covered_Out,
 	End_Right_Covered_Down,
 	End_Left_Covered_Out,
-	End_Left_Covered_Down,
-	Center_Horizontal,
-	End_Up,
-	End_Down,
-	Center_Horizontal_Covered,
-	End_Up_Covered_Out,
-	End_Up_Covered_Down,
-	End_Down_Covered_Out,
-	End_Down_Covered_Down
+	End_Left_Covered_Down
 }
 
 #endregion Enums

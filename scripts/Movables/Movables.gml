@@ -20,6 +20,7 @@ function Position(_x, _y, _xdrag, _ydrag, _parent, _wraps = true) constructor {
 	
 	hit_right_conveyor = false
 	hit_left_conveyor = false
+	hit_up_conveyor = false
 	
 	hit_tractors = [false, false, false, false, false]
 	
