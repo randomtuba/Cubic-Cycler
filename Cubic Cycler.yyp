@@ -111,6 +111,8 @@
     {"id":{"name":"rm2_dubious","path":"rooms/rm2_dubious/rm2_dubious.yy",},},
     {"id":{"name":"rm2_go_zoom","path":"rooms/rm2_go_zoom/rm2_go_zoom.yy",},},
     {"id":{"name":"rm2_gravity_intro","path":"rooms/rm2_gravity_intro/rm2_gravity_intro.yy",},},
+    {"id":{"name":"rm2_gravity2_secret","path":"rooms/rm2_gravity2_secret/rm2_gravity2_secret.yy",},},
+    {"id":{"name":"rm2_gravity2","path":"rooms/rm2_gravity2/rm2_gravity2.yy",},},
     {"id":{"name":"rm2_mp_1","path":"rooms/rm2_mp_1/rm2_mp_1.yy",},},
     {"id":{"name":"rm3_test_2","path":"rooms/rm3_test_2/rm3_test_2.yy",},},
     {"id":{"name":"rm3_test","path":"rooms/rm3_test/rm3_test.yy",},},
@@ -262,6 +264,8 @@
     {"roomId":{"name":"rm2_gravity_intro","path":"rooms/rm2_gravity_intro/rm2_gravity_intro.yy",},},
     {"roomId":{"name":"rm2_mp_1","path":"rooms/rm2_mp_1/rm2_mp_1.yy",},},
     {"roomId":{"name":"rm2_go_zoom","path":"rooms/rm2_go_zoom/rm2_go_zoom.yy",},},
+    {"roomId":{"name":"rm2_gravity2_secret","path":"rooms/rm2_gravity2_secret/rm2_gravity2_secret.yy",},},
+    {"roomId":{"name":"rm2_gravity2","path":"rooms/rm2_gravity2/rm2_gravity2.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
