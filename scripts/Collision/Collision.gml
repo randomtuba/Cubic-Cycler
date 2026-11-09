@@ -261,7 +261,7 @@ function checkContactTilemap(obj, map, x1Change = 0, y1Change = 0, buffer = 4) {
 /// @param x1Change (Optional) Considers obj to be offset by this amount
 /// @param y1Change (Optional) Considers obj to be offset by this amount
 /// @param buffer (Optional) Determines how precise the directional collision should be, default 4
-function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wraps = true) {
+function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wraps = true, except) {
 	var obj1_center = new wPoint(obj.x - abs(obj.sprite_xoffset) + abs(obj.sprite_width) / 2 + x1Change,
 								obj.y - abs(obj.sprite_yoffset) + abs(obj.sprite_height) / 2 + y1Change)
 	
@@ -294,7 +294,7 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wr
 					array_push(contacts, contact)
 				} else {
 					// Regular object collision
-					show_debug_message(obj2)
+					if (instance_exists(except) && obj2.id == except.id) { continue; }
 					
 					if (is_outside_locked_view(obj2)) { continue; }
 					
@@ -417,16 +417,17 @@ function contactMeetsDirection(obj, contact, _direction, buffer = 4) {
 /// @param {Real} _y The Y offset to apply
 /// @param {Enum.Direction} _direction (Optional) If specified, only considers collisions in this direction
 /// @param buffer (Optional) Used by _direction to determine how precise the collision should be, default 4
-function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, buffer = 4) {
+function checkValidMoveGM(obj, collisions, _x, _y, _direction = Direction.None, buffer = 4, except = noone) {
 	// These are returned later
 	var isValid = true
 	var blockers = []
 	
 	// List of all contacts, either Struct.Contact or Struct.MapContact
-	var contacts = checkContactGM(obj, collisions, _x, _y, buffer)
+	var contacts = checkContactGM(obj, collisions, _x, _y, buffer, true, except)
 	
 	for (var i = 0; i < array_length(contacts); i++) {
-		var c = contacts[i]
+		var c = contacts[i];
+		
 		if (is_instanceof(c, MapContact)) {
 			// Tilemap collision
 			var matchesDirection = c.directions[_direction]
@@ -546,10 +547,10 @@ function checkValidMoveAllDirections_2(obj, collisions, _x, _y, buffer = 4, wrap
 /// @param {Id.Instance} obj The object
 /// @param collisions An array containing all objects that should be considered solid
 /// @param buffer (Optional) The distance at which things can be considered touching, default 2
-function checkGrounded(obj, collisions, buffer = 2, grav_dir = 270) {
+function checkGrounded(obj, collisions, buffer = 2, grav_dir = 270, except = noone) {
 	var _Dir = angle_direction_to_enum_Direction(grav_dir);
 	var _simple_ang = enum_Direction_to_angle_direction(_Dir);
-	return checkValidMoveGM(obj, collisions, buffer*dcos(_simple_ang), -buffer*dsin(_simple_ang), _Dir);
+	return checkValidMoveGM(obj, collisions, buffer*dcos(_simple_ang), -buffer*dsin(_simple_ang), _Dir, 2, except);
 }
 
 

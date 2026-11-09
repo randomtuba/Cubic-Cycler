@@ -93,36 +93,51 @@ function update_collisions() {
 
 function apply_interaction(obj, dir) {
 	with obj {
-		if (global.camera_3d_for_act3 && !am_i_in_view(x, y) || !am_i_in_view(other.x, other.y)) { return; }
+		if (global.camera_3d_for_act3 && (!am_i_in_view(x, y) || !am_i_in_view(other.x, other.y))) { return; }
 		
 		switch (dir) {
 			case Direction.None: {
 				// Nothing happens, this shouldn't really be reached
 			} break
-			case Direction.Down: {
+			case Direction.Down: { //cubert above box
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
 				// If the pushbox is grounded, just stop the object
 				if (!checkGrounded(other, collisions).valid) {
 					new_speed = 0
 				}
-				pos.y_speed = new_speed
+				
+				//test to fix smth
+				var cubert_disco = false; //cubert disconnect off of cube onto a ledge or something
+				if (!checkGrounded(self, collisions, 10, gravity_direction, other).valid) { cubert_disco = true; }
+				//var _collisions_minus_pushbox = [];
+				//for (var i=0; i<array_length(collisions); i++) { if (collisions[i] != obj_pushbox) { array_push(_collisions_minus_pushbox, collisions[i]); } }
+				//if (!checkGrounded(self, _collisions_minus_pushbox).valid) {
+				//	pos.y_speed = 0;
+				//}
+				
+				pos.y_speed = new_speed * !cubert_disco
 				other.pos.y_speed = new_speed
+				
 			
 				// Snap obj
-				objSize = getObjSize(self)
-				boxSize = getObjSize(other)
-				pos.setPos(
-					pos.point.getX(),
-					other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 3, 0)
-				)
+				if (!cubert_disco) {
+					objSize = getObjSize(self)
+					boxSize = getObjSize(other)
+					pos.move(0, other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 3, 0) - pos.point.getY());
+				}
+				//pos.setPos(
+				//	pos.point.getX(),
+				//	other.pos.point.getY() - boxSize.h / 2 - objSize.h / 2 + max(new_speed - 3, 0)
+				//)
 			} break
 		
-			case Direction.Up: {
+			case Direction.Up: { //box above cubert
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2
 				pos.y_speed = new_speed
 				other.pos.y_speed = new_speed
+				
 			
 				// Snap box
 				objSize = getObjSize(self)
