@@ -1,7 +1,7 @@
 {
   "$GMRoom":"v1",
   "%Name":"rm2_puzzle_and_secret",
-  "creationCodeFile":"",
+  "creationCodeFile":"rooms/rm2_puzzle_and_secret/RoomCreationCode.gml",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,

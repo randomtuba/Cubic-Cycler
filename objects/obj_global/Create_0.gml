@@ -81,6 +81,8 @@ global.act3_map = [
 global.act = 0
 
 global.generators_destroyed_map = []
+global.room_explored_map = []
+
 
 //fill it with falses at the start of the game
 var _map = get_level_map();
@@ -88,6 +90,13 @@ for (var i=0; i<array_length(_map); i++) {
 	array_push(global.generators_destroyed_map, []);
 	for (var j=0; j<array_length(_map[0]); j++) {
 		array_push(global.generators_destroyed_map[i], false);
+	}
+}
+var _map2 = global.act2_map;
+for (var i=0; i<array_length(_map2); i++) {
+	array_push(global.room_explored_map, []);
+	for (var j=0; j<array_length(_map2[0]); j++) {
+		array_push(global.room_explored_map[i], false);
 	}
 }
 

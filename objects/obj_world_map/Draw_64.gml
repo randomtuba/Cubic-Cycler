@@ -34,7 +34,14 @@ if (enable_k > 0) {
 			var _level_beat = global.generators_destroyed_map[j][i];
 			var _is_current_level = (global.level_x == j && global.level_y == i);
 			draw_set_color(_level_beat ? c_lime : c_red)
-			draw_rectangle(_x,_y, _x + gap,_y +gap*ratio,false);
+			if(_map == global.act2_map){
+				draw_set_color(global.room_explored_map[j][i] ? c_lime : c_red)
+			}
+			if(_map != global.act2_map || _map == global.act2_map && get_level_map()[i][j] != -1){
+				draw_rectangle(_x,_y, _x + gap,_y +gap*ratio,false);
+			}
+			
+			
 			
 			var _speci_room = get_level_map()[i][j];
 			var _spr = get_room_thumb(_speci_room);

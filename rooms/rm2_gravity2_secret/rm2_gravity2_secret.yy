@@ -1,7 +1,7 @@
 {
   "$GMRoom":"v1",
   "%Name":"rm2_gravity2_secret",
-  "creationCodeFile":"",
+  "creationCodeFile":"rooms/rm2_gravity2_secret/RoomCreationCode.gml",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
