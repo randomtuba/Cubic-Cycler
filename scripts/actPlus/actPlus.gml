@@ -13,7 +13,14 @@ function actPlus(){
 		}
 		
 		// set new checkpoint data and go to start room
-		if (global.act == 1) {
+		if (global.act == 3) {
+			global.checkpoint_room = rm3_test
+			global.checkpoint_level_x = 0
+			global.checkpoint_level_y = 0
+			global.level_x = 0
+			global.level_y = 0
+			
+		} else if (global.act == 1) {
 			global.checkpoint_room = rm_start
 			global.checkpoint_level_x = 2
 			global.checkpoint_level_y = 1

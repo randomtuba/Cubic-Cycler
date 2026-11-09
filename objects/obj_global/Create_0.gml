@@ -6,7 +6,7 @@
 #macro FREELY_MOVABLE_OBJECTS [obj_cubert, obj_pushbox]
 #macro HAVE_CONTACT_BEHAVIOUR [obj_spring, obj_button, obj_button_cubert, obj_checkpoint, obj_generator, obj_spikes, obj_spikeball, obj_spike_low]
 #macro HAVE_GROUNDED_BEHAVIOUR [obj_conveyor, obj_moving_platform]
-#macro HAVE_BLOCKER_BEHAVIOUR [obj_pushbox, obj_block_fragile]
+#macro HAVE_BLOCKER_BEHAVIOUR [obj_pushbox, obj_block_fragile, obj_conveyor]
 
 #endregion Macros
 
@@ -29,7 +29,7 @@ global.camera_3d_progress = 0;
 global.camera_3d_cubert_depth = 0;
 global.camera_3d_cubert_depth_k = 0;
 camera_3d_progress_prev = 0;
-camera_3d_depth_ratio = 0.25;
+camera_3d_depth_ratio = 0.5;
 
 global.use_background = true
 global.background_scale = 2
@@ -71,6 +71,10 @@ global.act2_map = [
 	[-1, -1,rm2_gravity_intro,-1,-1],
 	[rm2_wall_launch, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,-1],
 	[-1, -1,-1,-1,-1],
+]
+
+global.act3_map = [
+	[rm3_test, rm3_test_2],
 ]
 
 // stores current act
@@ -135,25 +139,25 @@ enum ConveyorVisualType {
 
 function update_camera_3d() {
 	var depth_count_3d = floor(room_height / global.cam_size[1]); //1, 2, 3, ...
-	var y_increase_due_depth = sprite_get_height(spr_block_top_only)*camera_3d_depth_ratio;
-	var p = global.camera_3d_progress;
+	var y_increase_due_depth = 32*camera_3d_depth_ratio;
+	var p = round(global.camera_3d_progress*4)/4;
 	
 	//var view_vertical_off = global.cam_size[1] + 8*floor(depth_count_3d*y_increase_due_depth*p/8)
-	window_set_size(global.cam_size[0], global.cam_size[1] + p*(depth_count_3d-1)*y_increase_due_depth);//+ 8*floor((depth_count_3d-1)*y_increase_due_depth*p/8)
+	window_set_size(global.cam_size[0], global.cam_size[1] + p*depth_count_3d*y_increase_due_depth);//+ 8*floor((depth_count_3d-1)*y_increase_due_depth*p/8)
 		
 	view_enabled = true;
 	
+	for (var i=depth_count_3d; i<=7; i++) { view_visible[i] = false; }
 	for (var i=0; i<depth_count_3d; i++) {
 		camera_set_view_pos(view_camera[i], 0, i*global.cam_size[1]);
 		camera_set_view_size(view_camera[i], global.cam_size[0], global.cam_size[1]);
 		view_visible[i] = true;
 		view_xport[i] = 0;
-		view_yport[i] = p*i*y_increase_due_depth//4 * 8 * floor (i * y_increase_due_depth * p / 8);
+		view_yport[i] = //p*i*y_increase_due_depth;//4 * 8 * floor (i * y_increase_due_depth * p / 8);
+		
 		view_wport[i] = global.cam_size[0];
-		view_hport[i] = global.cam_size[1] + p*i*y_increase_due_depth;
+		view_hport[i] = window_get_height()//global.cam_size[1]// + i*p*y_increase_due_depth;
 	}
-	
-	for (var i=depth_count_3d; i<7; i++) { view_visible[i] = false; }
 				
 	with (obj_pushbox) { wraps = am_i_in_view_x(x); }
 	with (obj_checkpoint) { wraps = am_i_in_view_x(x); }

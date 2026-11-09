@@ -87,7 +87,7 @@ if (direction == Direction.Down) {
 
 sprite_set_speed(sprite_index, 12, spritespeed_framespersecond)
 
-function apply_interaction(obj) {
+function apply_interaction(obj, dir) {
 	with obj {
 		switch (other.direction) {
 			case Direction.Right:
@@ -104,13 +104,17 @@ function apply_interaction(obj) {
 				break
 			case Direction.Up:
 				if (!pos.hit_up_conveyor) {
-					pos.y_this_frame -= global.conveyor_speed
+					pos.y_speed -= global.conveyor_speed/10
+					//pos.y_this_frame -= global.conveyor_speed
+					//pos.move(0, -global.conveyor_speed);
 					pos.hit_up_conveyor = true
 				}
 				break
 			case Direction.Down:
 				if (!pos.hit_down_conveyor) {
-					pos.y_this_frame += global.conveyor_speed
+					pos.y_speed += global.conveyor_speed/10
+					//pos.y_this_frame += global.conveyor_speed
+					//pos.move(0, global.conveyor_speed);
 					pos.hit_down_conveyor = true
 				}
 				break
