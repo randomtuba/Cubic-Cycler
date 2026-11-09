@@ -104,7 +104,10 @@ if (coyote_time > 0) {
 		
 		//Apply speed from conveyors
 		if (conveyor_buffer > 0) {
-			pos.x_speed += global.conveyor_speed
+			if (pos.hit_left_conveyor) pos.x_speed -= global.conveyor_speed
+			if (pos.hit_right_conveyor) pos.x_speed += global.conveyor_speed
+			if (pos.hit_up_conveyor) pos.y_speed -= global.conveyor_speed
+			if (pos.hit_down_conveyor) pos.y_speed += global.conveyor_speed
 			// Reduce drag temporarily
 			pos.x_drag = 0.95
 			alarm[1] = sec/3
