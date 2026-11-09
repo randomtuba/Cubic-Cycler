@@ -281,9 +281,12 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wr
 				instance_place_list(x + x1Change + global.cam_size[0] * _x, y + y1Change + global.cam_size[1] * _y, compare, hitObjects, false)
 			}
 			
+			show_debug_message("----")
+			
 			// Store any hits alongside their distances
 			for (var i = 0; i < ds_list_size(hitObjects); i++) {
 				var obj2 = ds_list_find_value(hitObjects, i)
+				
 				
 				if (isTilemap(obj2)) {
 					// Tilemap collision
@@ -291,6 +294,7 @@ function checkContactGM(obj, compare, x1Change = 0, y1Change = 0, buffer = 4, wr
 					array_push(contacts, contact)
 				} else {
 					// Regular object collision
+					show_debug_message(obj2)
 					
 					if (is_outside_locked_view(obj2)) { continue; }
 					
