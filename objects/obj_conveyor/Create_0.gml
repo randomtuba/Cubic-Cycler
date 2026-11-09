@@ -79,7 +79,8 @@ if (direction == Direction.Up) {
 
 if (direction == Direction.Down) {
 	sprite_index = sprite_duplicate(sprite_index)
-	image_angle = -90
+	image_angle = 90
+	image_xscale = -1
 }
 
 #endregion Set correct sprite
@@ -88,16 +89,31 @@ sprite_set_speed(sprite_index, 12, spritespeed_framespersecond)
 
 function apply_interaction(obj) {
 	with obj {
-		if (other.direction == Direction.Right) {
-			if (!pos.hit_right_conveyor) {
-				pos.x_this_frame += global.conveyor_speed
-				pos.hit_right_conveyor = true
-			}
-		} else {
-			if (!pos.hit_left_conveyor) {
-				pos.x_this_frame -= global.conveyor_speed
-				pos.hit_left_conveyor = true
-			}
+		switch (other.direction) {
+			case Direction.Right:
+				if (!pos.hit_right_conveyor) {
+					pos.x_this_frame += global.conveyor_speed
+					pos.hit_right_conveyor = true
+				}
+				break
+			case Direction.Left:
+				if (!pos.hit_left_conveyor) {
+					pos.x_this_frame -= global.conveyor_speed
+					pos.hit_left_conveyor = true
+				}
+				break
+			case Direction.Up:
+				if (!pos.hit_up_conveyor) {
+					pos.y_this_frame -= global.conveyor_speed
+					pos.hit_up_conveyor = true
+				}
+				break
+			case Direction.Down:
+				if (!pos.hit_down_conveyor) {
+					pos.y_this_frame += global.conveyor_speed
+					pos.hit_down_conveyor = true
+				}
+				break
 		}
 	}
 }
