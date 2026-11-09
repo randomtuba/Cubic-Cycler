@@ -113,7 +113,9 @@
     {"id":{"name":"rm2_gravity_intro","path":"rooms/rm2_gravity_intro/rm2_gravity_intro.yy",},},
     {"id":{"name":"rm2_gravity2_secret","path":"rooms/rm2_gravity2_secret/rm2_gravity2_secret.yy",},},
     {"id":{"name":"rm2_gravity2","path":"rooms/rm2_gravity2/rm2_gravity2.yy",},},
+    {"id":{"name":"rm2_jump_advanced","path":"rooms/rm2_jump_advanced/rm2_jump_advanced.yy",},},
     {"id":{"name":"rm2_mp_1","path":"rooms/rm2_mp_1/rm2_mp_1.yy",},},
+    {"id":{"name":"rm2_puzzle_and_secret","path":"rooms/rm2_puzzle_and_secret/rm2_puzzle_and_secret.yy",},},
     {"id":{"name":"rm2_wall_launch","path":"rooms/rm2_wall_launch/rm2_wall_launch.yy",},},
     {"id":{"name":"rm3_test_2","path":"rooms/rm3_test_2/rm3_test_2.yy",},},
     {"id":{"name":"rm3_test","path":"rooms/rm3_test/rm3_test.yy",},},
@@ -268,6 +270,8 @@
     {"roomId":{"name":"rm2_gravity2_secret","path":"rooms/rm2_gravity2_secret/rm2_gravity2_secret.yy",},},
     {"roomId":{"name":"rm2_gravity2","path":"rooms/rm2_gravity2/rm2_gravity2.yy",},},
     {"roomId":{"name":"rm2_wall_launch","path":"rooms/rm2_wall_launch/rm2_wall_launch.yy",},},
+    {"roomId":{"name":"rm2_puzzle_and_secret","path":"rooms/rm2_puzzle_and_secret/rm2_puzzle_and_secret.yy",},},
+    {"roomId":{"name":"rm2_jump_advanced","path":"rooms/rm2_jump_advanced/rm2_jump_advanced.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
