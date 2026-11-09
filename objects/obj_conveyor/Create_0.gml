@@ -104,17 +104,13 @@ function apply_interaction(obj, dir) {
 				break
 			case Direction.Up:
 				if (!pos.hit_up_conveyor) {
-					pos.y_speed -= global.conveyor_speed/10
-					//pos.y_this_frame -= global.conveyor_speed
-					//pos.move(0, -global.conveyor_speed);
+					pos.y_speed -= global.conveyor_speed / 10 * (obj.pos.point.getX() > other.x - 16 ? -1 : 1)
 					pos.hit_up_conveyor = true
 				}
 				break
 			case Direction.Down:
 				if (!pos.hit_down_conveyor) {
-					pos.y_speed += global.conveyor_speed/10
-					//pos.y_this_frame += global.conveyor_speed
-					//pos.move(0, global.conveyor_speed);
+					pos.y_speed += global.conveyor_speed / 10 * (obj.pos.point.getX() > other.x - 16 ? -1 : 1)
 					pos.hit_down_conveyor = true
 				}
 				break
