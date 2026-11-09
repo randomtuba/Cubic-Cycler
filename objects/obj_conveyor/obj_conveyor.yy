@@ -50,6 +50,7 @@
         "ConveyorVisualType.End_Down_Covered_Out",
         "ConveyorVisualType.End_Down_Covered_Down",
       ],"multiselect":false,"name":"visual_type","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"ConveyorVisualType.Center","varType":6,},
+    {"$GMObjectProperty":"v2","%Name":"flip_sprite","filters":[],"listItems":[],"multiselect":false,"name":"flip_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

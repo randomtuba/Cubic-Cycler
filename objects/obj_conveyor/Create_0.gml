@@ -82,6 +82,9 @@ if (direction == Direction.Down) {
 	image_angle = 90
 	image_xscale = -1
 }
+if (flip_sprite) {
+	image_angle += 180
+}
 
 #endregion Set correct sprite
 
