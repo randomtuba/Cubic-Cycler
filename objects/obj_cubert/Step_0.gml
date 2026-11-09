@@ -88,7 +88,7 @@ else if (jump_buffer > 0) { jump_buffer-- }
 // Cooldown
 if (jump_cooldown > 0) { jump_cooldown-- }
 
-if ((pos.hit_left_conveyor || pos.hit_right_conveyor) && !(pos.hit_left_conveyor && pos.hit_right_conveyor)) {
+if (pos.hit_left_conveyor + pos.hit_right_conveyor + pos.hit_up_conveyor + pos.hit_down_conveyor == 1) {
 	conveyor_buffer = global.coyote_time
 } else if (conveyor_buffer > 0) { conveyor_buffer-- }
 
