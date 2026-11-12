@@ -108,6 +108,7 @@
     {"id":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
     {"id":{"name":"rm2_camera_intro","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},},
     {"id":{"name":"rm2_central","path":"rooms/rm2_central/rm2_central.yy",},},
+    {"id":{"name":"rm2_conveyor_final","path":"rooms/rm2_conveyor_final/rm2_conveyor_final.yy",},},
     {"id":{"name":"rm2_dubious","path":"rooms/rm2_dubious/rm2_dubious.yy",},},
     {"id":{"name":"rm2_go_zoom","path":"rooms/rm2_go_zoom/rm2_go_zoom.yy",},},
     {"id":{"name":"rm2_gravity_intro","path":"rooms/rm2_gravity_intro/rm2_gravity_intro.yy",},},
@@ -272,6 +273,7 @@
     {"roomId":{"name":"rm2_wall_launch","path":"rooms/rm2_wall_launch/rm2_wall_launch.yy",},},
     {"roomId":{"name":"rm2_puzzle_and_secret","path":"rooms/rm2_puzzle_and_secret/rm2_puzzle_and_secret.yy",},},
     {"roomId":{"name":"rm2_jump_advanced","path":"rooms/rm2_jump_advanced/rm2_jump_advanced.yy",},},
+    {"roomId":{"name":"rm2_conveyor_final","path":"rooms/rm2_conveyor_final/rm2_conveyor_final.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
