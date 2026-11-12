@@ -37,7 +37,7 @@ global.background_scale = 2
 // stores the position of the player
 global.default_x = 0
 global.default_y = 0
-global.actsaved = 0
+
 // platformer physics quality of life
 global.coyote_time = 5
 global.input_buffer_time = 5
@@ -79,10 +79,11 @@ global.act3_map = [
 
 // stores current act
 global.act = 0
+global.actsaved = 0
 
 global.generators_destroyed_map = []
 global.room_explored_map = []
-
+global.buttons_pressed = []
 
 //fill it with falses at the start of the game
 var _map = get_level_map();
