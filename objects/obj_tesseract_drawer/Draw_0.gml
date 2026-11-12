@@ -4,6 +4,7 @@ if (collect_timer < sec * 5) {
 
 	if (collected && instance_exists(obj_cubert)) {
 		//TODO: make the rotation and scale change after collection or something
+		audio_play_sound(tesseract_sfx, 0, false)
 		x = lerp(xstart, obj_cubert.x, collect_k);
 		y = lerp(ystart, obj_cubert.y, collect_k);
 		rot_xw_spd *= 1.0022 //exponential spin faster when collected

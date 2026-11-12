@@ -21,6 +21,7 @@ switch (facing_direction) {
 function apply_interaction(obj) {
 	image_speed = 1
 	with obj {
+		audio_play_sound(spring_sfx_ver2, 0, false)
 		switch (other.facing_direction) {
 			case (Direction.Up):
 				springyspring = 1

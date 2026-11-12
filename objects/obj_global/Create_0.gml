@@ -18,7 +18,7 @@ timer = 0;
 #region Variables
 
 global.debug = false;
-global.minimap = false;
+global.minimap = true;
 global.gamepad = false;
 
 global.camera_follows_player_for_act2 = false;
@@ -69,7 +69,7 @@ global.act2_map = [
 	[-1, -1,-1,-1,-1],
 	[-1, rm2_puzzle_and_secret,rm2_gravity2,-1,-1],
 	[rm2_conveyor_final, -1,rm2_gravity_intro,-1,-1],
-	[rm2_wall_launch, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,-1],
+	[rm2_wall_launch, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,rm2_jump_advanced],
 	[-1, -1,-1,-1,-1],
 ]
 
