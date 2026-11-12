@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"spring_sfx_ver2",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.8509524,
+  "exportDir":"",
+  "name":"spring_sfx_ver2",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"spring_sfx_ver2.wav",
+  "volume":1.0,
+}
