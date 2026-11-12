@@ -3,6 +3,7 @@
   "%Name":"obj_pedestal",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_pedestal",
@@ -33,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_pedestal",
-    "path":"sprites/spr_pedestal/spr_pedestal.yy",
+    "name":"spr_pedestal_off",
+    "path":"sprites/spr_pedestal_off/spr_pedestal_off.yy",
   },
   "spriteMaskId":null,
   "visible":true,

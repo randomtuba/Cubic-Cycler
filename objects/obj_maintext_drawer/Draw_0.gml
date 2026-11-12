@@ -25,6 +25,11 @@ switch (room) {
 		}
 		if (!should_screenwrap()) draw_text(350, 200, "Now try going back to the start!")
 	break
+	case rm_tesseract_1:
+		draw_text(400, 120, $"{get_destroyed_generator_count()} / 12 generators destroyed");
+	break
+	case rm2_camera_intro:
+		draw_text(500, 300, "Press E at a pedestal to lock\nand unlock the screen!\n\nPress M to toggle minimap.");
 }
 
 if (keyboard_check(vk_anykey)) { global.gamepad = false; }
