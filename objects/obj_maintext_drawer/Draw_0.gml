@@ -25,6 +25,8 @@ switch (room) {
 		}
 		if (!should_screenwrap()) draw_text(350, 200, "Now try going back to the start!")
 	break
+	case rm_tesseract_1:
+		draw_text(400, 120, $"{get_destroyed_generator_count()} / 12 generators destroyed");
 }
 
 if (keyboard_check(vk_anykey)) { global.gamepad = false; }
