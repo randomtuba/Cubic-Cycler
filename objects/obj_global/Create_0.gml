@@ -18,7 +18,7 @@ timer = 0;
 #region Variables
 
 global.debug = false;
-global.minimap = true;
+global.minimap = false;
 global.gamepad = false;
 
 global.camera_follows_player_for_act2 = false;
