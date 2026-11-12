@@ -67,6 +67,7 @@ if (enable_k > 0) {
 					global.level_y = i;
 					global.level_x = j;
 					
+					global.buttons_pressed = []
 					room_goto(get_level_map()[global.level_y][global.level_x]);
 					var room_name = get_level_map()[global.level_y][global.level_x];
 					var level_spawn = get_spawn_coords_by_room(room_name);
