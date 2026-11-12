@@ -18,7 +18,7 @@ function apply_interaction(obj) {
 			pressed = true
 			
 			// Add to buttons pressed list (Act 2)
-			if (!array_contains(global.buttons_pressed, id) && stays_pressed) {
+			if (!array_contains(global.buttons_pressed, id) && stays_pressed && global.act == 2) {
 				array_push(global.buttons_pressed, id)
 			}
 
