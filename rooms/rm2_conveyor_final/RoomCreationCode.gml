@@ -1,0 +1,1 @@
+global.room_explored_map[global.level_x][global.level_y] = true;
