@@ -217,6 +217,8 @@
     {"id":{"name":"spr_moving_platform","path":"sprites/spr_moving_platform/spr_moving_platform.yy",},},
     {"id":{"name":"spr_overlay_2","path":"sprites/spr_overlay_2/spr_overlay_2.yy",},},
     {"id":{"name":"spr_overlay","path":"sprites/spr_overlay/spr_overlay.yy",},},
+    {"id":{"name":"spr_pedestal_1","path":"sprites/spr_pedestal_1/spr_pedestal_1.yy",},},
+    {"id":{"name":"spr_pedestal_off","path":"sprites/spr_pedestal_off/spr_pedestal_off.yy",},},
     {"id":{"name":"spr_pedestal","path":"sprites/spr_pedestal/spr_pedestal.yy",},},
     {"id":{"name":"spr_pushbox","path":"sprites/spr_pushbox/spr_pushbox.yy",},},
     {"id":{"name":"spr_save_menu","path":"sprites/spr_save_menu/spr_save_menu.yy",},},
