@@ -30,6 +30,7 @@ if (global.camera_follows_player_for_act2) {
 }
 
 if (keyboard_check_pressed(vk_f3)) { global.debug = !global.debug; }
-if (keyboard_check_pressed(ord("M"))) { global.minimap = !global.minimap; view_visible[6] = false; }
-if (keyboard_check_pressed(ord("P"))) { global.camera_3d_for_act3 = ! global.camera_3d_for_act3; }
+if (keyboard_check_pressed(ord("M")) || gamepad_button_check_pressed(0, gp_face4)) { global.minimap = !global.minimap; view_visible[6] = false; }
+var _mass = gamepad_button_check_pressed(0, gp_padl) && gamepad_button_check_pressed(0, gp_padd) && gamepad_button_check_pressed(0, gp_face1) && gamepad_button_check_pressed(0, gp_face3)
+if (global.debug && (keyboard_check_pressed(ord("P")) || _mass)) { global.camera_3d_for_act3 = ! global.camera_3d_for_act3; }
 timer++;
