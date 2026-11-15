@@ -1,18 +1,18 @@
 {
   "$GMSound":"v2",
-  "%Name":"spring_sfx_ver2",
+  "%Name":"sfx_tesseract_collect",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
-  "channelFormat":1,
+  "channelFormat":0,
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.8509524,
+  "duration":10.774081,
   "exportDir":"",
-  "name":"spring_sfx_ver2",
+  "name":"sfx_tesseract_collect",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"spring_sfx_ver2.wav",
+  "soundFile":"sfx_tesseract_collect.wav",
   "volume":1.0,
 }

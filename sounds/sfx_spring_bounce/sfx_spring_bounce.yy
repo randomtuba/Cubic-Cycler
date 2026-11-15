@@ -1,18 +1,18 @@
 {
   "$GMSound":"v2",
-  "%Name":"tesseract_sfx",
+  "%Name":"sfx_spring_bounce",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
+  "channelFormat":1,
+  "compression":3,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":10.774081,
+  "duration":1.8509524,
   "exportDir":"",
-  "name":"tesseract_sfx",
+  "name":"sfx_spring_bounce",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"tesseract_sfx.wav",
+  "soundFile":"sfx_spring_bounce.wav",
   "volume":1.0,
 }

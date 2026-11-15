@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"jump_sfx",
+  "%Name":"sfx_jump",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -12,7 +12,7 @@
   "conversionMode":0,
   "duration":1.8509524,
   "exportDir":"",
-  "name":"jump_sfx",
+  "name":"sfx_jump",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"jump_sfx.wav",
+  "soundFile":"sfx_jump.wav",
   "volume":1.0,
 }
