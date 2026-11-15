@@ -18,11 +18,40 @@ if ((keyboard_check_pressed(ord("R")) || gamepad_button_check_pressed(0, gp_star
 
 #region Controls
 
-var _right = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
-var _left = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
-var _lr = !immobile ? (_right - _left) : false
-var _down = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !immobile
-var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !immobile
+var gd = gravity_direction;
+//down
+
+	var _right = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	var _left = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	var _lr = !immobile ? (_right - _left) : false
+	var _down = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !immobile
+	var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !immobile
+
+//left
+if(gd == 180 || gd == -180){
+	_jump = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	_down = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	_left = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !immobile
+	_right = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !immobile
+	_lr = !immobile ? (_right - _left) : false
+}
+//up
+if(gd == 90){
+	_left = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	_right = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	_jump = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !immobile
+	_down = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !immobile
+	_lr = !immobile ? (_right - _left) : false
+}
+//right
+if(gd == 0){
+	_down = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	_jump = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	_right = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !immobile
+	_left = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !immobile
+	_lr = !immobile ? (_right - _left) : false
+}
+
 
 #endregion
 
@@ -34,27 +63,24 @@ var _grounded = !groundCheck.valid
 runEventsAndGrounded(groundCheck.blockers)
 
 #region Horizontal Movement
+//down gravity_direction= 270
+var move_dir = gravity_direction  + 90;
+//left gravity_direction= 180
 
-var move_dir = gravity_direction + 90;
+
+
 var move_x = dcos(move_dir);
 var move_y = dsin(move_dir);
-// Keep controls consistent for up and down, and left and right
-if (  (abs(move_x) > abs(move_y)) ) {
-	if(move_x < 0){
-        move_x = -move_x;
-        move_y = -move_y;
-	}
-}
-else{
-	if(move_y < 0) {
-   
-        move_x = -move_x;
-        move_y = -move_y;
-	}
-}
-//updates according to gravity
+
+
+
+
 pos.x_speed += _lr * 0.75 * move_x;
 pos.y_speed += _lr * 0.75 * move_y;
+
+
+
+
 #endregion Horizontal Movement
 
 #region Coyote Time
