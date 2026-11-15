@@ -6,7 +6,7 @@ function update_connected(playsound=true) {
 	// Update connected switch blocks
 	with (obj_switch_block) {
 		if (receiving_id = other.broadcast_id) {
-			if (playsound) audio_play_sound(sfx_button_press, 0, false)
+			if (playsound) audio_play_sound(sfx_button_press, 0, false, global.sfx_vol)
 			toggle()
 		}
 	}

@@ -21,6 +21,10 @@ global.debug = false;
 global.minimap = false;
 global.gamepad = false;
 
+global.pause_menu = instance_nearest(x, y, obj_pause);
+global.music_vol = 0.8; //0 to 1
+global.sfx_vol = 0.8;
+
 global.camera_follows_player_for_act2 = false;
 global.cam_size = [1024, 640];
 global.pedestal = noone;

@@ -1,0 +1,1 @@
+pause_menu_func = pause_menu_slider_func;

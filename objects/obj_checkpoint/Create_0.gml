@@ -11,7 +11,7 @@ function apply_interaction(obj) {
 		if (cooldown > 0) return;   
 		cooldown = 2 * room_speed;
 		
-		if (global.checkpoint_id != id) audio_play_sound(sfx_checkpoint, 0, false)
+		if (global.checkpoint_id != id) audio_play_sound(sfx_checkpoint, 0, false, global.sfx_vol)
 		global.checkpoint_id = id
 		global.checkpoint_x = x
 		global.checkpoint_y = y

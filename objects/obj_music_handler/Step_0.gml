@@ -1,6 +1,4 @@
-if (!audio_is_playing(song)) {
-	song_ended = true
-}
+if (!audio_is_playing(song)) { song_ended = true }
 
 if (song_ended) {
 	song_timer++

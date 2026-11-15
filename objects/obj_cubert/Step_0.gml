@@ -94,8 +94,8 @@ if (pos.hit_left_conveyor + pos.hit_right_conveyor + pos.hit_up_conveyor + pos.h
 
 // Jump
 if (coyote_time > 0) {
-	if (jump_buffer > 0 && jump_cooldown <= 0) { 
-		audio_play_sound(sfx_jump, 0, false)
+	if (jump_buffer > 0 && jump_cooldown <= 0) {
+		audio_play_sound(sfx_jump, 0, false, global.sfx_vol)
 		pos.x_speed += (pos.x_speed+10) * dcos(gravity_direction+180)
 		pos.y_speed -= (pos.y_speed+10) * dsin(gravity_direction+180)
 		

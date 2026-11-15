@@ -20,7 +20,7 @@ function turn_off(actually_turn_on = false) {
 
 function apply_interaction(obj) {
 	if (obj.object_index == obj_cubert) {
-		if (!global.generators_destroyed_map[global.level_x][global.level_y]) audio_play_sound(sfx_generator_break, 0, false)
+		if (!global.generators_destroyed_map[global.level_x][global.level_y]) audio_play_sound(sfx_generator_break, 0, false, global.sfx_vol)
 		global.generators_destroyed_map[global.level_x][global.level_y] = true;
 		turn_off()
 	}
