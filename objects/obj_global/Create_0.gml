@@ -84,6 +84,7 @@ global.act3_map = [
 // stores current act
 global.act = 0
 global.actsaved = 0
+global.savefile = 1
 
 global.generators_destroyed_map = []
 global.room_explored_map = []

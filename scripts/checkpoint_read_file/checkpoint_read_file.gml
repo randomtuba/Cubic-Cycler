@@ -1,5 +1,5 @@
-function checkpoint_read_file() {
-    var _path = game_save_id + "checkpoint.json";
+function checkpoint_read_file(_savefile = global.savefile) {
+    var _path = game_save_id + "checkpoint"+string(_savefile)+".json";
 
     if (!file_exists(_path)) return false;
 	

@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"OtherMildlyImportantFont",
+  "%Name":"MildlyImportantFont",
   "AntiAlias":1,
   "applyKerning":0,
   "ascender":14,
@@ -189,7 +189,7 @@
   "last":0,
   "lineHeight":18,
   "maintainGms1Font":false,
-  "name":"OtherMildlyImportantFont",
+  "name":"MildlyImportantFont",
   "parent":{
     "name":"Cubic Cycler",
     "path":"Cubic Cycler.yyp",

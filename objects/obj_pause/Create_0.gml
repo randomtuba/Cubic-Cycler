@@ -1,20 +1,48 @@
 progress_k = 0;
 progress = 0;
 
+innerText = "";
+
 value = 0.8;
 value_setter = function(){
 	global.music_vol = value;
 	with (obj_music_handler) { audio_sound_gain(song, global.music_vol, 100); }
 } //to be modified in instance creation (or not)
-pause_menu_func = function(){return;} //to be modified in instance creation (or not)
+pause_menu_func = function(_hover){return;} //to be modified in instance creation (or not)
 
 
 //functions in question
-function pause_menu_slider_func() {
+function pause_menu_go_to_menu(_hover){
+	if (mouse_check_button_pressed(mb_left) && _hover) {
+		with (obj_cubert) { instance_destroy(); }
+		//room_goto(rm_mainmenu);
+	}
+}
+function pause_menu_teleport_act(_hover) {
+	if (mouse_check_button_pressed(mb_left) && _hover) {
+		if (room == rm_mainmenu || room == rm_controls) {
+			room_goto(rm_tut_top_left);
+		} else {
+			global.act = value;
+			actPlus();
+		}
+	}
+}
+function pause_menu_savefile(_hover) {
+	innerText = (global.savefile == value) ? "LOAD" : "SAVE "+string(value);
+	
+	if (mouse_check_button_pressed(mb_left) && _hover) {
+		if (global.savefile != value) { global.savefile = value; }
+		else {
+			checkpoint_read_file();
+			with(obj_cubert) { apply_current_checkpoint(); }
+		}
+	}
+}
+function pause_menu_slider_func(_hover) {
 	if (abs(1-progress_k) > 0.025) { return; }
 
 	value = clamp(value, 0, 1);
-	var _hover = mouse_x > bbox_left+8 && mouse_x < (bbox_right-8) && mouse_y > bbox_top && mouse_y < bbox_bottom
 	if (mouse_check_button(mb_left) && _hover) {
 		var p = (mouse_x - (bbox_left+8)) / (bbox_right-bbox_left-16)
 		value = lerp(value, p, 0.5);

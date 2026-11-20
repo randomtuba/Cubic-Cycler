@@ -28,19 +28,24 @@ was_grounded = false
 checkpoint_read_file();
 
 function restart() {
-	
 	checkpoint_read_file();
+	
 	show_debug_message("===== CUBERT DEATH =====");
 	show_debug_message("X: " + string(x));
 	show_debug_message("Y: " + string(y));
 	show_debug_message("RESTART CALLED");
+	show_debug_message("savefile = " + string(global.savefile));
 	show_debug_message("checkpoint_id = " + string(global.checkpoint_id));
-		show_debug_message("Room: " + string(global.checkpoint_room));
-		show_debug_message("Level X: " + string(global.checkpoint_level_x));
-		show_debug_message("Level Y: " + string(global.checkpoint_level_y));
-		show_debug_message("Player X: " + string(global.checkpoint_x));
-		show_debug_message("Player Y: " + string(global.checkpoint_y));
-		show_debug_message("Gravity: " + string(global.checkpoint_level_gravity));
+	show_debug_message("Room: " + string(global.checkpoint_room));
+	show_debug_message("Level X: " + string(global.checkpoint_level_x));
+	show_debug_message("Level Y: " + string(global.checkpoint_level_y));
+	show_debug_message("Player X: " + string(global.checkpoint_x));
+	show_debug_message("Player Y: " + string(global.checkpoint_y));
+	show_debug_message("Gravity: " + string(global.checkpoint_level_gravity));
+		
+}
+
+function apply_current_checkpoint() {
 	if (global.checkpoint_id == -1) {
 		if (global.act == 1) {
 			room_goto(rm_start)
@@ -64,6 +69,7 @@ function restart() {
 		}
 	} else {
 		if (global.actsaved != global.act) {
+			global.act = global.actsaved
 			actPlus()
 		}	
 		
@@ -81,7 +87,6 @@ function restart() {
 	}
 	pos.x_speed = 0
 	pos.y_speed = 0
-	
 }
 
 function update_collisions() {

@@ -44,6 +44,7 @@
   },
   "name":"Cubic Cycler",
   "resources":[
+    {"id":{"name":"ImposingFont","path":"fonts/ImposingFont/ImposingFont.yy",},},
     {"id":{"name":"MainFont","path":"fonts/MainFont/MainFont.yy",},},
     {"id":{"name":"MildlyImportantFont","path":"fonts/MildlyImportantFont/MildlyImportantFont.yy",},},
     {"id":{"name":"obj_block_fragile","path":"objects/obj_block_fragile/obj_block_fragile.yy",},},
