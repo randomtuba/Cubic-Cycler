@@ -60,8 +60,8 @@
   ],
   "name":"rm2_gravity2_secret",
   "parent":{
-    "name":"Act2",
-    "path":"folders/Rooms/Act2.yy",
+    "name":"Unused",
+    "path":"folders/Rooms/Unused.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
