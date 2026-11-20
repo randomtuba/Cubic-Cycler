@@ -32,8 +32,8 @@
   ],
   "name":"rm2_central",
   "parent":{
-    "name":"Act2",
-    "path":"folders/Rooms/Act2.yy",
+    "name":"Unused",
+    "path":"folders/Rooms/Unused.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

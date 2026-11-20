@@ -34,8 +34,8 @@
   ],
   "name":"rm2_dubious",
   "parent":{
-    "name":"Act2",
-    "path":"folders/Rooms/Act2.yy",
+    "name":"Unused",
+    "path":"folders/Rooms/Unused.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
