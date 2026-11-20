@@ -2,6 +2,7 @@ progress_k = 0;
 progress = 0;
 
 innerText = "";
+innerSpr = -1; //overrides menu spr
 
 value = 0.8;
 value_setter = function(){

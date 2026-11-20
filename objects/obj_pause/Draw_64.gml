@@ -31,14 +31,17 @@ if (instance_exists(global.pause_menu) && global.pause_menu.id != id) {
 }
 
 
-draw_self();
+var _x = lerp(bbox_left, bbox_right, 0.5);
+var _y = lerp(bbox_top, bbox_bottom, 0.5);
+if (innerSpr == -1) { draw_self(); }
+else { draw_sprite_ext(innerSpr, 0, _x, _y, 1, 1, image_angle, c_white, image_alpha); }
 
 
 draw_set_alpha(image_alpha);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 //draw_text(lerp(bbox_left, bbox_right, 0.5), lerp(bbox_top, bbox_bottom, 0.5), innerText);
-draw_text_transformed(lerp(bbox_left, bbox_right, 0.5), lerp(bbox_top, bbox_bottom, 0.5), innerText, 1, 1, image_angle);
+draw_text_transformed(_x, _y, innerText, 1, 1, image_angle);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_alpha(1);

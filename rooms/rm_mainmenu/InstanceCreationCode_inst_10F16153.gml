@@ -1,8 +1,12 @@
-innerText = "GAMEPAD";
+innerText = "";
+innerSpr = -1;
 pause_menu_func = function(_hover){
+	image_alpha = 0;
 	if (global.gamepad) {
-		innerText = "GAMEPAD";
+		//innerText = "GAMEPAD";
+		innerSpr = controller_xboxone;
 	} else {
-		innerText = "KEYBOARD & MOUSE";
+		innerSpr = keyboard_outline;
+		//innerText = "KEYBOARD & MOUSE";
 	}
 };
