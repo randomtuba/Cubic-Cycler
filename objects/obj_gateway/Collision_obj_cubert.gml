@@ -1,5 +1,5 @@
 if (visible && !active) {
 	audio_play_sound(sfx_teleport_quick, 0, false, global.sfx_vol)
-	with (obj_cubert) immobile = true
+	with (obj_cubert) { immobile = true }
 	active = true
 }
