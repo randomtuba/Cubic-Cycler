@@ -72,7 +72,7 @@ global.act1_map = [
 global.act2_map = [
 	[-1, -1, rm2_air_tricks,-1,-1],
 	[-1, rm2_puzzle_and_secret,rm2_gravity2,-1,-1],
-	[rm2_conveyor_final, -1,rm2_gravity_intro,-1,-1],
+	[rm2_conveyor_final, -1,rm2_gravity_intro,-1,rm2_mp_3],
 	[rm2_wall_launch, rm2_go_zoom,rm2_camera_intro,rm2_mp_1,rm2_mp_2],
 	[-1, -1,-1,-1,-1],
 ]

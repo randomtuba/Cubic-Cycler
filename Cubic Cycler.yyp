@@ -120,6 +120,7 @@
     {"id":{"name":"rm2_jump_advanced","path":"rooms/rm2_jump_advanced/rm2_jump_advanced.yy",},},
     {"id":{"name":"rm2_mp_1","path":"rooms/rm2_mp_1/rm2_mp_1.yy",},},
     {"id":{"name":"rm2_mp_2","path":"rooms/rm2_mp_2/rm2_mp_2.yy",},},
+    {"id":{"name":"rm2_mp_3","path":"rooms/rm2_mp_3/rm2_mp_3.yy",},},
     {"id":{"name":"rm2_puzzle_and_secret","path":"rooms/rm2_puzzle_and_secret/rm2_puzzle_and_secret.yy",},},
     {"id":{"name":"rm2_wall_launch","path":"rooms/rm2_wall_launch/rm2_wall_launch.yy",},},
     {"id":{"name":"rm3_test_2","path":"rooms/rm3_test_2/rm3_test_2.yy",},},
@@ -286,6 +287,7 @@
     {"roomId":{"name":"rm2_conveyor_final","path":"rooms/rm2_conveyor_final/rm2_conveyor_final.yy",},},
     {"roomId":{"name":"rm2_mp_2","path":"rooms/rm2_mp_2/rm2_mp_2.yy",},},
     {"roomId":{"name":"rm2_air_tricks","path":"rooms/rm2_air_tricks/rm2_air_tricks.yy",},},
+    {"roomId":{"name":"rm2_mp_3","path":"rooms/rm2_mp_3/rm2_mp_3.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
