@@ -2,9 +2,6 @@ gravity = 0.4
 vspeed *= 0.99
 
 if (y > room_height+100) {
-	randomize();
-	var i = irandom_range(0, 40);
-	if (i == 0) { image_index = 4+irandom_range(0, 2); } else { image_index = 0 }
 	y = -100
 }
 
