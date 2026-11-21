@@ -1,7 +1,7 @@
 // main vars
 depth = -999
 pos = new Position(x, y, 0.90, 0.99, self)
-global.checkpoint_level_gravity = 0;
+global.checkpoint_level_gravity = 270;
 rotation = 0;
 x_scale = 0.5;
 collisions = []; update_collisions();
@@ -25,10 +25,8 @@ jump_j_max = sec;
 bounciness = 10;
 was_grounded = false
 
-checkpoint_read_file();
-
 function restart() {
-	checkpoint_read_file();
+	apply_current_checkpoint();
 	
 	show_debug_message("===== CUBERT DEATH =====");
 	show_debug_message("X: " + string(x));

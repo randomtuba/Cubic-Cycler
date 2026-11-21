@@ -22,6 +22,7 @@ function pause_menu_go_to_menu(_hover){
 function pause_menu_teleport_act(_hover) {
 	if (mouse_check_button_pressed(mb_left) && _hover) {
 		if (room == rm_mainmenu || room == rm_controls) {
+			with (obj_music_handler) { audio_stop_sound(song) }
 			room_goto(rm_tut_top_left);
 		} else {
 			global.act = value;
@@ -30,13 +31,19 @@ function pause_menu_teleport_act(_hover) {
 	}
 }
 function pause_menu_savefile(_hover) {
-	innerText = (global.savefile == value) ? "LOAD" : "SAVE "+string(value);
+	var _exists = file_exists(game_save_id + "checkpoint" + string(value) + ".json");
+	if (global.savefile == value) {
+		innerText = _exists ? "LOAD" : "EMPTY";
+	} else {
+		innerText = _exists ? "SAVE " + string(value) : "NEW " + string(value);
+	}
 	
 	if (mouse_check_button_pressed(mb_left) && _hover) {
 		if (global.savefile != value) { global.savefile = value; }
 		else {
 			checkpoint_read_file();
 			with(obj_cubert) { apply_current_checkpoint(); }
+			checkpoint_restore_progress()
 		}
 	}
 }

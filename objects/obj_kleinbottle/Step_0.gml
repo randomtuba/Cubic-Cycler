@@ -6,6 +6,7 @@ if (image_index == 1) {
 
 	if (image_alpha <= 0) {
 		array_push(global.kleinbottles_collected, id)
+		checkpoint_write_file()
 		instance_destroy()
 	}
 }

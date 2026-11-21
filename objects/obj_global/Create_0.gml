@@ -116,6 +116,8 @@ if (!checkpoint_read_file()) {
 	global.checkpoint_room = rm_tut_top_left
 	global.checkpoint_level_x = 0
 	global.checkpoint_level_y = 0
+	global.checkpoint_level_gravity = 270
+	checkpoint_restore_progress()
 }
 
 
