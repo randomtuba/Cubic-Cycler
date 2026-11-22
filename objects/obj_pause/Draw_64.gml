@@ -19,7 +19,7 @@ var _hover = _mx > bbox_left+8 && _mx < (bbox_right-8) && _my > bbox_top && _my 
 image_index = 2*_hover;
 if (global.pause_menu == self) { image_index = 0; }
 
-draw_circle(mouse_x, mouse_y, 5, true);
+draw_circle(mouse_x - camera_get_view_x(view_camera[7]), mouse_y - camera_get_view_y(view_camera[7]), 5, true);
 
 if (instance_exists(global.pause_menu) && global.pause_menu.id != id) { 
 	var pmenu = global.pause_menu;

@@ -52,7 +52,7 @@ function pause_menu_slider_func(_hover) {
 
 	value = clamp(value, 0, 1);
 	if (mouse_check_button(mb_left) && _hover) {
-		var p = (mouse_x - (bbox_left+8)) / (bbox_right-bbox_left-16)
+		var p = (mouse_x - camera_get_view_x(view_camera[7]) - (bbox_left+8)) / (bbox_right-bbox_left-16)
 		value = lerp(value, p, 0.5);
 		value_setter();
 	}

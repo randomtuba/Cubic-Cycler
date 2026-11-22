@@ -46,8 +46,8 @@
   },
   "origin":6,
   "parent":{
-    "name":"Cubic Cycler",
-    "path":"Cubic Cycler.yyp",
+    "name":"Sprites",
+    "path":"folders/Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
