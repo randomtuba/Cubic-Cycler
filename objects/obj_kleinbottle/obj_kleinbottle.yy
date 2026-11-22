@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_kleinbottle",
-    "path":"sprites/spr_kleinbottle/spr_kleinbottle.yy",
+    "name":"spr_kleinbottle_1",
+    "path":"sprites/spr_kleinbottle_1/spr_kleinbottle_1.yy",
   },
   "spriteMaskId":null,
   "visible":true,
