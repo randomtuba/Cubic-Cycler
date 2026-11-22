@@ -144,7 +144,8 @@ if (coyote_time > 0) {
 #endregion Jumping
 
 var motion = pos.getMotion()
-var movement = attemptMoveInSteps_2(self, collisions, motion.x, motion.y, 4, should_screenwrap(), should_screenwrap()&&!global.camera_3d_for_act3)
+var _steps = max(4, ceil(max(abs(motion.x), abs(motion.y)) / 3)) // as cubert goes faster, more steps are applied
+var movement = attemptMoveInSteps_2(self, collisions, motion.x, motion.y, 4, should_screenwrap(), should_screenwrap()&&!global.camera_3d_for_act3, _steps)
 
 runBlockerEvents(movement.blockers)
 
