@@ -5,10 +5,20 @@
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
-  "instanceCreationOrder":[],
+  "instanceCreationOrder":[
+    {"name":"inst_36320E54","path":"rooms/rm2_airlock/rm2_airlock.yy",},
+    {"name":"inst_70F3B1A8","path":"rooms/rm2_airlock/rm2_airlock.yy",},
+    {"name":"inst_60298DC1","path":"rooms/rm2_airlock/rm2_airlock.yy",},
+    {"name":"inst_3401F200","path":"rooms/rm2_airlock/rm2_airlock.yy",},
+  ],
   "isDnd":false,
   "layers":[
-    {"$GMRInstanceLayer":"","%Name":"Instances","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRInstanceLayer":"","%Name":"Instances","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"$GMRInstance":"v4","%Name":"inst_36320E54","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_36320E54","objectId":{"name":"obj_tesseract_stand","path":"objects/obj_tesseract_stand/obj_tesseract_stand.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":384.0,"y":1152.0,},
+        {"$GMRInstance":"v4","%Name":"inst_70F3B1A8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_70F3B1A8","objectId":{"name":"obj_tesseract_stand","path":"objects/obj_tesseract_stand/obj_tesseract_stand.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":768.0,"y":1152.0,},
+        {"$GMRInstance":"v4","%Name":"inst_60298DC1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_60298DC1","objectId":{"name":"obj_tesseract_stand","path":"objects/obj_tesseract_stand/obj_tesseract_stand.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1184.0,"y":1152.0,},
+        {"$GMRInstance":"v4","%Name":"inst_3401F200","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3401F200","objectId":{"name":"obj_tesseract_stand","path":"objects/obj_tesseract_stand/obj_tesseract_stand.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1568.0,"y":1152.0,},
+      ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Tiles_1","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":40,"SerialiseWidth":64,"TileCompressedData":[
           2,19,20,-12,0,-41,-2147483648,-7,0,4,18,19,19,20,-12,0,-25,-2147483648,-13,0,1,-2147483648,-9,0,4,18,
           19,19,20,-12,0,-21,-2147483648,-27,0,4,18,19,19,20,-12,0,-2,-2147483648,-8,0,1,-2147483648,-37,0,4,18,
@@ -23,7 +33,7 @@
           4,18,19,19,20,-34,0,1,-2147483648,-25,0,4,18,19,19,20,-29,0,-4,-2147483648,-27,0,4,18,19,19,20,-29,0,
           1,-2147483648,-25,0,1,-2147483648,-4,0,4,18,19,19,20,-4,0,1,-2147483648,-47,0,-5,-2147483648,-3,0,7,
           18,19,19,20,0,0,-2147483648,-8,0,1,-2147483648,-37,0,-2,-2147483648,-9,0,4,18,19,19,20,-60,0,4,18,19,
-          19,20,-60,0,4,18,19,19,37,-60,11,1,36,-65,19,
+          19,20,-60,0,4,18,19,19,37,-10,11,-3,19,-9,11,-3,19,-10,11,-3,19,-9,11,-3,19,-10,11,1,36,-65,19,
         ],"TileDataFormat":1,},"tilesetId":{"name":"tileset_block","path":"tilesets/tileset_block/tileset_block.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
   ],
   "name":"rm2_airlock",
