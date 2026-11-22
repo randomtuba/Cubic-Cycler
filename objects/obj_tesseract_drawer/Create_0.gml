@@ -5,6 +5,9 @@ ang_xy = 0;//from right (0deg) to up (90deg), can go full circle ofc
 
 timer = 0;
 speed_mult = 5; // this is here because the tesseract was accidentally 5x as fast
+back_to_zero = false
+shrink_k = 0
+shrink_start_scale = 800
 
 ang_xz_spd = 4/20;
 ang_xy_spd = pi/20;
