@@ -89,6 +89,14 @@ function turn_if_colliding() {
 		if (instance_exists(obj) && is_behind(obj.pos.point.getX(), obj.pos.point.getY())) {
 			continue
 		}
+		
+		// should fix pushboxes falling off randomly, because sometimes they traveled at double speed
+		if (instance_exists(obj) && (move_direction == Direction.Left || move_direction == Direction.Right)
+			&& array_contains(FREELY_MOVABLE_OBJECTS, obj.object_index)
+			&& min(bbox_bottom, obj.bbox_bottom) - max(bbox_top, obj.bbox_top) < 8) {
+			continue
+		}
+		
 		if (instance_exists(obj) && (array_contains(FREELY_MOVABLE_OBJECTS, obj.object_index))) {
 			match_speed(obj)
 			var success = attemptMove(obj, obj.collisions, pos.x_speed, pos.y_speed, 4, should_screenwrap())
