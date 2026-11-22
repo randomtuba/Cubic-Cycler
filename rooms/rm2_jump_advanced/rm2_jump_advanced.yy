@@ -384,8 +384,8 @@
   ],
   "name":"rm2_jump_advanced",
   "parent":{
-    "name":"Act2",
-    "path":"folders/Rooms/Act2.yy",
+    "name":"Unused",
+    "path":"folders/Rooms/Unused.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

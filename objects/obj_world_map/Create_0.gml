@@ -5,7 +5,7 @@ enable_k = 0;
 function get_spawn_coords_by_room(_room = room) {
 	switch(_room) {
 		//tutorial
-		//
+		case rm_tut_bottom_left:        return [160, 448];
 		//act1
 		case rm_start:					return [160, 480];
 		case rm_spring_intro:			return [128, 480];
@@ -23,6 +23,18 @@ function get_spawn_coords_by_room(_room = room) {
 		case rm_awkward:				return [576, 0];
 		case rm_pushbox_and_fragile:	return [960, 288];
 		case rm_tesseract_1:            return [960, 288];
+		//act2
+		case rm2_air_tricks:            return [1728, 1184];
+		case rm2_camera_intro:          return [480, 480];
+		case rm2_conveyor_final:        return [192, 1216];
+		case rm2_go_zoom:               return [1760, 960];
+		case rm2_gravity_intro:         return [1440, 1216];
+		case rm2_gravity2:              return [768, 1056];
+		case rm2_mp_1:                  return [160, 160];
+		case rm2_mp_2:                  return [96, 1088];
+		case rm2_mp_3:                  return [128, 1216];
+		case rm2_puzzle_and_secret:     return [1440, 1056];
+		case rm2_wall_launch:           return [2016, 512];
 		//
 		default:						return [160, 480];
 	}

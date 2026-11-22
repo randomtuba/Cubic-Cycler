@@ -20,7 +20,7 @@ if ((keyboard_check_pressed(ord("R")) || gamepad_button_check_pressed(0, gp_star
 #region Controls
 
 var gd = gravity_direction;
-show_debug_message(gd)
+
 //down
 
 	var _right = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)

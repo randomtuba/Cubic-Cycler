@@ -62,7 +62,7 @@ if (enable_k > 0) {
 				draw_set_color(c_black);
 				draw_rectangle_thick_outline(_x,_y, _x + gap, _y +gap*ratio, w);
 			
-				var _is_clicked_with_permission = _click && (global.debug || global.generators_destroyed_map[j][i]);
+				var _is_clicked_with_permission = _click && (global.debug || (global.room_explored_map[j][i] && global.act == 2) || (global.generators_destroyed_map[j][i] && global.act < 2));
 				if(_is_clicked_with_permission){
 					global.level_y = i;
 					global.level_x = j;
@@ -74,7 +74,8 @@ if (enable_k > 0) {
 					
 		
 					with (obj_cubert) {
-						pos.setPos(level_spawn[0], level_spawn[1]);
+						pos.setPos(level_spawn[0], level_spawn[1], false);
+						gravity_direction = 270
 					}
 				}
 			}
