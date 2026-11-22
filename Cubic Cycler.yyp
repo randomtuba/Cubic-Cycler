@@ -109,6 +109,7 @@
     {"id":{"name":"rm_tut_top_left","path":"rooms/rm_tut_top_left/rm_tut_top_left.yy",},},
     {"id":{"name":"rm_tut_top_right","path":"rooms/rm_tut_top_right/rm_tut_top_right.yy",},},
     {"id":{"name":"rm2_air_tricks","path":"rooms/rm2_air_tricks/rm2_air_tricks.yy",},},
+    {"id":{"name":"rm2_airlock","path":"rooms/rm2_airlock/rm2_airlock.yy",},},
     {"id":{"name":"rm2_camera_intro","path":"rooms/rm2_camera_intro/rm2_camera_intro.yy",},},
     {"id":{"name":"rm2_central","path":"rooms/rm2_central/rm2_central.yy",},},
     {"id":{"name":"rm2_conveyor_final","path":"rooms/rm2_conveyor_final/rm2_conveyor_final.yy",},},
@@ -304,6 +305,7 @@
     {"roomId":{"name":"rm2_mp_2","path":"rooms/rm2_mp_2/rm2_mp_2.yy",},},
     {"roomId":{"name":"rm2_air_tricks","path":"rooms/rm2_air_tricks/rm2_air_tricks.yy",},},
     {"roomId":{"name":"rm2_mp_3","path":"rooms/rm2_mp_3/rm2_mp_3.yy",},},
+    {"roomId":{"name":"rm2_airlock","path":"rooms/rm2_airlock/rm2_airlock.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
