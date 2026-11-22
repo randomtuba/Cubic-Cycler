@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"mus_nowwithdrums",
+  "%Name":"mus_ponderbeat",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -12,7 +12,7 @@
   "conversionMode":0,
   "duration":71.57551,
   "exportDir":"",
-  "name":"mus_nowwithdrums",
+  "name":"mus_ponderbeat",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mus_nowwithdrums.mp3",
+  "soundFile":"mus_ponderbeat.mp3",
   "volume":1.0,
 }
