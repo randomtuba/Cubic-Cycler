@@ -5,7 +5,7 @@ wraps = true
 function apply_interaction(obj) {
 		
 	if (global.checkpoint_id != id) {
-		audio_play_sound(sfx_checkpoint, 0, false, global.sfx_vol)
+		if (!audio_is_playing(sfx_checkpoint)) audio_play_sound(sfx_checkpoint, 0, false, global.sfx_vol)
 		global.checkpoint_id = id
 		global.checkpoint_x = x
 		global.checkpoint_y = y

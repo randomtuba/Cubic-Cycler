@@ -144,6 +144,7 @@
     {"id":{"name":"sfx_checkpoint","path":"sounds/sfx_checkpoint/sfx_checkpoint.yy",},},
     {"id":{"name":"sfx_generator_break","path":"sounds/sfx_generator_break/sfx_generator_break.yy",},},
     {"id":{"name":"sfx_jump","path":"sounds/sfx_jump/sfx_jump.yy",},},
+    {"id":{"name":"sfx_pedestal_click","path":"sounds/sfx_pedestal_click/sfx_pedestal_click.yy",},},
     {"id":{"name":"sfx_spring_bounce","path":"sounds/sfx_spring_bounce/sfx_spring_bounce.yy",},},
     {"id":{"name":"sfx_teleport_quick","path":"sounds/sfx_teleport_quick/sfx_teleport_quick.yy",},},
     {"id":{"name":"sfx_tesseract_collect","path":"sounds/sfx_tesseract_collect/sfx_tesseract_collect.yy",},},
