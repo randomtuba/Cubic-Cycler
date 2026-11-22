@@ -89,6 +89,7 @@ global.savefile = 1
 global.generators_destroyed_map = []
 global.room_explored_map = []
 global.buttons_pressed = []
+global.tesseracts = [[],[false,false,false,false]] // 0 is for collected tesseracts, 1 is for placed tesseracts
 
 //fill it with falses at the start of the game
 var _map = get_level_map();

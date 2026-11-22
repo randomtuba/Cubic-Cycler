@@ -1,7 +1,7 @@
 if (collected) collect_timer++
 
 if (collect_timer < sec * 5) {
-	if (!collected && instance_exists(obj_cubert) && point_distance(x, y, obj_cubert.x, obj_cubert.y) < 100) {
+	if (!collected && instance_exists(obj_cubert) && point_distance(x, y, obj_cubert.x, obj_cubert.y) < 100 && room != rm2_airlock) {
 		collected = true;
 		audio_play_sound(sfx_tesseract_collect, 0, false, global.sfx_vol)
 	}
@@ -22,7 +22,7 @@ if (collect_timer < sec * 5) {
 			tesscolor = make_colour_hsv(curhue, 255, lerp(0, 255, collectioncurve))
 		}
 
-		if (instance_exists(obj_cubert) && point_distance(x, y, obj_cubert.x, obj_cubert.y) < 100) { collected = true; }
+		if (instance_exists(obj_cubert) && point_distance(x, y, obj_cubert.x, obj_cubert.y) < 100 && room != rm2_airlock) { collected = true; }
 		collect_k = lerp(collect_k, collected, 0.003);
 		if (!back_to_zero && collect_k >= 0.925) {
 			back_to_zero = true
@@ -35,4 +35,8 @@ if (collect_timer < sec * 5) {
 	}
 
 	make_dubrot_mat();
+} else if (!array_contains(global.tesseracts[0], id)) {
+	array_push(global.tesseracts[0], id)
 }
+
+if (array_contains(global.tesseracts[0], id)) instance_destroy()
