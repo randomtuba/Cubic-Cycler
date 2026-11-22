@@ -1,7 +1,6 @@
 function actPlus(){
-		if (global.act < global.actsaved) {
-           // global.act = global.actsaved;
-		}
+		global.actsaved = global.act
+		
 		// refresh map var and generators destroyed map
 		_map = get_level_map();
 		global.generators_destroyed_map = []
@@ -24,6 +23,8 @@ function actPlus(){
 			global.checkpoint_room = rm_start
 			global.checkpoint_level_x = 2
 			global.checkpoint_level_y = 1
+			global.checkpoint_x = 64
+			global.checkpoint_y = 480
 			
 			global.level_x = 2
 			global.level_y = 1
@@ -40,6 +41,8 @@ function actPlus(){
 			global.checkpoint_room = rm2_camera_intro
 			global.checkpoint_level_x = 2
 			global.checkpoint_level_y = 3
+			global.checkpoint_x = 480
+			global.checkpoint_y = 480
 			
 			global.level_x = 2
 			global.level_y = 3
@@ -48,4 +51,6 @@ function actPlus(){
 		
 		// unfreeze cubert
 		with (obj_cubert) { immobile = false }
+		
+		checkpoint_write_file()
 }

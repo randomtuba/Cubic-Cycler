@@ -1,4 +1,3 @@
-
 #region Loss State
 
 image_index = lose_state
@@ -187,6 +186,7 @@ if (x > room_width) {
 			global.buttons_pressed = []
 			room_goto(_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX() - room_width, pos.point.getY(), false)
+			if (global.act > 0) set_default_checkpoint(_map[global.level_y][global.level_x])
 		} else { global.level_x--; }
     }
 }
@@ -198,6 +198,7 @@ else if (x < 0) {
 			global.buttons_pressed = []
 			room_goto(_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX() + room_width, pos.point.getY(), false)
+			if (global.act > 0) set_default_checkpoint(_map[global.level_y][global.level_x])
 		} else { global.level_x++; }
     }
 }
@@ -211,6 +212,7 @@ if (y > room_height) {
 			global.buttons_pressed = []
 			room_goto(_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX(), pos.point.getY() - room_height, false)
+			if (global.act > 0) set_default_checkpoint(_map[global.level_y][global.level_x])
 		} else { global.level_y--; }
     }
 }
@@ -222,6 +224,7 @@ else if (y < 0) {
 			global.buttons_pressed = []
 			room_goto(_map[global.level_y][global.level_x])
 			pos.setPos(pos.point.getX(), pos.point.getY() + room_height, false)
+			if (global.act > 0) set_default_checkpoint(_map[global.level_y][global.level_x])
 		} else { global.level_y++; }
     }
 }

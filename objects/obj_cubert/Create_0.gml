@@ -54,9 +54,9 @@ function apply_current_checkpoint() {
 		} else if (global.act == 2) {
 			
 			room_goto(rm2_camera_intro)
-			global.level_x = 0
-			global.level_y = 0
-			pos.setPos(64, 480)
+			global.level_x = 2
+			global.level_y = 3
+			pos.setPos(480, 480, false)
 			
 		} else {
 			
@@ -69,7 +69,7 @@ function apply_current_checkpoint() {
 		if (global.actsaved != global.act) {
 			global.act = global.actsaved
 			actPlus()
-		}	
+		}
 		
 		room_goto(global.checkpoint_room)
 		global.level_x = global.checkpoint_level_x
@@ -85,6 +85,21 @@ function apply_current_checkpoint() {
 	}
 	pos.x_speed = 0
 	pos.y_speed = 0
+}
+
+function set_default_checkpoint(_room = room) {
+	global.checkpoint_id = "default"
+	with (obj_world_map) {
+		var _spawn = get_spawn_coords_by_room(_room)
+		global.checkpoint_x = _spawn[0]
+		global.checkpoint_y = _spawn[1]
+	}
+	global.checkpoint_room = _room
+	global.checkpoint_level_x = global.level_x
+	global.checkpoint_level_y = global.level_y
+	global.checkpoint_level_gravity = image_angle - 90;
+		
+	checkpoint_write_file();
 }
 
 function update_collisions() {

@@ -1,4 +1,5 @@
 image_speed = 0
+depth = 10094
 
 function run_button_menu(_x = x) {
 	if (_x > 690) {
