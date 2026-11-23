@@ -26,6 +26,7 @@ if (global.debug && keyboard_check_pressed(ord("C"))) {
 	with (obj_music_handler) game_done = true
 	audio_stop_all()
 	instance_destroy(obj_cubert)
+	instance_destroy(obj_world_map)
 	room_goto(rm_winscreen)
 }
 
