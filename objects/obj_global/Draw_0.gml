@@ -1,4 +1,4 @@
-var _no_back = (room == rm_mainmenu || room == rm_controls);
+var _no_back = (room == rm_mainmenu || room == rm_controls || room == rm_winscreen);
 
 if (_no_back || !global.use_background) {
 	draw_set_colour(_no_back ? c_black : make_colour_rgb(131, 175, 178));

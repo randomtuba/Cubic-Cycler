@@ -1,6 +1,7 @@
 song = audio_play_sound(mus_ccdemo, 100, true)
 song_timer = 0
 song_ended = false
+game_done = false
 
 function play_new_song() {
 	audio_stop_sound(song)
