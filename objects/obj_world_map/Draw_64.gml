@@ -56,23 +56,20 @@ if (enable_k > 0) {
 				draw_rectangle_thick_outline(_x,_y, _x + gap, _y+gap*ratio, w);
 			}
 			
-			
-			var _is_hovering = (_mx > _x && _mx < _x+gap && _my > _y && _my < _y+gap*ratio);
+			var room_name = _map[i][j];
+			var _tile_exists = (room_name != -1) && room_exists(room_name);
+			var _is_hovering = _tile_exists && (_mx > _x && _mx < _x+gap && _my > _y && _my < _y+gap*ratio);
 			if(_is_hovering){
 				draw_set_color(c_black);
 				draw_rectangle_thick_outline(_x,_y, _x + gap, _y +gap*ratio, w);
-			
 				var _is_clicked_with_permission = _click && (global.debug || (global.room_explored_map[j][i] && global.act == 2) || (global.generators_destroyed_map[j][i] && global.act < 2));
 				if(_is_clicked_with_permission){
 					global.level_y = i;
 					global.level_x = j;
-					
 					global.buttons_pressed = []
-					room_goto(get_level_map()[global.level_y][global.level_x]);
-					var room_name = get_level_map()[global.level_y][global.level_x];
+					room_goto(room_name);
 					var level_spawn = get_spawn_coords_by_room(room_name);
 					
-		
 					with (obj_cubert) {
 						pos.setPos(level_spawn[0], level_spawn[1], false);
 						gravity_direction = 270
