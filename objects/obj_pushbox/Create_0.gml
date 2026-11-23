@@ -102,6 +102,8 @@ function apply_interaction(obj, dir) {
 			case Direction.Down: { //cubert above box
 				// Adjust speed
 				var new_speed = (pos.y_speed + other.pos.y_speed) / 2 * 0.99
+				// box on box case (prevents both boxes from traveling slower)
+				if (object_index == obj_pushbox) { new_speed = other.pos.y_speed }
 				// If the pushbox is grounded, just stop the object
 				if (!checkGrounded(other, collisions).valid) {
 					new_speed = 0

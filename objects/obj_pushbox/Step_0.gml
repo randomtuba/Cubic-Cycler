@@ -39,8 +39,6 @@ for (var d = 0; d < 5; d++) {
 		}
 	}
 }
-movement.x = true;
-movement.y = true;
 
 // Reset speed if blocked
 if (!movement.x) { pos.x_speed = 0 }
