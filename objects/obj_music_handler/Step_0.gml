@@ -1,4 +1,9 @@
-if (!audio_is_playing(song)) { song_ended = true }
+if (!audio_is_playing(song)) {
+	with (obj_credits_drawer) {
+		if (credits_timer > 60 * sec) game_restart()
+	}
+	song_ended = true
+}
 
 if (song_ended && !game_done) {
 	song_timer++

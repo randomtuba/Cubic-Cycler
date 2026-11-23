@@ -45,6 +45,7 @@
   },
   "name":"Cubic Cycler",
   "resources":[
+    {"id":{"name":"BigFont","path":"fonts/BigFont/BigFont.yy",},},
     {"id":{"name":"ImposingFont","path":"fonts/ImposingFont/ImposingFont.yy",},},
     {"id":{"name":"MainFont","path":"fonts/MainFont/MainFont.yy",},},
     {"id":{"name":"MildlyImportantFont","path":"fonts/MildlyImportantFont/MildlyImportantFont.yy",},},
@@ -59,6 +60,7 @@
     {"id":{"name":"obj_checkpoint","path":"objects/obj_checkpoint/obj_checkpoint.yy",},},
     {"id":{"name":"obj_controlstext_drawer","path":"objects/obj_controlstext_drawer/obj_controlstext_drawer.yy",},},
     {"id":{"name":"obj_conveyor","path":"objects/obj_conveyor/obj_conveyor.yy",},},
+    {"id":{"name":"obj_credits_drawer","path":"objects/obj_credits_drawer/obj_credits_drawer.yy",},},
     {"id":{"name":"obj_cubert_menu","path":"objects/obj_cubert_menu/obj_cubert_menu.yy",},},
     {"id":{"name":"obj_cubert","path":"objects/obj_cubert/obj_cubert.yy",},},
     {"id":{"name":"obj_gateway","path":"objects/obj_gateway/obj_gateway.yy",},},

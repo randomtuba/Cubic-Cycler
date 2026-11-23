@@ -21,6 +21,14 @@ if (global.debug && keyboard_check_pressed(vk_backspace)){
 	global.generators_destroyed_map[global.level_x][global.level_y] = !status;
 }
 
+// Skip to credits, debug only ofc
+if (global.debug && keyboard_check_pressed(ord("C"))) {
+	with (obj_music_handler) game_done = true
+	audio_stop_all()
+	instance_destroy(obj_cubert)
+	room_goto(rm_winscreen)
+}
+
 
 if (global.camera_follows_player_for_act2) {
 	var a = 0.2;
