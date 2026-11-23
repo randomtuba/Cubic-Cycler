@@ -21,7 +21,8 @@ function checkpoint_read_file(_savefile = global.savefile) {
 	global.checkpoint_progress = {
 		generators: variable_struct_exists(_data, "generators") ? _data.generators : undefined,
 		explored: variable_struct_exists(_data, "explored") ? _data.explored : undefined,
-		kleinbottles: variable_struct_exists(_data, "kleinbottles") ? _data.kleinbottles : undefined
+		kleinbottles: variable_struct_exists(_data, "kleinbottles") ? _data.kleinbottles : undefined,
+		tesseracts: variable_struct_exists(_data, "tesseracts") ? _data.tesseracts : undefined
 	};
 
 	return true;
@@ -34,6 +35,7 @@ function checkpoint_restore_progress() {
 	if (!is_undefined(_p.generators)) global.generators_destroyed_map = _p.generators
 	if (!is_undefined(_p.explored)) global.room_explored_map = _p.explored
 	if (!is_undefined(_p.kleinbottles)) global.kleinbottles_collected = _p.kleinbottles
+	if (!is_undefined(_p.tesseracts)) global.tesseracts = _p.tesseracts
 }
 
 // wipes all progress on the creation of a new game
@@ -47,4 +49,5 @@ function checkpoint_reset_progress() {
 		array_push(global.room_explored_map, array_create(array_length(global.act2_map[0]), false))
 	}
 	global.kleinbottles_collected = []
+	global.tesseracts = [[],[false,false,false,false]]
 }

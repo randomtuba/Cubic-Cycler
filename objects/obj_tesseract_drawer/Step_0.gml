@@ -37,6 +37,7 @@ if (collect_timer < sec * 5) {
 	make_dubrot_mat();
 } else if (!array_contains(global.tesseracts[0], id)) {
 	array_push(global.tesseracts[0], id)
+	checkpoint_write_file()
 }
 
 if (array_contains(global.tesseracts[0], id)) instance_destroy()

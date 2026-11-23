@@ -13,6 +13,7 @@ function checkpoint_write_file(_savefile = global.savefile) {
 		generators: global.generators_destroyed_map,
 		explored: global.room_explored_map,
 		kleinbottles: global.kleinbottles_collected,
+		tesseracts: global.tesseracts,
 		savefile: _savefile
 	};
 
