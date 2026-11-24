@@ -252,5 +252,9 @@ if (global.debug && (mouse_check_button(mb_middle) || keyboard_check(ord("G"))))
 	gravity_direction = _ang_seg*floor((point_direction(x, y, mouse_x, mouse_y)+_ang_seg/2)/_ang_seg)
 }
 
-if (pos.x_speed != 0) { image_xscale = sign(pos.x_speed) * (gravity_direction == 90 ? -1 : 1); }
+if (abs(180-gd) <= 1.5 || abs(-180-gd) <= 1.5 || abs(gd) <= 1.5) {
+	if (pos.y_speed != 0) { image_xscale = sign(pos.y_speed) * (gravity_direction == 0 ? -1 : 1); }
+} else {
+	if (pos.x_speed != 0) { image_xscale = sign(pos.x_speed) * (gravity_direction == 90 ? -1 : 1); }
+}
 x_scale = lerp(x_scale, image_xscale, 0.9)

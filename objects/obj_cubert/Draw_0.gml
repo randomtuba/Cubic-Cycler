@@ -2,13 +2,42 @@
 #region Controls (Copy from Step)
 
 var _inAir = checkGrounded(self, collisions, 5, gravity_direction).valid
+var _cannot_move = immobile || global.pause_menu.image_alpha > 0.2
 
-var _right = keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr) || gamepad_axis_value(0, gp_axislh) > 0.1
-var _left = keyboard_check(vk_left)||keyboard_check(ord("A")) || gamepad_button_check(0, gp_padl) || gamepad_axis_value(0, gp_axislh) < -0.1
-var _lr = _right - _left
-var _down = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && _inAir && !immobile
-var _jump = keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5
-_jump = _jump && !immobile
+var gd = gravity_direction;
+
+//down
+
+	var _right = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	var _left = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	var _lr = !_cannot_move? (_right - _left) : false
+	var _down = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !_cannot_move
+	var _jump = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !_cannot_move
+
+//left
+if(abs(180-gd) <= 1.5 || abs(-180-gd) <= 1.5){
+	_jump = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	_down = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	_left = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !_cannot_move
+	_right = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !_cannot_move
+	_lr = !_cannot_move ? (_right - _left) : false
+}
+//up
+if(abs(90-gd) <= 1.5){
+	_left = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	_right = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	_jump = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !_cannot_move
+	_down = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !_cannot_move
+	_lr = !_cannot_move? (_right - _left) : false
+}
+//right
+if(abs(gd) <= 1.5){
+	_down = (gamepad_button_check(0, gp_padr) || keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_axis_value(0, gp_axislh) > 0.1)
+	_jump = (gamepad_button_check(0, gp_padl) || keyboard_check(vk_left) || keyboard_check(ord("A"))  || gamepad_axis_value(0, gp_axislh) < -0.1)
+	_right = (keyboard_check(vk_down) || keyboard_check(ord("S")) || gamepad_button_check(0, gp_padd) || gamepad_axis_value(0, gp_axislv) > 0.5) && !_cannot_move
+	_left = (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(vk_space) || gamepad_button_check(0, gp_padu) || gamepad_button_check(0, gp_face1) || gamepad_axis_value(0, gp_axislv) < -0.5) && !_cannot_move
+	_lr = !_cannot_move ? (_right - _left) : false
+}
 
 #endregion
 
