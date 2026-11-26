@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_tut_arrow",
-    "path":"sprites/spr_tut_arrow/spr_tut_arrow.yy",
+    "name":"spr_tut_arrow_1",
+    "path":"sprites/spr_tut_arrow_1/spr_tut_arrow_1.yy",
   },
   "spriteMaskId":null,
   "visible":true,
