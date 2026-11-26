@@ -143,6 +143,7 @@
     {"id":{"name":"mus_ccdemo","path":"sounds/mus_ccdemo/mus_ccdemo.yy",},},
     {"id":{"name":"mus_chimera_11","path":"sounds/mus_chimera_11/mus_chimera_11.yy",},},
     {"id":{"name":"mus_cubic_chambers","path":"sounds/mus_cubic_chambers/mus_cubic_chambers.yy",},},
+    {"id":{"name":"mus_cycling_forever","path":"sounds/mus_cycling_forever/mus_cycling_forever.yy",},},
     {"id":{"name":"mus_framing_device","path":"sounds/mus_framing_device/mus_framing_device.yy",},},
     {"id":{"name":"mus_isolation_in_b_minor","path":"sounds/mus_isolation_in_b_minor/mus_isolation_in_b_minor.yy",},},
     {"id":{"name":"mus_ponderbeat","path":"sounds/mus_ponderbeat/mus_ponderbeat.yy",},},
