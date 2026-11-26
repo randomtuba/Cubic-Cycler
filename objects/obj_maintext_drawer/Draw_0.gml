@@ -25,6 +25,14 @@ switch (room) {
 		}
 		if (!should_screenwrap()) draw_text(350, 200, "Now try going back to the start!")
 	break
+	case rm_tut_bottom_right:
+		if (global.gamepad) {
+			draw_text(50, 75, "You can move downwards with the\nDPad or Left Joystick to dive!\nIt makes you fall faster.")
+		} else {
+			draw_text(50, 75, "You can press S to dive!\nIt makes you fall faster.")
+		}
+		draw_text(600, 35, "Also, when the map is open,\nyou can teleport to a\ngreen-bordered room by clicking on it.")
+	break
 	case rm_tesseract_1:
 		draw_text(400, 120, $"{get_destroyed_generator_count()} / 12 generators broken");
 	break

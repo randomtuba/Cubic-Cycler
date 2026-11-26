@@ -54,11 +54,13 @@ if (_timer >= 25 && _timer < 31) {
 	draw_text(10, 180, "zachmuffin123")
 	draw_text(10, 210, "Enixma")
 	draw_text(10, 240, "yiran")
+	draw_text(10, 270, "randomtuba")
 	draw_set_halign(fa_right)
 	draw_text(room_width - 10, 150, "Music")
 	draw_text(room_width - 10, 180, "Music, SFX")
 	draw_text(room_width - 10, 210, "Music")
 	draw_text(room_width - 10, 240, "Pedestal Click SFX")
+	draw_text(room_width - 10, 270, "Lose SFX")
 }
 if (_timer >= 31 && _timer < 37) {
 	draw_set_font(BigFont)
@@ -67,14 +69,14 @@ if (_timer >= 31 && _timer < 37) {
 	draw_set_font(MainFont)
 	draw_set_halign(fa_left)
 	draw_text(10, 150, "randomtuba")
-	draw_text(10, 180, "zachmuffin123")
-	draw_text(10, 210, "tldoggie")
+	draw_text(10, 180, "tldoggie")
+	draw_text(10, 210, "zachmuffin123")
 	draw_text(10, 240, "yiran")
 	draw_set_halign(fa_right)
-	draw_text(room_width - 10, 150, "13 rooms")
+	draw_text(room_width - 10, 150, "12 rooms")
+	draw_text(room_width - 10, 210, "9.5 rooms")
 	draw_text(room_width - 10, 180, "8 rooms")
-	draw_text(room_width - 10, 210, "5 rooms")
-	draw_text(room_width - 10, 240, "2 rooms")
+	draw_text(room_width - 10, 240, "2.5 rooms")
 }
 if (_timer >= 37 && _timer < 43) {
 	draw_set_font(BigFont)
