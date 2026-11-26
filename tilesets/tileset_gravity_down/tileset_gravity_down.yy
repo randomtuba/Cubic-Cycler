@@ -37,7 +37,7 @@
     {"$GMTileAnimation":"","%Name":"animation_3","frames":[3,67,131,195,259,323,387,451,515,579,643,707,771,835,899,963,],"name":"animation_3","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
     {"$GMTileAnimation":"","%Name":"animation_4","frames":[4,68,132,196,260,324,388,452,516,580,644,708,772,836,900,964,],"name":"animation_4","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
     {"$GMTileAnimation":"","%Name":"animation_5","frames":[9,73,137,201,265,329,393,457,521,585,649,713,777,841,905,969,],"name":"animation_5","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
-    {"$GMTileAnimation":"","%Name":"animation_6","frames":[17,81,145,209,273,337,401,977,],"name":"animation_6","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
+    {"$GMTileAnimation":"","%Name":"animation_6","frames":[17,81,145,209,273,337,401,465,529,593,657,721,785,849,913,977,],"name":"animation_6","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
     {"$GMTileAnimation":"","%Name":"animation_7","frames":[25,89,153,217,281,345,409,473,537,601,665,729,793,857,921,985,],"name":"animation_7","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
     {"$GMTileAnimation":"","%Name":"animation_8","frames":[10,74,138,202,266,330,394,458,522,586,650,714,778,842,906,970,],"name":"animation_8","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
     {"$GMTileAnimation":"","%Name":"animation_9","frames":[11,75,139,203,267,331,395,459,523,587,651,715,779,843,907,971,],"name":"animation_9","resourceType":"GMTileAnimation","resourceVersion":"2.0",},
