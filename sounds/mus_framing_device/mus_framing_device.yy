@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"mus_framing_device.ogg",
-  "volume":1.0,
+  "volume":0.95,
 }

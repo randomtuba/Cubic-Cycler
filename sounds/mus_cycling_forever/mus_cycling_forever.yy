@@ -10,7 +10,7 @@
   "compression":3,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":172.06857,
+  "duration":221.3567,
   "exportDir":"",
   "name":"mus_cycling_forever",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"mus_cycling_forever.ogg",
-  "volume":1.0,
+  "volume":0.8,
 }
