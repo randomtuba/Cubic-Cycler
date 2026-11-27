@@ -10,7 +10,7 @@
   "compression":3,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":221.3567,
+  "duration":210.89973,
   "exportDir":"",
   "name":"mus_cycling_forever",
   "parent":{

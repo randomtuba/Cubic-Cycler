@@ -171,6 +171,7 @@ if (!movement.y) { pos.y_speed = 0 }
 var _would_grounded = !movement.y*abs(dsin(gravity_direction)) + !movement.x*abs(dcos(gravity_direction))
 if (_would_grounded && !was_grounded) { jump_k = jump_j_max }
 was_grounded = _would_grounded
+collision_snap()
 
 #endregion Movement
 

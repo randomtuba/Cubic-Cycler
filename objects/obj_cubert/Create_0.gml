@@ -115,5 +115,29 @@ function room_index_bounded(_i = global.level_x, _j = global.level_y) {
 		_map[_j][_i] != -1
 }
 
-
+function collision_snap(max_push = 24) {
+	var _contact = checkValidMoveAllDirections(self, collisions, 0, 0)
 	
+	// checking edge cases (literally!)
+	var _overlapping = !_contact.valid[Direction.None]
+	var _blocked_somewhere = !_contact.valid[Direction.Up]
+		|| !_contact.valid[Direction.Down]
+		|| !_contact.valid[Direction.Left]
+		|| !_contact.valid[Direction.Right]
+		
+	if (!_overlapping || _blocked_somewhere) { return }
+	
+	// push cubert out from the floor
+	for (var _dist = 1; _dist <= max_push; _dist++) {
+		// offsets based on gravity direction
+		var _offset_x = -dcos(gravity_direction) * _dist
+		var _offset_y = dsin(gravity_direction) * _dist
+		
+		if (checkValidMoveGM(self, collisions, _offset_x, _offset_y, Direction.None).valid) {
+			pos.move(_offset_x, _offset_y, should_screenwrap())
+			pos.x_speed = 0
+			pos.y_speed = 0
+			return
+		}
+	}
+}
