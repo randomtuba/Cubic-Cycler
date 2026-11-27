@@ -74,8 +74,8 @@ if (_timer >= 31 && _timer < 37) {
 	draw_text(10, 240, "yiran")
 	draw_set_halign(fa_right)
 	draw_text(room_width - 10, 150, "12 rooms")
-	draw_text(room_width - 10, 210, "9.5 rooms")
-	draw_text(room_width - 10, 180, "8 rooms")
+	draw_text(room_width - 10, 180, "9.5 rooms")
+	draw_text(room_width - 10, 210, "8 rooms")
 	draw_text(room_width - 10, 240, "2.5 rooms")
 }
 if (_timer >= 37 && _timer < 43) {

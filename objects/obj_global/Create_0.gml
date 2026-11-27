@@ -10,6 +10,20 @@
 
 #endregion Macros
 
+font_enable_effects(MainFont, true, {
+    outlineEnable: true,
+    outlineDistance: 2,
+    outlineColour: make_colour_rgb(85, 85, 85),
+    outlineAlpha: 1
+});
+
+font_enable_effects(BigFont, true, {
+    outlineEnable: true,
+    outlineDistance: 2,
+    outlineColour: make_colour_rgb(85, 85, 85),
+    outlineAlpha: 1
+});
+
 randomize()
 
 depth += 100;
