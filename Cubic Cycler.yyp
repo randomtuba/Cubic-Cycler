@@ -73,7 +73,7 @@
     {"id":{"name":"obj_gravity_change_area","path":"objects/obj_gravity_change_area/obj_gravity_change_area.yy",},},
     {"id":{"name":"obj_kleinbottle","path":"objects/obj_kleinbottle/obj_kleinbottle.yy",},},
     {"id":{"name":"obj_logo_symbols","path":"objects/obj_logo_symbols/obj_logo_symbols.yy",},},
-    {"id":{"name":"obj_logo","path":"objects/obj_logo/obj_logo.yy",},},
+    {"id":{"name":"obj_logo_text","path":"objects/obj_logo_text/obj_logo_text.yy",},},
     {"id":{"name":"obj_maintext_drawer","path":"objects/obj_maintext_drawer/obj_maintext_drawer.yy",},},
     {"id":{"name":"obj_moving_platform","path":"objects/obj_moving_platform/obj_moving_platform.yy",},},
     {"id":{"name":"obj_music_handler","path":"objects/obj_music_handler/obj_music_handler.yy",},},
