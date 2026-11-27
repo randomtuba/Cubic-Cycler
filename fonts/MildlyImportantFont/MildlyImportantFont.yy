@@ -191,8 +191,8 @@
   "maintainGms1Font":false,
   "name":"MildlyImportantFont",
   "parent":{
-    "name":"Cubic Cycler",
-    "path":"Cubic Cycler.yyp",
+    "name":"Fonts",
+    "path":"folders/Fonts.yy",
   },
   "pointRounding":0,
   "ranges":[

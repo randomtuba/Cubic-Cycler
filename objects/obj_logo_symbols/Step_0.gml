@@ -1,0 +1,1 @@
+image_angle -= sec / 100
