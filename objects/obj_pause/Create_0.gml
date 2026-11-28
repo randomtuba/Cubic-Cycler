@@ -34,8 +34,10 @@ function pause_menu_savefile(_hover) {
 	var _exists = file_exists(game_save_id + "checkpoint" + string(value) + ".json");
 	if (global.savefile == value) {
 		innerText = _exists ? "LOAD" : "EMPTY";
+		image_index = 3+_hover;
 	} else {
 		innerText = _exists ? "SAVE " + string(value) : "NEW " + string(value);
+		image_index = 2*_hover;
 	}
 	
 	if (mouse_check_button_pressed(mb_left) && _hover) {

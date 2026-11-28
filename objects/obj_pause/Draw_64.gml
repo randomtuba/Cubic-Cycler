@@ -16,7 +16,6 @@ image_alpha = 1-abs(1-progress_k);
 var _mx = device_mouse_x_to_gui(0);
 var _my = device_mouse_y_to_gui(0);
 var _hover = _mx > bbox_left+8 && _mx < (bbox_right-8) && _my > bbox_top && _my < bbox_bottom;
-image_index = 2*_hover;
 if (global.pause_menu == self) { image_index = 0; }
 
 draw_circle(mouse_x - camera_get_view_x(view_camera[7]), mouse_y - camera_get_view_y(view_camera[7]), 5, true);
@@ -35,6 +34,7 @@ var _x = lerp(bbox_left, bbox_right, 0.5);
 var _y = lerp(bbox_top, bbox_bottom, 0.5);
 if (innerSpr == -1) { draw_self(); }
 else { draw_sprite_ext(innerSpr, 0, _x, _y, 1, 1, image_angle, c_white, image_alpha); }
+image_index = 2*_hover;
 
 
 draw_set_alpha(image_alpha);
