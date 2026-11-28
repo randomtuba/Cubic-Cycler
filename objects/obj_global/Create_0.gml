@@ -36,6 +36,7 @@ global.minimap = false;
 global.gamepad = false;
 
 global.pause_menu = instance_nearest(x, y, obj_pause);
+global.map_holder_pausemenu_obj = noone;
 global.music_vol = 0.8; //0 to 1
 global.sfx_vol = 0.8;
 

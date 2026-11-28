@@ -16,6 +16,7 @@ image_alpha = 1-abs(1-progress_k);
 var _mx = device_mouse_x_to_gui(0);
 var _my = device_mouse_y_to_gui(0);
 var _hover = _mx > bbox_left+8 && _mx < (bbox_right-8) && _my > bbox_top && _my < bbox_bottom;
+hover_k = lerp(hover_k, _hover, 0.5);
 if (global.pause_menu == self) { image_index = 0; }
 
 draw_circle(mouse_x - camera_get_view_x(view_camera[7]), mouse_y - camera_get_view_y(view_camera[7]), 5, true);
@@ -27,6 +28,10 @@ if (instance_exists(global.pause_menu) && global.pause_menu.id != id) {
 	x = pmenu.xstart+dist*dcos(ang+image_angle)
 	y = pmenu.ystart-dist*dsin(ang+image_angle)
 	depth = global.pause_menu.depth - 10;
+	if (innerSpr != spr_menubacking_minimap_screen && innerSpr != spr_menubacking_minimap_screen_2) {
+		image_xscale = image_xscale_start + 0.05*hover_k;
+		image_yscale = image_yscale_start + 0.05*hover_k;
+	}
 }
 
 

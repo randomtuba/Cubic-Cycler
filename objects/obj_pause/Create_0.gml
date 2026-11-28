@@ -1,5 +1,6 @@
 progress_k = 0;
 progress = 0;
+hover_k = 0;
 
 innerText = "";
 innerSpr = -1; //overrides menu spr
@@ -11,11 +12,21 @@ value_setter = function(){
 } //to be modified in instance creation (or not)
 pause_menu_func = function(_hover){return;} //to be modified in instance creation (or not)
 
+image_xscale_start = image_xscale;
+image_yscale_start = image_yscale;
+
 
 //functions in question
+function pause_menu_hidespr(_hover){ image_alpha = 0; }
+ 
+function pause_menu_credits(_hover){
+	if (mouse_check_button_pressed(mb_left) && _hover) {
+		
+	}
+}
 function pause_menu_go_to_menu(_hover){
 	if (mouse_check_button_pressed(mb_left) && _hover) {
-		with (obj_cubert) { instance_destroy(); }
+		//with (obj_cubert) { instance_destroy(); }
 		//room_goto(rm_mainmenu);
 	}
 }

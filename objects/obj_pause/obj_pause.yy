@@ -11,8 +11,8 @@
   "name":"obj_pause",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects_simple_UI",
-    "path":"folders/Objects_simple_UI.yy",
+    "name":"Objects_control",
+    "path":"folders/Objects_control.yy",
   },
   "parentObjectId":null,
   "persistent":true,
